@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>马子潇 - 个人作品集</title>
   <style>
-    /* --- 1. 画廊级极简主义重置 & 换成任天堂同款亮红背景 --- */
+    /* --- 1. 画廊级极简主义重置 & 换成高级暗夜猩红（极深红，绝不刺眼） --- */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -17,14 +17,14 @@
       display: flex;
       flex-direction: column;
       overflow: hidden; 
-      background-color: #e60012; /* 🔥 任天堂官方标准亮红 */
+      background-color: #140102; /* 基底：接近黑的极深红 */
       color: #ffffff; 
       -webkit-font-smoothing: antialiased;
     }
 
-    /* --- 2. 顶部个人信息栏（针对红底调和） --- */
+    /* --- 2. 顶部个人信息栏 --- */
     header {
-      background-color: #cd0010; /* 略深一点的任天堂红，建立顶部秩序感 */
+      background-color: #0c0001; /* 顶栏做沉降暗化 */
       padding: 0 40px;
       display: flex;
       justify-content: space-between;
@@ -32,36 +32,34 @@
       height: 90px; 
       flex-shrink: 0;
       z-index: 30;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.15); 
+      border-bottom: 1px solid #250306; 
     }
     .profile-info h1 {
       font-size: 20px;
       font-weight: 600;
       letter-spacing: 2px;
       margin-bottom: 4px;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
     .profile-info p {
       font-size: 11px;
       letter-spacing: 1px;
-      color: rgba(255, 255, 255, 0.75); 
+      color: #7d6264; 
       text-transform: uppercase;
     }
     .contact-info {
       text-align: right;
       font-size: 11px;
-      color: rgba(255, 255, 255, 0.75);
+      color: #7d6264;
       line-height: 1.8;
       letter-spacing: 0.5px;
     }
     .contact-info a {
-      color: #ffffff;
+      color: #b59fa1;
       text-decoration: none;
-      font-weight: 500;
-      transition: opacity 0.3s ease;
+      transition: color 0.3s ease;
     }
     .contact-info a:hover {
-      opacity: 0.8;
+      color: #ffffff;
     }
 
     /* 主体网格容器 */
@@ -70,21 +68,21 @@
       flex: 1;
       overflow: hidden;
       height: calc(100vh - 90px); 
-      background-color: #e60012;
+      background-color: #140102;
     }
 
-    /* --- 3. 左侧一级菜单栏（3D 舞台 + 向右侧投下强烈立体阴影） --- */
+    /* --- 3. 左侧一级菜单栏（3D 舞台 + 投射强烈物理阴影） --- */
     .left-panel {
       width: 25%;
       height: 100%;
       display: flex;
       flex-direction: column; 
       overflow: visible; 
-      border-right: 1px solid rgba(0, 0, 0, 0.1);
-      background-color: #b3000e;
+      border-right: 1px solid #250306;
+      background-color: #110102;
       z-index: 25;
       perspective: 1000px; 
-      box-shadow: 15px 0 40px rgba(0, 0, 0, 0.6); 
+      box-shadow: 20px 0 45px rgba(0, 0, 0, 0.9); /* 强化向右投射的阴影 */
     }
     
     .project-item {
@@ -92,9 +90,9 @@
       width: 100%;
       cursor: pointer;
       position: relative;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-      background-color: #9a000c;
-      opacity: 0.5; /* 在亮红背景下稍微提高未选中卡片的初始透明度 */
+      border-bottom: 1px solid #210305;
+      background-color: #0d0102;
+      opacity: 0.35; 
       transform-style: preserve-3d;
       transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -118,17 +116,18 @@
       transition: border 0.4s ease, box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
+    /* 悬浮和激活时边框亮起并产生卡牌悬空阴影 */
     .project-item:hover .project-item-card, 
     .project-item.active .project-item-card {
-      border: 1px solid rgba(255, 255, 255, 0.6);
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.75);
+      border: 1px solid rgba(255, 255, 255, 0.45);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.95);
     }
 
     .project-item img {
       width: 100%;
       height: 100%;
       object-fit: cover; 
-      filter: grayscale(10%);
+      filter: grayscale(15%);
       transform: translateZ(0px) scale(1.02);
       transition: filter 0.8s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -144,12 +143,12 @@
       flex-direction: column;
       height: 100%;
       overflow: hidden;
-      background-color: #e60012;
+      background-color: #140102;
     }
     
     .detail-view {
       flex: 1; 
-      background-color: #cd0010;
+      background-color: #0e0102;
       overflow: hidden;
       position: relative; 
       perspective: 1200px;
@@ -179,14 +178,14 @@
       pointer-events: auto;
     }
 
-    /* 悬浮叠层文字排版（渐变底层加深，以应对红底的高亮度） */
+    /* 悬浮叠层文字排版 */
     .text-overlay {
       position: absolute;
       left: 0;
       bottom: 0;
       width: 100%;
       padding: 90px 40px 40px 40px;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.5) 60%, rgba(0, 0, 0, 0) 100%);
+      background: linear-gradient(to top, rgba(5, 0, 0, 0.98) 0%, rgba(5, 0, 0, 0.5) 60%, rgba(0, 0, 0, 0) 100%);
       z-index: 10;
       pointer-events: none; 
       
@@ -204,15 +203,15 @@
       margin-bottom: 8px;
       color: #ffffff;
       text-transform: uppercase;
-      text-shadow: 0 4px 12px rgba(0,0,0,0.7);
+      text-shadow: 0 4px 12px rgba(0,0,0,0.8);
     }
     .text-overlay p {
       font-size: 12px;
       line-height: 1.8;
-      color: #e5e5e5;
+      color: #cccccc;
       font-weight: 300;
       letter-spacing: 0.3px;
-      text-shadow: 0 3px 10px rgba(0,0,0,0.7);
+      text-shadow: 0 3px 10px rgba(0,0,0,0.8);
     }
 
     /* 左右隐形触控热区 */
@@ -227,16 +226,15 @@
     .click-zone-left { left: 0; }
     .click-zone-right { right: 0; }
 
-
     /* --- 5. 底部级联缩略图横行 --- */
     .thumbnail-panel {
       height: 20%; 
       width: 100%;
       display: flex;
-      background-color: #b3000e;
+      background-color: #0c0001;
       overflow: visible; 
       flex-shrink: 0;
-      border-top: 1px solid rgba(0, 0, 0, 0.15);
+      border-top: 1px solid #250306;
       perspective: 1000px;
     }
     .thumb-item {
@@ -244,8 +242,8 @@
       height: 100%;
       cursor: pointer;
       position: relative;
-      opacity: 0.4; 
-      border-right: 1px solid rgba(0, 0, 0, 0.1); 
+      opacity: 0.3; 
+      border-right: 1px solid #1f0204; 
       
       transform-style: preserve-3d;
       transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -271,8 +269,8 @@
     }
     .thumb-item:hover .thumb-item-card,
     .thumb-item.active-thumb .thumb-item-card {
-      border: 1px solid rgba(255, 255, 255, 0.5);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.4);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.85);
     }
 
     .thumb-item img {
@@ -466,7 +464,7 @@
       // 1. 左侧选项栏：倾斜 28度，模拟拿起的极致聚焦感
       items.forEach(item => applyTiltEffect(item, 28, 1.12));
 
-      // 2. 底部缩略图：倾斜 20度，放大率增至 1.08
+      // 2. 底部缩略图：倾斜 20度，放大率 1.08
       thumbs.forEach(thumb => applyTiltEffect(thumb, 20, 1.08));
 
       // 3. 右侧大视觉舱：同步空间偏转摆动
