@@ -17,8 +17,8 @@
       display: flex;
       flex-direction: column;
       overflow: hidden; 
-      background-color: #000000; /* 纯黑背景 */
-      color: #ffffff; /* 纯白文字 */
+      background-color: #000000; 
+      color: #ffffff; 
     }
 
     /* 1. 顶部个人信息栏 */
@@ -50,7 +50,6 @@
     .contact-info a {
       color: #ffffff;
       text-decoration: none;
-      border-bottom: 1px solid #444;
     }
 
     /* 主体内容区域 */
@@ -60,36 +59,36 @@
       overflow: hidden;
     }
 
-    /* 2. 左侧 1/4 区域：5个图片完全密铺，不滚动 */
+    /* 2. 左侧 1/4 区域：5个项目完全密铺 */
     .left-panel {
       width: 25%;
       height: 100%;
       display: flex;
-      flex-direction: column; /* 纵向排列 */
-      overflow: hidden; /* 绝对不滚动 */
+      flex-direction: column; 
+      overflow: hidden; 
       padding-left: 40px;
       padding-bottom: 40px;
     }
     .project-item {
-      flex: 1; /* 核心：5个元素等分整高 */
+      flex: 1; 
       width: 100%;
       cursor: pointer;
       overflow: hidden;
       position: relative;
       transition: opacity 0.3s ease;
-      opacity: 0.4; /* 未选中时暗色 */
-      border-bottom: 1px solid #111; /* 微弱的分界线 */
+      opacity: 0.4; 
+      border-bottom: 1px solid #111; 
     }
     .project-item:last-child {
       border-bottom: none;
     }
     .project-item:hover, .project-item.active {
-      opacity: 1; /* 选中或悬浮时完全点亮 */
+      opacity: 1; 
     }
     .project-item img {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* 完全密铺格子 */
+      object-fit: cover; 
     }
 
     /* 3. 右侧 3/4 展示区域 */
@@ -109,46 +108,47 @@
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      position: relative; /* 为滚动条定位 */
+      position: relative; 
     }
     .detail-view img, .detail-view video {
       width: 100%;
       height: 100%;
-      object-fit: cover; /* 核心：完全拉伸覆盖整个区域 */
+      object-fit: cover; 
       display: none;
     }
     .detail-view .active-media {
       display: block;
     }
 
-    /* 模拟图片区域中下部的极简滚动条/进度条 */
+    /* 右侧中下部的极简滚动进度条（代表5张图的滚动进度） */
     .scroll-indicator-bar {
       position: absolute;
-      bottom: 20px; /* 位于中下部 */
+      bottom: 20px; 
       left: 10%;
       width: 80%;
       height: 2px;
-      background-color: rgba(255, 255, 255, 0.2);
+      background-color: rgba(255, 255, 255, 0.15);
       border-radius: 1px;
+      z-index: 10;
     }
     .scroll-indicator-progress {
       height: 100%;
-      width: 20%; /* 1/5 长度 */
+      width: 20%; /* 5张图，每张占 20% */
       background-color: #ffffff;
       border-radius: 1px;
-      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
       transform: translateX(0%);
     }
 
-    /* 右下：文字说明（严格缩减至两行高度） */
+    /* 右下：文字说明（固定两行高度） */
     .detail-desc {
-      height: 75px; /* 固定高度，确保标题+内容刚好两行左右 */
+      height: 75px; 
       background-color: #000000;
       padding-top: 20px;
-      overflow: hidden; /* 防止溢出破坏两行规整感 */
+      overflow: hidden; 
     }
     .detail-desc h2 {
-      display: inline; /* 标题与正文在一行或紧凑排列 */
+      display: inline; 
       font-size: 14px;
       font-weight: 600;
       letter-spacing: 0.5px;
@@ -180,24 +180,24 @@
     
     <div class="left-panel" id="leftPanel">
       
-      <div class="project-item active" data-index="0" data-type="image" data-src="https://picsum.photos/1920/1080?random=11" data-title="[关卡作品 01]" data-desc="核心关卡动线规划设计。采用多路径多垂直空间的探索流向，极大增强玩家的探索欲与局内遭遇战的不确定性。">
-        <img src="https://picsum.photos/600/400?random=11" alt="关卡一">
+      <div class="project-item active" data-id="project1">
+        <img src="https://picsum.photos/600/400?random=11" alt="项目一封面">
       </div>
 
-      <div class="project-item" data-index="1" data-type="image" data-src="https://picsum.photos/1920/1080?random=12" data-title="[关卡作品 02]" data-desc="光影与引导机制实验。利用冷暖光源的交替，隐性引导玩家在无UI状态下自然找到潜行暗道与安全屋。">
-        <img src="https://picsum.photos/600/400?random=12" alt="关卡二">
+      <div class="project-item" data-id="project2">
+        <img src="https://picsum.photos/600/400?random=12" alt="项目二封面">
       </div>
 
-      <div class="project-item" data-index="2" data-type="video" data-src="https://www.w3schools.com/html/mov_bbb.mp4" data-title="[动态机制展示 03]" data-desc="基于虚幻引擎的动态机关与地形解谜机制。此视频展示了玩家触发压力板后区域重组的逻辑闭环。">
-        <img src="https://picsum.photos/600/400?random=13" alt="项目三">
+      <div class="project-item" data-id="project3">
+        <img src="https://picsum.photos/600/400?random=13" alt="项目三封面">
       </div>
 
-      <div class="project-item" data-index="3" data-type="image" data-src="https://picsum.photos/1920/1080?random=14" data-title="[系统设计 04]" data-desc="沙盒关卡资源遭遇战。基于心流理论设计的敌方AI刷新曲线，保证高潮和心流舒缓期的交替出现。">
-        <img src="https://picsum.photos/600/400?random=14" alt="项目四">
+      <div class="project-item" data-id="project4">
+        <img src="https://picsum.photos/600/400?random=14" alt="项目四封面">
       </div>
 
-      <div class="project-item" data-index="4" data-type="image" data-src="https://picsum.photos/1920/1080?random=15" data-title="[世界观白模 05]" data-desc="宏观高低差白模搭建。快速验证大型开放城市中，钩爪与滑翔翼在不同建筑密度下的移速与身法爽感。">
-        <img src="https://picsum.photos/600/400?random=15" alt="项目五">
+      <div class="project-item" data-id="project5">
+        <img src="https://picsum.photos/600/400?random=15" alt="项目五封面">
       </div>
 
     </div>
@@ -205,7 +205,7 @@
     <div class="right-panel">
       
       <div class="detail-view">
-        <img id="targetImage" class="active-media" src="https://picsum.photos/1920/1080?random=11" alt="大图展示">
+        <img id="targetImage" class="active-media" src="" alt="大图展示">
         <video id="targetVideo" controls autoplay loop muted src=""></video>
         
         <div class="scroll-indicator-bar">
@@ -214,8 +214,8 @@
       </div>
 
       <div class="detail-desc">
-        <h2 id="targetTitle">[关卡作品 01]</h2>
-        <p id="targetDesc">核心关卡动线规划设计。采用多路径多垂直空间的探索流向，极大增强玩家的探索欲与局内遭遇战的不确定性。</p>
+        <h2 id="targetTitle">加载中...</h2>
+        <p id="targetDesc">加载中...</p>
       </div>
 
     </div>
@@ -223,6 +223,65 @@
   </div>
 
   <script>
+    // 1. 这里配置你 5 个项目的具体子内容（每个项目包含 5 个滚动媒体）
+    const projectData = {
+      project1: {
+        title: "[关卡作品 01] - 核心动线",
+        desc: "核心关卡动线规划设计。多路径垂直空间的探索流向，以下5张图/视频正在每5秒循环滚动演示具体细节。",
+        media: [
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=101' },
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=102' },
+          { type: 'video', src: 'https://www.w3schools.com/html/mov_bbb.mp4' }, // 视频会自动播放
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=104' },
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=105' }
+        ]
+      },
+      project2: {
+        title: "[关卡作品 02] - 光影引导",
+        desc: "利用冷暖光源的交替，隐性引导玩家在无UI状态下自然找到潜行暗道。请观察右侧媒体的自动流式更替。",
+        media: [
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=201' },
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=202' },
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=203' },
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=204' },
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=205' }
+        ]
+      },
+      project3: {
+        title: "[动态机制 03] - 机关解谜",
+        desc: "基于虚幻引擎的动态地形解锁逻辑闭环。多维度的动态展示，包含测试白模动画和触发逻辑脚本渲染。",
+        media: [
+          { type: 'video', src: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=302' },
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=303' },
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=304' },
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=305' }
+        ]
+      },
+      project4: {
+        title: "[系统设计 04] - 沙盒遭遇战",
+        desc: "基于心流理论设计的敌方AI刷新曲线，保证高潮和心流舒缓期的交替出现，右侧轮播展现沙盒覆盖区域。",
+        media: [
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=401' },
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=402' },
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=403' },
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=404' },
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=405' }
+        ]
+      },
+      project5: {
+        title: "[世界观 05] - 宏观高低差",
+        desc: "快速验证大型开放城市中，钩爪与滑翔翼在不同建筑密度下的移速与身法爽感。通过5张图多角度推演。",
+        media: [
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=501' },
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=502' },
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=503' },
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=504' },
+          { type: 'image', src: 'https://picsum.photos/1920/1080?random=505' }
+        ]
+      }
+    };
+
     document.addEventListener('DOMContentLoaded', () => {
       const items = document.querySelectorAll('.project-item');
       const targetImage = document.getElementById('targetImage');
@@ -231,42 +290,70 @@
       const targetDesc = document.getElementById('targetDesc');
       const indicatorProgress = document.getElementById('indicatorProgress');
 
+      let currentProjectID = 'project1';
+      let currentSubIndex = 0;
+      let rotationInterval = null;
+
+      // 渲染当前主项目的某一个子媒体
+      function renderSubMedia(projectId, subIndex) {
+        const project = projectData[projectId];
+        if (!project) return;
+
+        // 更新文本内容
+        targetTitle.textContent = project.title;
+        targetDesc.textContent = project.desc;
+
+        const currentMedia = project.media[subIndex];
+
+        // 更新中下部滚动条的位置 (一共5张图，每张占 100% / 5 = 20%)
+        indicatorProgress.style.transform = `translateX(${subIndex * 100}%)`;
+
+        // 处理媒体渲染
+        if (currentMedia.type === 'video') {
+          targetImage.classList.remove('active-media');
+          targetImage.src = ''; 
+          
+          targetVideo.src = currentMedia.src;
+          targetVideo.classList.add('active-media');
+          targetVideo.play().catch(e => console.log("自动播放拦截：", e));
+        } else {
+          targetVideo.classList.remove('active-media');
+          targetVideo.pause();
+          targetVideo.src = ''; 
+          
+          targetImage.src = currentMedia.src;
+          targetImage.classList.add('active-media');
+        }
+      }
+
+      // 启动 5 秒自动滚动计时器
+      function startAutoRotation(projectId) {
+        if (rotationInterval) clearInterval(rotationInterval);
+        currentSubIndex = 0; // 每次换主项目，都从第一张子图开始
+        renderSubMedia(projectId, currentSubIndex);
+
+        rotationInterval = setInterval(() => {
+          currentSubIndex = (currentSubIndex + 1) % 5; // 在 0~4 之间无限循环
+          renderSubMedia(projectId, currentSubIndex);
+        }, 5000); // 5000毫秒 = 5秒
+      }
+
+      // 给左侧 5 个大格子绑定点击事件
       items.forEach(item => {
         item.addEventListener('click', () => {
+          const projectId = item.getAttribute('data-id');
+          if (projectId === currentProjectID) return; // 如果已经是当前项，不作操作
+
           items.forEach(i => i.classList.remove('active'));
           item.classList.add('active');
 
-          const type = item.getAttribute('data-type');
-          const src = item.getAttribute('data-src');
-          const title = item.getAttribute('data-title');
-          const desc = item.getAttribute('data-desc');
-          const index = parseInt(item.getAttribute('data-index'));
-
-          // 更新文字
-          targetTitle.textContent = title;
-          targetDesc.textContent = desc;
-
-          // 联动控制中下部滚动条的位置 (5个选项，每个占 100% / 5 = 20%)
-          indicatorProgress.style.transform = `translateX(${index * 100}%)`;
-
-          // 媒体切换且完全覆盖
-          if (type === 'video') {
-            targetImage.classList.remove('active-media');
-            targetImage.src = '';
-            
-            targetVideo.src = src;
-            targetVideo.classList.add('active-media');
-            targetVideo.play().catch(e => console.log(e));
-          } else {
-            targetVideo.classList.remove('active-media');
-            targetVideo.pause();
-            targetVideo.src = '';
-            
-            targetImage.src = src;
-            targetImage.classList.add('active-media');
-          }
+          currentProjectID = projectId;
+          startAutoRotation(projectId);
         });
       });
+
+      // 初始化：默认启动第一个项目
+      startAutoRotation('project1');
     });
   </script>
 
