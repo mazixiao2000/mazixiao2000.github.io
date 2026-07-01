@@ -5,55 +5,64 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>马子潇 - 个人作品集</title>
   <style>
-    /* 基础样式重置 & 纯黑无缝 */
+    /* --- 1. 画廊级极简主义重置 --- */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Roboto, sans-serif;
       height: 100vh;
       display: flex;
       flex-direction: column;
       overflow: hidden; 
       background-color: #000000; 
       color: #ffffff; 
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* 1. 顶部个人信息栏 */
+    /* --- 2. 顶部空灵个人信息栏 --- */
     header {
       background-color: #000000;
-      padding: 25px 40px;
+      padding: 0 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       height: 90px; 
       flex-shrink: 0;
       z-index: 20;
+      border-bottom: 1px solid #111111; /* 极细暗边框，建立秩序感 */
     }
     .profile-info h1 {
-      font-size: 24px;
-      font-weight: 700;
-      letter-spacing: 1px;
-      margin-bottom: 5px;
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 2px;
+      margin-bottom: 4px;
     }
     .profile-info p {
-      font-size: 13px;
-      color: #888888;
+      font-size: 11px;
+      letter-spacing: 1px;
+      color: #666666;
+      text-transform: uppercase;
     }
     .contact-info {
       text-align: right;
-      font-size: 13px;
-      color: #888888;
-      line-height: 1.6;
+      font-size: 11px;
+      color: #666666;
+      line-height: 1.8;
+      letter-spacing: 0.5px;
     }
     .contact-info a {
-      color: #ffffff;
+      color: #999999;
       text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    .contact-info a:hover {
+      color: #ffffff;
     }
 
-    /* 主体内容区域 */
+    /* 主体网格容器 */
     .main-container {
       display: flex;
       flex: 1;
@@ -61,22 +70,28 @@
       height: calc(100vh - 90px); 
     }
 
-    /* 2. 左侧 1/4 区域：5个项目完全密铺 */
+    /* --- 3. 左侧一级菜单栏（1/4 完美密铺） --- */
     .left-panel {
       width: 25%;
       height: 100%;
       display: flex;
       flex-direction: column; 
       overflow: hidden; 
+      border-right: 1px solid #111111;
     }
     .project-item {
-      height: 20%; /* 每个卡片占主体精准的 20% */
+      height: 20%; 
       width: 100%;
       cursor: pointer;
       overflow: hidden;
       position: relative;
-      transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
-      opacity: 0.35; 
+      border-bottom: 1px solid #111111;
+      background-color: #050505;
+      transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      opacity: 0.25; /* 未选中时保持极低的呼吸感，突出当前大图 */
+    }
+    .project-item:last-child {
+      border-bottom: none;
     }
     .project-item:hover, .project-item.active {
       opacity: 1; 
@@ -85,13 +100,15 @@
       width: 100%;
       height: 100%;
       object-fit: cover; 
-      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+      filter: grayscale(20%); /* 微微去色营造高级感 */
+      transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1), filter 0.8s ease;
     }
     .project-item:hover img {
-      transform: scale(1.08); 
+      transform: scale(1.04); 
+      filter: grayscale(0%);
     }
 
-    /* 3. 右侧 3/4 展示区域 */
+    /* --- 4. 右侧 3/4 核心视觉导向展示区 --- */
     .right-panel {
       width: 75%;
       display: flex;
@@ -100,7 +117,7 @@
       overflow: hidden;
     }
     
-    /* 右上：大图展示区（延伸填满剩余的所有 80% 空间） */
+    /* 大图展示舱 */
     .detail-view {
       flex: 1; 
       background-color: #000000;
@@ -120,7 +137,7 @@
       height: 100%;
       object-fit: cover; 
       opacity: 0;
-      transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1);
       pointer-events: none;
     }
     .detail-view .active-media {
@@ -128,41 +145,42 @@
       pointer-events: auto;
     }
 
-    /* 【新增加】图片上叠加文字容器 */
+    /* 【精进】大图之上重构的高级画廊叠层文字 */
     .text-overlay {
       position: absolute;
       left: 0;
       bottom: 0;
       width: 100%;
-      padding: 40px 40px 30px 40px;
-      /* 使用优雅柔和的暗向渐变，确保在大图背景亮色时文本依旧清晰易读 */
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0) 100%);
+      padding: 60px 40px 40px 40px;
+      /* 更高级、更自然的线性多级羽化阴影 */
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0) 100%);
       z-index: 10;
-      pointer-events: none; /* 防止遮挡大图的盲击热区 */
-      transition: opacity 0.4s ease;
+      pointer-events: none; 
+    }
+    .text-overlay-content {
+      max-width: 800px; /* 限制文本展宽，使其符合画廊画册的视觉排版 */
     }
     .text-overlay h2 {
-      display: inline; 
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 600;
-      letter-spacing: 0.5px;
-      margin-right: 15px;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
       color: #ffffff;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      text-transform: uppercase;
     }
     .text-overlay p {
-      display: inline;
-      font-size: 13.5px;
-      line-height: 1.6;
-      color: #cccccc;
-      text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+      font-size: 12px;
+      line-height: 1.8;
+      color: #aaaaaa;
+      font-weight: 300;
+      letter-spacing: 0.3px;
     }
 
-    /* 左右大图热区盲击带 */
+    /* 左右隐形触控热区 */
     .click-zone {
       position: absolute;
       top: 0;
-      width: 35%;
+      width: 30%;
       height: 100%;
       z-index: 5;
       cursor: pointer;
@@ -171,7 +189,7 @@
     .click-zone-right { right: 0; }
 
 
-    /* 【绝对对齐】右下：缩略图区域（完美等于最下一栏 20% 高度） */
+    /* --- 5. 【绝对对齐】底部二级缩略图横行（高度精准对齐左侧最下一栏） --- */
     .thumbnail-panel {
       height: 20%; 
       width: 100%;
@@ -179,6 +197,7 @@
       background-color: #000000;
       overflow: hidden;
       flex-shrink: 0;
+      border-top: 1px solid #111111;
     }
     .thumb-item {
       flex: 1; 
@@ -186,9 +205,9 @@
       cursor: pointer;
       overflow: hidden;
       position: relative;
-      opacity: 0.3;
-      transition: opacity 0.4s ease;
-      border-right: 1px solid #000000; 
+      opacity: 0.2; /* 默认更弱化，让当前播放的缩略图高亮极具聚焦感 */
+      transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      border-right: 1px solid #111111; 
     }
     .thumb-item:last-child {
       border-right: none;
@@ -197,9 +216,15 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
+      transform: scale(1.01);
+      transition: transform 0.6s ease;
     }
+    /* 缩略图当前激活高亮，带有一点高定艺术品的纯净感 */
     .thumb-item.active-thumb {
       opacity: 1;
+    }
+    .thumb-item.active-thumb img {
+      transform: scale(1);
     }
   </style>
 </head>
@@ -208,7 +233,7 @@
   <header>
     <div class="profile-info">
       <h1>马子潇</h1>
-      <p>关卡设计 / 游戏设计</p>
+      <p>Level Design / Game Design Portfolio</p>
     </div>
     <div class="contact-info">
       <p>📧 <a href="mailto:zixiaom@smu.edu">zixiaom@smu.edu</a></p>
@@ -248,8 +273,10 @@
         </div>
 
         <div class="text-overlay">
-          <h2 id="targetTitle">加载中...</h2>
-          <p id="targetDesc">加载中...</p>
+          <div class="text-overlay-content">
+            <h2 id="targetTitle">LOADING...</h2>
+            <p id="targetDesc">LOADING DESCRIPTION...</p>
+          </div>
         </div>
       </div>
 
@@ -268,8 +295,8 @@
   <script>
     const projectData = {
       project1: {
-        title: "[关卡作品 01] - 核心动线",
-        desc: "核心关卡动线规划设计。多路径垂直空间的探索流向，以下5张图/视频正在每5秒循环滚动演示具体细节。",
+        title: "01 / 核心关卡动线规划",
+        desc: "核心关卡动线规划与多路径垂直空间探索流向。探讨主要视线引导及关键资源点的交织排布，右侧大图与下方缩略图每5秒进行流式更替演进。",
         media: [
           { type: 'image', src: 'https://picsum.photos/1920/1080?random=101' },
           { type: 'image', src: 'https://picsum.photos/1920/1080?random=102' },
@@ -279,8 +306,8 @@
         ]
       },
       project2: {
-        title: "[关卡作品 02] - 光影引导",
-        desc: "利用冷暖光源的交替，隐性引导玩家在无UI状态下自然找到潜行暗道。请观察右侧媒体的自动流式更替。",
+        title: "02 / 隐性光影引导机制",
+        desc: "利用高对比度冷暖光源的自然交替与几何形态暗示，隐性引导玩家在无UI及全黑匿踪状态下，自然直觉地发现潜行暗道与安全屋区域。",
         media: [
           { type: 'image', src: 'https://picsum.photos/1920/1080?random=201' },
           { type: 'image', src: 'https://picsum.photos/1920/1080?random=202' },
@@ -290,8 +317,8 @@
         ]
       },
       project3: {
-        title: "[动态机制 03] - 机关解谜",
-        desc: "基于虚幻引擎的动态地形解锁逻辑闭环。多维度的动态展示，包含测试白模动画和触发逻辑脚本渲染。",
+        title: "03 / 动态环境与复合解谜机制",
+        desc: "基于虚幻引擎重构的动态地形解锁与逻辑闭环机制。多维度呈现测试白模阶段的动画演绎，包含触发逻辑条件分支以及多段机关运作细节。",
         media: [
           { type: 'video', src: 'https://www.w3schools.com/html/mov_bbb.mp4' },
           { type: 'image', src: 'https://picsum.photos/1920/1080?random=302' },
@@ -301,8 +328,8 @@
         ]
       },
       project4: {
-        title: "[系统设计 04] - 沙盒遭遇战",
-        desc: "基于心流理论设计的敌方AI刷新曲线，保证高潮和心流舒缓期的交替出现，右侧轮播展现沙盒覆盖区域。",
+        title: "04 / 沙盒遭遇战心流曲线",
+        desc: "基于动态心流缓释理论设计的敌方AI刷新与战术覆盖包络。通过空间掩体的高低落差分布，保证战斗高潮期与资源搜集舒缓期的优雅交替。",
         media: [
           { type: 'image', src: 'https://picsum.photos/1920/1080?random=401' },
           { type: 'image', src: 'https://picsum.photos/1920/1080?random=402' },
@@ -312,8 +339,8 @@
         ]
       },
       project5: {
-        title: "[世界观 05] - 宏观高低差",
-        desc: "快速验证大型开放城市中，钩爪与滑翔翼在不同建筑密度下的移速与身法爽感。通过5张图多角度推演。",
+        title: "05 / 垂直高低差沙盒移动验证",
+        desc: "快速推演并验证大型开放立体城市中，钩爪机制、垂直滑索与滑翔翼系统在不同建筑密度、高差倾角下的移动速率、惯性衔接与操作爽感。",
         media: [
           { type: 'image', src: 'https://picsum.photos/1920/1080?random=501' },
           { type: 'image', src: 'https://picsum.photos/1920/1080?random=502' },
@@ -394,7 +421,6 @@
         startAutoRotation(currentProjectID, currentSubIndex);
       }
 
-      // 左右大图热区盲击
       document.getElementById('zoneLeft').addEventListener('click', (e) => {
         e.stopPropagation();
         currentSubIndex = (currentSubIndex - 1 + 5) % 5;
@@ -409,7 +435,6 @@
         resetTimer();
       });
 
-      // 点击5个缩略图无缝换大图
       thumbs.forEach(thumb => {
         thumb.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -420,7 +445,6 @@
         });
       });
 
-      // 左侧主列表5项点击
       items.forEach(item => {
         item.addEventListener('click', () => {
           const projectId = item.getAttribute('data-id');
