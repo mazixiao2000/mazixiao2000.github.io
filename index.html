@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>马子潇 - 个人作品集</title>
   <style>
-    /* 基础样式重置 & 暗黑模式 */
+    /* 基础样式重置 & 纯黑无缝全屏 */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -21,7 +21,7 @@
       color: #ffffff; 
     }
 
-    /* 1. 顶部个人信息栏 */
+    /* 1. 顶部个人信息栏（移除左右内边距，使其与无边框排版贴合） */
     header {
       background-color: #000000;
       padding: 25px 40px;
@@ -29,6 +29,7 @@
       justify-content: space-between;
       align-items: center;
       flex-shrink: 0;
+      z-index: 20;
     }
     .profile-info h1 {
       font-size: 24px;
@@ -59,15 +60,13 @@
       overflow: hidden;
     }
 
-    /* 2. 左侧 1/4 区域：5个项目完全密铺 */
+    /* 2. 左侧 1/4 区域：完全无间隙密铺 */
     .left-panel {
       width: 25%;
       height: 100%;
       display: flex;
       flex-direction: column; 
       overflow: hidden; 
-      padding-left: 40px;
-      padding-bottom: 40px;
     }
     .project-item {
       flex: 1; 
@@ -75,76 +74,110 @@
       cursor: pointer;
       overflow: hidden;
       position: relative;
-      transition: opacity 0.3s ease;
-      opacity: 0.4; 
-      border-bottom: 1px solid #111; 
-    }
-    .project-item:last-child {
-      border-bottom: none;
+      transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      opacity: 0.35; 
     }
     .project-item:hover, .project-item.active {
       opacity: 1; 
     }
+    /* 悬停放大与平滑动画效果 */
     .project-item img {
       width: 100%;
       height: 100%;
       object-fit: cover; 
+      transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .project-item:hover img {
+      transform: scale(1.08); /* 略微放大悬浮效果 */
     }
 
-    /* 3. 右侧 3/4 展示区域 */
+    /* 3. 右侧 3/4 展示区域：完全贴合边缘 */
     .right-panel {
       width: 75%;
       display: flex;
       flex-direction: column;
       height: 100%;
-      padding: 0 40px 40px 40px;
     }
     
-    /* 右上：媒体展示区（极大化、完全覆盖、带中下部滚动条） */
+    /* 右上：媒体展示区（100%全屏覆盖，两侧点击区域判定） */
     .detail-view {
       flex: 1;
-      background-color: #0a0a0a;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background-color: #000000;
       overflow: hidden;
       position: relative; 
     }
+    
+    /* 媒体元素及切换时的平滑淡入动效 */
+    .media-container {
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
     .detail-view img, .detail-view video {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
       height: 100%;
       object-fit: cover; 
-      display: none;
+      opacity: 0;
+      transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+      pointer-events: none; /* 让上层点击能穿透 */
     }
     .detail-view .active-media {
-      display: block;
+      opacity: 1;
+      pointer-events: auto;
     }
 
-    /* 右侧中下部的极简滚动进度条（代表5张图的滚动进度） */
-    .scroll-indicator-bar {
+    /* 左右点击切图区域的绝对定位 */
+    .click-zone {
       position: absolute;
-      bottom: 20px; 
-      left: 10%;
-      width: 80%;
-      height: 2px;
-      background-color: rgba(255, 255, 255, 0.15);
-      border-radius: 1px;
+      top: 0;
+      width: 40%;
+      height: 100%;
+      z-index: 5;
+      cursor: pointer;
+    }
+    .click-zone-left {
+      left: 0;
+      /* cursor: url('data:image/svg+xml;utf8,<svg...'), auto; 可以自行扩展光标 */
+    }
+    .click-zone-right {
+      right: 0;
+    }
+
+    /* 五个圆点轮播控制器样式 */
+    .dot-controller {
+      position: absolute;
+      bottom: 25px; 
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 12px;
       z-index: 10;
     }
-    .scroll-indicator-progress {
-      height: 100%;
-      width: 20%; /* 5张图，每张占 20% */
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.25);
+      cursor: pointer;
+      transition: background-color 0.4s ease, transform 0.4s ease;
+    }
+    .dot:hover {
+      background-color: rgba(255, 255, 255, 0.6);
+      transform: scale(1.2);
+    }
+    .dot.active-dot {
       background-color: #ffffff;
-      border-radius: 1px;
-      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-      transform: translateX(0%);
+      transform: scale(1.2);
     }
 
-    /* 右下：文字说明（固定两行高度） */
+    /* 右下：文字说明（保持固定两行高度，底部略微留白贴边） */
     .detail-desc {
-      height: 75px; 
+      height: 85px; 
       background-color: #000000;
-      padding-top: 20px;
+      padding: 25px 40px 0 40px; /* 两侧对齐文本 */
       overflow: hidden; 
     }
     .detail-desc h2 {
@@ -179,37 +212,40 @@
   <div class="main-container">
     
     <div class="left-panel" id="leftPanel">
-      
       <div class="project-item active" data-id="project1">
         <img src="https://picsum.photos/600/400?random=11" alt="项目一封面">
       </div>
-
       <div class="project-item" data-id="project2">
         <img src="https://picsum.photos/600/400?random=12" alt="项目二封面">
       </div>
-
       <div class="project-item" data-id="project3">
         <img src="https://picsum.photos/600/400?random=13" alt="项目三封面">
       </div>
-
       <div class="project-item" data-id="project4">
         <img src="https://picsum.photos/600/400?random=14" alt="项目四封面">
       </div>
-
       <div class="project-item" data-id="project5">
         <img src="https://picsum.photos/600/400?random=15" alt="项目五封面">
       </div>
-
     </div>
 
     <div class="right-panel">
       
       <div class="detail-view">
-        <img id="targetImage" class="active-media" src="" alt="大图展示">
-        <video id="targetVideo" controls autoplay loop muted src=""></video>
+        <div class="click-zone click-zone-left" id="zoneLeft"></div>
+        <div class="click-zone click-zone-right" id="zoneRight"></div>
+
+        <div class="media-container" id="mediaContainer">
+          <img id="targetImage" class="active-media" src="" alt="大图展示">
+          <video id="targetVideo" controls autoplay loop muted src=""></video>
+        </div>
         
-        <div class="scroll-indicator-bar">
-          <div class="scroll-indicator-progress" id="indicatorProgress"></div>
+        <div class="dot-controller" id="dotController">
+          <div class="dot active-dot" data-idx="0"></div>
+          <div class="dot" data-idx="1"></div>
+          <div class="dot" data-idx="2"></div>
+          <div class="dot" data-idx="3"></div>
+          <div class="dot" data-idx="4"></div>
         </div>
       </div>
 
@@ -223,7 +259,6 @@
   </div>
 
   <script>
-    // 1. 这里配置你 5 个项目的具体子内容（每个项目包含 5 个滚动媒体）
     const projectData = {
       project1: {
         title: "[关卡作品 01] - 核心动线",
@@ -231,7 +266,7 @@
         media: [
           { type: 'image', src: 'https://picsum.photos/1920/1080?random=101' },
           { type: 'image', src: 'https://picsum.photos/1920/1080?random=102' },
-          { type: 'video', src: 'https://www.w3schools.com/html/mov_bbb.mp4' }, // 视频会自动播放
+          { type: 'video', src: 'https://www.w3schools.com/html/mov_bbb.mp4' }, 
           { type: 'image', src: 'https://picsum.photos/1920/1080?random=104' },
           { type: 'image', src: 'https://picsum.photos/1920/1080?random=105' }
         ]
@@ -288,72 +323,101 @@
       const targetVideo = document.getElementById('targetVideo');
       const targetTitle = document.getElementById('targetTitle');
       const targetDesc = document.getElementById('targetDesc');
-      const indicatorProgress = document.getElementById('indicatorProgress');
+      const dots = document.querySelectorAll('.dot');
 
       let currentProjectID = 'project1';
       let currentSubIndex = 0;
       let rotationInterval = null;
 
-      // 渲染当前主项目的某一个子媒体
       function renderSubMedia(projectId, subIndex) {
         const project = projectData[projectId];
         if (!project) return;
 
-        // 更新文本内容
         targetTitle.textContent = project.title;
         targetDesc.textContent = project.desc;
 
+        // 更新圆点状态
+        dots.forEach((d, idx) => {
+          if (idx === subIndex) d.classList.add('active-dot');
+          else d.classList.remove('active-dot');
+        });
+
         const currentMedia = project.media[subIndex];
 
-        // 更新中下部滚动条的位置 (一共5张图，每张占 100% / 5 = 20%)
-        indicatorProgress.style.transform = `translateX(${subIndex * 100}%)`;
-
-        // 处理媒体渲染
+        // 运用 Opacity 动画平滑淡入淡出切换媒体
         if (currentMedia.type === 'video') {
           targetImage.classList.remove('active-media');
-          targetImage.src = ''; 
           
           targetVideo.src = currentMedia.src;
           targetVideo.classList.add('active-media');
-          targetVideo.play().catch(e => console.log("自动播放拦截：", e));
+          targetVideo.play().catch(e => console.log(e));
         } else {
           targetVideo.classList.remove('active-media');
           targetVideo.pause();
-          targetVideo.src = ''; 
           
           targetImage.src = currentMedia.src;
           targetImage.classList.add('active-media');
         }
       }
 
-      // 启动 5 秒自动滚动计时器
-      function startAutoRotation(projectId) {
+      function startAutoRotation(projectId, startIdx = 0) {
         if (rotationInterval) clearInterval(rotationInterval);
-        currentSubIndex = 0; // 每次换主项目，都从第一张子图开始
+        currentSubIndex = startIdx;
         renderSubMedia(projectId, currentSubIndex);
 
         rotationInterval = setInterval(() => {
-          currentSubIndex = (currentSubIndex + 1) % 5; // 在 0~4 之间无限循环
+          currentSubIndex = (currentSubIndex + 1) % 5;
           renderSubMedia(projectId, currentSubIndex);
-        }, 5000); // 5000毫秒 = 5秒
+        }, 5000); 
       }
 
-      // 给左侧 5 个大格子绑定点击事件
+      // 重置定时器（用于手动干预点击切换后重新计算5秒）
+      function resetTimer() {
+        startAutoRotation(currentProjectID, currentSubIndex);
+      }
+
+      // 1. 左右侧点击切图机制（左侧40%区域切上一张，右侧40%区域切下一张）
+      document.getElementById('zoneLeft').addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentSubIndex = (currentSubIndex - 1 + 5) % 5;
+        renderSubMedia(currentProjectID, currentSubIndex);
+        resetTimer();
+      });
+
+      document.getElementById('zoneRight').addEventListener('click', (e) => {
+        e.stopPropagation();
+        currentSubIndex = (currentSubIndex + 1) % 5;
+        renderSubMedia(currentProjectID, currentSubIndex);
+        resetTimer();
+      });
+
+      // 2. 五个圆点点击精确选图
+      dots.forEach(dot => {
+        dot.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const idx = parseInt(dot.getAttribute('data-idx'));
+          currentSubIndex = idx;
+          renderSubMedia(currentProjectID, currentSubIndex);
+          resetTimer();
+        });
+      });
+
+      // 3. 左侧主列表点击
       items.forEach(item => {
         item.addEventListener('click', () => {
           const projectId = item.getAttribute('data-id');
-          if (projectId === currentProjectID) return; // 如果已经是当前项，不作操作
+          if (projectId === currentProjectID) return;
 
           items.forEach(i => i.classList.remove('active'));
           item.classList.add('active');
 
           currentProjectID = projectId;
-          startAutoRotation(projectId);
+          startAutoRotation(projectId, 0);
         });
       });
 
-      // 初始化：默认启动第一个项目
-      startAutoRotation('project1');
+      // 初始化
+      startAutoRotation('project1', 0);
     });
   </script>
 
