@@ -21,14 +21,14 @@
       color: #ffffff; 
     }
 
-    /* 1. 顶部个人信息栏（固定高度，便于主体进行网格切分） */
+    /* 1. 顶部个人信息栏 */
     header {
       background-color: #000000;
       padding: 25px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      height: 90px; /* 固定头部高度 */
+      height: 90px; 
       flex-shrink: 0;
       z-index: 20;
     }
@@ -58,7 +58,7 @@
       display: flex;
       flex: 1;
       overflow: hidden;
-      height: calc(100vh - 90px); /* 动态减去头部高度 */
+      height: calc(100vh - 90px); 
     }
 
     /* 2. 左侧 1/4 区域：5个项目完全密铺 */
@@ -70,7 +70,7 @@
       overflow: hidden; 
     }
     .project-item {
-      flex: 1; /* 每个格子高度正好是主体高度的 20% */
+      height: 20%; /* 核心：每个大格子占据精确的 20% 高度 */
       width: 100%;
       cursor: pointer;
       overflow: hidden;
@@ -100,9 +100,9 @@
       overflow: hidden;
     }
     
-    /* 右上：媒体大图展示区（动态算高） */
+    /* 右上：大图展示区（自动延伸填满剩余空间，即占据 60% 高度） */
     .detail-view {
-      flex: 1; /* 自动撑满扣除缩略图和文字后的上半部分 */
+      flex: 1; 
       background-color: #000000;
       overflow: hidden;
       position: relative; 
@@ -128,7 +128,7 @@
       pointer-events: auto;
     }
 
-    /* 左右大盲区切图触控带 */
+    /* 左右大图热区盲击带 */
     .click-zone {
       position: absolute;
       top: 0;
@@ -141,8 +141,7 @@
     .click-zone-right { right: 0; }
 
 
-    /* 【核心同步点】右中：五张缩略图联动区域 */
-    /* 高度必须严格和左侧倒数第二栏（单个project-item，即主体的20%高度）完全一致 */
+    /* 【绝对对齐】右中：缩略图区域，高度完美等于左侧从下往上第二栏（20% 高度） */
     .thumbnail-panel {
       height: 20%; 
       width: 100%;
@@ -152,14 +151,14 @@
       flex-shrink: 0;
     }
     .thumb-item {
-      flex: 1; /* 5张缩略图等分宽度铺满 */
+      flex: 1; 
       height: 100%;
       cursor: pointer;
       overflow: hidden;
       position: relative;
       opacity: 0.3;
       transition: opacity 0.4s ease;
-      border-right: 1px solid #000000; /* 缩略图之间微缝 */
+      border-right: 1px solid #000000; 
     }
     .thumb-item:last-child {
       border-right: none;
@@ -169,18 +168,16 @@
       height: 100%;
       object-fit: cover;
     }
-    /* 当前轮播到的小图高亮样式 */
     .thumb-item.active-thumb {
       opacity: 1;
     }
 
 
-    /* 【核心同步点】右下：文字说明区域 */
-    /* 高度等于左侧最后一栏的上侧（我们取主体高度的 10% 刚好完美对称） */
+    /* 【绝对对齐】右下：文字区域，高度完美等于左侧最下一栏（20% 高度） */
     .detail-desc {
-      height: 10%; 
+      height: 20%; 
       background-color: #000000;
-      padding: 15px 40px 0 40px; 
+      padding: 30px 40px 0 40px; /* 增加上内边距，使文字在两排高度里呈现得更优雅空灵 */
       overflow: hidden; 
       flex-shrink: 0;
     }
@@ -195,7 +192,7 @@
     .detail-desc p {
       display: inline;
       font-size: 13px;
-      line-height: 1.5;
+      line-height: 1.6;
       color: #888888;
     }
   </style>
@@ -246,11 +243,11 @@
       </div>
 
       <div class="thumbnail-panel" id="thumbnailPanel">
-        <div class="thumb-item active-thumb" data-idx="0"><img id="thumb0" src="" alt="缩略图1"></div>
-        <div class="thumb-item" data-idx="1"><img id="thumb1" src="" alt="缩略图2"></div>
-        <div class="thumb-item" data-idx="2"><img id="thumb2" src="" alt="缩略图3"></div>
-        <div class="thumb-item" data-idx="3"><img id="thumb3" src="" alt="缩略图4"></div>
-        <div class="thumb-item" data-idx="4"><img id="thumb4" src="" alt="缩略图5"></div>
+        <div class="thumb-item active-thumb" data-idx="0"><img src="" alt="缩略图1"></div>
+        <div class="thumb-item" data-idx="1"><img src="" alt="缩略图2"></div>
+        <div class="thumb-item" data-idx="2"><img src="" alt="缩略图3"></div>
+        <div class="thumb-item" data-idx="3"><img src="" alt="缩略图4"></div>
+        <div class="thumb-item" data-idx="4"><img src="" alt="缩略图5"></div>
       </div>
 
       <div class="detail-desc">
@@ -263,7 +260,6 @@
   </div>
 
   <script>
-    // 数据集：每个项目配5个媒体资源（可用同一个图片URL进行测试，缩略图会自动抓取这里的数据）
     const projectData = {
       project1: {
         title: "[关卡作品 01] - 核心动线",
@@ -311,7 +307,7 @@
       },
       project5: {
         title: "[世界观 05] - 宏观高低差",
-        desc: "快速验证大型开放城市中，钩爪与滑翔翼在不同建筑密度下的移速与身法爽感。通过5张图多角度推演。",
+        desc: "快速验证大型开放城市中，钩爪与滑翔翼在不同建筑密度下的移速与身法爽感。通过5张图多角度推推演。",
         media: [
           { type: 'image', src: 'https://picsum.photos/1920/1080?random=501' },
           { type: 'image', src: 'https://picsum.photos/1920/1080?random=502' },
@@ -334,14 +330,12 @@
       let currentSubIndex = 0;
       let rotationInterval = null;
 
-      // 更新下方5个缩略图的图片内容
       function updateThumbnailSource(projectId) {
         const project = projectData[projectId];
         if (!project) return;
         thumbs.forEach((thumb, idx) => {
           const mediaItem = project.media[idx];
           const imgTag = thumb.querySelector('img');
-          // 如果子内容是视频，缩略图可以用一张封面或占位（这里演示如果是视频则用项目大列表图兜底，图片则直接用原图）
           if (mediaItem.type === 'video') {
             imgTag.src = 'https://picsum.photos/600/400?random=999'; 
           } else {
@@ -357,10 +351,9 @@
         targetTitle.textContent = project.title;
         targetDesc.textContent = project.desc;
 
-        // 联动缩略图高亮状态
         thumbs.forEach((t, idx) => {
           if (idx === subIndex) t.classList.add('active-thumb');
-          else d = t.classList.remove('active-thumb');
+          else t.classList.remove('active-thumb');
         });
 
         const currentMedia = project.media[subIndex];
@@ -395,7 +388,7 @@
         startAutoRotation(currentProjectID, currentSubIndex);
       }
 
-      // 1. 左右大图热区盲击
+      // 左右大图热区盲击
       document.getElementById('zoneLeft').addEventListener('click', (e) => {
         e.stopPropagation();
         currentSubIndex = (currentSubIndex - 1 + 5) % 5;
@@ -410,7 +403,7 @@
         resetTimer();
       });
 
-      // 2. 点击5个缩略图无缝换大图
+      // 点击5个缩略图无缝换大图
       thumbs.forEach(thumb => {
         thumb.addEventListener('click', (e) => {
           e.stopPropagation();
@@ -421,7 +414,7 @@
         });
       });
 
-      // 3. 左侧主列表5项点击
+      // 左侧主列表5项点击
       items.forEach(item => {
         item.addEventListener('click', () => {
           const projectId = item.getAttribute('data-id');
@@ -435,7 +428,6 @@
         });
       });
 
-      // 默认启动
       startAutoRotation('project1', 0);
     });
   </script>
