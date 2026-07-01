@@ -17,78 +17,78 @@
       display: flex;
       flex-direction: column;
       overflow: hidden; /* 禁止整页滚动 */
-      background-color: #f8f9fa;
-      color: #333;
+      background-color: #ffffff;
+      color: #111;
     }
 
     /* 1. 顶部个人信息栏 */
     header {
       background-color: #ffffff;
-      padding: 20px 40px;
-      border-bottom: 1px solid #e9ecef;
+      padding: 30px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-shrink: 0; /* 防止顶部栏被压缩 */
+      flex-shrink: 0;
     }
     .profile-info h1 {
-      font-size: 24px;
-      margin-bottom: 5px;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
     }
     .profile-info p {
-      font-size: 14px;
-      color: #6c757d;
+      font-size: 13px;
+      color: #8c8c8c;
     }
     .contact-info {
       text-align: right;
-      font-size: 14px;
+      font-size: 13px;
+      color: #8c8c8c;
       line-height: 1.6;
     }
     .contact-info a {
-      color: #007bff;
-      text-decoration: none;
+      color: #111;
+      text-decoration: underline;
     }
 
     /* 主体内容区域 */
     .main-container {
       display: flex;
       flex: 1;
-      overflow: hidden; /* 核心：确保子元素的滚动不影响外层 */
+      overflow: hidden;
     }
 
-    /* 2. 左侧 1/4 流式滚动条目 */
+    /* 2. 左侧 1/4 视觉流式滚动（极简风：纯图、无缝隙无边框） */
     .left-panel {
       width: 25%;
       background-color: #ffffff;
-      border-right: 1px solid #e9ecef;
-      overflow-y: auto; /* 允许纵向流式滚动 */
-      padding: 20px;
+      overflow-y: auto;
+      padding: 0 10px 40px 40px; /* 保持左边距对齐顶部 */
     }
+    /* 隐藏滚动条但保留滚动功能（更具极简感） */
+    .left-panel::-webkit-scrollbar {
+      width: 4px;
+    }
+    .left-panel::-webkit-scrollbar-thumb {
+      background: #e0e0e0;
+      border-radius: 2px;
+    }
+
     .project-item {
-      background-color: #f1f3f5;
-      border-radius: 8px;
-      padding: 10px;
+      width: 100%;
       margin-bottom: 15px;
       cursor: pointer;
-      transition: transform 0.2s, border-color 0.2s;
-      border: 2px solid transparent;
+      transition: opacity 0.3s ease;
+      opacity: 0.7; /* 默认略微半透明，突出选中项 */
     }
-    .project-item:hover {
-      transform: translateY(-2px);
-      border-color: #007bff;
+    .project-item:hover, .project-item.active {
+      opacity: 1; /* 悬浮或选中时完全变亮 */
     }
     .project-item img {
       width: 100%;
-      height: 120px;
-      object-fit: cover;
-      border-radius: 4px;
+      height: auto;
       display: block;
-      margin-bottom: 8px;
-    }
-    .project-item p {
-      font-size: 14px;
-      font-weight: bold;
-      text-align: center;
+      object-fit: cover;
     }
 
     /* 3. 右侧 3/4 展示区域 */
@@ -97,38 +97,44 @@
       display: flex;
       flex-direction: column;
       height: 100%;
+      padding: 0 40px 40px 40px;
     }
-    /* 右上：大图展示 */
+    
+    /* 右上：媒体展示区（支持图片、GIF、视频） */
     .detail-view {
       flex: 1;
-      background-color: #eaeaea;
+      background-color: #f9f9f9; /* 极简浅灰底色 */
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
-      position: relative;
     }
-    .detail-view img {
+    .detail-view img, .detail-view video {
       max-width: 100%;
       max-height: 100%;
       object-fit: contain;
+      display: none; /* 默认隐藏，由JS控制显示 */
     }
+    .detail-view .active-media {
+      display: block; /* 只显示当前活跃的媒体 */
+    }
+
     /* 右下：文字说明 */
     .detail-desc {
-      height: 35%; /* 占用右侧下半部分 */
+      height: 30%;
       background-color: #ffffff;
-      border-top: 1px solid #e9ecef;
-      padding: 30px;
-      overflow-y: auto; /* 如果文字变多，允许文字区域单独滚动 */
+      padding-top: 30px;
+      overflow-y: auto;
     }
     .detail-desc h2 {
-      margin-bottom: 10px;
-      font-size: 20px;
+      margin-bottom: 12px;
+      font-size: 18px;
+      font-weight: 600;
     }
     .detail-desc p {
-      font-size: 15px;
-      line-height: 1.6;
-      color: #495057;
+      font-size: 14px;
+      line-height: 1.7;
+      color: #555555;
     }
   </style>
 </head>
@@ -141,37 +147,28 @@
     </div>
     <div class="contact-info">
       <p>📧 邮箱: your-email@example.com</p>
-      <p>🌐 个人主页: <a href="https://mazixiao2000.github.io">mazixiao2000.github.io</a></p>
+      <p>🌐 个人主页: <a href="#">mazixiao2000.github.io</a></p>
     </div>
   </header>
 
   <div class="main-container">
     
-    <div class="left-panel">
+    <div class="left-panel" id="leftPanel">
       
-      <div class="project-item">
-        <img src="https://picsum.photos/400/300?random=1" alt="项目一">
-        <p>作品项目一名称</p>
+      <div class="project-item active" data-type="image" data-src="https://picsum.photos/1200/800?random=1" data-title="作品项目一：山地轨道静态摄影" data-desc="这是项目一的详细描述。点击左侧这个卡片后，右侧会展示一张高清大图。整体布局采用极简主义，去除了多余的边框和标题文字，完全以视觉图片为主导。">
+        <img src="https://picsum.photos/600/400?random=1" alt="项目一">
       </div>
 
-      <div class="project-item">
-        <img src="https://picsum.photos/400/300?random=2" alt="项目二">
-        <p>作品项目二名称</p>
+      <div class="project-item" data-type="image" data-src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z0cmNvdXQ0YmY0cm95ZXg3cW1wNTJlbG90Y200dHpwdm9pY3B0ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7qE1YN7aBOFPRw8E/giphy.gif" data-title="作品项目二：动态 UI 交互交互（GIF）" data-desc="这是项目二的描述。右侧现在加载的是一个 GIF 动图。无论是图片、静态画作还是动态的演示，都能完美自适应右侧的视窗中心。">
+        <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z0cmNvdXQ0YmY0cm95ZXg3cW1wNTJlbG90Y200dHpwdm9pY3B0ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7qE1YN7aBOFPRw8E/giphy.gif" alt="项目二">
       </div>
 
-      <div class="project-item">
-        <img src="https://picsum.photos/400/300?random=3" alt="项目三">
-        <p>作品项目三名称</p>
+      <div class="project-item" data-type="video" data-src="https://www.w3schools.com/html/mov_bbb.mp4" data-title="作品项目三：短视频与动态视觉" data-desc="这是项目三的描述。点击此项后，右侧会自动切换成一个 HTML5 原生视频播放器，并支持自动循环播放和静音，非常适合用来展示你的视频剪辑作品或动态特效。">
+        <img src="https://picsum.photos/600/400?random=3" alt="项目三占位图">
       </div>
 
-      <div class="project-item">
-        <img src="https://picsum.photos/400/300?random=4" alt="项目四">
-        <p>作品项目四名称</p>
-      </div>
-
-      <div class="project-item">
-        <img src="https://picsum.photos/400/300?random=5" alt="项目五">
-        <p>作品项目五名称</p>
+      <div class="project-item" data-type="image" data-src="https://picsum.photos/1200/800?random=4" data-title="作品项目四：平面视觉设计" data-desc="这是项目四的描述。极简风格的左侧列表在鼠标悬停时会从半透明变成完全清澈，给予用户非常直观的视觉反馈。">
+        <img src="https://picsum.photos/600/400?random=4" alt="项目四">
       </div>
 
     </div>
@@ -179,17 +176,63 @@
     <div class="right-panel">
       
       <div class="detail-view">
-        <img src="https://picsum.photos/800/600?random=1" alt="选中项目大图">
+        <img id="targetImage" class="active-media" src="https://picsum.photos/1200/800?random=1" alt="大图展示">
+        <video id="targetVideo" controls autoplay loop muted src=""></video>
       </div>
 
       <div class="detail-desc">
-        <h2>选中的作品项目标题</h2>
-        <p>这里是项目的具体文字说明占位符。你可以详细描述这个项目的背景、你所使用的技术栈、设计理念以及取得的成果。由于整体页面被锁定了高度，即使这里的文字非常长，也只会在当前这个白色区块内滚动，不会撑坏整个网页的精美布局。</p>
+        <h2 id="targetTitle">作品项目一：山地轨道静态摄影</h2>
+        <p id="targetDesc">这是项目一的详细描述。点击左侧这个卡片后，右侧会展示一张高清大图。整体布局采用极简主义，去除了多余的边框和标题文字，完全以视觉图片为主导。</p>
       </div>
 
     </div>
 
   </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const items = document.querySelectorAll('.project-item');
+      const targetImage = document.getElementById('targetImage');
+      const targetVideo = document.getElementById('targetVideo');
+      const targetTitle = document.getElementById('targetTitle');
+      const targetDesc = document.getElementById('targetDesc');
+
+      items.forEach(item => {
+        item.addEventListener('click', () => {
+          // 1. 切换左侧条目的激活高亮状态
+          items.forEach(i => i.classList.remove('active'));
+          item.classList.add('active');
+
+          // 2. 获取当前点击项的数据
+          const type = item.getAttribute('data-type');
+          const src = item.getAttribute('data-src');
+          const title = item.getAttribute('data-title');
+          const desc = item.getAttribute('data-desc');
+
+          // 3. 更新右侧的文字
+          targetTitle.textContent = title;
+          targetDesc.textContent = desc;
+
+          // 4. 根据类型（图片/GIF 或 视频）动态切换右侧媒体标签
+          if (type === 'video') {
+            targetImage.classList.remove('active-media');
+            targetImage.src = ''; // 释放图片资源
+            
+            targetVideo.src = src;
+            targetVideo.classList.add('active-media');
+            targetVideo.play().catch(err => console.log("自动播放被拦截: ", err));
+          } else {
+            targetVideo.classList.remove('active-media');
+            targetVideo.pause();
+            targetVideo.src = ''; // 释放视频资源
+            
+            targetImage.src = src;
+            targetImage.classList.add('active-media');
+          }
+        });
+      });
+    });
+  </script>
 
 </body>
 </html>
