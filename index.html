@@ -70,7 +70,7 @@
       height: calc(100vh - 90px); 
     }
 
-    /* --- 3. 左侧一级菜单栏（开启 3D 透视舞台） --- */
+    /* --- 3. 左侧一级菜单栏（3D 透视舞台） --- */
     .left-panel {
       width: 25%;
       height: 100%;
@@ -78,7 +78,6 @@
       flex-direction: column; 
       overflow: hidden; 
       border-right: 1px solid #111111;
-      /* 核心：为子元素的 3D 旋转提供透视纵深感，数值越小视角越强烈 */
       perspective: 1000px; 
     }
     
@@ -90,8 +89,6 @@
       border-bottom: 1px solid #111111;
       background-color: #050505;
       opacity: 0.25; 
-      
-      /* 核心：允许子元素在3D空间中渲染，并设置复位过渡 */
       transform-style: preserve-3d;
       transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     }
@@ -100,22 +97,20 @@
     }
     .project-item:hover, .project-item.active {
       opacity: 1; 
-      z-index: 10; /* 悬浮时图层往上提，防止边缘被相邻格子遮挡 */
+      z-index: 10; 
     }
     
-    /* 内部真正承载图片和边框的容器 */
     .project-item-card {
       width: 100%;
       height: 100%;
       overflow: hidden;
       position: relative;
       transform-style: preserve-3d;
-      pointer-events: none; /* 让鼠标事件直接穿透给父级 project-item 捕捉 */
+      pointer-events: none; 
       border: 0px solid rgba(255, 255, 255, 0);
       transition: border 0.4s ease, box-shadow 0.4s ease;
     }
     
-    /* 当悬浮或激活时，卡牌本身产生 PTCG 式的外边框亮起和微阴影 */
     .project-item:hover .project-item-card, 
     .project-item.active .project-item-card {
       border: 1px solid rgba(255, 255, 255, 0.3);
@@ -127,16 +122,15 @@
       height: 100%;
       object-fit: cover; 
       filter: grayscale(20%);
-      /* 将图片略微向 3D 空间深处平移，与外边框拉开Z轴距离，形成极强的裸眼视差 */
       transform: translateZ(0px) scale(1.02);
       transition: filter 0.8s ease, transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     }
     .project-item:hover img {
       filter: grayscale(0%);
-      transform: translateZ(20px) scale(1.06); /* 鼠标移入时，图片向屏幕外凸起 20px */
+      transform: translateZ(20px) scale(1.06); 
     }
 
-    /* --- 4. 右侧 3/4 核心视觉导向展示区 --- */
+    /* --- 4. 右侧展示区与 3D 核心大图区 --- */
     .right-panel {
       width: 75%;
       display: flex;
@@ -145,16 +139,22 @@
       overflow: hidden;
     }
     
+    /* 大图展示舱舞台，开启大图的 perspective 透视 */
     .detail-view {
       flex: 1; 
       background-color: #000000;
       overflow: hidden;
       position: relative; 
+      perspective: 1200px;
     }
+    
+    /* 大图的 3D 卡牌承载器 */
     .media-container {
       width: 100%;
       height: 100%;
       position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     }
     .detail-view img, .detail-view video {
       position: absolute;
@@ -166,22 +166,29 @@
       opacity: 0;
       transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1);
       pointer-events: none;
+      /* 图片位于 3D 背景层层深 */
+      transform: translateZ(0px);
     }
     .detail-view .active-media {
       opacity: 1;
       pointer-events: auto;
     }
 
-    /* 悬浮叠层文字排版 */
+    /* 大图之上重构的高级画廊叠层文字（开启 3D 并向前凸起以获得立体视差） */
     .text-overlay {
       position: absolute;
       left: 0;
       bottom: 0;
       width: 100%;
-      padding: 60px 40px 40px 40px;
-      background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.4) 50%, rgba(0, 0, 0, 0) 100%);
+      padding: 70px 40px 40px 40px;
+      background: linear-gradient(to top, rgba(0, 0, 0, 0.95) 0%, rgba(0, 0, 0, 0.4) 60%, rgba(0, 0, 0, 0) 100%);
       z-index: 10;
       pointer-events: none; 
+      
+      /* 核心：文字在 3D 空间中悬浮向前凸起 40px，呈现悬空视差 */
+      transform-style: preserve-3d;
+      transform: translateZ(40px);
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     }
     .text-overlay-content {
       max-width: 800px; 
@@ -193,6 +200,7 @@
       margin-bottom: 8px;
       color: #ffffff;
       text-transform: uppercase;
+      text-shadow: 0 4px 10px rgba(0,0,0,0.5);
     }
     .text-overlay p {
       font-size: 12px;
@@ -200,22 +208,23 @@
       color: #aaaaaa;
       font-weight: 300;
       letter-spacing: 0.3px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.5);
     }
 
-    /* 左右隐形触控热区 */
+    /* 左右隐形触控热区（要放在最上层，防止 3D 文字遮挡无法点击） */
     .click-zone {
       position: absolute;
       top: 0;
       width: 30%;
       height: 100%;
-      z-index: 5;
+      z-index: 15;
       cursor: pointer;
     }
     .click-zone-left { left: 0; }
     .click-zone-right { right: 0; }
 
 
-    /* --- 5. 【绝对对齐】底部二级缩略图横行 --- */
+    /* --- 5. 底部级联缩略图横行（3D 透视舞台） --- */
     .thumbnail-panel {
       height: 20%; 
       width: 100%;
@@ -224,32 +233,54 @@
       overflow: hidden;
       flex-shrink: 0;
       border-top: 1px solid #111111;
+      
+      /* 缩略图大横行的透视舞台 */
+      perspective: 1000px;
     }
     .thumb-item {
       flex: 1; 
       height: 100%;
       cursor: pointer;
-      overflow: hidden;
       position: relative;
       opacity: 0.2; 
-      transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
       border-right: 1px solid #111111; 
+      
+      /* 开启 3D卡牌属性 */
+      transform-style: preserve-3d;
+      transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     }
     .thumb-item:last-child {
       border-right: none;
     }
+    .thumb-item:hover, .thumb-item.active-thumb {
+      opacity: 1;
+      z-index: 10;
+    }
+    
+    .thumb-item-card {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+      transform-style: preserve-3d;
+      pointer-events: none;
+      border: 0px solid rgba(255, 255, 255, 0);
+      transition: border 0.4s ease;
+    }
+    .thumb-item:hover .thumb-item-card,
+    .thumb-item.active-thumb .thumb-item-card {
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+
     .thumb-item img {
       width: 100%;
       height: 100%;
       object-fit: cover;
-      transform: scale(1.01);
-      transition: transform 0.6s ease;
+      transform: translateZ(0px) scale(1.02);
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
     }
-    .thumb-item.active-thumb {
-      opacity: 1;
-    }
-    .thumb-item.active-thumb img {
-      transform: scale(1);
+    .thumb-item:hover img {
+      transform: translateZ(10px) scale(1.05); /* 底部缩略图悬浮时卡面微微前凸 10px */
     }
   </style>
 </head>
@@ -298,7 +329,7 @@
 
     <div class="right-panel">
       
-      <div class="detail-view">
+      <div class="detail-view" id="detailViewStage">
         <div class="click-zone click-zone-left" id="zoneLeft"></div>
         <div class="click-zone click-zone-right" id="zoneRight"></div>
 
@@ -307,7 +338,7 @@
           <video id="targetVideo" controls autoplay loop muted src=""></video>
         </div>
 
-        <div class="text-overlay">
+        <div class="text-overlay" id="textOverlay">
           <div class="text-overlay-content">
             <h2 id="targetTitle">LOADING...</h2>
             <p id="targetDesc">LOADING DESCRIPTION...</p>
@@ -316,11 +347,11 @@
       </div>
 
       <div class="thumbnail-panel" id="thumbnailPanel">
-        <div class="thumb-item active-thumb" data-idx="0"><img src="" alt="缩略图1"></div>
-        <div class="thumb-item" data-idx="1"><img src="" alt="缩略图2"></div>
-        <div class="thumb-item" data-idx="2"><img src="" alt="缩略图3"></div>
-        <div class="thumb-item" data-idx="3"><img src="" alt="缩略图4"></div>
-        <div class="thumb-item" data-idx="4"><img src="" alt="缩略图5"></div>
+        <div class="thumb-item active-thumb" data-idx="0"><div class="thumb-item-card"><img src="" alt="缩略图1"></div></div>
+        <div class="thumb-item" data-idx="1"><div class="thumb-item-card"><img src="" alt="缩略图2"></div></div>
+        <div class="thumb-item" data-idx="2"><div class="thumb-item-card"><img src="" alt="缩略图3"></div></div>
+        <div class="thumb-item" data-idx="3"><div class="thumb-item-card"><img src="" alt="缩略图4"></div></div>
+        <div class="thumb-item" data-idx="4"><div class="thumb-item-card"><img src="" alt="缩略图5"></div></div>
       </div>
 
     </div>
@@ -375,7 +406,7 @@
       },
       project5: {
         title: "05 / 垂直高低差沙盒移动验证",
-        desc: "快速推推演并验证大型开放立体城市中，钩爪机制、垂直滑索与滑翔翼系统在不同建筑密度、高差倾角下的移动速率、惯性衔接与操作爽感。",
+        desc: "快速推演并验证大型开放立体城市中，钩爪机制、垂直滑索与滑翔翼系统在不同建筑密度、高差倾角下的移动速率、惯性衔接与操作爽感。",
         media: [
           { type: 'image', src: 'https://picsum.photos/1920/1080?random=501' },
           { type: 'image', src: 'https://picsum.photos/1920/1080?random=502' },
@@ -393,40 +424,72 @@
       const targetTitle = document.getElementById('targetTitle');
       const targetDesc = document.getElementById('targetDesc');
       const thumbs = document.querySelectorAll('.thumb-item');
+      
+      const detailViewStage = document.getElementById('detailViewStage');
+      const mediaContainer = document.getElementById('mediaContainer');
+      const textOverlay = document.getElementById('textOverlay');
 
       let currentProjectID = 'project1';
       let currentSubIndex = 0;
       let rotationInterval = null;
 
       /* ===================================================
-         🔥 PTCG 同款：3D 动态倾斜卡牌计算引擎
+         🔥 3D卡牌动态旋转计算公共函数（PTCG同款逻辑）
          =================================================== */
-      items.forEach(item => {
-        item.addEventListener('mousemove', (e) => {
-          const rect = item.getBoundingClientRect();
-          // 计算鼠标当前在卡牌内部的坐标位置 (0 到 宽度/高度)
+      function applyTiltEffect(element, maxRotate = 15, scale = 1.02) {
+        element.addEventListener('mousemove', (e) => {
+          const rect = element.getBoundingClientRect();
           const x = e.clientX - rect.left;
           const y = e.clientY - rect.top;
           
-          // 将坐标映射到 -0.5 到 0.5 的相对中心点系数
           const xc = x / rect.width - 0.5;
           const yc = y / rect.height - 0.5;
           
-          // 计算旋转角度（乘以 20 度的最大旋转上限值）
-          // 鼠标在右，向右翻转（绕Y轴正旋转）；鼠标在上，向上翻转（绕X轴负旋转）
-          const rotateX = yc * -20; 
-          const rotateY = xc * 20;
+          const rotateX = yc * -maxRotate; 
+          const rotateY = xc * maxRotate;
 
           requestAnimationFrame(() => {
-            item.style.transform = `scale(1.02) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+            element.style.transform = `scale(${scale}) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
           });
         });
 
-        // 鼠标移出时，丝滑还原初始状态
-        item.addEventListener('mouseleave', () => {
+        element.addEventListener('mouseleave', () => {
           requestAnimationFrame(() => {
-            item.style.transform = 'scale(1) rotateX(0deg) rotateY(0deg)';
+            element.style.transform = 'scale(1) rotateX(0deg) rotateY(0deg)';
           });
+        });
+      }
+
+      // 绑定左侧大项目栏（最大倾斜 18度，带微放大）
+      items.forEach(item => applyTiltEffect(item, 18, 1.02));
+
+      // 绑定底部缩略图（由于面积小，最大倾斜 12度，带微放大）
+      thumbs.forEach(thumb => applyTiltEffect(thumb, 12, 1.03));
+
+      // 绑定核心右侧大图舱（摆动角度不易过大，5度即可呈现极高雅的视差，不放大）
+      detailViewStage.addEventListener('mousemove', (e) => {
+        const rect = detailViewStage.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        const xc = x / rect.width - 0.5;
+        const yc = y / rect.height - 0.5;
+        
+        const rotateX = yc * -6; 
+        const rotateY = xc * 6;
+
+        requestAnimationFrame(() => {
+          // 画面向主倾斜
+          mediaContainer.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+          // 文字叠层往前探，旋转相同角度在 Z轴的加持下形成电影悬浮错觉
+          textOverlay.style.transform = `translateZ(40px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        });
+      });
+
+      detailViewStage.addEventListener('mouseleave', () => {
+        requestAnimationFrame(() => {
+          mediaContainer.style.transform = 'rotateX(0deg) rotateY(0deg)';
+          textOverlay.style.transform = 'translateZ(40px) rotateX(0deg) rotateY(0deg)';
         });
       });
 
