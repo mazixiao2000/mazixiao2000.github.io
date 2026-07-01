@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>马子潇 - 个人作品集</title>
   <style>
-    /* 基础样式重置 & 纯黑无缝全屏 */
+    /* 基础样式重置 & 纯黑无缝 */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -21,13 +21,14 @@
       color: #ffffff; 
     }
 
-    /* 1. 顶部个人信息栏（移除左右内边距，使其与无边框排版贴合） */
+    /* 1. 顶部个人信息栏（固定高度，便于主体进行网格切分） */
     header {
       background-color: #000000;
       padding: 25px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      height: 90px; /* 固定头部高度 */
       flex-shrink: 0;
       z-index: 20;
     }
@@ -40,7 +41,6 @@
     .profile-info p {
       font-size: 13px;
       color: #888888;
-      letter-spacing: 0.5px;
     }
     .contact-info {
       text-align: right;
@@ -58,9 +58,10 @@
       display: flex;
       flex: 1;
       overflow: hidden;
+      height: calc(100vh - 90px); /* 动态减去头部高度 */
     }
 
-    /* 2. 左侧 1/4 区域：完全无间隙密铺 */
+    /* 2. 左侧 1/4 区域：5个项目完全密铺 */
     .left-panel {
       width: 25%;
       height: 100%;
@@ -69,7 +70,7 @@
       overflow: hidden; 
     }
     .project-item {
-      flex: 1; 
+      flex: 1; /* 每个格子高度正好是主体高度的 20% */
       width: 100%;
       cursor: pointer;
       overflow: hidden;
@@ -80,7 +81,6 @@
     .project-item:hover, .project-item.active {
       opacity: 1; 
     }
-    /* 悬停放大与平滑动画效果 */
     .project-item img {
       width: 100%;
       height: 100%;
@@ -88,26 +88,25 @@
       transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
     }
     .project-item:hover img {
-      transform: scale(1.08); /* 略微放大悬浮效果 */
+      transform: scale(1.08); 
     }
 
-    /* 3. 右侧 3/4 展示区域：完全贴合边缘 */
+    /* 3. 右侧 3/4 展示区域 */
     .right-panel {
       width: 75%;
       display: flex;
       flex-direction: column;
       height: 100%;
+      overflow: hidden;
     }
     
-    /* 右上：媒体展示区（100%全屏覆盖，两侧点击区域判定） */
+    /* 右上：媒体大图展示区（动态算高） */
     .detail-view {
-      flex: 1;
+      flex: 1; /* 自动撑满扣除缩略图和文字后的上半部分 */
       background-color: #000000;
       overflow: hidden;
       position: relative; 
     }
-    
-    /* 媒体元素及切换时的平滑淡入动效 */
     .media-container {
       width: 100%;
       height: 100%;
@@ -122,63 +121,68 @@
       object-fit: cover; 
       opacity: 0;
       transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1);
-      pointer-events: none; /* 让上层点击能穿透 */
+      pointer-events: none;
     }
     .detail-view .active-media {
       opacity: 1;
       pointer-events: auto;
     }
 
-    /* 左右点击切图区域的绝对定位 */
+    /* 左右大盲区切图触控带 */
     .click-zone {
       position: absolute;
       top: 0;
-      width: 40%;
+      width: 35%;
       height: 100%;
       z-index: 5;
       cursor: pointer;
     }
-    .click-zone-left {
-      left: 0;
-      /* cursor: url('data:image/svg+xml;utf8,<svg...'), auto; 可以自行扩展光标 */
-    }
-    .click-zone-right {
-      right: 0;
-    }
+    .click-zone-left { left: 0; }
+    .click-zone-right { right: 0; }
 
-    /* 五个圆点轮播控制器样式 */
-    .dot-controller {
-      position: absolute;
-      bottom: 25px; 
-      left: 50%;
-      transform: translateX(-50%);
+
+    /* 【核心同步点】右中：五张缩略图联动区域 */
+    /* 高度必须严格和左侧倒数第二栏（单个project-item，即主体的20%高度）完全一致 */
+    .thumbnail-panel {
+      height: 20%; 
+      width: 100%;
       display: flex;
-      gap: 12px;
-      z-index: 10;
+      background-color: #000000;
+      overflow: hidden;
+      flex-shrink: 0;
     }
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background-color: rgba(255, 255, 255, 0.25);
+    .thumb-item {
+      flex: 1; /* 5张缩略图等分宽度铺满 */
+      height: 100%;
       cursor: pointer;
-      transition: background-color 0.4s ease, transform 0.4s ease;
+      overflow: hidden;
+      position: relative;
+      opacity: 0.3;
+      transition: opacity 0.4s ease;
+      border-right: 1px solid #000000; /* 缩略图之间微缝 */
     }
-    .dot:hover {
-      background-color: rgba(255, 255, 255, 0.6);
-      transform: scale(1.2);
+    .thumb-item:last-child {
+      border-right: none;
     }
-    .dot.active-dot {
-      background-color: #ffffff;
-      transform: scale(1.2);
+    .thumb-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    /* 当前轮播到的小图高亮样式 */
+    .thumb-item.active-thumb {
+      opacity: 1;
     }
 
-    /* 右下：文字说明（保持固定两行高度，底部略微留白贴边） */
+
+    /* 【核心同步点】右下：文字说明区域 */
+    /* 高度等于左侧最后一栏的上侧（我们取主体高度的 10% 刚好完美对称） */
     .detail-desc {
-      height: 85px; 
+      height: 10%; 
       background-color: #000000;
-      padding: 25px 40px 0 40px; /* 两侧对齐文本 */
+      padding: 15px 40px 0 40px; 
       overflow: hidden; 
+      flex-shrink: 0;
     }
     .detail-desc h2 {
       display: inline; 
@@ -239,14 +243,14 @@
           <img id="targetImage" class="active-media" src="" alt="大图展示">
           <video id="targetVideo" controls autoplay loop muted src=""></video>
         </div>
-        
-        <div class="dot-controller" id="dotController">
-          <div class="dot active-dot" data-idx="0"></div>
-          <div class="dot" data-idx="1"></div>
-          <div class="dot" data-idx="2"></div>
-          <div class="dot" data-idx="3"></div>
-          <div class="dot" data-idx="4"></div>
-        </div>
+      </div>
+
+      <div class="thumbnail-panel" id="thumbnailPanel">
+        <div class="thumb-item active-thumb" data-idx="0"><img id="thumb0" src="" alt="缩略图1"></div>
+        <div class="thumb-item" data-idx="1"><img id="thumb1" src="" alt="缩略图2"></div>
+        <div class="thumb-item" data-idx="2"><img id="thumb2" src="" alt="缩略图3"></div>
+        <div class="thumb-item" data-idx="3"><img id="thumb3" src="" alt="缩略图4"></div>
+        <div class="thumb-item" data-idx="4"><img id="thumb4" src="" alt="缩略图5"></div>
       </div>
 
       <div class="detail-desc">
@@ -259,6 +263,7 @@
   </div>
 
   <script>
+    // 数据集：每个项目配5个媒体资源（可用同一个图片URL进行测试，缩略图会自动抓取这里的数据）
     const projectData = {
       project1: {
         title: "[关卡作品 01] - 核心动线",
@@ -323,11 +328,27 @@
       const targetVideo = document.getElementById('targetVideo');
       const targetTitle = document.getElementById('targetTitle');
       const targetDesc = document.getElementById('targetDesc');
-      const dots = document.querySelectorAll('.dot');
+      const thumbs = document.querySelectorAll('.thumb-item');
 
       let currentProjectID = 'project1';
       let currentSubIndex = 0;
       let rotationInterval = null;
+
+      // 更新下方5个缩略图的图片内容
+      function updateThumbnailSource(projectId) {
+        const project = projectData[projectId];
+        if (!project) return;
+        thumbs.forEach((thumb, idx) => {
+          const mediaItem = project.media[idx];
+          const imgTag = thumb.querySelector('img');
+          // 如果子内容是视频，缩略图可以用一张封面或占位（这里演示如果是视频则用项目大列表图兜底，图片则直接用原图）
+          if (mediaItem.type === 'video') {
+            imgTag.src = 'https://picsum.photos/600/400?random=999'; 
+          } else {
+            imgTag.src = mediaItem.src;
+          }
+        });
+      }
 
       function renderSubMedia(projectId, subIndex) {
         const project = projectData[projectId];
@@ -336,25 +357,22 @@
         targetTitle.textContent = project.title;
         targetDesc.textContent = project.desc;
 
-        // 更新圆点状态
-        dots.forEach((d, idx) => {
-          if (idx === subIndex) d.classList.add('active-dot');
-          else d.classList.remove('active-dot');
+        // 联动缩略图高亮状态
+        thumbs.forEach((t, idx) => {
+          if (idx === subIndex) t.classList.add('active-thumb');
+          else d = t.classList.remove('active-thumb');
         });
 
         const currentMedia = project.media[subIndex];
 
-        // 运用 Opacity 动画平滑淡入淡出切换媒体
         if (currentMedia.type === 'video') {
           targetImage.classList.remove('active-media');
-          
           targetVideo.src = currentMedia.src;
           targetVideo.classList.add('active-media');
           targetVideo.play().catch(e => console.log(e));
         } else {
           targetVideo.classList.remove('active-media');
           targetVideo.pause();
-          
           targetImage.src = currentMedia.src;
           targetImage.classList.add('active-media');
         }
@@ -363,6 +381,8 @@
       function startAutoRotation(projectId, startIdx = 0) {
         if (rotationInterval) clearInterval(rotationInterval);
         currentSubIndex = startIdx;
+        
+        updateThumbnailSource(projectId);
         renderSubMedia(projectId, currentSubIndex);
 
         rotationInterval = setInterval(() => {
@@ -371,12 +391,11 @@
         }, 5000); 
       }
 
-      // 重置定时器（用于手动干预点击切换后重新计算5秒）
       function resetTimer() {
         startAutoRotation(currentProjectID, currentSubIndex);
       }
 
-      // 1. 左右侧点击切图机制（左侧40%区域切上一张，右侧40%区域切下一张）
+      // 1. 左右大图热区盲击
       document.getElementById('zoneLeft').addEventListener('click', (e) => {
         e.stopPropagation();
         currentSubIndex = (currentSubIndex - 1 + 5) % 5;
@@ -391,18 +410,18 @@
         resetTimer();
       });
 
-      // 2. 五个圆点点击精确选图
-      dots.forEach(dot => {
-        dot.addEventListener('click', (e) => {
+      // 2. 点击5个缩略图无缝换大图
+      thumbs.forEach(thumb => {
+        thumb.addEventListener('click', (e) => {
           e.stopPropagation();
-          const idx = parseInt(dot.getAttribute('data-idx'));
+          const idx = parseInt(thumb.getAttribute('data-idx'));
           currentSubIndex = idx;
           renderSubMedia(currentProjectID, currentSubIndex);
           resetTimer();
         });
       });
 
-      // 3. 左侧主列表点击
+      // 3. 左侧主列表5项点击
       items.forEach(item => {
         item.addEventListener('click', () => {
           const projectId = item.getAttribute('data-id');
@@ -416,7 +435,7 @@
         });
       });
 
-      // 初始化
+      // 默认启动
       startAutoRotation('project1', 0);
     });
   </script>
