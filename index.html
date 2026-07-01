@@ -3,52 +3,54 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>我的个人作品集</title>
+  <title>马子潇 - 个人作品集</title>
   <style>
-    /* 基础样式重置 */
+    /* 基础样式重置 & 暗黑模式 */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
       height: 100vh;
       display: flex;
       flex-direction: column;
-      overflow: hidden; /* 禁止整页滚动 */
-      background-color: #ffffff;
-      color: #111;
+      overflow: hidden; 
+      background-color: #000000; /* 纯黑背景 */
+      color: #ffffff; /* 纯白文字 */
     }
 
     /* 1. 顶部个人信息栏 */
     header {
-      background-color: #ffffff;
-      padding: 30px 40px;
+      background-color: #000000;
+      padding: 25px 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-shrink: 0;
     }
     .profile-info h1 {
-      font-size: 22px;
-      font-weight: 600;
-      letter-spacing: -0.5px;
-      margin-bottom: 4px;
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
     }
     .profile-info p {
       font-size: 13px;
-      color: #8c8c8c;
+      color: #888888;
+      letter-spacing: 0.5px;
     }
     .contact-info {
       text-align: right;
       font-size: 13px;
-      color: #8c8c8c;
+      color: #888888;
       line-height: 1.6;
     }
     .contact-info a {
-      color: #111;
-      text-decoration: underline;
+      color: #ffffff;
+      text-decoration: none;
+      border-bottom: 1px solid #444;
     }
 
     /* 主体内容区域 */
@@ -58,37 +60,36 @@
       overflow: hidden;
     }
 
-    /* 2. 左侧 1/4 视觉流式滚动（极简风：纯图、无缝隙无边框） */
+    /* 2. 左侧 1/4 区域：5个图片完全密铺，不滚动 */
     .left-panel {
       width: 25%;
-      background-color: #ffffff;
-      overflow-y: auto;
-      padding: 0 10px 40px 40px; /* 保持左边距对齐顶部 */
+      height: 100%;
+      display: flex;
+      flex-direction: column; /* 纵向排列 */
+      overflow: hidden; /* 绝对不滚动 */
+      padding-left: 40px;
+      padding-bottom: 40px;
     }
-    /* 隐藏滚动条但保留滚动功能（更具极简感） */
-    .left-panel::-webkit-scrollbar {
-      width: 4px;
-    }
-    .left-panel::-webkit-scrollbar-thumb {
-      background: #e0e0e0;
-      border-radius: 2px;
-    }
-
     .project-item {
+      flex: 1; /* 核心：5个元素等分整高 */
       width: 100%;
-      margin-bottom: 15px;
       cursor: pointer;
+      overflow: hidden;
+      position: relative;
       transition: opacity 0.3s ease;
-      opacity: 0.7; /* 默认略微半透明，突出选中项 */
+      opacity: 0.4; /* 未选中时暗色 */
+      border-bottom: 1px solid #111; /* 微弱的分界线 */
+    }
+    .project-item:last-child {
+      border-bottom: none;
     }
     .project-item:hover, .project-item.active {
-      opacity: 1; /* 悬浮或选中时完全变亮 */
+      opacity: 1; /* 选中或悬浮时完全点亮 */
     }
     .project-item img {
       width: 100%;
-      height: auto;
-      display: block;
-      object-fit: cover;
+      height: 100%;
+      object-fit: cover; /* 完全密铺格子 */
     }
 
     /* 3. 右侧 3/4 展示区域 */
@@ -100,41 +101,65 @@
       padding: 0 40px 40px 40px;
     }
     
-    /* 右上：媒体展示区（支持图片、GIF、视频） */
+    /* 右上：媒体展示区（极大化、完全覆盖、带中下部滚动条） */
     .detail-view {
       flex: 1;
-      background-color: #f9f9f9; /* 极简浅灰底色 */
+      background-color: #0a0a0a;
       display: flex;
       align-items: center;
       justify-content: center;
       overflow: hidden;
+      position: relative; /* 为滚动条定位 */
     }
     .detail-view img, .detail-view video {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      display: none; /* 默认隐藏，由JS控制显示 */
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* 核心：完全拉伸覆盖整个区域 */
+      display: none;
     }
     .detail-view .active-media {
-      display: block; /* 只显示当前活跃的媒体 */
+      display: block;
     }
 
-    /* 右下：文字说明 */
-    .detail-desc {
-      height: 30%;
+    /* 模拟图片区域中下部的极简滚动条/进度条 */
+    .scroll-indicator-bar {
+      position: absolute;
+      bottom: 20px; /* 位于中下部 */
+      left: 10%;
+      width: 80%;
+      height: 2px;
+      background-color: rgba(255, 255, 255, 0.2);
+      border-radius: 1px;
+    }
+    .scroll-indicator-progress {
+      height: 100%;
+      width: 20%; /* 1/5 长度 */
       background-color: #ffffff;
-      padding-top: 30px;
-      overflow-y: auto;
+      border-radius: 1px;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transform: translateX(0%);
+    }
+
+    /* 右下：文字说明（严格缩减至两行高度） */
+    .detail-desc {
+      height: 75px; /* 固定高度，确保标题+内容刚好两行左右 */
+      background-color: #000000;
+      padding-top: 20px;
+      overflow: hidden; /* 防止溢出破坏两行规整感 */
     }
     .detail-desc h2 {
-      margin-bottom: 12px;
-      font-size: 18px;
+      display: inline; /* 标题与正文在一行或紧凑排列 */
+      font-size: 14px;
       font-weight: 600;
+      letter-spacing: 0.5px;
+      margin-right: 15px;
+      color: #ffffff;
     }
     .detail-desc p {
-      font-size: 14px;
-      line-height: 1.7;
-      color: #555555;
+      display: inline;
+      font-size: 13px;
+      line-height: 1.5;
+      color: #888888;
     }
   </style>
 </head>
@@ -142,12 +167,12 @@
 
   <header>
     <div class="profile-info">
-      <h1>张三 (Your Name)</h1>
-      <p>UI/UX 设计师 / 前端开发者 / 摄影师</p>
+      <h1>马子潇</h1>
+      <p>关卡设计 / 游戏设计</p>
     </div>
     <div class="contact-info">
-      <p>📧 邮箱: your-email@example.com</p>
-      <p>🌐 个人主页: <a href="#">mazixiao2000.github.io</a></p>
+      <p>📧 <a href="mailto:zixiaom@smu.edu">zixiaom@smu.edu</a></p>
+      <p>📱 (+86) 13506692801</p>
     </div>
   </header>
 
@@ -155,20 +180,24 @@
     
     <div class="left-panel" id="leftPanel">
       
-      <div class="project-item active" data-type="image" data-src="https://picsum.photos/1200/800?random=1" data-title="作品项目一：山地轨道静态摄影" data-desc="这是项目一的详细描述。点击左侧这个卡片后，右侧会展示一张高清大图。整体布局采用极简主义，去除了多余的边框和标题文字，完全以视觉图片为主导。">
-        <img src="https://picsum.photos/600/400?random=1" alt="项目一">
+      <div class="project-item active" data-index="0" data-type="image" data-src="https://picsum.photos/1920/1080?random=11" data-title="[关卡作品 01]" data-desc="核心关卡动线规划设计。采用多路径多垂直空间的探索流向，极大增强玩家的探索欲与局内遭遇战的不确定性。">
+        <img src="https://picsum.photos/600/400?random=11" alt="关卡一">
       </div>
 
-      <div class="project-item" data-type="image" data-src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z0cmNvdXQ0YmY0cm95ZXg3cW1wNTJlbG90Y200dHpwdm9pY3B0ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7qE1YN7aBOFPRw8E/giphy.gif" data-title="作品项目二：动态 UI 交互交互（GIF）" data-desc="这是项目二的描述。右侧现在加载的是一个 GIF 动图。无论是图片、静态画作还是动态的演示，都能完美自适应右侧的视窗中心。">
-        <img src="https://i.giphy.com/media/v1.Y2lkPTc5MGI3NjExM3Z0cmNvdXQ0YmY0cm95ZXg3cW1wNTJlbG90Y200dHpwdm9pY3B0ZSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/3o7qE1YN7aBOFPRw8E/giphy.gif" alt="项目二">
+      <div class="project-item" data-index="1" data-type="image" data-src="https://picsum.photos/1920/1080?random=12" data-title="[关卡作品 02]" data-desc="光影与引导机制实验。利用冷暖光源的交替，隐性引导玩家在无UI状态下自然找到潜行暗道与安全屋。">
+        <img src="https://picsum.photos/600/400?random=12" alt="关卡二">
       </div>
 
-      <div class="project-item" data-type="video" data-src="https://www.w3schools.com/html/mov_bbb.mp4" data-title="作品项目三：短视频与动态视觉" data-desc="这是项目三的描述。点击此项后，右侧会自动切换成一个 HTML5 原生视频播放器，并支持自动循环播放和静音，非常适合用来展示你的视频剪辑作品或动态特效。">
-        <img src="https://picsum.photos/600/400?random=3" alt="项目三占位图">
+      <div class="project-item" data-index="2" data-type="video" data-src="https://www.w3schools.com/html/mov_bbb.mp4" data-title="[动态机制展示 03]" data-desc="基于虚幻引擎的动态机关与地形解谜机制。此视频展示了玩家触发压力板后区域重组的逻辑闭环。">
+        <img src="https://picsum.photos/600/400?random=13" alt="项目三">
       </div>
 
-      <div class="project-item" data-type="image" data-src="https://picsum.photos/1200/800?random=4" data-title="作品项目四：平面视觉设计" data-desc="这是项目四的描述。极简风格的左侧列表在鼠标悬停时会从半透明变成完全清澈，给予用户非常直观的视觉反馈。">
-        <img src="https://picsum.photos/600/400?random=4" alt="项目四">
+      <div class="project-item" data-index="3" data-type="image" data-src="https://picsum.photos/1920/1080?random=14" data-title="[系统设计 04]" data-desc="沙盒关卡资源遭遇战。基于心流理论设计的敌方AI刷新曲线，保证高潮和心流舒缓期的交替出现。">
+        <img src="https://picsum.photos/600/400?random=14" alt="项目四">
+      </div>
+
+      <div class="project-item" data-index="4" data-type="image" data-src="https://picsum.photos/1920/1080?random=15" data-title="[世界观白模 05]" data-desc="宏观高低差白模搭建。快速验证大型开放城市中，钩爪与滑翔翼在不同建筑密度下的移速与身法爽感。">
+        <img src="https://picsum.photos/600/400?random=15" alt="项目五">
       </div>
 
     </div>
@@ -176,13 +205,17 @@
     <div class="right-panel">
       
       <div class="detail-view">
-        <img id="targetImage" class="active-media" src="https://picsum.photos/1200/800?random=1" alt="大图展示">
+        <img id="targetImage" class="active-media" src="https://picsum.photos/1920/1080?random=11" alt="大图展示">
         <video id="targetVideo" controls autoplay loop muted src=""></video>
+        
+        <div class="scroll-indicator-bar">
+          <div class="scroll-indicator-progress" id="indicatorProgress"></div>
+        </div>
       </div>
 
       <div class="detail-desc">
-        <h2 id="targetTitle">作品项目一：山地轨道静态摄影</h2>
-        <p id="targetDesc">这是项目一的详细描述。点击左侧这个卡片后，右侧会展示一张高清大图。整体布局采用极简主义，去除了多余的边框和标题文字，完全以视觉图片为主导。</p>
+        <h2 id="targetTitle">[关卡作品 01]</h2>
+        <p id="targetDesc">核心关卡动线规划设计。采用多路径多垂直空间的探索流向，极大增强玩家的探索欲与局内遭遇战的不确定性。</p>
       </div>
 
     </div>
@@ -196,35 +229,38 @@
       const targetVideo = document.getElementById('targetVideo');
       const targetTitle = document.getElementById('targetTitle');
       const targetDesc = document.getElementById('targetDesc');
+      const indicatorProgress = document.getElementById('indicatorProgress');
 
       items.forEach(item => {
         item.addEventListener('click', () => {
-          // 1. 切换左侧条目的激活高亮状态
           items.forEach(i => i.classList.remove('active'));
           item.classList.add('active');
 
-          // 2. 获取当前点击项的数据
           const type = item.getAttribute('data-type');
           const src = item.getAttribute('data-src');
           const title = item.getAttribute('data-title');
           const desc = item.getAttribute('data-desc');
+          const index = parseInt(item.getAttribute('data-index'));
 
-          // 3. 更新右侧的文字
+          // 更新文字
           targetTitle.textContent = title;
           targetDesc.textContent = desc;
 
-          // 4. 根据类型（图片/GIF 或 视频）动态切换右侧媒体标签
+          // 联动控制中下部滚动条的位置 (5个选项，每个占 100% / 5 = 20%)
+          indicatorProgress.style.transform = `translateX(${index * 100}%)`;
+
+          // 媒体切换且完全覆盖
           if (type === 'video') {
             targetImage.classList.remove('active-media');
-            targetImage.src = ''; // 释放图片资源
+            targetImage.src = '';
             
             targetVideo.src = src;
             targetVideo.classList.add('active-media');
-            targetVideo.play().catch(err => console.log("自动播放被拦截: ", err));
+            targetVideo.play().catch(e => console.log(e));
           } else {
             targetVideo.classList.remove('active-media');
             targetVideo.pause();
-            targetVideo.src = ''; // 释放视频资源
+            targetVideo.src = '';
             
             targetImage.src = src;
             targetImage.classList.add('active-media');
