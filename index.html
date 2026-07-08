@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>马子潇 - 个人作品集</title>
   <style>
-    /* --- 1. 画廊级极简主义重置 & 换成高级暗夜猩红（极深红，绝不刺眼） --- */
+    /* --- 1. 画廊级极简主义重置 & 换成高级暗夜猩红 --- */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -17,14 +17,14 @@
       display: flex;
       flex-direction: column;
       overflow: hidden; 
-      background-color: #140102; /* 基底：接近黑的极深红 */
+      background-color: #140102; 
       color: #ffffff; 
       -webkit-font-smoothing: antialiased;
     }
 
     /* --- 2. 顶部个人信息栏 --- */
     header {
-      background-color: #0c0001; /* 顶栏做沉降暗化 */
+      background-color: #0c0001; 
       padding: 0 40px;
       display: flex;
       justify-content: space-between;
@@ -71,7 +71,7 @@
       background-color: #140102;
     }
 
-    /* --- 3. 左侧一级菜单栏（3D 舞台 + 投射强烈物理阴影） --- */
+    /* --- 3. 左侧一级菜单栏（3D 舞台） --- */
     .left-panel {
       width: 25%;
       height: 100%;
@@ -82,7 +82,7 @@
       background-color: #110102;
       z-index: 25;
       perspective: 1000px; 
-      box-shadow: 20px 0 45px rgba(0, 0, 0, 0.9); /* 强化向右投射的阴影 */
+      box-shadow: 20px 0 45px rgba(0, 0, 0, 0.9); 
     }
     
     .project-item {
@@ -116,7 +116,6 @@
       transition: border 0.4s ease, box-shadow 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
     
-    /* 悬浮和激活时边框亮起并产生卡牌悬空阴影 */
     .project-item:hover .project-item-card, 
     .project-item.active .project-item-card {
       border: 1px solid rgba(255, 255, 255, 0.45);
@@ -152,8 +151,32 @@
       overflow: hidden;
       position: relative; 
       perspective: 1200px;
+      cursor: pointer; /* 鼠标移上去显示指针，提示可以点击进入详情 */
     }
     
+    /* 提示进入多页面的小悬浮标签 */
+    .enter-badge {
+      position: absolute;
+      top: 30px;
+      right: 30px;
+      background: rgba(20, 1, 2, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 6px 14px;
+      font-size: 11px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.8);
+      z-index: 20;
+      pointer-events: none;
+      transition: all 0.3s ease;
+    }
+    .detail-view:hover .enter-badge {
+      background: #ffffff;
+      color: #140102;
+      border-color: #ffffff;
+      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
+
     .media-container {
       width: 100%;
       height: 100%;
@@ -188,7 +211,6 @@
       background: linear-gradient(to top, rgba(5, 0, 0, 0.98) 0%, rgba(5, 0, 0, 0.5) 60%, rgba(0, 0, 0, 0) 100%);
       z-index: 10;
       pointer-events: none; 
-      
       transform-style: preserve-3d;
       transform: translateZ(60px); 
       transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
@@ -214,11 +236,11 @@
       text-shadow: 0 3px 10px rgba(0,0,0,0.8);
     }
 
-    /* 左右隐形触控热区 */
+    /* 左右隐形触控热区（调整权重，让其中间留出空隙触发大图点击） */
     .click-zone {
       position: absolute;
       top: 0;
-      width: 30%;
+      width: 20%;
       height: 100%;
       z-index: 15;
       cursor: pointer;
@@ -244,7 +266,6 @@
       position: relative;
       opacity: 0.3; 
       border-right: 1px solid #1f0204; 
-      
       transform-style: preserve-3d;
       transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -331,6 +352,8 @@
     <div class="right-panel">
       
       <div class="detail-view" id="detailViewStage">
+        <div class="enter-badge">点击进入详情 VIEW CASE ➔</div>
+        
         <div class="click-zone click-zone-left" id="zoneLeft"></div>
         <div class="click-zone click-zone-right" id="zoneRight"></div>
 
@@ -363,7 +386,7 @@
     const projectData = {
       project1: {
         title: "01 / 核心关卡动线规划",
-        desc: "核心关卡动线规划与多路径垂直空间探索流向。探讨主要视线引导及关键资源点的交织排布，右侧大图与下方缩略图每5秒进行流式更替演进。",
+        desc: "核心关卡动线规划与多路径垂直空间探索流向。探讨主要视线引导及关键资源点的交织排布，点击大图进入独立拆解详情页。",
         media: [
           { type: 'image', src: 'https://picsum.photos/1920/1080?random=101' },
           { type: 'image', src: 'https://picsum.photos/1920/1080?random=102' },
@@ -435,25 +458,21 @@
       let rotationInterval = null;
 
       /* ===================================================
-         🔥 强化版拟物化：3D 卡牌倾斜计算引擎
+         3D 卡牌倾斜计算引擎
          =================================================== */
       function applyTiltEffect(element, maxRotate = 25, scale = 1.12) {
         element.addEventListener('mousemove', (e) => {
           const rect = element.getBoundingClientRect();
           const x = e.clientX - rect.left;
           const y = e.clientY - rect.top;
-          
           const xc = x / rect.width - 0.5;
           const yc = y / rect.height - 0.5;
-          
           const rotateX = yc * -maxRotate; 
           const rotateY = xc * maxRotate;
-
           requestAnimationFrame(() => {
             element.style.transform = `scale(${scale}) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
           });
         });
-
         element.addEventListener('mouseleave', () => {
           requestAnimationFrame(() => {
             element.style.transform = 'scale(1) rotateX(0deg) rotateY(0deg)';
@@ -461,24 +480,17 @@
         });
       }
 
-      // 1. 左侧选项栏：倾斜 28度，模拟拿起的极致聚焦感
       items.forEach(item => applyTiltEffect(item, 28, 1.12));
-
-      // 2. 底部缩略图：倾斜 20度，放大率 1.08
       thumbs.forEach(thumb => applyTiltEffect(thumb, 20, 1.08));
 
-      // 3. 右侧大视觉舱：同步空间偏转摆动
       detailViewStage.addEventListener('mousemove', (e) => {
         const rect = detailViewStage.getBoundingClientRect();
         const x = e.clientX - rect.left;
         const y = e.clientY - rect.top;
-        
         const xc = x / rect.width - 0.5;
         const yc = y / rect.height - 0.5;
-        
         const rotateX = yc * -10; 
         const rotateY = xc * 10;
-
         requestAnimationFrame(() => {
           mediaContainer.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
           textOverlay.style.transform = `translateZ(60px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
@@ -492,6 +504,20 @@
         });
       });
 
+      /* ===================================================
+         页面跳转驱动：点击大图或双击选项跳转到具体页面
+         =================================================== */
+      function getProjectURL(id) {
+        // 映射对应的子页面文件名
+        return `${id}.html`; 
+      }
+
+      detailViewStage.addEventListener('click', (e) => {
+        // 确保点击的不是左右两边的切换盲区
+        if (!e.target.classList.contains('click-zone')) {
+          window.location.href = getProjectURL(currentProjectID);
+        }
+      });
 
       /* ===================================================
          业务核心驱动逻辑
@@ -589,11 +615,15 @@
           currentProjectID = projectId;
           startAutoRotation(projectId, 0);
         });
+        
+        // 双击左侧列表也可以直接进入详情
+        item.addEventListener('dblclick', () => {
+          window.location.href = getProjectURL(currentProjectID);
+        });
       });
 
       startAutoRotation('project1', 0);
     });
   </script>
-
 </body>
 </html>
