@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>项目详情 - 核心关卡动线规划</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: #140102; /* 延续主页的高级暗夜猩红 */
+      color: #ffffff;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* 顶部导航返回栏 */
+    .nav-bar {
+      height: 70px;
+      background-color: #0c0001;
+      display: flex;
+      align-items: center;
+      padding: 0 40px;
+      border-bottom: 1px solid #250306;
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+    }
+    .back-btn {
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      transition: opacity 0.3s;
+    }
+    .back-btn:hover {
+      opacity: 0.7;
+    }
+
+    /* 深度详情内容容器 */
+    .content-container {
+      max-width: 900px;
+      margin: 140px auto 100px auto; /* 留出顶部导航距离 */
+      padding: 0 20px;
+    }
+
+    /* 关卡大标题 */
+    .project-header h1 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      margin-bottom: 15px;
+    }
+    .project-meta {
+      font-size: 12px;
+      color: #7d6264;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 40px;
+      border-bottom: 1px solid #250306;
+      padding-bottom: 20px;
+    }
+
+    /* 游戏行业常用：关卡概览卡片 */
+    .spec-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 50px;
+      background: #0c0001;
+      padding: 25px;
+      border: 1px solid #250306;
+    }
+    .spec-item h3 {
+      font-size: 11px;
+      color: #7d6264;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 5px;
+    }
+    .spec-item p {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    /* 正文排版 */
+    .article-section {
+      margin-bottom: 60px;
+    }
+    .article-section h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 20px;
+      letter-spacing: 0.5px;
+      border-left: 3px solid #ff3344; /* 细节处点缀一丝高亮红 */
+      padding-left: 15px;
+    }
+    .article-section p {
+      font-size: 15px;
+      color: #cccccc;
+      margin-bottom: 25px;
+      text-align: justify;
+    }
+
+    /* 大图/关卡白模展示 */
+    .showcase-media {
+      width: 100%;
+      border: 1px solid #250306;
+      margin-bottom: 25px;
+      background: #0c0001;
+    }
+    .showcase-media img {
+      width: 100%;
+      display: block;
+      height: auto;
+    }
+    .media-caption {
+      font-size: 12px;
+      color: #7d6264;
+      text-align: center;
+      margin-top: -15px;
+      margin-bottom: 35px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="nav-bar">
+    <a href="index.html" class="back-btn"> BACK TO PORTFOLIO</a>
+  </div>
+
+  <div class="content-container">
+    
+    <div class="project-header">
+      <h1>01 / 核心关卡动线规划</h1>
+      <div class="project-meta">Level Design Case Study / Unreal Engine</div>
+    </div>
+
+    <div class="spec-grid">
+      <div class="spec-item">
+        <h3>项目类型</h3>
+        <p>3D 动作冒险沙盒</p>
+      </div>
+      <div class="spec-item">
+        <h3>负责模块</h3>
+        <p>白模搭建 / 心流曲线设计</p>
+      </div>
+      <div class="spec-item">
+        <h3>测试周期</h3>
+        <p>3 Weeks</p>
+      </div>
+    </div>
+
+    <div class="article-section">
+      <h2>1. 设计意图与玩家动线平衡（Mission Intent）</h2>
+      <p>在此关卡设计中，核心目标是在垂直空间（Verticality）中创造非线性的探索体验。通过高度落差限制玩家早期的视线视野，强迫其使用侧向勾爪动线。这样既可以平滑战斗的心流激昂感，也能给硬核玩家留出跳过战斗的边缘潜行暗道。</p>
+      
+      <div class="showcase-media">
+        <img src="https://picsum.photos/1920/1080?random=101" alt="动线规划图">
+      </div>
+      <div class="media-caption">▲ 图 1.1：主干道动线与视线遮挡体（Blockout）空间推演</div>
+    </div>
+
+    <div class="article-section">
+      <h2>2. 隐性视线引导与空间地标（Landmark）</h2>
+      <p>为了让玩家在长达 15 分钟的无 UI 沉浸状态下不迷失方向，利用了经典的“地标建筑法”。无论玩家跌落到哪一层地下夹缝，只要抬起视角，都能透过天花板的岩石裂缝看到核心高塔的顶端微光。这为玩家在 3D 复杂迷宫中提供了天然的精神锚点。</p>
+      
+      <div class="showcase-media">
+        <img src="https://picsum.photos/1920/1080?random=102" alt="光影测试">
+      </div>
+      <div class="media-caption">▲ 图 1.2：灰模视界测试（灰色空间高对比强光照覆盖反馈）</div>
+    </div>
+
+  </div>
+
+</body>
+</html>
