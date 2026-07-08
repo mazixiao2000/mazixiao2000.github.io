@@ -17,12 +17,12 @@
       display: flex;
       flex-direction: column;
       overflow: hidden; 
-      background-color: #2a2a2a; /* 高质感中度工业灰 */
+      background-color: #2a2a2a; 
       color: #ffffff; 
       -webkit-font-smoothing: antialiased;
     }
 
-    /* --- 2. 顶部个人信息栏（惊艳亮橙） --- */
+    /* --- 2. 顶部个人信息栏 --- */
     header {
       background-color: #ff5500; 
       padding: 0 40px;
@@ -75,25 +75,24 @@
       background-color: #2a2a2a;
     }
 
-    /* --- 3. 左侧选项卡栏（超宽卡片 + 阻尼物理回弹动效） --- */
+    /* --- 3. 左侧选项卡栏（物理阴影联动 + 区分去回程动效） --- */
     .left-panel {
       width: 25%;
       height: 100%;
       display: flex;
       flex-direction: column; 
-      overflow: visible; /* 必须允许可见，方便超宽卡片向外穿透扩展 */
+      overflow: visible; 
       border-right: 1px solid #1a1a1a;
-      background-color: #222222; 
+      background-color: #1a1a1a; /* 更暗底色阻断穿帮 */
       z-index: 50;
       perspective: 1200px; 
-      box-shadow: 10px 0 30px rgba(0, 0, 0, 0.15); 
+      box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3); 
     }
     
     .project-item {
       height: 20%; 
-      
-      /* 【核心修改1】：加宽卡片至 133.33%，以便多出 1/4 宽度供后续隐藏/滑出 */
-      width: 133.33%; 
+      /* 【核心修改1】：微调卡片宽度为 108%，只多出一点点供滑出 */
+      width: 108%; 
       cursor: pointer;
       position: relative;
       border-bottom: 1px solid #1a1a1a;
@@ -101,20 +100,27 @@
       overflow: visible;
       opacity: 1; 
       
-      /* 【核心修改2】：默认向左平移 25%，使超出的 1/4 恰好隐匿在屏幕左边缘之外 */
-      transform: translateX(-25%);
+      /* 【核心修改2】：常态下隐藏多余的 7.4% 宽度在左侧边缘外 */
+      transform: translateX(-7.4%);
       
-      /* 【核心修改3】：配置经典的带有超调物理特性的贝塞尔回弹曲线 (cubic-bezier) */
-      transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      /* 【核心修改3】：整体移动时携带阴影，防止阴影脱节 */
+      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
+      
+      /* 【默认/退回动画】：当鼠标移开滑回时，使用带有物理超调的回弹曲线 */
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2), box-shadow 0.3s ease;
     }
     .project-item:last-child {
       border-bottom: none;
     }
     
-    /* 【核心修改4】：鼠标悬停时平移归零，卡片向右完全释放滑出，左边界刚好对齐屏幕最左侧 */
+    /* 【核心修改4】：鼠标悬停划出时，采用纯粹的线性平滑减速（不要弹性），且同步增强跟随阴影 */
     .project-item:hover {
       transform: translateX(0);
       z-index: 60; 
+      box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5); /* 阴影随卡片一起向右移动 */
+      
+      /* 覆盖过渡：滑出那下只需顺滑（无回弹特效） */
+      transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s cubic-bezier(0.25, 1, 0.5, 1);
     }
     .project-item.active {
       z-index: 55; 
@@ -128,15 +134,13 @@
       position: relative;
       transform-style: preserve-3d;
       border: 0px solid transparent;
-      /* 这里负责内部 3D 旋转的独立丝滑复位 */
-      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1), border 0.25s ease;
+      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border 0.25s ease;
     }
     
     /* 激活或悬停状态下的高亮橙色描边 */
     .project-item:hover .project-item-card, 
     .project-item.active .project-item-card {
       border: 2px solid #ff5500; 
-      box-shadow: -15px 15px 35px rgba(0, 0, 0, 0.5); 
     }
 
     .project-item img {
@@ -165,7 +169,6 @@
       transition: opacity 0.25s ease;
     }
     
-    /* 悬停（Hover）或当前激活（Active）时，显示标题文字黑框 */
     .project-item:hover .item-hover-overlay,
     .project-item.active .item-hover-overlay {
       opacity: 1; 
@@ -178,7 +181,7 @@
       letter-spacing: 1px;
     }
 
-    /* --- 4. 右侧展示区（哑光低噪灰） --- */
+    /* --- 4. 右侧展示区 --- */
     .right-panel {
       width: 75%;
       height: 100%;
@@ -188,7 +191,6 @@
       scroll-behavior: smooth;
     }
 
-    /* 隐藏右侧原生滚动条 */
     .right-panel::-webkit-scrollbar {
       width: 0px;
       background: transparent;
@@ -270,7 +272,6 @@
       text-align: justify;
     }
     
-    /* 关键设计亮点修饰符 */
     .highlight-text {
       color: #ff5500;
       font-weight: 600;
@@ -353,7 +354,7 @@
 
   </div>
 
-  <script {strict-completion}>
+  <script>
     // 关卡数据库
     const portfolioDatabase = {
       project1: {
@@ -379,7 +380,7 @@
             heading: "3. 物理环境交互与闭环逻辑验证",
             text: "关卡中段引入了一组具有连锁反应的复合几何机关。玩家需要通过重力箱体触发底层泄洪闸，进而利用浮力升起通路。以下视频展示了白模测试阶段针对触发器边界、物理状态机衔接流利度的<span class='highlight-text'>手感极限测试</span>。",
             media: { type: 'video', src: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-            caption: "▲ 演示 1.3：虚幻引擎环境白模触发逻辑与物理碰撞闭环演示"
+            caption: "▲ 演示 1.3：虚幻引擎环境白模触发 logic 与物理碰撞闭环演示"
           },
           {
             heading: "4. 战斗遭遇战（Encounter）空间战术包络",
@@ -463,7 +464,7 @@
       const wrapper = document.getElementById('detailContentWrapper');
 
       /* ===================================================
-         1. 3D 卡牌微倾斜物理引擎（在平移的基础上完美叠加 3D 效果）
+         1. 3D 卡牌微倾斜物理引擎（与外层位移解耦，纯粹处理倾斜）
          =================================================== */
       function applyTiltEffect(itemElement, cardElement, maxRotate = 24, scale = 1.05) {
         itemElement.addEventListener('mousemove', (e) => {
@@ -531,7 +532,6 @@
           `;
         });
 
-        // 柔和切入动效
         wrapper.classList.add('content-fade');
         setTimeout(() => {
           wrapper.innerHTML = htmlContent;
@@ -555,7 +555,6 @@
         });
       });
 
-      // 初始化载入
       renderLongProjectPage('project1');
     });
   </script>
