@@ -71,7 +71,7 @@
       background-color: #140102;
     }
 
-    /* --- 3. 左侧一级菜单栏（3D 舞台） --- */
+    /* --- 3. 左侧一级菜单栏（保持经典 3D 舞台） --- */
     .left-panel {
       width: 25%;
       height: 100%;
@@ -135,174 +135,115 @@
       transform: translateZ(45px) scale(1.1); 
     }
 
-    /* --- 4. 右侧展示区与 3D 大图区 --- */
+    /* --- 4. 右侧深度内容展示区（改造成纵向可拉伸的长轴画布） --- */
     .right-panel {
       width: 75%;
-      display: flex;
-      flex-direction: column;
       height: 100%;
-      overflow: hidden;
-      background-color: #140102;
-    }
-    
-    .detail-view {
-      flex: 1; 
       background-color: #0e0102;
-      overflow: hidden;
-      position: relative; 
-      perspective: 1200px;
-      cursor: pointer; /* 鼠标移上去显示指针，提示可以点击进入详情 */
+      /* 核心修改：允许内容纵向溢出并滚动 */
+      overflow-y: auto; 
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+
+    /* 优雅地隐藏右侧区域的自带原生滚动条，保持多维界面高级感 */
+    .right-panel::-webkit-scrollbar {
+      width: 0px;
+      background: transparent;
+    }
+    .right-panel {
+      -ms-overflow-style: none;  /* IE and Edge */
+      scrollbar-width: none;  /* Firefox */
+    }
+
+    /* 详情页长轴排版包装器 */
+    .detail-content-wrapper {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 50px 40px 100px 40px;
+      opacity: 1;
+      transition: opacity 0.4s ease;
     }
     
-    /* 提示进入多页面的小悬浮标签 */
-    .enter-badge {
-      position: absolute;
-      top: 30px;
-      right: 30px;
-      background: rgba(20, 1, 2, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      padding: 6px 14px;
-      font-size: 11px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.8);
-      z-index: 20;
-      pointer-events: none;
-      transition: all 0.3s ease;
-    }
-    .detail-view:hover .enter-badge {
-      background: #ffffff;
-      color: #140102;
-      border-color: #ffffff;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.5);
-    }
-
-    .media-container {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      transform-style: preserve-3d;
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .detail-view img, .detail-view video {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover; 
+    /* 配合切换时的淡入淡出动画类 */
+    .content-fade {
       opacity: 0;
-      transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1);
-      pointer-events: none;
-      transform: translateZ(0px);
-    }
-    .detail-view .active-media {
-      opacity: 1;
-      pointer-events: auto;
     }
 
-    /* 悬浮叠层文字排版 */
-    .text-overlay {
-      position: absolute;
-      left: 0;
-      bottom: 0;
-      width: 100%;
-      padding: 90px 40px 40px 40px;
-      background: linear-gradient(to top, rgba(5, 0, 0, 0.98) 0%, rgba(5, 0, 0, 0.5) 60%, rgba(0, 0, 0, 0) 100%);
-      z-index: 10;
-      pointer-events: none; 
-      transform-style: preserve-3d;
-      transform: translateZ(60px); 
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .text-overlay-content {
-      max-width: 800px; 
-    }
-    .text-overlay h2 {
-      font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
+    /* 关卡大标题与基本信息规格表 */
+    .project-title-area h2 {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 1px;
       margin-bottom: 8px;
       color: #ffffff;
-      text-transform: uppercase;
-      text-shadow: 0 4px 12px rgba(0,0,0,0.8);
     }
-    .text-overlay p {
+    .project-title-area .sub-tag {
       font-size: 12px;
-      line-height: 1.8;
+      color: #7d6264;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 30px;
+    }
+
+    .spec-table-mini {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      margin-bottom: 40px;
+      background: #0c0001;
+      padding: 20px;
+      border: 1px solid #250306;
+    }
+    .spec-cell h3 {
+      font-size: 11px;
+      color: #7d6264;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+    .spec-cell p {
+      font-size: 13px;
+      color: #eeeeee;
+    }
+
+    /* 独立的图文拆解块 */
+    .detail-section {
+      margin-bottom: 45px;
+    }
+    .detail-section h4 {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 15px;
+      letter-spacing: 0.5px;
+      border-left: 3px solid #b59fa1;
+      padding-left: 12px;
+    }
+    .detail-section p {
+      font-size: 14px;
+      line-height: 1.7;
       color: #cccccc;
-      font-weight: 300;
-      letter-spacing: 0.3px;
-      text-shadow: 0 3px 10px rgba(0,0,0,0.8);
+      margin-bottom: 20px;
+      text-align: justify;
     }
 
-    /* 左右隐形触控热区（调整权重，让其中间留出空隙触发大图点击） */
-    .click-zone {
-      position: absolute;
-      top: 0;
-      width: 20%;
-      height: 100%;
-      z-index: 15;
-      cursor: pointer;
-    }
-    .click-zone-left { left: 0; }
-    .click-zone-right { right: 0; }
-
-    /* --- 5. 底部级联缩略图横行 --- */
-    .thumbnail-panel {
-      height: 20%; 
+    /* 长图文媒体容器 */
+    .showcase-block {
       width: 100%;
-      display: flex;
-      background-color: #0c0001;
-      overflow: visible; 
-      flex-shrink: 0;
-      border-top: 1px solid #250306;
-      perspective: 1000px;
+      border: 1px solid #250306;
+      background: #0c0001;
+      margin-bottom: 12px;
     }
-    .thumb-item {
-      flex: 1; 
-      height: 100%;
-      cursor: pointer;
-      position: relative;
-      opacity: 0.3; 
-      border-right: 1px solid #1f0204; 
-      transform-style: preserve-3d;
-      transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .thumb-item:last-child {
-      border-right: none;
-    }
-    .thumb-item:hover, .thumb-item.active-thumb {
-      opacity: 1;
-      z-index: 40;
-    }
-    
-    .thumb-item-card {
+    .showcase-block img, .showcase-block video {
       width: 100%;
-      height: 100%;
-      overflow: hidden;
-      position: relative;
-      transform-style: preserve-3d;
-      pointer-events: none;
-      border: 1px solid rgba(255, 255, 255, 0);
-      box-shadow: 0 0px 0px rgba(0, 0, 0, 0);
-      transition: border 0.4s ease, box-shadow 0.5s ease;
+      display: block;
+      height: auto;
     }
-    .thumb-item:hover .thumb-item-card,
-    .thumb-item.active-thumb .thumb-item-card {
-      border: 1px solid rgba(255, 255, 255, 0.4);
-      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.85);
-    }
-
-    .thumb-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: translateZ(0px) scale(1.02);
-      transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .thumb-item:hover img {
-      transform: translateZ(25px) scale(1.08); 
+    .showcase-caption {
+      font-size: 11px;
+      color: #7d6264;
+      text-align: center;
+      margin-bottom: 25px;
     }
   </style>
 </head>
@@ -349,116 +290,112 @@
       </div>
     </div>
 
-    <div class="right-panel">
-      
-      <div class="detail-view" id="detailViewStage">
-        <div class="enter-badge">点击进入详情 VIEW CASE ➔</div>
-        
-        <div class="click-zone click-zone-left" id="zoneLeft"></div>
-        <div class="click-zone click-zone-right" id="zoneRight"></div>
-
-        <div class="media-container" id="mediaContainer">
-          <img id="targetImage" class="active-media" src="" alt="大图展示">
-          <video id="targetVideo" controls autoplay loop muted src=""></video>
+    <div class="right-panel" id="rightPanel">
+      <div class="detail-content-wrapper" id="detailContentWrapper">
         </div>
-
-        <div class="text-overlay" id="textOverlay">
-          <div class="text-overlay-content">
-            <h2 id="targetTitle">LOADING...</h2>
-            <p id="targetDesc">LOADING DESCRIPTION...</p>
-          </div>
-        </div>
-      </div>
-
-      <div class="thumbnail-panel" id="thumbnailPanel">
-        <div class="thumb-item active-thumb" data-idx="0"><div class="thumb-item-card"><img src="" alt="缩略图1"></div></div>
-        <div class="thumb-item" data-idx="1"><div class="thumb-item-card"><img src="" alt="缩略图2"></div></div>
-        <div class="thumb-item" data-idx="2"><div class="thumb-item-card"><img src="" alt="缩略图3"></div></div>
-        <div class="thumb-item" data-idx="3"><div class="thumb-item-card"><img src="" alt="缩略图4"></div></div>
-        <div class="thumb-item" data-idx="4"><div class="thumb-item-card"><img src="" alt="缩略图5"></div></div>
-      </div>
-
     </div>
 
   </div>
 
   <script>
-    const projectData = {
+    // 关卡数据池：在这里你可以把每个项目拓展成无限长、包含多张图文的专业复盘文章
+    const portfolioDatabase = {
       project1: {
         title: "01 / 核心关卡动线规划",
-        desc: "核心关卡动线规划与多路径垂直空间探索流向。探讨主要视线引导及关键资源点的交织排布，点击大图进入独立拆解详情页。",
-        media: [
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=101' },
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=102' },
-          { type: 'video', src: 'https://www.w3schools.com/html/mov_bbb.mp4' }, 
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=104' },
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=105' }
+        tag: "Level Design Case Study / Unreal Engine",
+        type: "3D 动作冒险沙盒",
+        role: "白模搭建 / 心流曲线设计",
+        time: "3 Weeks",
+        sections: [
+          {
+            heading: "1. 设计意图与玩家动线平衡（Mission Intent）",
+            text: "在此关卡设计中，核心目标是在垂直空间（Verticality）中创造非线性的探索体验。通过高度落差限制玩家早期的视线视野，强迫其使用侧向勾爪动线。这样既可以平滑战斗的心流激昂感，也能给硬核玩家留出跳过战斗的边缘潜行暗道。",
+            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=101' },
+            caption: "▲ 图 1.1：主干道动线与视线遮挡体（Blockout）空间推演"
+          },
+          {
+            heading: "2. 隐性视线引导与空间地标（Landmark）",
+            text: "为了让玩家在长达 15 分钟的无 UI 沉浸状态下不迷失方向，利用了经典的“地标建筑法”。无论玩家跌落到哪一层地下夹缝，只要抬起视角，都能透过天花板的岩石裂缝看到核心高塔的顶端微光。这为玩家在 3D 复杂迷宫中提供了天然的精神锚点。",
+            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=102' },
+            caption: "▲ 图 1.2：灰模视界测试（灰色空间高对比强光照覆盖反馈）"
+          },
+          {
+            heading: "3. 关卡心流动态演示机制",
+            text: "通过下方实际引擎运行视频进行机制多级验证，确认动态解谜中玩家的视线在遭遇巨型机关时的第一反应焦点。",
+            media: { type: 'video', src: 'https://www.w3schools.com/html/mov_bbb.mp4' },
+            caption: "▲ 演示 1.3：物理机关连锁反应闭环测试视频"
+          }
         ]
       },
       project2: {
         title: "02 / 隐性光影引导机制",
-        desc: "利用高对比度冷暖光源的自然交替与几何形态暗示，隐性引导玩家在无UI及全黑匿踪状态下，自然直觉地发现潜行暗道与安全屋区域。",
-        media: [
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=201' },
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=202' },
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=203' },
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=204' },
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=205' }
+        tag: "Lighting & Guidance / Frostbite Engine",
+        type: "线性写实潜行谍战",
+        role: "光照关卡规划 / AI视线控制",
+        time: "2 Weeks",
+        sections: [
+          {
+            heading: "1. 冷暖光源引导模型机制",
+            text: "利用高对比度冷暖光源的自然交替与几何形态暗示，隐性引导玩家在无UI及全黑匿踪状态下，自然直觉地发现潜行暗道与安全屋区域。",
+            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=201' },
+            caption: "▲ 图 2.1：高照度强对比下的隐蔽动线视域分析"
+          }
         ]
       },
       project3: {
         title: "03 / 动态环境与复合解谜机制",
-        desc: "基于虚幻引擎重构的动态地形解锁与逻辑闭环机制。多维度呈现测试白模阶段的动画演绎，包含触发逻辑条件分支以及多段机关运作细节。",
-        media: [
-          { type: 'video', src: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=302' },
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=303' },
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=304' },
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=305' }
+        tag: "Puzzle Mechanics / Unity 3D",
+        type: "第一人称空间解谜",
+        role: "关卡触发器逻辑 / 地形状态机",
+        time: "4 Weeks",
+        sections: [
+          {
+            heading: "1. 基于地形改变的空间闭环设计",
+            text: "基于虚幻引擎重构的动态地形解锁与逻辑闭环机制。多维度呈现测试白模阶段的动画演绎，包含触发逻辑条件分支以及多段机关运作细节。",
+            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=302' },
+            caption: "▲ 图 3.1：地形矩阵变动下的路径连接拓扑图"
+          }
         ]
       },
       project4: {
         title: "04 / 沙盒遭遇战心流曲线",
-        desc: "基于动态心流缓释理论设计的敌方AI刷新与战术覆盖包络。通过空间掩体的高低落差分布，保证战斗高潮期与资源搜集舒缓期的优雅交替。",
-        media: [
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=401' },
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=402' },
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=403' },
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=404' },
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=405' }
+        tag: "Combat Encounter / CryEngine",
+        type: "开放世界多人射击",
+        role: "沙盒遭遇战规划 / 掩体布局",
+        time: "3 Weeks",
+        sections: [
+          {
+            heading: "1. 空间掩体错落与敌方AI压制曲线",
+            text: "基于动态心流缓释理论设计的敌方AI刷新与战术覆盖包络。通过空间掩体的高低落差分布，保证战斗高潮期与资源搜集舒缓期的优雅交替。",
+            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=401' },
+            caption: "▲ 图 4.1：掩体视线死角与射击交火线空间包络分析"
+          }
         ]
       },
       project5: {
         title: "05 / 垂直高低差沙盒移动验证",
-        desc: "快速推演并验证大型开放立体城市中，钩爪机制、垂直滑索与滑翔翼系统在不同建筑密度、高差倾角下的移动速率、惯性衔接与操作爽感。",
-        media: [
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=501' },
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=502' },
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=503' },
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=504' },
-          { type: 'image', src: 'https://picsum.photos/1920/1080?random=505' }
+        tag: "Movement Mechanics / Unreal Engine 5",
+        type: "开放立体大世界赛博风",
+        role: "机制手感验证 / 边界极限测试",
+        time: "2 Weeks",
+        sections: [
+          {
+            heading: "1. 高机动三维运动学关卡推演",
+            text: "快速推演并验证大型开放立体城市中，钩爪机制、垂直滑索与滑翔翼系统在不同建筑密度、高差倾角下的移动速率、惯性衔接与操作爽感。",
+            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=501' },
+            caption: "▲ 图 5.1：极限速度移动下关卡视差载入（Stream Loading）边界红线测试"
+          }
         ]
       }
     };
 
     document.addEventListener('DOMContentLoaded', () => {
       const items = document.querySelectorAll('.project-item');
-      const targetImage = document.getElementById('targetImage');
-      const targetVideo = document.getElementById('targetVideo');
-      const targetTitle = document.getElementById('targetTitle');
-      const targetDesc = document.getElementById('targetDesc');
-      const thumbs = document.querySelectorAll('.thumb-item');
-      
-      const detailViewStage = document.getElementById('detailViewStage');
-      const mediaContainer = document.getElementById('mediaContainer');
-      const textOverlay = document.getElementById('textOverlay');
-
-      let currentProjectID = 'project1';
-      let currentSubIndex = 0;
-      let rotationInterval = null;
+      const rightPanel = document.getElementById('rightPanel');
+      const wrapper = document.getElementById('detailContentWrapper');
 
       /* ===================================================
-         3D 卡牌倾斜计算引擎
+         1. 3D 卡牌倾斜计算引擎（完美保留左侧手感）
          =================================================== */
       function applyTiltEffect(element, maxRotate = 25, scale = 1.12) {
         element.addEventListener('mousemove', (e) => {
@@ -479,150 +416,77 @@
           });
         });
       }
-
       items.forEach(item => applyTiltEffect(item, 28, 1.12));
-      thumbs.forEach(thumb => applyTiltEffect(thumb, 20, 1.08));
-
-      detailViewStage.addEventListener('mousemove', (e) => {
-        const rect = detailViewStage.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        const xc = x / rect.width - 0.5;
-        const yc = y / rect.height - 0.5;
-        const rotateX = yc * -10; 
-        const rotateY = xc * 10;
-        requestAnimationFrame(() => {
-          mediaContainer.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-          textOverlay.style.transform = `translateZ(60px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        });
-      });
-
-      detailViewStage.addEventListener('mouseleave', () => {
-        requestAnimationFrame(() => {
-          mediaContainer.style.transform = 'rotateX(0deg) rotateY(0deg)';
-          textOverlay.style.transform = 'translateZ(60px) rotateX(0deg) rotateY(0deg)';
-        });
-      });
 
       /* ===================================================
-         页面跳转驱动：点击大图或双击选项跳转到具体页面
+         2. 长页面多组件动态装配函数
          =================================================== */
-      function getProjectURL(id) {
-        // 映射对应的子页面文件名
-        return `${id}.html`; 
-      }
+      function renderLongProjectPage(projectId) {
+        const data = portfolioDatabase[projectId];
+        if (!data) return;
 
-      detailViewStage.addEventListener('click', (e) => {
-        // 确保点击的不是左右两边的切换盲区
-        if (!e.target.classList.contains('click-zone')) {
-          window.location.href = getProjectURL(currentProjectID);
-        }
-      });
+        // 构建长轴页面的基本信息头与规格参数表
+        let htmlContent = `
+          <div class="project-title-area">
+            <h2>${data.title}</h2>
+            <div class="sub-tag">${data.tag}</div>
+          </div>
+          
+          <div class="spec-table-mini">
+            <div class="spec-cell"><h3>项目类型</h3><p>${data.type}</p></div>
+            <div class="spec-cell"><h3>负责模块</h3><p>${data.role}</p></div>
+            <div class="spec-cell"><h3>研发测试周期</h3><p>${data.time}</p></div>
+          </div>
+        `;
 
-      /* ===================================================
-         业务核心驱动逻辑
-         =================================================== */
-      function updateThumbnailSource(projectId) {
-        const project = projectData[projectId];
-        if (!project) return;
-        thumbs.forEach((thumb, idx) => {
-          const mediaItem = project.media[idx];
-          const imgTag = thumb.querySelector('img');
-          if (mediaItem.type === 'video') {
-            imgTag.src = 'https://picsum.photos/600/400?random=999'; 
+        // 动态迭代加入所有长图文和视频混排模块
+        data.sections.forEach(sec => {
+          htmlContent += `
+            <div class="detail-section">
+              <h4>${sec.heading}</h4>
+              <p>${sec.text}</p>
+              <div class="showcase-block">
+          `;
+
+          if (sec.media.type === 'video') {
+            htmlContent += `<video controls autoplay loop muted src="${sec.media.src}"></video>`;
           } else {
-            imgTag.src = mediaItem.src;
+            htmlContent += `<img src="${sec.media.src}" alt="展示多媒体">`;
           }
-        });
-      }
 
-      function renderSubMedia(projectId, subIndex) {
-        const project = projectData[projectId];
-        if (!project) return;
-
-        targetTitle.textContent = project.title;
-        targetDesc.textContent = project.desc;
-
-        thumbs.forEach((t, idx) => {
-          if (idx === subIndex) t.classList.add('active-thumb');
-          else t.classList.remove('active-thumb');
+          htmlContent += `
+              </div>
+              <div class="showcase-caption">${sec.caption}</div>
+            </div>
+          `;
         });
 
-        const currentMedia = project.media[subIndex];
-
-        if (currentMedia.type === 'video') {
-          targetImage.classList.remove('active-media');
-          targetVideo.src = currentMedia.src;
-          targetVideo.classList.add('active-media');
-          targetVideo.play().catch(e => console.log(e));
-        } else {
-          targetVideo.classList.remove('active-media');
-          targetVideo.pause();
-          targetImage.src = currentMedia.src;
-          targetImage.classList.add('active-media');
-        }
+        // 加上淡入效果并将内容灌入右侧
+        wrapper.classList.add('content-fade');
+        setTimeout(() => {
+          wrapper.innerHTML = htmlContent;
+          wrapper.classList.remove('content-fade');
+          rightPanel.scrollTop = 0; // 切换项目时，自动将右侧长页面重置拉回最顶端
+        }, 150);
       }
 
-      function startAutoRotation(projectId, startIdx = 0) {
-        if (rotationInterval) clearInterval(rotationInterval);
-        currentSubIndex = startIdx;
-        
-        updateThumbnailSource(projectId);
-        renderSubMedia(projectId, currentSubIndex);
-
-        rotationInterval = setInterval(() => {
-          currentSubIndex = (currentSubIndex + 1) % 5;
-          renderSubMedia(projectId, currentSubIndex);
-        }, 5000); 
-      }
-
-      function resetTimer() {
-        startAutoRotation(currentProjectID, currentSubIndex);
-      }
-
-      document.getElementById('zoneLeft').addEventListener('click', (e) => {
-        e.stopPropagation();
-        currentSubIndex = (currentSubIndex - 1 + 5) % 5;
-        renderSubMedia(currentProjectID, currentSubIndex);
-        resetTimer();
-      });
-
-      document.getElementById('zoneRight').addEventListener('click', (e) => {
-        e.stopPropagation();
-        currentSubIndex = (currentSubIndex + 1) % 5;
-        renderSubMedia(currentProjectID, currentSubIndex);
-        resetTimer();
-      });
-
-      thumbs.forEach(thumb => {
-        thumb.addEventListener('click', (e) => {
-          e.stopPropagation();
-          const idx = parseInt(thumb.getAttribute('data-idx'));
-          currentSubIndex = idx;
-          renderSubMedia(currentProjectID, currentSubIndex);
-          resetTimer();
-        });
-      });
-
+      /* ===================================================
+         3. 选项卡联动控制核心
+         =================================================== */
       items.forEach(item => {
         item.addEventListener('click', () => {
-          const projectId = item.getAttribute('data-id');
-          if (projectId === currentProjectID) return;
+          if (item.classList.contains('active')) return;
 
           items.forEach(i => i.classList.remove('active'));
           item.classList.add('active');
 
-          currentProjectID = projectId;
-          startAutoRotation(projectId, 0);
-        });
-        
-        // 双击左侧列表也可以直接进入详情
-        item.addEventListener('dblclick', () => {
-          window.location.href = getProjectURL(currentProjectID);
+          const projectId = item.getAttribute('data-id');
+          renderLongProjectPage(projectId);
         });
       });
 
-      startAutoRotation('project1', 0);
+      // 初始化默认载入第一个长项目
+      renderLongProjectPage('project1');
     });
   </script>
 </body>
