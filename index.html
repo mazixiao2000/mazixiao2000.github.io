@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>马子潇 - 个人作品集</title>
   <style>
-    /* --- 1. 画廊级极简主义重置 & 换成高级暗夜猩红 --- */
+    /* --- 1. 画廊级极简主义重置 & 工业灰调主题 --- */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -17,14 +17,14 @@
       display: flex;
       flex-direction: column;
       overflow: hidden; 
-      background-color: #140102; 
+      background-color: #121212; /* 基底：极深工业灰 */
       color: #ffffff; 
       -webkit-font-smoothing: antialiased;
     }
 
-    /* --- 2. 顶部个人信息栏 --- */
+    /* --- 2. 顶部个人信息栏（高亮震撼橙） --- */
     header {
-      background-color: #0c0001; 
+      background-color: #ff5500; /* 亮橙色主基调 */
       padding: 0 40px;
       display: flex;
       justify-content: space-between;
@@ -32,34 +32,38 @@
       height: 90px; 
       flex-shrink: 0;
       z-index: 30;
-      border-bottom: 1px solid #250306; 
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
     }
     .profile-info h1 {
-      font-size: 20px;
-      font-weight: 600;
+      font-size: 22px;
+      font-weight: 700;
       letter-spacing: 2px;
       margin-bottom: 4px;
+      color: #000000; /* 亮橙背景下使用纯黑文字，极具工业风冲击力 */
     }
     .profile-info p {
       font-size: 11px;
       letter-spacing: 1px;
-      color: #7d6264; 
+      color: #222222; 
+      font-weight: 600;
       text-transform: uppercase;
     }
     .contact-info {
       text-align: right;
       font-size: 11px;
-      color: #7d6264;
+      color: #222222;
+      font-weight: 600;
       line-height: 1.8;
       letter-spacing: 0.5px;
     }
     .contact-info a {
-      color: #b59fa1;
+      color: #000000;
       text-decoration: none;
-      transition: color 0.3s ease;
+      border-bottom: 1px solid #000000;
+      transition: opacity 0.3s ease;
     }
     .contact-info a:hover {
-      color: #ffffff;
+      opacity: 0.6;
     }
 
     /* 主体网格容器 */
@@ -68,21 +72,21 @@
       flex: 1;
       overflow: hidden;
       height: calc(100vh - 90px); 
-      background-color: #140102;
+      background-color: #121212;
     }
 
-    /* --- 3. 左侧一级菜单栏（保持经典 3D 舞台） --- */
+    /* --- 3. 左侧一级菜单栏（3D 舞台） --- */
     .left-panel {
       width: 25%;
       height: 100%;
       display: flex;
       flex-direction: column; 
       overflow: visible; 
-      border-right: 1px solid #250306;
-      background-color: #110102;
+      border-right: 1px solid #282828;
+      background-color: #161616;
       z-index: 25;
       perspective: 1000px; 
-      box-shadow: 20px 0 45px rgba(0, 0, 0, 0.9); 
+      box-shadow: 20px 0 45px rgba(0, 0, 0, 0.7); 
     }
     
     .project-item {
@@ -90,9 +94,9 @@
       width: 100%;
       cursor: pointer;
       position: relative;
-      border-bottom: 1px solid #210305;
-      background-color: #0d0102;
-      opacity: 0.35; 
+      border-bottom: 1px solid #222222;
+      background-color: #161616;
+      opacity: 0.4; 
       transform-style: preserve-3d;
       transition: opacity 0.5s cubic-bezier(0.25, 1, 0.5, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
@@ -118,61 +122,89 @@
     
     .project-item:hover .project-item-card, 
     .project-item.active .project-item-card {
-      border: 1px solid rgba(255, 255, 255, 0.45);
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.95);
+      border: 1px solid #ff5500; /* 激活或悬停时卡片边框亮起橙色 */
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8);
     }
 
     .project-item img {
       width: 100%;
       height: 100%;
       object-fit: cover; 
-      filter: grayscale(15%);
+      filter: grayscale(80%);
       transform: translateZ(0px) scale(1.02);
-      transition: filter 0.8s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: filter 0.6s ease, transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
     }
-    .project-item:hover img {
-      filter: grayscale(0%);
+    .project-item:hover img, .project-item.active img {
+      filter: grayscale(20%);
       transform: translateZ(45px) scale(1.1); 
     }
 
-    /* --- 4. 右侧深度内容展示区（改造成纵向可拉伸的长轴画布） --- */
+    /* 悬停时在卡片中心浮现的文本遮罩层 */
+    .item-hover-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(18, 18, 18, 0.85); /* 半透明水泥黑 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 20px;
+      text-align: center;
+      opacity: 0; /* 默认隐藏 */
+      z-index: 10;
+      transform: translateZ(50px); /* 让文字在3D空间中比图片更靠前，极具悬浮感 */
+      transition: opacity 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+    .project-item:hover .item-hover-overlay,
+    .project-item.active .item-hover-overlay {
+      opacity: 1; /* 悬停和激活时浮现 */
+    }
+    .item-hover-overlay span {
+      color: #ff5500; /* 悬浮字体使用橙色 */
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* --- 4. 右侧深度长轴滚动展示区（水泥灰） --- */
     .right-panel {
       width: 75%;
       height: 100%;
-      background-color: #0e0102;
-      /* 核心修改：允许内容纵向溢出并滚动 */
+      background-color: #1a1a1a; /* 舒适的水泥暗灰 */
       overflow-y: auto; 
       overflow-x: hidden;
       scroll-behavior: smooth;
     }
 
-    /* 优雅地隐藏右侧区域的自带原生滚动条，保持多维界面高级感 */
+    /* 优雅隐形滚动条 */
     .right-panel::-webkit-scrollbar {
       width: 0px;
       background: transparent;
     }
     .right-panel {
-      -ms-overflow-style: none;  /* IE and Edge */
-      scrollbar-width: none;  /* Firefox */
+      -ms-overflow-style: none;  
+      scrollbar-width: none;  
     }
 
     /* 详情页长轴排版包装器 */
     .detail-content-wrapper {
       max-width: 900px;
       margin: 0 auto;
-      padding: 50px 40px 100px 40px;
+      padding: 60px 40px 120px 40px;
       opacity: 1;
-      transition: opacity 0.4s ease;
+      transition: opacity 0.3s ease;
     }
     
-    /* 配合切换时的淡入淡出动画类 */
     .content-fade {
       opacity: 0;
     }
 
     /* 关卡大标题与基本信息规格表 */
     .project-title-area h2 {
-      font-size: 28px;
+      font-size: 30px;
       font-weight: 700;
       letter-spacing: 1px;
       margin-bottom: 8px;
@@ -180,7 +212,7 @@
     }
     .project-title-area .sub-tag {
       font-size: 12px;
-      color: #7d6264;
+      color: #888888;
       text-transform: uppercase;
       letter-spacing: 2px;
       margin-bottom: 30px;
@@ -190,49 +222,51 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 20px;
-      margin-bottom: 40px;
-      background: #0c0001;
+      margin-bottom: 50px;
+      background: #121212;
       padding: 20px;
-      border: 1px solid #250306;
+      border: 1px solid #282828;
     }
     .spec-cell h3 {
       font-size: 11px;
-      color: #7d6264;
+      color: #ff5500; /* 规格小标题高亮橙 */
       text-transform: uppercase;
       letter-spacing: 1px;
       margin-bottom: 4px;
     }
     .spec-cell p {
       font-size: 13px;
-      color: #eeeeee;
+      color: #dddddd;
     }
 
     /* 独立的图文拆解块 */
     .detail-section {
-      margin-bottom: 45px;
+      margin-bottom: 60px;
     }
     .detail-section h4 {
-      font-size: 16px;
+      font-size: 18px;
       font-weight: 600;
-      margin-bottom: 15px;
+      margin-bottom: 18px;
       letter-spacing: 0.5px;
-      border-left: 3px solid #b59fa1;
+      border-left: 3px solid #ff5500; /* 用橙色作为章节指示线 */
       padding-left: 12px;
+      color: #ffffff;
     }
     .detail-section p {
-      font-size: 14px;
-      line-height: 1.7;
-      color: #cccccc;
-      margin-bottom: 20px;
+      font-size: 14.5px;
+      line-height: 1.8;
+      color: #aaaaaa;
+      margin-bottom: 25px;
       text-align: justify;
     }
 
     /* 长图文媒体容器 */
     .showcase-block {
       width: 100%;
-      border: 1px solid #250306;
-      background: #0c0001;
+      border: 1px solid #282828;
+      background: #121212;
       margin-bottom: 12px;
+      overflow: hidden;
     }
     .showcase-block img, .showcase-block video {
       width: 100%;
@@ -241,9 +275,9 @@
     }
     .showcase-caption {
       font-size: 11px;
-      color: #7d6264;
+      color: #666666;
       text-align: center;
-      margin-bottom: 25px;
+      margin-bottom: 30px;
     }
   </style>
 </head>
@@ -267,26 +301,31 @@
         <div class="project-item-card">
           <img src="https://picsum.photos/600/400?random=11" alt="项目一封面">
         </div>
+        <div class="item-hover-overlay"><span>01 / 核心关卡动线规划</span></div>
       </div>
       <div class="project-item" data-id="project2">
         <div class="project-item-card">
           <img src="https://picsum.photos/600/400?random=12" alt="项目二封面">
         </div>
+        <div class="item-hover-overlay"><span>02 / 隐性光影引导机制</span></div>
       </div>
       <div class="project-item" data-id="project3">
         <div class="project-item-card">
           <img src="https://picsum.photos/600/400?random=13" alt="项目三封面">
         </div>
+        <div class="item-hover-overlay"><span>03 / 动态环境与复合解谜</span></div>
       </div>
       <div class="project-item" data-id="project4">
         <div class="project-item-card">
           <img src="https://picsum.photos/600/400?random=14" alt="项目四封面">
         </div>
+        <div class="item-hover-overlay"><span>04 / 沙盒遭遇战心流曲线</span></div>
       </div>
       <div class="project-item" data-id="project5">
         <div class="project-item-card">
           <img src="https://picsum.photos/600/400?random=15" alt="项目五封面">
         </div>
+        <div class="item-hover-overlay"><span>05 / 垂直高低差移动验证</span></div>
       </div>
     </div>
 
@@ -298,32 +337,43 @@
   </div>
 
   <script>
-    // 关卡数据池：在这里你可以把每个项目拓展成无限长、包含多张图文的专业复盘文章
     const portfolioDatabase = {
       project1: {
-        title: "01 / 核心关卡动线规划",
+        title: "01 / 核心关卡动线规划与多路径拆解",
         tag: "Level Design Case Study / Unreal Engine",
         type: "3D 动作冒险沙盒",
-        role: "白模搭建 / 心流曲线设计",
+        role: "白模搭建 / 心流曲线 / 视线阻断",
         time: "3 Weeks",
         sections: [
           {
-            heading: "1. 设计意图与玩家动线平衡（Mission Intent）",
-            text: "在此关卡设计中，核心目标是在垂直空间（Verticality）中创造非线性的探索体验。通过高度落差限制玩家早期的视线视野，强迫其使用侧向勾爪动线。这样既可以平滑战斗的心流激昂感，也能给硬核玩家留出跳过战斗的边缘潜行暗道。",
+            heading: "1. 关卡核心设计意图与心流包络（Mission Intent）",
+            text: "在此关卡设计中，核心目标是在高密度垂直空间（Verticality）中创造非线性的探索体验。我们拒绝了传统大世界平铺直叙的铺设，转而采用高度落差限制玩家早期的视线视野。通过强迫其使用侧向勾爪动线，平滑战斗遭遇前的紧张感，并为核心硬核潜行玩家留出了无伤绕过主战区的边缘盲道。",
             media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=101' },
-            caption: "▲ 图 1.1：主干道动线与视线遮挡体（Blockout）空间推演"
+            caption: "▲ 图 1.1：主干道动线与视线遮挡体（Blockout）空间结构推演"
           },
           {
-            heading: "2. 隐性视线引导与空间地标（Landmark）",
-            text: "为了让玩家在长达 15 分钟的无 UI 沉浸状态下不迷失方向，利用了经典的“地标建筑法”。无论玩家跌落到哪一层地下夹缝，只要抬起视角，都能透过天花板的岩石裂缝看到核心高塔的顶端微光。这为玩家在 3D 复杂迷宫中提供了天然的精神锚点。",
+            heading: "2. 隐性地标锚定法与三维视线引导（Landmark & Guidance）",
+            text: "为了让玩家在长达 15 分钟的无 UI 沉浸状态下不产生迷失感，本关卡重度利用了“三维地标法”。无论玩家在战斗中跌落到哪一层地下裂缝，只要抬起视角，都能透过精心计算的岩石错位裂隙，直观看到核心高塔的顶端微光。这种视线牵引在 3D 复杂黑箱空间中提供了极为稳固的心理锚点。",
             media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=102' },
-            caption: "▲ 图 1.2：灰模视界测试（灰色空间高对比强光照覆盖反馈）"
+            caption: "▲ 图 1.2：灰模阶段视界载入与明暗对比度（High Contrast）测试"
           },
           {
-            heading: "3. 关卡心流动态演示机制",
-            text: "通过下方实际引擎运行视频进行机制多级验证，确认动态解谜中玩家的视线在遭遇巨型机关时的第一反应焦点。",
+            heading: "3. 物理环境交互与闭环逻辑验证",
+            text: "关卡中段引入了一组具有连锁反应的复合几何机关。玩家需要通过重力箱体触发底层泄洪闸，进而利用浮力升起通路。以下视频展示了白模测试阶段针对触发器（Trigger Box）边界、物理状态机衔接流利度的极限手感测试。",
             media: { type: 'video', src: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-            caption: "▲ 演示 1.3：物理机关连锁反应闭环测试视频"
+            caption: "▲ 演示 1.3：虚幻引擎环境白模触发逻辑与物理碰撞闭环演示"
+          },
+          {
+            heading: "4. 战斗遭遇战（Encounter）空间战术包络",
+            text: "遭遇战区域采用了经典的“下沉式斗兽场”与“高台狙击位”的复合布局。敌方 AI 刷新点被隐藏在视野盲区的双层回廊后。通过提供 3 处可破坏的悬挂重物环境物，引导玩家形成‘观察-规划-潜入-爆发战斗’的经典战术循环，避免陷入纯粹的消耗战。",
+            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=103' },
+            caption: "▲ 图 1.4：遭遇战交火线（Fire-line）与掩体密度分布拓扑图"
+          },
+          {
+            heading: "5. 复盘复盘与可迭代性优化数据（Post-Mortem）",
+            text: "经过 10 名核心玩家的盲测（Playtest）数据反馈，原先第三阶段的滑索动线因倾角过陡（接近 45°），导致玩家容易产生视觉眩晕且极难在中途变换方向。团队随后在迭代中将滑索倾角放缓至 28°，并在动线中点增设了一个承托式的悬空木质脚手架作为手感缓释区，使得整体心流体验回归预期黄金线。",
+            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=104' },
+            caption: "▲ 图 1.5：盲测热力图数据（Heatmap）与玩家挫败感峰值区间修正对比"
           }
         ]
       },
@@ -395,7 +445,7 @@
       const wrapper = document.getElementById('detailContentWrapper');
 
       /* ===================================================
-         1. 3D 卡牌倾斜计算引擎（完美保留左侧手感）
+         1. 3D 卡牌倾斜计算引擎（完美保留左侧绝佳手感）
          =================================================== */
       function applyTiltEffect(element, maxRotate = 25, scale = 1.12) {
         element.addEventListener('mousemove', (e) => {
@@ -419,13 +469,12 @@
       items.forEach(item => applyTiltEffect(item, 28, 1.12));
 
       /* ===================================================
-         2. 长页面多组件动态装配函数
+         2. 长轴多组件动态渲染装配
          =================================================== */
       function renderLongProjectPage(projectId) {
         const data = portfolioDatabase[projectId];
         if (!data) return;
 
-        // 构建长轴页面的基本信息头与规格参数表
         let htmlContent = `
           <div class="project-title-area">
             <h2>${data.title}</h2>
@@ -439,7 +488,6 @@
           </div>
         `;
 
-        // 动态迭代加入所有长图文和视频混排模块
         data.sections.forEach(sec => {
           htmlContent += `
             <div class="detail-section">
@@ -451,7 +499,7 @@
           if (sec.media.type === 'video') {
             htmlContent += `<video controls autoplay loop muted src="${sec.media.src}"></video>`;
           } else {
-            htmlContent += `<img src="${sec.media.src}" alt="展示多媒体">`;
+            htmlContent += `<img src="${sec.media.src}" alt="关卡图示">`;
           }
 
           htmlContent += `
@@ -461,17 +509,17 @@
           `;
         });
 
-        // 加上淡入效果并将内容灌入右侧
+        // 柔和切入动效
         wrapper.classList.add('content-fade');
         setTimeout(() => {
           wrapper.innerHTML = htmlContent;
           wrapper.classList.remove('content-fade');
-          rightPanel.scrollTop = 0; // 切换项目时，自动将右侧长页面重置拉回最顶端
+          rightPanel.scrollTop = 0; // 换项目时瞬间置顶
         }, 150);
       }
 
       /* ===================================================
-         3. 选项卡联动控制核心
+         3. 选项卡核心联动
          =================================================== */
       items.forEach(item => {
         item.addEventListener('click', () => {
@@ -485,7 +533,7 @@
         });
       });
 
-      // 初始化默认载入第一个长项目
+      // 初始化载入
       renderLongProjectPage('project1');
     });
   </script>
