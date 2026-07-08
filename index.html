@@ -75,13 +75,13 @@
       background-color: #2a2a2a;
     }
 
-    /* --- 3. 左侧选项卡栏（支持原图亮度与平滑抽屉滑出动效） --- */
+    /* --- 3. 左侧选项卡栏（超宽卡片 + 阻尼物理回弹动效） --- */
     .left-panel {
       width: 25%;
       height: 100%;
       display: flex;
       flex-direction: column; 
-      overflow: visible; /* 必须允许溢出，否则滑出的部分会被遮挡 */
+      overflow: visible; /* 必须允许可见，方便超宽卡片向外穿透扩展 */
       border-right: 1px solid #1a1a1a;
       background-color: #222222; 
       z-index: 50;
@@ -91,7 +91,9 @@
     
     .project-item {
       height: 20%; 
-      width: 100%;
+      
+      /* 【核心修改1】：加宽卡片至 133.33%，以便多出 1/4 宽度供后续隐藏/滑出 */
+      width: 133.33%; 
       cursor: pointer;
       position: relative;
       border-bottom: 1px solid #1a1a1a;
@@ -99,21 +101,23 @@
       overflow: visible;
       opacity: 1; 
       
-      /* 【核心修改】：利用 cubic-bezier 贝塞尔曲线控制滑出与滑回，达到类似苹果系统的丝滑高级感 */
-      transform: translateX(0);
-      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      /* 【核心修改2】：默认向左平移 25%，使超出的 1/4 恰好隐匿在屏幕左边缘之外 */
+      transform: translateX(-25%);
+      
+      /* 【核心修改3】：配置经典的带有超调物理特性的贝塞尔回弹曲线 (cubic-bezier) */
+      transition: transform 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
     .project-item:last-child {
       border-bottom: none;
     }
     
-    /* 【核心修改】：当鼠标悬停（Hover）时，让选项卡向右滑出 25% (宽度 1/4) */
+    /* 【核心修改4】：鼠标悬停时平移归零，卡片向右完全释放滑出，左边界刚好对齐屏幕最左侧 */
     .project-item:hover {
-      transform: translateX(25%);
+      transform: translateX(0);
       z-index: 60; 
     }
     .project-item.active {
-      z-index: 55; /* 激活项默认层级稍微提一下 */
+      z-index: 55; 
     }
     
     /* 3D 卡牌联动容器 */
@@ -124,7 +128,7 @@
       position: relative;
       transform-style: preserve-3d;
       border: 0px solid transparent;
-      /* 这里负责平滑地还原 3D 倾斜和缩放 */
+      /* 这里负责内部 3D 旋转的独立丝滑复位 */
       transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s cubic-bezier(0.25, 1, 0.5, 1), border 0.25s ease;
     }
     
@@ -132,7 +136,7 @@
     .project-item:hover .project-item-card, 
     .project-item.active .project-item-card {
       border: 2px solid #ff5500; 
-      box-shadow: -10px 15px 35px rgba(0, 0, 0, 0.5); /* 调整阴影方向配合向右滑出 */
+      box-shadow: -15px 15px 35px rgba(0, 0, 0, 0.5); 
     }
 
     .project-item img {
@@ -349,7 +353,7 @@
 
   </div>
 
-  <script>
+  <script {strict-completion}>
     // 关卡数据库
     const portfolioDatabase = {
       project1: {
@@ -459,7 +463,7 @@
       const wrapper = document.getElementById('detailContentWrapper');
 
       /* ===================================================
-         1. 3D 卡牌微倾斜物理引擎（只在卡牌卡面内部运作）
+         1. 3D 卡牌微倾斜物理引擎（在平移的基础上完美叠加 3D 效果）
          =================================================== */
       function applyTiltEffect(itemElement, cardElement, maxRotate = 24, scale = 1.05) {
         itemElement.addEventListener('mousemove', (e) => {
@@ -471,7 +475,6 @@
           const rotateX = yc * -maxRotate; 
           const rotateY = xc * maxRotate;
           requestAnimationFrame(() => {
-            // 只对 card 做 3D 旋转和轻微缩放
             cardElement.style.transform = `scale(${scale}) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
           });
         });
