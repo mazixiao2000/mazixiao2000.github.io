@@ -1,18 +1,18 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>马子潇 - 个人作品集</title>
+  <title>Zixiao Ma - Portfolio</title>
   <style>
-    /* --- 1. 全局极致主义重置 & 中度冷工业灰调体系 --- */
+    /* --- 1. Global Brutalist Reset & Industrial Grey Palette --- */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -22,7 +22,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* --- 2. 顶部个人信息栏 --- */
+    /* --- 2. Header / Profile Bar --- */
     header {
       background-color: #ff5500; 
       padding: 0 40px;
@@ -66,7 +66,7 @@
       opacity: 0.6;
     }
 
-    /* 主体布局 */
+    /* Main Container Layout */
     .main-container {
       display: flex;
       flex: 1;
@@ -75,7 +75,7 @@
       background-color: #2a2a2a;
     }
 
-    /* --- 3. 左侧选项卡栏 --- */
+    /* --- 3. Left Panel (Tab Items) --- */
     .left-panel {
       width: 25%;
       height: 100%;
@@ -90,7 +90,6 @@
     }
     
     .project-item {
-      /* 【修改】：6个选项卡平分高度 100% / 6 = 16.66% */
       height: 16.66%; 
       width: 108%; 
       cursor: pointer;
@@ -103,14 +102,14 @@
       transform: translateX(-7.4%);
       box-shadow: 0 0 0 rgba(0, 0, 0, 0);
       
-      /* 退回动画 */
+      /* Reset/Return Animation Curve */
       transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2), box-shadow 0.3s ease;
     }
     .project-item:last-child {
       border-bottom: none;
     }
     
-    /* 鼠标悬停划出 */
+    /* Hover Animation state */
     .project-item:hover {
       transform: translateX(0);
       z-index: 60; 
@@ -121,7 +120,7 @@
       z-index: 55; 
     }
     
-    /* 3D 卡牌联动容器 */
+    /* 3D Card Container */
     .project-item-card {
       width: 100%;
       height: 100%;
@@ -132,7 +131,7 @@
       transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border 0.25s ease;
     }
     
-    /* 高亮橙色描边 */
+    /* Active & Hover Border Highlight */
     .project-item:hover .project-item-card, 
     .project-item.active .project-item-card {
       border: 2px solid #ff5500; 
@@ -146,50 +145,46 @@
       filter: none; 
     }
 
-    /* 【核心修改1】：文本遮罩控制层 —— 未选中也显示标题，且图片不全变暗 */
+    /* Persistent Title Overlays */
     .item-hover-overlay {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      /* 默认状态：轻微的渐变底衬，保证白色文字在任何图片上都清晰可见，同时图片完全不失真变暗 */
-      background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.2) 100%); 
+      background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.2) 100%); 
       display: flex;
       justify-content: center;
       align-items: center;
       padding: 0 15px;
       text-align: center;
-      opacity: 1; /* 始终保持可见 */
+      opacity: 1; 
       pointer-events: none;
       transition: background 0.25s ease;
     }
     
-    /* 当悬停或激活时，可以适当对背景做加深响应，如不需要可以删掉此段 */
     .project-item:hover .item-hover-overlay,
     .project-item.active .item-hover-overlay {
-      background: rgba(0, 0, 0, 0.65); 
+      background: rgba(0, 0, 0, 0.7); 
     }
     
     .item-hover-overlay span {
-      color: #ffffff; /* 默认状态下文字为白色以增强可读性 */
+      color: #ffffff; 
       font-size: 13px;
       font-weight: 600;
       letter-spacing: 1px;
       line-height: 1.4;
-      /* 文本阴影增加极端复杂背景下的可读性 */
       text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5); 
       transition: color 0.25s ease;
     }
 
-    /* 悬停或选中状态下，文字变为标志性橙色 */
     .project-item:hover .item-hover-overlay span,
     .project-item.active .item-hover-overlay span {
       color: #ff5500;
       text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
 
-    /* --- 4. 右侧展示区 --- */
+    /* --- 4. Right Showcase Area --- */
     .right-panel {
       width: 75%;
       height: 100%;
@@ -208,7 +203,7 @@
       scrollbar-width: none;  
     }
 
-    /* 详情页排版包装器 */
+    /* Content Layout Wrapper */
     .detail-content-wrapper {
       max-width: 880px;
       margin: 0 auto;
@@ -221,7 +216,7 @@
       opacity: 0;
     }
 
-    /* 大标题与参数表 */
+    /* Headers and Metrics Breakdown */
     .project-title-area h2 {
       font-size: 32px;
       font-weight: 700;
@@ -259,7 +254,7 @@
       font-weight: 500;
     }
 
-    /* 独立的图文拆解块 */
+    /* Modular Content Blocks */
     .detail-section {
       margin-bottom: 65px;
     }
@@ -285,7 +280,7 @@
       font-weight: 600;
     }
 
-    /* 媒体展示容器 */
+    /* Media Containers */
     .showcase-block {
       width: 100%;
       border: 1px solid #444444;
@@ -311,12 +306,12 @@
 
   <header>
     <div class="profile-info">
-      <h1>马子潇</h1>
-      <p>关卡策划 / 游戏设计</p>
+      <h1>Zixiao Ma</h1>
+      <p>Level Designer / Game Designer</p>
     </div>
     <div class="contact-info">
-      <p>📧 <a href="mailto:zixiaom@smu.edu">zixiaom@smu.edu</a></p>
-      <p>📱 (+86) 13506692801</p>
+      <p>📧 <a href="mailto:marsshow2000@outlook.com">marsshow2000@outlook.com</a></p>
+      <p>📱 (+1) 945-949-6840</p>
     </div>
   </header>
 
@@ -325,38 +320,38 @@
     <div class="left-panel" id="leftPanel">
       <div class="project-item active" data-id="project1">
         <div class="project-item-card">
-          <img src="https://picsum.photos/600/400?random=11" alt="星空关卡设计">
-          <div class="item-hover-overlay"><span>星空关卡设计</span></div>
+          <img src="https://picsum.photos/600/400?random=11" alt="Starfield Level Design">
+          <div class="item-hover-overlay"><span>Starfield Level Design</span></div>
         </div>
       </div>
       <div class="project-item" data-id="project2">
         <div class="project-item-card">
-          <img src="https://picsum.photos/600/400?random=12" alt="半条命2关卡设计">
-          <div class="item-hover-overlay"><span>半条命2关卡设计</span></div>
+          <img src="https://picsum.photos/600/400?random=12" alt="Half-Life 2 Level Design">
+          <div class="item-hover-overlay"><span>Half-Life 2 Level Design</span></div>
         </div>
       </div>
       <div class="project-item" data-id="project3">
         <div class="project-item-card">
-          <img src="https://picsum.photos/600/400?random=13" alt="HamsterBallin">
-          <div class="item-hover-overlay"><span>UE5 3D多人竞速<br>HamsterBallin‘</span></div>
+          <img src="https://picsum.photos/600/400?random=13" alt="HamsterBallin'">
+          <div class="item-hover-overlay"><span>UE5 3D Multiplayer Racing<br>HamsterBallin‘</span></div>
         </div>
       </div>
       <div class="project-item" data-id="project4">
         <div class="project-item-card">
           <img src="https://picsum.photos/600/400?random=14" alt="FLING">
-          <div class="item-hover-overlay"><span>Unity 2D平台跳跃<br>FLING</span></div>
+          <div class="item-hover-overlay"><span>Unity 2D Platformer<br>FLING</span></div>
         </div>
       </div>
       <div class="project-item" data-id="project5">
         <div class="project-item-card">
-          <img src="https://picsum.photos/600/400?random=15" alt="更多项目">
-          <div class="item-hover-overlay"><span>更多项目</span></div>
+          <img src="https://picsum.photos/600/400?random=15" alt="More Projects">
+          <div class="item-hover-overlay"><span>More Projects</span></div>
         </div>
       </div>
       <div class="project-item" data-id="project6">
         <div class="project-item-card">
-          <img src="https://picsum.photos/600/400?random=16" alt="关于我">
-          <div class="item-hover-overlay"><span>关于我</span></div>
+          <img src="https://picsum.photos/600/400?random=16" alt="About Me">
+          <div class="item-hover-overlay"><span>About Me</span></div>
         </div>
       </div>
     </div>
@@ -368,95 +363,95 @@
   </div>
 
   <script>
-    // 【核心修改2】：配套更新全新的 6 个关卡数据库内容
+    /* Portfolio Database Architecture */
     const portfolioDatabase = {
       project1: {
-        title: "星空关卡设计 - 开放宇宙资源站探索",
+        title: "Starfield Level Design - Resource Outpost Exploration",
         tag: "Level Design Case Study / Starfield Theme",
-        type: "3D 开放世界 RPG 关卡",
-        role: "动线流线设计 / 资源点规划 / 氛围营造",
+        type: "3D Open World RPG Level",
+        role: "Layout Design / Point of Interest Placement / Atmosphere",
         time: "3 Weeks",
         sections: [
           {
-            heading: "1. 关卡核心设计意图",
-            text: "本关卡专注于模拟低重力地外行星环境。玩家需要利用宇航喷气背包在废弃的采矿枢纽中进行三维纵向探索，通过<span class='highlight-text'>视线阻断</span>与隐藏通风管道提供多样化的潜入路径。",
+            heading: "1. Core Mission Intent & Spatial Flow",
+            text: "This layout prototype explicitly structures sandbox exploration in low-gravity celestial environments. Players leverage jetpack mechanics to navigate a defunct refinery vertically, where strategically applied <span class='highlight-text'>sightline occlusion</span> and complex ventilation passages carve out multiple high-reward stealth vectors.",
             media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=101' },
-            caption: "▲ 图 1.1：低重力纵向探索动线白模推演"
+            caption: "▲ Fig 1.1: Multi-tier blockout composition testing vertical movement limits."
           }
         ]
       },
       project2: {
-        title: "半条命2关卡设计 - 17号城工业区突围",
+        title: "Half-Life 2 Level Design - City 17 Industrial Breach",
         tag: "Classic Level Design / Source Engine Philosophy",
-        type: "线性第一人称射击",
-        role: "物理机关解谜 / 战斗节奏把控",
+        type: "Linear First-Person Shooter",
+        role: "Physics-Based Puzzles / Pacing & Combat Encounters",
         time: "2 Weeks",
         sections: [
           {
-            heading: "1. 经典重力枪物理交互设计",
-            text: "秉承《Half-Life 2》的隐性教学理念，关卡前半段通过一处闭环水箱解谜教导玩家利用浮力物搭建桥梁，随后在后半段无缝引入联合军遭遇战，将物理交互转化为<span class='highlight-text'>战术掩体破坏</span>。",
+            heading: "1. Gravity Gun Environmental Architecture",
+            text: "Adhering strictly to Valve's signature mechanics-driven pacing, the layout features a closed water valve ecosystem that naturally guides players to employ buoying dynamics to build bridges. This puzzle sequence transitions smoothly into a Combine ambush, where physics props directly convert into <span class='highlight-text'>destructible tactical cover</span>.",
             media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=201' },
-            caption: "▲ 图 2.1：基于物理杠杆与浮力装置的解谜闭环"
+            caption: "▲ Fig 2.1: Logic loop diagram mapping physics leverage and liquid buoyancy mechanics."
           }
         ]
       },
       project3: {
-        title: "UE5 3D多人竞速游戏 - HamsterBallin‘",
+        title: "UE5 3D Multiplayer Racing - HamsterBallin‘",
         tag: "Gameplay & Level Mechanics / Unreal Engine 5",
-        type: "3D 多人联机竞速",
-        role: "高动态曲面设计 / 碰撞体边界优化 / 速度感调校",
+        type: "3D Multiplayer Arcade Racing",
+        role: "Curved Tracking / Collision Mesh Optimization / Handling Calibration",
         time: "4 Weeks",
         sections: [
           {
-            heading: "1. 高动态仓鼠球速度包络曲线",
-            text: "核心挑战在于在极端高时速下保持玩家对方向的控制力。关卡重度依赖跑道边缘的隐性弧度分流，利用物理表面材质的摩擦力差异，在弯道处为硬核玩家提供<span class='highlight-text'>‘极限切线切入点’</span>。",
+            heading: "1. Managing High-Velocity Curvatures",
+            text: "The definitive design problem was securing player agency and directional control under extreme velocities. Track borders rely on micro-sloped profiles to buffer centripetal displacement, deploying varying surface physics to afford expert players high-risk <span class='highlight-text'>tangential cutting paths</span> across hairpin loops.",
             media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=302' },
-            caption: "▲ 图 3.1：高流速曲面赛道与触发边界拓扑分析"
+            caption: "▲ Fig 3.1: High-velocity structural sweep showcasing geometry boundaries and trigger volume layout."
           }
         ]
       },
       project4: {
-        title: "Unity 2D平台跳跃游戏 - FLING",
+        title: "Unity 2D Platformer - FLING",
         tag: "2D Precision Platformer / Unity 2D",
-        type: "硬核精密跳跃",
-        role: "关卡配置 / 动态判定校准",
+        type: "Hardcore Precision Platformer",
+        role: "Level Layout Configuration / Frame-Perfect Collision Tuning",
         time: "3 Weeks",
         sections: [
           {
-            heading: "1. 弹性机制与手感缓释区",
-            text: "FLING 的核心乐趣在于抛射带来的物理惯性。关卡设计围绕‘起跳-空中修正-精准落地’展开，在容错率极低的钉刺阵列中，精心预留了可反复微调手感的<span class='highlight-text'>平台缓冲区</span>。",
+            heading: "1. Projectile Velocity & Frustration Management",
+            text: "The foundational gameplay loop of FLING focuses on momentum and kinetic trajectory arcs. Every corridor coordinates 'launch, micro-correction, and micro-landing' patterns, inserting critical <span class='highlight-text'>buffer platforms</span> within lethal hazard fields to balance the steep difficulty scaling.",
             media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=401' },
-            caption: "▲ 图 4.1：抛物线轨迹判定与关卡挫败感峰值控制图"
+            caption: "▲ Fig 4.1: Vector mapping for launch variables contrasted against player telemetry models."
           }
         ]
       },
       project5: {
-        title: "更多项目组件与独立原型沉淀",
+        title: "More Projects - Prototypes & System Sandboxes",
         tag: "Prototypes & Game Jam Works",
-        type: "多类型玩法验证",
-        role: "快速原型搭建 / 核心玩法抽象",
+        type: "Multi-genre Gameplay Validation",
+        role: "Rapid Prototyping / Core Mechanic Abstraction",
         time: "Ongoing",
         sections: [
           {
-            heading: "1. Game Jam 极限原型创意孵化",
-            text: "这里收录了多款在 48 小时内孵化的关卡机制原型，涵盖了空间重力反转、多维度视差解谜等前沿探索，展现了快速敏捷迭代的工业开发能力。",
+            heading: "1. Game Jam Mechanical Proof-of-Concepts",
+            text: "A repository compiling diverse systemic prototypes developed during 48-hour sprints. Concepts investigate localized gravity inversion matrix setups and non-Euclidean perspective shift mechanics, emphasizing responsive, rapid-turnaround development practices.",
             media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=501' },
-            caption: "▲ 图 5.1：机制验证阶段的多构型白模归档"
+            caption: "▲ Fig 5.1: Blockout structural inventory detailing spatial logic validation testing."
           }
         ]
       },
       project6: {
-        title: "关于我 / 教育背景与设计哲学",
-        tag: "About Me / Resume & Design Philosophy",
-        type: "个人档案",
-        role: "关卡策划 / 游戏设计师",
+        title: "About Me / Profile & Design Philosophy",
+        tag: "About Me / Resume & Core Credentials",
+        type: "Personal Profile",
+        role: "Level Designer",
         time: "Full-Time",
         sections: [
           {
-            heading: "1. 设计哲学：用空间讲述属于玩家的故事",
-            text: "我认为关卡策划是‘游戏世界沉默的导演’。优秀的关卡不应通过频繁的 UI 或台词强迫玩家，而是通过<span class='highlight-text'>光影、几何结构、AI 压制感</span>去激发玩家本能的探索欲与战斗心流。期待与优秀的团队一起构建令人沉浸的虚拟世界。",
+            heading: "1. Professional Profile",
+            text: "Level Designer at SMU Guildhall with a passion for exploration, player guidance, and environmental storytelling. Dedicated to crafting engaging and memorable gameplay experiences through level design.",
             media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=601' },
-            caption: "▲ 致力于打磨极致的心流曲线与黑箱关卡艺术"
+            caption: "▲ Committed to refining pristine pacing frameworks and advanced space design."
           }
         ]
       }
@@ -468,7 +463,7 @@
       const wrapper = document.getElementById('detailContentWrapper');
 
       /* ===================================================
-         1. 3D 卡牌微倾斜物理引擎（解耦外层位移，纯粹处理倾斜）
+         1. 3D Card Interactive Tilt Mechanical Engine
          =================================================== */
       function applyTiltEffect(itemElement, cardElement, maxRotate = 35, scale = 1.05) {
         itemElement.addEventListener('mousemove', (e) => {
@@ -492,12 +487,11 @@
       
       items.forEach(item => {
         const card = item.querySelector('.project-item-card');
-        // 【核心修改3】：将 maxRotate 参数从原先的 24 提高到 35 度，悬停扭曲感更足
         applyTiltEffect(item, card, 35, 1.05); 
       });
 
       /* ===================================================
-         2. 长轴多组件内容组装
+         2. Dynamic Content Assembler Engine
          =================================================== */
       function renderLongProjectPage(projectId) {
         const data = portfolioDatabase[projectId];
@@ -510,9 +504,9 @@
           </div>
           
           <div class="spec-table-mini">
-            <div class="spec-cell"><h3>项目类型</h3><p>${data.type}</p></div>
-            <div class="spec-cell"><h3>负责模块</h3><p>${data.role}</p></div>
-            <div class="spec-cell"><h3>研发测试周期</h3><p>${data.time}</p></div>
+            <div class="spec-cell"><h3>Project Type</h3><p>${data.type}</p></div>
+            <div class="spec-cell"><h3>Responsibilities</h3><p>${data.role}</p></div>
+            <div class="spec-cell"><h3>Timeline</h3><p>${data.time}</p></div>
           </div>
         `;
 
@@ -527,7 +521,7 @@
           if (sec.media.type === 'video') {
             htmlContent += `<video controls autoplay loop muted src="${sec.media.src}"></video>`;
           } else {
-            htmlContent += `<img src="${sec.media.src}" alt="关卡图示">`;
+            htmlContent += `<img src="${sec.media.src}" alt="Showcase Visual Asset">`;
           }
 
           htmlContent += `
@@ -546,7 +540,7 @@
       }
 
       /* ===================================================
-         3. 选项卡联动切换
+         3. Navigation Linkage / Tab Switching Controller
          =================================================== */
       items.forEach(item => {
         item.addEventListener('click', () => {
@@ -560,6 +554,7 @@
         });
       });
 
+      // Launch Initial View Configuration
       renderLongProjectPage('project1');
     });
   </script>
