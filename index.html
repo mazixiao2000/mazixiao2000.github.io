@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>马子潇 - 个人作品集</title>
   <style>
-    /* --- 1. 全局重置与工业灰调体系 --- */
+    /* --- 1. 全局重置与冷工业灰调体系 --- */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -75,7 +75,7 @@
       background-color: #1a1a1a;
     }
 
-    /* --- 3. 左侧选项卡栏（修改：原图回归 + 鼠标坐标跟随物理折射层） --- */
+    /* --- 3. 左侧选项卡栏（全新概念：极简暗色密铺 + 超维毛玻璃折射） --- */
     .left-panel {
       width: 25%;
       height: 100%;
@@ -83,143 +83,144 @@
       flex-direction: column; 
       overflow: visible; 
       border-right: 1px solid #262626;
-      background-color: #111111;
+      background-color: #111111; /* 极深底色，衬托毛玻璃 */
       z-index: 50;
+      transform-style: preserve-3d;
+      perspective: 1000px;
     }
     
     .project-item {
-      height: 16.666%; /* 6等分布局 */
+      height: 16.666%; /* 6个选项从上到下完美密铺 */
       width: 100%; 
       cursor: pointer;
       position: relative;
       border-bottom: 1px solid #1f1f1f;
-      background-color: #222222;
-      overflow: hidden; /* 裁剪边缘 */
-      transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+      background-color: #161616; /* 常态暗黑密铺底色 */
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 24px;
+      overflow: visible;
+      
+      /* 去程利落，回程带有轻微物理阻尼 */
+      transition: background-color 0.3s ease, transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1), box-shadow 0.3s ease;
     }
     .project-item:last-child {
       border-bottom: none;
     }
-
-    /* 常态下的基础背景图（带轻微暗化，保证文字清晰度） */
-    .base-bg-img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      filter: brightness(0.5); /* 淡淡显露原图 */
-      transition: filter 0.3s ease;
-    }
-    .project-item:hover .base-bg-img {
-      filter: brightness(0.6);
-    }
     
-    /* 常态下的底层文本标签 */
-    .item-text-label {
-      position: absolute;
-      width: 100%;
-      padding: 0 24px;
-      text-align: center;
-      z-index: 5;
+    /* 常态下的底层静态文本 */
+    .item-text-layer {
       font-size: 13.5px;
-      font-weight: 700;
-      color: rgba(255, 255, 255, 0.85);
+      font-weight: 600;
+      color: #888888; /* 未悬停时低调的工业灰 */
       letter-spacing: 1px;
-      line-height: 1.4;
-      text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
-      top: 50%;
-      transform: translateY(-50%);
-      pointer-events: none;
-    }
-
-    /* 【核心特效舱】：物理毛玻璃随动镜片 */
-    .dynamic-glass-lens {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      z-index: 10;
-      pointer-events: none;
-      opacity: 0;
-      
-      /* 通过 clip-path 动态裁剪出一个跟随鼠标的圆，这里初始化在左上角 */
-      clip-path: circle(0px at 0px 0px);
-      
-      /* 毛玻璃融合高级反光镀膜 */
-      background: rgba(255, 255, 255, 0.03);
-      box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.15);
-      
-      transition: opacity 0.25s ease;
-    }
-
-    /* 毛玻璃透镜内部克隆的放大且模糊的背景原图（折射核心） */
-    .lens-refracted-img {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      
-      /* 核心物理滤镜：模糊 + 提高折射饱和与对比 */
-      filter: blur(8px) brightness(0.8) saturate(140%) contrast(110%);
-      
-      /* 凸透镜效果：使镜片内部内容整体比基底放大 1.15 倍 */
-      transform: scale(1.15);
-      transform-origin: 0px 0px; /* 动态通过JS改写，实现高级光学视差错位 */
-    }
-
-    /* 透镜内同步放大的折射文字 */
-    .lens-refracted-text {
-      position: absolute;
-      width: 100%;
-      padding: 0 24px;
       text-align: center;
-      font-size: 15.5px; /* 光学折射放大感 */
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: 1.5px;
       line-height: 1.4;
-      text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
-      top: 50%;
-      transform: translateY(-50%) scale(1.1);
+      transition: color 0.3s ease, transform 0.3s ease;
     }
 
-    /* 悬停与激活时激活随动透镜 */
-    .project-item:hover .dynamic-glass-lens {
+    /* 【核心特效层】：悬停与激活时的物理毛玻璃折射舱 */
+    .glass-refractor {
+      position: absolute;
+      top: -2px;
+      left: -2px;
+      right: -2px;
+      bottom: -2px;
+      border-radius: 4px;
+      
+      /* 毛玻璃核心滤镜：模糊 + 强饱和度提升折射感 */
+      backdrop-filter: blur(16px) saturate(190%) contrast(120%);
+      -webkit-backdrop-filter: blur(16px) saturate(190%) contrast(120%);
+      
+      /* 晶体质感：带有反光边缘的微白渐变与微弱白微光 */
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0.01) 100%);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0 26px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.0);
+      
+      /* 初始隐藏 */
+      opacity: 0;
+      transform: scale(0.96) translateZ(0);
+      pointer-events: none;
+      z-index: 10;
+      
+      /* 动效控制 */
+      transition: opacity 0.25s ease, transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), border-color 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    /* 毛玻璃舱内部的折射高亮文本（带放大与微光） */
+    .glass-refractor span {
+      color: #ffffff;
+      font-size: 14.5px; /* 略微放大，模拟光线折射凸透镜效果 */
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-align: center;
+      line-height: 1.4;
+      text-shadow: 0 0 12px rgba(255, 255, 255, 0.2);
+      transform: scale(1);
+      transition: transform 0.25s ease, color 0.25s ease;
+    }
+
+    /* 悬停状态（Hover）：形成尺寸稍大、内部折射、反光的毛玻璃效果 */
+    .project-item:hover {
+      z-index: 60;
+    }
+    .project-item:hover .glass-refractor {
       opacity: 1;
+      /* 尺寸稍大（scale 1.04）并向前突起，形成立体折射层 */
+      transform: scale(1.04) translateZ(20px);
+      border-color: rgba(255, 85, 0, 0.4); /* 边缘带有一层淡淡的橙色反光折射 */
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    }
+    .project-item:hover .item-text-layer {
+      color: #ffffff;
+      transform: scale(1.04);
     }
 
-    /* 【确定选中状态】：永久锁在选项卡中央，并产生耀眼的橙色边缘与橙字 */
+    /* 【核心修改】：当确定/激活某个选项时（Active），永久停留在超维毛玻璃状态上 */
     .project-item.active {
-      transform: scale(1.02);
-      box-shadow: 5px 5px 20px rgba(0,0,0,0.4);
-      border: 1px solid #ff5500;
+      background-color: #1e1e1e; /* 激活项底座微亮 */
+      z-index: 55;
     }
-    .project-item.active .dynamic-glass-lens {
+    .project-item.active .glass-refractor {
       opacity: 1;
-      /* 点击后不跟随鼠标，通过 JS 的 style 强制拉回中央并扩展成方块或大圆，这里由JS接管 */
+      transform: scale(1.04) translateZ(15px); /* 稳固停留在稍大且升起的折射形态 */
+      background: linear-gradient(135deg, rgba(255, 85, 0, 0.12) 0%, rgba(255, 255, 255, 0.02) 100%); /* 融入微弱的核心橙光折射 */
+      border: 1px solid rgba(ff, 55, 0, 0.7);
+      border-color: #ff5500; /* 标志性工业橙外边框锁定 */
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(255, 85, 0, 0.05);
     }
-    .project-item.active .lens-refracted-text {
-      color: #ff5500; /* 折射字变核心工业橙 */
+    .project-item.active .glass-refractor span {
+      color: #ff5500; /* 激活项文本变为核心橙色，极为耀眼 */
       text-shadow: 0 0 15px rgba(255, 85, 0, 0.4);
+    }
+    .project-item.active .item-text-layer {
+      opacity: 0; /* 激活后底层灰字完全让位给毛玻璃舱 */
     }
 
     /* --- 4. 右侧展示区 --- */
     .right-panel {
       width: 75%;
       height: 100%;
-      background-color: #222222; 
+      background-color: #222222; /* 调深右侧背景，加强整体统一的高级暗黑感 */
       overflow-y: auto; 
       overflow-x: hidden;
       scroll-behavior: smooth;
     }
 
-    .right-panel::-webkit-scrollbar { width: 0px; background: transparent; }
-    .right-panel { -ms-overflow-style: none; scrollbar-width: none; }
+    .right-panel::-webkit-scrollbar {
+      width: 0px;
+      background: transparent;
+    }
+    .right-panel {
+      -ms-overflow-style: none;  
+      scrollbar-width: none;  
+    }
 
     .detail-content-wrapper {
       max-width: 880px;
@@ -229,10 +230,24 @@
       transition: opacity 0.25s ease;
     }
     
-    .content-fade { opacity: 0; }
+    .content-fade {
+      opacity: 0;
+    }
 
-    .project-title-area h2 { font-size: 32px; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 8px; color: #ffffff; }
-    .project-title-area .sub-tag { font-size: 12px; color: #aaaaaa; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 35px; }
+    .project-title-area h2 {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+      color: #ffffff; 
+    }
+    .project-title-area .sub-tag {
+      font-size: 12px;
+      color: #aaaaaa;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 35px;
+    }
 
     .spec-table-mini {
       display: grid;
@@ -243,18 +258,63 @@
       padding: 22px;
       border: 1px solid #333333;
     }
-    .spec-cell h3 { font-size: 11px; color: #ff5500; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
-    .spec-cell p { font-size: 13.5px; color: #eeeeee; font-weight: 500; }
+    .spec-cell h3 {
+      font-size: 11px;
+      color: #ff5500; 
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .spec-cell p {
+      font-size: 13.5px;
+      color: #eeeeee;
+      font-weight: 500;
+    }
 
-    .detail-section { margin-bottom: 65px; }
-    .detail-section h4 { font-size: 18px; font-weight: 700; margin-bottom: 18px; letter-spacing: 0.5px; border-left: 4px solid #ff5500; padding-left: 12px; color: #ffffff; }
-    .detail-section p { font-size: 14.5px; line-height: 1.8; color: #cccccc; margin-bottom: 25px; text-align: justify; }
+    .detail-section {
+      margin-bottom: 65px;
+    }
+    .detail-section h4 {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 18px;
+      letter-spacing: 0.5px;
+      border-left: 4px solid #ff5500; 
+      padding-left: 12px;
+      color: #ffffff;
+    }
+    .detail-section p {
+      font-size: 14.5px;
+      line-height: 1.8;
+      color: #cccccc; 
+      margin-bottom: 25px;
+      text-align: justify;
+    }
     
-    .highlight-text { color: #ff5500; font-weight: 600; }
+    .highlight-text {
+      color: #ff5500;
+      font-weight: 600;
+    }
 
-    .showcase-block { width: 100%; border: 1px solid #333333; background: #181818; margin-bottom: 12px; overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.3); }
-    .showcase-block img, .showcase-block video { width: 100%; display: block; height: auto; }
-    .showcase-caption { font-size: 11.5px; color: #888888; text-align: center; margin-bottom: 30px; }
+    .showcase-block {
+      width: 100%;
+      border: 1px solid #333333;
+      background: #181818;
+      margin-bottom: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+    }
+    .showcase-block img, .showcase-block video {
+      width: 100%;
+      display: block;
+      height: auto;
+    }
+    .showcase-caption {
+      font-size: 11.5px;
+      color: #888888;
+      text-align: center;
+      margin-bottom: 30px;
+    }
   </style>
 </head>
 <body>
@@ -274,52 +334,28 @@
     
     <div class="left-panel" id="leftPanel">
       <div class="project-item active" data-id="project1">
-        <img class="base-bg-img" src="https://picsum.photos/600/400?random=11" alt="原图">
-        <div class="item-text-label">星空关卡设计</div>
-        <div class="dynamic-glass-lens">
-          <img class="lens-refracted-img" src="https://picsum.photos/600/400?random=11">
-          <div class="lens-refracted-text">星空关卡设计</div>
-        </div>
+        <div class="item-text-layer">星空关卡设计</div>
+        <div class="glass-refractor"><span>星空关卡设计</span></div>
       </div>
       <div class="project-item" data-id="project2">
-        <img class="base-bg-img" src="https://picsum.photos/600/400?random=12" alt="原图">
-        <div class="item-text-label">半条命关卡设计</div>
-        <div class="dynamic-glass-lens">
-          <img class="lens-refracted-img" src="https://picsum.photos/600/400?random=12">
-          <div class="lens-refracted-text">半条命关卡设计</div>
-        </div>
+        <div class="item-text-layer">半条命关卡设计</div>
+        <div class="glass-refractor"><span>半条命关卡设计</span></div>
       </div>
       <div class="project-item" data-id="project3">
-        <img class="base-bg-img" src="https://picsum.photos/600/400?random=13" alt="原图">
-        <div class="item-text-label">UE5多人竞速游戏HamsterBallin‘</div>
-        <div class="dynamic-glass-lens">
-          <img class="lens-refracted-img" src="https://picsum.photos/600/400?random=13">
-          <div class="lens-refracted-text">UE5多人竞速游戏HamsterBallin‘</div>
-        </div>
+        <div class="item-text-layer">UE5多人竞速游戏HamsterBallin‘</div>
+        <div class="glass-refractor"><span>UE5多人竞速游戏HamsterBallin‘</span></div>
       </div>
       <div class="project-item" data-id="project4">
-        <img class="base-bg-img" src="https://picsum.photos/600/400?random=14" alt="原图">
-        <div class="item-text-label">Unity2d平台跳跃游戏FLING</div>
-        <div class="dynamic-glass-lens">
-          <img class="lens-refracted-img" src="https://picsum.photos/600/400?random=14">
-          <div class="lens-refracted-text">Unity2d平台跳跃游戏FLING</div>
-        </div>
+        <div class="item-text-layer">Unity2d平台跳跃游戏FLING</div>
+        <div class="glass-refractor"><span>Unity2d平台跳跃游戏FLING</span></div>
       </div>
       <div class="project-item" data-id="project5">
-        <img class="base-bg-img" src="https://picsum.photos/600/400?random=15" alt="原图">
-        <div class="item-text-label">其他项目</div>
-        <div class="dynamic-glass-lens">
-          <img class="lens-refracted-img" src="https://picsum.photos/600/400?random=15">
-          <div class="lens-refracted-text">其他项目</div>
-        </div>
+        <div class="item-text-layer">其他项目</div>
+        <div class="glass-refractor"><span>其他项目</span></div>
       </div>
       <div class="project-item" data-id="project6">
-        <img class="base-bg-img" src="https://picsum.photos/600/400?random=16" alt="原图">
-        <div class="item-text-label">关于我</div>
-        <div class="dynamic-glass-lens">
-          <img class="lens-refracted-img" src="https://picsum.photos/600/400?random=16">
-          <div class="lens-refracted-text">关于我</div>
-        </div>
+        <div class="item-text-layer">关于我</div>
+        <div class="glass-refractor"><span>关于我</span></div>
       </div>
     </div>
 
@@ -331,6 +367,7 @@
   </div>
 
   <script>
+    // 关卡数据库（保持完整的6项映射结构）
     const portfolioDatabase = {
       project1: {
         title: "星空关卡设计 / 开放宇宙前哨站动线",
@@ -430,62 +467,32 @@
       const wrapper = document.getElementById('detailContentWrapper');
 
       /* ===================================================
-         【核心物理计算】：实时高斯毛玻璃滤镜圈——解算指针坐标 & 光学视差
+         1. 3D 物理毛玻璃折射微偏角（微小的视觉折射倾斜感）
          =================================================== */
-      function updateLensPosition(e, item) {
-        // 如果当前选项已被激活，强制将透镜锚定在几何中心，呈现完美对称锁死效果
-        if (item.classList.contains('active')) {
-          const rect = item.getBoundingClientRect();
-          const cx = rect.width / 2;
-          const cy = rect.height / 2;
-          const lens = item.querySelector('.dynamic-glass-lens');
-          const refractedImg = item.querySelector('.lens-refracted-img');
-          
-          lens.style.clipPath = `circle(120px at ${cx}px ${cy}px)`; 
-          refractedImg.style.transformOrigin = `${cx}px ${cy}px`;
-          return;
-        }
-
-        const rect = item.getBoundingClientRect();
-        const x = e.clientX - rect.left; // 鼠标在卡片内的 X 轴物理坐标
-        const y = e.clientY - rect.top;  // 鼠标在卡片内的 Y 轴物理坐标
-        
-        const lens = item.querySelector('.dynamic-glass-lens');
-        const refractedImg = item.querySelector('.lens-refracted-img');
-
-        // 1. 动态生成局部圆形透镜裁剪面，大小设为 64px 保证高密度的精致感
-        lens.style.clipPath = `circle(64px at ${x}px ${y}px)`;
-        
-        // 2. 光学视差公式：通过改变变形基点（transform-origin），使内部放大图产生对抗鼠标的微位移，实现立体玻璃折射效果
-        refractedImg.style.transformOrigin = `${x}px ${y}px`;
-      }
-
       items.forEach(item => {
-        item.addEventListener('mousemove', (e) => updateLensPosition(e, item));
+        const glass = item.querySelector('.glass-refractor');
+        const textInside = glass.querySelector('span');
         
-        // 鼠标移出未激活项时重置
+        item.addEventListener('mousemove', (e) => {
+          const rect = item.getBoundingClientRect();
+          const x = e.clientX - rect.left;
+          const xc = x / rect.width - 0.5; // 水平偏离量
+          
+          // 悬停或者激活时，微量移动内部文本实现“折射视差错位”
+          requestAnimationFrame(() => {
+            textInside.style.transform = `translateX(${xc * 8}px) scale(1.02)`;
+          });
+        });
+        
         item.addEventListener('mouseleave', () => {
-          if (!item.classList.contains('active')) {
-            const lens = item.querySelector('.dynamic-glass-lens');
-            lens.style.clipPath = `circle(0px at 0px 0px)`;
-          }
+          requestAnimationFrame(() => {
+            textInside.style.transform = `translateX(0px) scale(1)`;
+          });
         });
       });
 
-      // 初始化激活项位置（居中锁死）
-      const initialActive = document.querySelector('.project-item.active');
-      if (initialActive) {
-        setTimeout(() => {
-          const rect = initialActive.getBoundingClientRect();
-          const lens = initialActive.querySelector('.dynamic-glass-lens');
-          const refractedImg = initialActive.querySelector('.lens-refracted-img');
-          lens.style.clipPath = `circle(150px at ${rect.width/2}px ${rect.height/2}px)`;
-          refractedImg.style.transformOrigin = `${rect.width/2}px ${rect.height/2}px`;
-        }, 100);
-      }
-
       /* ===================================================
-         2. 右侧数据生成引擎与联动逻辑
+         2. 长轴多组件内容组装
          =================================================== */
       function renderLongProjectPage(projectId) {
         const data = portfolioDatabase[projectId];
@@ -496,6 +503,7 @@
             <h2>${data.title}</h2>
             <div class="sub-tag">${data.tag}</div>
           </div>
+          
           <div class="spec-table-mini">
             <div class="spec-cell"><h3>项目类型</h3><p>${data.type}</p></div>
             <div class="spec-cell"><h3>负责模块</h3><p>${data.role}</p></div>
@@ -509,7 +517,15 @@
               <h4>${sec.heading}</h4>
               <p>${sec.text}</p>
               <div class="showcase-block">
-                <img src="${sec.media.src}" alt="关卡图示">
+          `;
+
+          if (sec.media.type === 'video') {
+            htmlContent += `<video controls autoplay loop muted src="${sec.media.src}"></video>`;
+          } else {
+            htmlContent += `<img src="${sec.media.src}" alt="关卡图示">`;
+          }
+
+          htmlContent += `
               </div>
               <div class="showcase-caption">${sec.caption}</div>
             </div>
@@ -524,24 +540,15 @@
         }, 120);
       }
 
+      /* ===================================================
+         3. 选项卡联动切换
+         =================================================== */
       items.forEach(item => {
         item.addEventListener('click', () => {
           if (item.classList.contains('active')) return;
 
-          // 卸任前激活项，并将其圆圈隐去
-          items.forEach(i => {
-            i.classList.remove('active');
-            i.querySelector('.dynamic-glass-lens').style.clipPath = `circle(0px at 0px 0px)`;
-          });
-          
+          items.forEach(i => i.classList.remove('active'));
           item.classList.add('active');
-          
-          // 将当前激活项的毛玻璃透镜永久全幅锁死在卡片中央
-          const rect = item.getBoundingClientRect();
-          const lens = item.querySelector('.dynamic-glass-lens');
-          const refractedImg = item.querySelector('.lens-refracted-img');
-          lens.style.clipPath = `circle(150px at ${rect.width/2}px ${rect.height/2}px)`;
-          refractedImg.style.transformOrigin = `${rect.width/2}px ${rect.height/2}px`;
 
           const projectId = item.getAttribute('data-id');
           renderLongProjectPage(projectId);
