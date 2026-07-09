@@ -75,7 +75,7 @@
       background-color: #2a2a2a;
     }
 
-    /* --- 3. 左侧选项卡栏（物理阴影联动 + 区分去回程动效） --- */
+    /* --- 3. 左侧选项卡栏 --- */
     .left-panel {
       width: 25%;
       height: 100%;
@@ -83,15 +83,15 @@
       flex-direction: column; 
       overflow: visible; 
       border-right: 1px solid #1a1a1a;
-      background-color: #1a1a1a; /* 更暗底色阻断穿帮 */
+      background-color: #1a1a1a; 
       z-index: 50;
       perspective: 1200px; 
       box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3); 
     }
     
     .project-item {
-      height: 20%; 
-      /* 【核心修改1】：微调卡片宽度为 108%，只多出一点点供滑出 */
+      /* 【修改】：6个选项卡平分高度 100% / 6 = 16.66% */
+      height: 16.66%; 
       width: 108%; 
       cursor: pointer;
       position: relative;
@@ -100,26 +100,21 @@
       overflow: visible;
       opacity: 1; 
       
-      /* 【核心修改2】：常态下隐藏多余的 7.4% 宽度在左侧边缘外 */
       transform: translateX(-7.4%);
-      
-      /* 【核心修改3】：整体移动时携带阴影，防止阴影脱节 */
       box-shadow: 0 0 0 rgba(0, 0, 0, 0);
       
-      /* 【默认/退回动画】：当鼠标移开滑回时，使用带有物理超调的回弹曲线 */
+      /* 退回动画 */
       transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2), box-shadow 0.3s ease;
     }
     .project-item:last-child {
       border-bottom: none;
     }
     
-    /* 【核心修改4】：鼠标悬停划出时，采用纯粹的线性平滑减速（不要弹性），且同步增强跟随阴影 */
+    /* 鼠标悬停划出 */
     .project-item:hover {
       transform: translateX(0);
       z-index: 60; 
-      box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5); /* 阴影随卡片一起向右移动 */
-      
-      /* 覆盖过渡：滑出那下只需顺滑（无回弹特效） */
+      box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5); 
       transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s cubic-bezier(0.25, 1, 0.5, 1);
     }
     .project-item.active {
@@ -137,7 +132,7 @@
       transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border 0.25s ease;
     }
     
-    /* 激活或悬停状态下的高亮橙色描边 */
+    /* 高亮橙色描边 */
     .project-item:hover .project-item-card, 
     .project-item.active .project-item-card {
       border: 2px solid #ff5500; 
@@ -151,34 +146,47 @@
       filter: none; 
     }
 
-    /* 文本遮罩控制层 */
+    /* 【核心修改1】：文本遮罩控制层 —— 未选中也显示标题，且图片不全变暗 */
     .item-hover-overlay {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.8); 
+      /* 默认状态：轻微的渐变底衬，保证白色文字在任何图片上都清晰可见，同时图片完全不失真变暗 */
+      background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.2) 100%); 
       display: flex;
       justify-content: center;
       align-items: center;
-      padding: 0 20px;
+      padding: 0 15px;
       text-align: center;
-      opacity: 0; 
+      opacity: 1; /* 始终保持可见 */
       pointer-events: none;
-      transition: opacity 0.25s ease;
+      transition: background 0.25s ease;
     }
     
+    /* 当悬停或激活时，可以适当对背景做加深响应，如不需要可以删掉此段 */
     .project-item:hover .item-hover-overlay,
     .project-item.active .item-hover-overlay {
-      opacity: 1; 
+      background: rgba(0, 0, 0, 0.65); 
     }
     
     .item-hover-overlay span {
-      color: #ff5500; 
+      color: #ffffff; /* 默认状态下文字为白色以增强可读性 */
       font-size: 13px;
       font-weight: 600;
       letter-spacing: 1px;
+      line-height: 1.4;
+      /* 文本阴影增加极端复杂背景下的可读性 */
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5); 
+      transition: color 0.25s ease;
+    }
+
+    /* 悬停或选中状态下，文字变为标志性橙色 */
+    .project-item:hover .item-hover-overlay span,
+    .project-item.active .item-hover-overlay span {
+      color: #ff5500;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
     }
 
     /* --- 4. 右侧展示区 --- */
@@ -213,7 +221,7 @@
       opacity: 0;
     }
 
-    /* 关卡大标题与参数表 */
+    /* 大标题与参数表 */
     .project-title-area h2 {
       font-size: 32px;
       font-weight: 700;
@@ -317,142 +325,138 @@
     <div class="left-panel" id="leftPanel">
       <div class="project-item active" data-id="project1">
         <div class="project-item-card">
-          <img src="https://picsum.photos/600/400?random=11" alt="项目一封面">
-          <div class="item-hover-overlay"><span>01 / 核心关卡动线规划</span></div>
+          <img src="https://picsum.photos/600/400?random=11" alt="星空关卡设计">
+          <div class="item-hover-overlay"><span>星空关卡设计</span></div>
         </div>
       </div>
       <div class="project-item" data-id="project2">
         <div class="project-item-card">
-          <img src="https://picsum.photos/600/400?random=12" alt="项目二封面">
-          <div class="item-hover-overlay"><span>02 / 隐性光影引导机制</span></div>
+          <img src="https://picsum.photos/600/400?random=12" alt="半条命2关卡设计">
+          <div class="item-hover-overlay"><span>半条命2关卡设计</span></div>
         </div>
       </div>
       <div class="project-item" data-id="project3">
         <div class="project-item-card">
-          <img src="https://picsum.photos/600/400?random=13" alt="项目三封面">
-          <div class="item-hover-overlay"><span>03 / 动态环境与复合解谜</span></div>
+          <img src="https://picsum.photos/600/400?random=13" alt="HamsterBallin">
+          <div class="item-hover-overlay"><span>UE5 3D多人竞速<br>HamsterBallin‘</span></div>
         </div>
       </div>
       <div class="project-item" data-id="project4">
         <div class="project-item-card">
-          <img src="https://picsum.photos/600/400?random=14" alt="项目四封面">
-          <div class="item-hover-overlay"><span>04 / 沙盒遭遇战心流曲线</span></div>
+          <img src="https://picsum.photos/600/400?random=14" alt="FLING">
+          <div class="item-hover-overlay"><span>Unity 2D平台跳跃<br>FLING</span></div>
         </div>
       </div>
       <div class="project-item" data-id="project5">
         <div class="project-item-card">
-          <img src="https://picsum.photos/600/400?random=15" alt="项目五封面">
-          <div class="item-hover-overlay"><span>05 / 垂直高低差移动验证</span></div>
+          <img src="https://picsum.photos/600/400?random=15" alt="更多项目">
+          <div class="item-hover-overlay"><span>更多项目</span></div>
+        </div>
+      </div>
+      <div class="project-item" data-id="project6">
+        <div class="project-item-card">
+          <img src="https://picsum.photos/600/400?random=16" alt="关于我">
+          <div class="item-hover-overlay"><span>关于我</span></div>
         </div>
       </div>
     </div>
 
     <div class="right-panel" id="rightPanel">
-      <div class="detail-content-wrapper" id="detailContentWrapper">
-        </div>
+      <div class="detail-content-wrapper" id="detailContentWrapper"></div>
     </div>
 
   </div>
 
   <script>
-    // 关卡数据库
+    // 【核心修改2】：配套更新全新的 6 个关卡数据库内容
     const portfolioDatabase = {
       project1: {
-        title: "01 / 核心关卡动线规划与多路径拆解",
-        tag: "Level Design Case Study / Unreal Engine",
-        type: "3D 动作冒险沙盒",
-        role: "白模搭建 / 心流曲线 / 视线阻断",
+        title: "星空关卡设计 - 开放宇宙资源站探索",
+        tag: "Level Design Case Study / Starfield Theme",
+        type: "3D 开放世界 RPG 关卡",
+        role: "动线流线设计 / 资源点规划 / 氛围营造",
         time: "3 Weeks",
         sections: [
           {
-            heading: "1. 关卡核心设计意图与心流包络（Mission Intent）",
-            text: "在此关卡设计中，核心目标是在高密度垂直空间中创造非线性的探索体验。我们拒绝了传统大世界平铺直叙的铺设，转而采用高度落差限制玩家早期的视线视野。通过强迫其使用侧向勾爪动线，平滑战斗遭遇前的紧张感，并为核心硬核潜行玩家留出了无伤绕过主战区的<span class='highlight-text'>边缘盲道</span>。",
+            heading: "1. 关卡核心设计意图",
+            text: "本关卡专注于模拟低重力地外行星环境。玩家需要利用宇航喷气背包在废弃的采矿枢纽中进行三维纵向探索，通过<span class='highlight-text'>视线阻断</span>与隐藏通风管道提供多样化的潜入路径。",
             media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=101' },
-            caption: "▲ 图 1.1：主干道动线与视线遮挡体（Blockout）空间结构推演"
-          },
-          {
-            heading: "2. 隐性地标锚定法与三维视线引导（Landmark & Guidance）",
-            text: "为了让玩家在长达 15 分钟的无 UI 沉浸状态下不产生迷失感，本关卡重度利用了“三维地标法”。无论玩家在战斗中跌落到哪一层地下裂缝，只要抬起视角，都能透过精心计算的岩石错位裂隙，直观看到核心高塔的顶端微光。这种<span class='highlight-text'>隐性视线牵引</span>在 3D 复杂黑箱空间中提供了极为稳固的心理锚点。",
-            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=102' },
-            caption: "▲ 图 1.2：灰模阶段视界载入与明暗对比度（High Contrast）测试"
-          },
-          {
-            heading: "3. 物理环境交互与闭环逻辑验证",
-            text: "关卡中段引入了一组具有连锁反应的复合几何机关。玩家需要通过重力箱体触发底层泄洪闸，进而利用浮力升起通路。以下视频展示了白模测试阶段针对触发器边界、物理状态机衔接流利度的<span class='highlight-text'>手感极限测试</span>。",
-            media: { type: 'video', src: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-            caption: "▲ 演示 1.3：虚幻引擎环境白模触发 logic 与物理碰撞闭环演示"
-          },
-          {
-            heading: "4. 战斗遭遇战（Encounter）空间战术包络",
-            text: "遭遇战区域采用了经典的“下沉式斗兽场”与“高台狙击位”的复合布局。敌方 AI 刷新点被隐藏在视野盲区的双层回廊后。通过提供 3 处可破坏的悬挂重物环境物，引导玩家形成<span class='highlight-text'>‘观察-规划-潜入-爆发战斗’</span>的经典战术循环，避免陷入纯粹的消耗战。",
-            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=103' },
-            caption: "▲ 图 1.4：遭遇战交火线（Fire-line）与掩体密度分布拓扑图"
-          },
-          {
-            heading: "5. 可迭代性优化盲测数据（Post-Mortem）",
-            text: "经过玩家的盲测数据反馈，原先第三阶段的滑索动线因倾角过陡，导致玩家容易产生视觉眩晕。团队随后在迭代中将滑索倾角放缓，并在动线中点增设了一个承托式的悬空木质脚手架作为<span class='highlight-text'>手感缓释区</span>，使得整体心流体验回归预期黄金线。",
-            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=104' },
-            caption: "▲ 图 1.5：盲测热力图数据（Heatmap）与玩家挫败感峰值区间修正对比"
+            caption: "▲ 图 1.1：低重力纵向探索动线白模推演"
           }
         ]
       },
       project2: {
-        title: "02 / 隐性光影引导机制与AI视线包络",
-        tag: "Lighting & Guidance / Frostbite Engine",
-        type: "线性写实潜行谍战",
-        role: "光照关卡规划 / AI视线控制",
+        title: "半条命2关卡设计 - 17号城工业区突围",
+        tag: "Classic Level Design / Source Engine Philosophy",
+        type: "线性第一人称射击",
+        role: "物理机关解谜 / 战斗节奏把控",
         time: "2 Weeks",
         sections: [
           {
-            heading: "1. Cold-Warm 光源引导模型机制",
-            text: "利用高对比度冷暖光源的自然交替与几何形态暗示，隐性引导玩家在无UI及全黑匿踪状态下，自然直觉地发现潜行暗道与安全屋区域。",
+            heading: "1. 经典重力枪物理交互设计",
+            text: "秉承《Half-Life 2》的隐性教学理念，关卡前半段通过一处闭环水箱解谜教导玩家利用浮力物搭建桥梁，随后在后半段无缝引入联合军遭遇战，将物理交互转化为<span class='highlight-text'>战术掩体破坏</span>。",
             media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=201' },
-            caption: "▲ 图 2.1：高照度强对比下的隐蔽动线视域分析"
+            caption: "▲ 图 2.1：基于物理杠杆与浮力装置的解谜闭环"
           }
         ]
       },
       project3: {
-        title: "03 / 动态环境与复合解谜机制",
-        tag: "Puzzle Mechanics / Unity 3D",
-        type: "第一人称空间解谜",
-        role: "关卡触发器逻辑 / 地形状态机",
+        title: "UE5 3D多人竞速游戏 - HamsterBallin‘",
+        tag: "Gameplay & Level Mechanics / Unreal Engine 5",
+        type: "3D 多人联机竞速",
+        role: "高动态曲面设计 / 碰撞体边界优化 / 速度感调校",
         time: "4 Weeks",
         sections: [
           {
-            heading: "1. 基于地形改变的空间闭环设计",
-            text: "基于虚幻引擎重构的动态地形解锁与逻辑闭环机制。多维度呈现测试白模阶段的动画演绎，包含触发 logic 条件分支以及多段机关运作细节。",
+            heading: "1. 高动态仓鼠球速度包络曲线",
+            text: "核心挑战在于在极端高时速下保持玩家对方向的控制力。关卡重度依赖跑道边缘的隐性弧度分流，利用物理表面材质的摩擦力差异，在弯道处为硬核玩家提供<span class='highlight-text'>‘极限切线切入点’</span>。",
             media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=302' },
-            caption: "▲ 图 3.1：地形矩阵变动下的路径连接拓扑图"
+            caption: "▲ 图 3.1：高流速曲面赛道与触发边界拓扑分析"
           }
         ]
       },
       project4: {
-        title: "04 / 沙盒遭遇战心流曲线",
-        tag: "Combat Encounter / CryEngine",
-        type: "开放世界多人射击",
-        role: "沙盒遭遇战规划 / 掩体布局",
+        title: "Unity 2D平台跳跃游戏 - FLING",
+        tag: "2D Precision Platformer / Unity 2D",
+        type: "硬核精密跳跃",
+        role: "关卡配置 / 动态判定校准",
         time: "3 Weeks",
         sections: [
           {
-            heading: "1. 空间掩体错落与敌方 AI 压制曲线",
-            text: "基于动态心流缓释理论设计的敌方 AI 刷新与战术覆盖包络。通过空间掩体的高低落差分布，保证战斗高潮期与资源搜集舒缓期的优雅交替。",
+            heading: "1. 弹性机制与手感缓释区",
+            text: "FLING 的核心乐趣在于抛射带来的物理惯性。关卡设计围绕‘起跳-空中修正-精准落地’展开，在容错率极低的钉刺阵列中，精心预留了可反复微调手感的<span class='highlight-text'>平台缓冲区</span>。",
             media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=401' },
-            caption: "▲ 图 4.1：掩体视线死角与射击交火线空间包络分析"
+            caption: "▲ 图 4.1：抛物线轨迹判定与关卡挫败感峰值控制图"
           }
         ]
       },
       project5: {
-        title: "05 / 垂直高低差沙盒移动验证",
-        tag: "Movement Mechanics / Unreal Engine 5",
-        type: "开放立体大世界赛博风",
-        role: "机制手感验证 / 边界极限测试",
-        time: "2 Weeks",
+        title: "更多项目组件与独立原型沉淀",
+        tag: "Prototypes & Game Jam Works",
+        type: "多类型玩法验证",
+        role: "快速原型搭建 / 核心玩法抽象",
+        time: "Ongoing",
         sections: [
           {
-            heading: "1. 高机动三维运动学关卡推演",
-            text: "快速推演并验证大型开放立体城市中，钩爪机制、垂直滑索与滑翔翼系统在不同建筑密度、高差倾角下的移动速率、惯性衔接与操作爽感。",
+            heading: "1. Game Jam 极限原型创意孵化",
+            text: "这里收录了多款在 48 小时内孵化的关卡机制原型，涵盖了空间重力反转、多维度视差解谜等前沿探索，展现了快速敏捷迭代的工业开发能力。",
             media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=501' },
-            caption: "▲ 图 5.1：极限速度移动下关卡视差载入（Stream Loading）边界红线测试"
+            caption: "▲ 图 5.1：机制验证阶段的多构型白模归档"
+          }
+        ]
+      },
+      project6: {
+        title: "关于我 / 教育背景与设计哲学",
+        tag: "About Me / Resume & Design Philosophy",
+        type: "个人档案",
+        role: "关卡策划 / 游戏设计师",
+        time: "Full-Time",
+        sections: [
+          {
+            heading: "1. 设计哲学：用空间讲述属于玩家的故事",
+            text: "我认为关卡策划是‘游戏世界沉默的导演’。优秀的关卡不应通过频繁的 UI 或台词强迫玩家，而是通过<span class='highlight-text'>光影、几何结构、AI 压制感</span>去激发玩家本能的探索欲与战斗心流。期待与优秀的团队一起构建令人沉浸的虚拟世界。",
+            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=601' },
+            caption: "▲ 致力于打磨极致的心流曲线与黑箱关卡艺术"
           }
         ]
       }
@@ -464,9 +468,9 @@
       const wrapper = document.getElementById('detailContentWrapper');
 
       /* ===================================================
-         1. 3D 卡牌微倾斜物理引擎（与外层位移解耦，纯粹处理倾斜）
+         1. 3D 卡牌微倾斜物理引擎（解耦外层位移，纯粹处理倾斜）
          =================================================== */
-      function applyTiltEffect(itemElement, cardElement, maxRotate = 24, scale = 1.05) {
+      function applyTiltEffect(itemElement, cardElement, maxRotate = 35, scale = 1.05) {
         itemElement.addEventListener('mousemove', (e) => {
           const rect = itemElement.getBoundingClientRect();
           const x = e.clientX - rect.left;
@@ -488,7 +492,8 @@
       
       items.forEach(item => {
         const card = item.querySelector('.project-item-card');
-        applyTiltEffect(item, card, 24, 1.05);
+        // 【核心修改3】：将 maxRotate 参数从原先的 24 提高到 35 度，悬停扭曲感更足
+        applyTiltEffect(item, card, 35, 1.05); 
       });
 
       /* ===================================================
