@@ -75,7 +75,7 @@
       background-color: #2a2a2a;
     }
 
-    /* --- 3. 左侧选项卡栏（支持整体橙色块激活 + 常态文字可见） --- */
+    /* --- 3. 左侧选项卡栏（修改：改为 6 等分，高雅灰底橙字） --- */
     .left-panel {
       width: 25%;
       height: 100%;
@@ -90,7 +90,7 @@
     }
     
     .project-item {
-      height: 20%; 
+      height: 16.666%; /* 修改：6个选项卡平分 100% 高度 */
       width: 108%; 
       cursor: pointer;
       position: relative;
@@ -117,13 +117,30 @@
       transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s cubic-bezier(0.25, 1, 0.5, 1);
     }
     
-    /* 【核心修改】：激活状态（Active）长期保持滑出，禁止回弹，且背景变纯橙色 */
+    /* 【核心修改1】：激活状态（Active）底色改为与右侧呼应的深灰（#333333），不再刺眼 */
     .project-item.active {
-      transform: translateX(0) !important; /* 强制保持滑出位置 */
+      transform: translateX(0) !important; 
       z-index: 55; 
-      background-color: #ff5500; /* 卡片底色完全变为工业亮橙 */
+      background-color: #333333; 
       box-shadow: 8px 8px 25px rgba(0, 0, 0, 0.4);
       transition: background-color 0.3s ease;
+    }
+    
+    /* 【核心修改2】：为激活状态左侧添加一个亮橙色实体UI指示条 */
+    .project-item::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 7.4%; /* 刚好贴在露出界面的最左侧 */
+      width: 6px;
+      height: 100%;
+      background-color: #ff5500;
+      z-index: 70;
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+    .project-item.active::before {
+      opacity: 1;
     }
     
     /* 3D 卡牌联动容器 */
@@ -138,7 +155,6 @@
       transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border 0.25s ease;
     }
     
-    /* 悬停非激活项时，保持原有的橙色边框反馈 */
     .project-item:hover:not(.active) .project-item-card {
       border: 2px solid #ff5500; 
     }
@@ -148,24 +164,23 @@
       height: 100%;
       object-fit: cover; 
       display: block;
-      filter: none; 
       opacity: 1;
       transition: opacity 0.3s ease;
     }
     
-    /* 【核心修改】：激活状态下，隐藏卡片原本的背景原图，从而纯粹暴露出外层容器的纯橙色块 */
+    /* 激活状态下，淡出隐藏原图，使其平滑融入深灰底色 */
     .project-item.active img {
       opacity: 0;
     }
 
-    /* 【核心修改】：文本遮罩控制层 —— 改为全透明，常态可见，不遮挡原图亮度 */
+    /* 文本遮罩层 */
     .item-hover-overlay {
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: transparent; /* 取消原先的黑色半透明罩 */
+      background: transparent; 
       display: flex;
       justify-content: center;
       align-items: center;
@@ -174,27 +189,24 @@
       pointer-events: none;
     }
     
-    /* 【核心修改】：文本样式精调 */
     .item-hover-overlay span {
-      color: #ffffff; /* 常态下文本为纯白 */
+      color: #ffffff; /* 常态文字：纯白可见 */
       font-size: 13px;
       font-weight: 700;
       letter-spacing: 1px;
       line-height: 1.4;
-      /* 增加轻微文字阴影，保证文字在各种浅色原图背景上依然清晰可读 */
       text-shadow: 0 2px 4px rgba(0, 0, 0, 0.9), 0 0 10px rgba(0, 0, 0, 0.5); 
       transition: color 0.3s ease, text-shadow 0.3s ease;
     }
     
-    /* 悬停未激活卡片时，文字可做轻微亮橙色变色点缀 */
     .project-item:hover:not(.active) .item-hover-overlay span {
       color: #ff5500;
       text-shadow: 0 2px 8px rgba(0, 0, 0, 1);
     }
     
-    /* 【核心修改】：当卡片被激活后，文字变成纯黑色，并且去掉阴影以融于橙色块背景 */
+    /* 【核心修改3】：当卡片激活后，文字变成高亮橙色（#ff5500），无阴影，干净利落 */
     .project-item.active .item-hover-overlay span {
-      color: #000000; 
+      color: #ff5500; 
       text-shadow: none; 
     }
 
@@ -330,32 +342,38 @@
     <div class="left-panel" id="leftPanel">
       <div class="project-item active" data-id="project1">
         <div class="project-item-card">
-          <img src="https://picsum.photos/600/400?random=11" alt="项目一封面">
-          <div class="item-hover-overlay"><span>01 / 核心关卡动线规划</span></div>
+          <img src="https://picsum.photos/600/400?random=11" alt="封面">
+          <div class="item-hover-overlay"><span>星空关卡设计</span></div>
         </div>
       </div>
       <div class="project-item" data-id="project2">
         <div class="project-item-card">
-          <img src="https://picsum.photos/600/400?random=12" alt="项目二封面">
-          <div class="item-hover-overlay"><span>02 / 隐性光影引导机制</span></div>
+          <img src="https://picsum.photos/600/400?random=12" alt="封面">
+          <div class="item-hover-overlay"><span>半条命关卡设计</span></div>
         </div>
       </div>
       <div class="project-item" data-id="project3">
         <div class="project-item-card">
-          <img src="https://picsum.photos/600/400?random=13" alt="项目三封面">
-          <div class="item-hover-overlay"><span>03 / 动态环境与复合解谜</span></div>
+          <img src="https://picsum.photos/600/400?random=13" alt="封面">
+          <div class="item-hover-overlay"><span>UE5多人竞速游戏HamsterBallin‘</span></div>
         </div>
       </div>
       <div class="project-item" data-id="project4">
         <div class="project-item-card">
-          <img src="https://picsum.photos/600/400?random=14" alt="项目四封面">
-          <div class="item-hover-overlay"><span>04 / 沙盒遭遇战心流曲线</span></div>
+          <img src="https://picsum.photos/600/400?random=14" alt="封面">
+          <div class="item-hover-overlay"><span>Unity2d平台跳跃游戏FLING</span></div>
         </div>
       </div>
       <div class="project-item" data-id="project5">
         <div class="project-item-card">
-          <img src="https://picsum.photos/600/400?random=15" alt="项目五封面">
-          <div class="item-hover-overlay"><span>05 / 垂直高低差移动验证</span></div>
+          <img src="https://picsum.photos/600/400?random=15" alt="封面">
+          <div class="item-hover-overlay"><span>其他项目</span></div>
+        </div>
+      </div>
+      <div class="project-item" data-id="project6">
+        <div class="project-item-card">
+          <img src="https://picsum.photos/600/400?random=16" alt="封面">
+          <div class="item-hover-overlay"><span>关于我</span></div>
         </div>
       </div>
     </div>
@@ -368,104 +386,95 @@
   </div>
 
   <script>
-    // 关卡数据库
+    // 关卡数据库（修改：拓展为对应的 6 个核心内容块）
     const portfolioDatabase = {
       project1: {
-        title: "01 / 核心关卡动线规划与多路径拆解",
-        tag: "Level Design Case Study / Unreal Engine",
-        type: "3D 动作冒险沙盒",
-        role: "白模搭建 / 心流曲线 / 视线阻断",
+        title: "星空关卡设计 / 开放宇宙前哨站动线",
+        tag: "Level Design Study / Creation Engine",
+        type: "科幻 RPG / 开放沙盒",
+        role: "动线规划 / 隐性地标牵引 / 白模测试",
         time: "3 Weeks",
         sections: [
           {
-            heading: "1. 关卡核心设计意图与心流包络（Mission Intent）",
-            text: "在此关卡设计中，核心目标是在高密度垂直空间中创造非线性的探索体验。我们拒绝了传统大世界平铺直叙的铺设，转而采用高度落差限制玩家早期的视线视野。通过强迫其使用侧向勾爪动线，平滑战斗遭遇前的紧张感，并为核心硬核潜行玩家留出了无伤绕过主战区的<span class='highlight-text'>边缘盲道</span>。",
+            heading: "1. 低重力环境下的垂直动线与探索心流",
+            text: "本设计旨在探索低重力场景下玩家的视线盲区与移动习惯。我们通过利用中高照度地标与环境气流，引导玩家在无UI状态下探索错落有致的废弃太空前哨站。",
             media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=101' },
-            caption: "▲ 图 1.1：主干道动线与视线遮挡体（Blockout）空间结构推演"
-          },
-          {
-            heading: "2. 隐性地标锚定法与三维视线引导（Landmark & Guidance）",
-            text: "为了让玩家在长达 15 分钟的无 UI 沉浸状态下不产生迷失感，本关卡重度利用了“三维地标法”。无论玩家在战斗中跌落到哪一层地下裂缝，只要抬起视角，都能透过精心计算的岩石错位裂隙，直观看到核心高塔的顶端微光。这种<span class='highlight-text'>隐性视线牵引</span>在 3D 复杂黑箱空间中提供了极为稳固的心理锚点。",
-            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=102' },
-            caption: "▲ 图 1.2：灰模阶段视界载入与明暗对比度（High Contrast）测试"
-          },
-          {
-            heading: "3. 物理环境交互与闭环逻辑验证",
-            text: "关卡中段引入了一组具有连锁反应的复合几何机关。玩家需要通过重力箱体触发底层泄洪闸，进而利用浮力升起通路。以下视频展示了白模测试阶段针对触发器边界、物理状态机衔接流利度的<span class='highlight-text'>手感极限测试</span>。",
-            media: { type: 'video', src: 'https://www.w3schools.com/html/mov_bbb.mp4' },
-            caption: "▲ 演示 1.3：虚幻引擎环境白模触发逻辑与物理碰撞闭环演示"
-          },
-          {
-            heading: "4. 战斗遭遇战（Encounter）空间战术包络",
-            text: "遭遇战区域采用了经典的“下沉式斗兽场”与“高台狙击位”的复合布局。敌方 AI 刷新点被隐藏在视野盲区的双层回廊后。通过提供 3 处可破坏的悬挂重物环境物，引导玩家形成<span class='highlight-text'>‘观察-规划-潜入-爆发战斗’</span>的经典战术循环，避免陷入纯粹的消耗战。",
-            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=103' },
-            caption: "▲ 图 1.4：遭遇战交火线（Fire-line）与掩体密度分布拓扑图"
-          },
-          {
-            heading: "5. 可迭代性优化盲测数据（Post-Mortem）",
-            text: "经过玩家的盲测数据反馈，原先第三阶段的滑索动线因倾角过陡，导致玩家容易产生视觉眩晕。团队随后在迭代中将滑索倾角放缓，并在动线中点增设了一个承托式的悬空木质脚手架作为<span class='highlight-text'>手感缓释区</span>，使得整体心流体验回归预期黄金线。",
-            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=104' },
-            caption: "▲ 图 1.5：盲测热力图数据（Heatmap）与玩家挫败感峰值区间修正对比"
+            caption: "▲ 图 1.1：低重力前哨站垂直黑箱空间视线阻断推演"
           }
         ]
       },
       project2: {
-        title: "02 / 隐性光影引导机制与AI视线包络",
-        tag: "Lighting & Guidance / Frostbite Engine",
-        type: "线性写实潜行谍战",
-        role: "光照关卡规划 / AI视线控制",
+        title: "半条命关卡设计 / 箱庭式遭遇战与隐性光影",
+        tag: "Singleplayer Level / Source 2 Engine",
+        type: "第一人称线性射击",
+        role: "箱庭解谜 / AI视线包络 / 物理机关交互",
         time: "2 Weeks",
         sections: [
           {
-            heading: "1. Cold-Warm 光源引导模型机制",
-            text: "利用高对比度冷暖光源的自然交替与几何形态暗示，隐性引导玩家在无UI及全黑匿踪状态下，自然直觉地发现潜行暗道与安全屋区域。",
+            heading: "1. 经典 Cold-Warm 光源引导模型机制",
+            text: "利用高对比度冷暖光源的自然交替与几何形态暗示，隐性引导玩家在全黑匿踪状态下，自然直觉地发现潜行暗道与战术掩体。",
             media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=201' },
-            caption: "▲ 图 2.1：高照度强对比下的隐蔽动线视域分析"
+            caption: "▲ 图 2.1：经典箱庭空间下的交火线与掩体拓扑"
           }
         ]
       },
       project3: {
-        title: "03 / 动态环境与复合解谜机制",
-        tag: "Puzzle Mechanics / Unity 3D",
-        type: "第一人称空间解谜",
-        role: "关卡触发器逻辑 / 地形状态机",
+        title: "UE5 多人竞速游戏 HamsterBallin‘ / 高速度下视差载入与物理碰撞",
+        tag: "Multiplayer Racing Game / Unreal Engine 5",
+        type: "多人联机 3D 物理竞速",
+        role: "关卡动态关卡流 / 极限速率验证 / 赛道盲测",
         time: "4 Weeks",
         sections: [
           {
-            heading: "1. 基于地形改变的空间闭环设计",
-            text: "基于虚幻引擎重构的动态地形解锁与逻辑闭环机制。多维度呈现测试白模阶段的动画演绎，包含触发 logic 条件分支以及多段机关运作细节。",
-            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=302' },
-            caption: "▲ 图 3.1：地形矩阵变动下的路径连接拓扑图"
+            heading: "1. 高机动惯性运动下的赛道边界红线测试",
+            text: "快速推演并验证在极高移动速率、滚动惯性下，赛道弯道弧度、高低落差对玩家操作手感和心流反馈带来的动态冲击。",
+            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=301' },
+            caption: "▲ 图 3.1：高流速状态下 Stream Loading 的视差加载技术边界验证"
           }
         ]
       },
       project4: {
-        title: "04 / 沙盒遭遇战心流曲线",
-        tag: "Combat Encounter / CryEngine",
-        type: "开放世界多人射击",
-        role: "沙盒遭遇战规划 / 掩体布局",
+        title: "Unity 2D 平台跳跃游戏 FLING / 关卡难度阶梯与心流曲线构建",
+        tag: "2D Platformer / Unity 3D",
+        type: "硬核 2D 动作跳跃",
+        role: "物理机制调优 / 障碍矩阵设计 / 关卡盲测迭代",
         time: "3 Weeks",
         sections: [
           {
-            heading: "1. 空间掩体错落与敌方 AI 压制曲线",
-            text: "基于动态心流缓释理论设计的敌方 AI 刷新与战术覆盖包络。通过空间掩体的高低落差分布，保证战斗高潮期与资源搜集舒缓期的优雅交替。",
+            heading: "1. 基于‘观察-尝试-挫败-精通’的黄金心流循环",
+            text: "针对 2D 刚体弹性机制进行微调，通过搭建精准到像素级的跳跃盲道，在前期关卡合理分布安全落脚点与挫败缓释区。",
             media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=401' },
-            caption: "▲ 图 4.1：掩体视线死角与射击交火线空间包络分析"
+            caption: "▲ 图 4.1：盲测数据玩家死亡热力图（Heatmap）与难度回归曲线分析"
           }
         ]
       },
       project5: {
-        title: "05 / 垂直高低差沙盒移动验证",
-        tag: "Movement Mechanics / Unreal Engine 5",
-        type: "开放立体大世界赛博风",
-        role: "机制手感验证 / 边界极限测试",
-        time: "2 Weeks",
+        title: "其他项目 / 功能性原型开发与技术验证合集",
+        tag: "Prototypes & Game Jams / Multiple Engines",
+        type: "独立游戏 / 原型测试",
+        role: "全栈开发 / 机制验证 / 快速出样",
+        time: "Ongoing",
         sections: [
           {
-            heading: "1. 高机动三维运动学关卡推演",
-            text: "快速推演并验证大型开放立体城市中，钩爪机制、垂直滑索与滑翔翼系统在不同建筑密度、高差倾角下的移动速率、惯性衔接与操作爽感。",
+            heading: "1. 历届 Game Jam 快速白模原型沉淀",
+            text: "这里包含了过去参与黑客马拉松及独立开发期间，快速迭代落地的多款实验性玩法核心机制原型，覆盖动态环境改变、连锁状态机等机制。",
             media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=501' },
-            caption: "▲ 图 5.1：极限速度移动下关卡视差载入（Stream Loading）边界红线测试"
+            caption: "▲ 图 5.1：复合式解谜触发 logic 与快速验证流程图"
+          }
+        ]
+      },
+      project6: {
+        title: "关于我 / 马子潇 (Zixiao Ma)",
+        tag: "Level Designer / Game Designer",
+        type: "简历与专业特长简介",
+        role: "关卡策划、核心机制设计",
+        time: "2026 Portfolio",
+        sections: [
+          {
+            heading: "专业背景与设计理念说明",
+            text: "热爱构建具有深刻沉浸感与扎实物理手感的三维箱庭空间。擅长利用严谨的白模搭建（Blockout）、清晰的视线牵引以及基于玩家行为数据的盲测反馈，去驱动关卡的极致迭代。熟练掌握 Unreal Engine 5、Unity 等主流引擎与核心脚本工具。",
+            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=601' },
+            caption: "▲ 致力于将最纯粹的游戏心流体验，传递给每一位在黑箱中探索的玩家。"
           }
         ]
       }
@@ -479,9 +488,8 @@
       /* ===================================================
          1. 3D 卡牌微倾斜物理引擎（只对未激活的卡牌应用）
          =================================================== */
-      function applyTiltEffect(itemElement, cardElement, maxRotate = 24, scale = 1.05) {
+      function applyTiltEffect(itemElement, cardElement, maxRotate = 14, scale = 1.03) {
         itemElement.addEventListener('mousemove', (e) => {
-          // 如果当前项已经被激活，为了视觉统一性，不执行 3D 偏转
           if(itemElement.classList.contains('active')) return;
           
           const rect = itemElement.getBoundingClientRect();
@@ -505,7 +513,7 @@
       
       items.forEach(item => {
         const card = item.querySelector('.project-item-card');
-        applyTiltEffect(item, card, 18, 1.03); // 微调 3D 偏转幅度，使其更契合新布局
+        applyTiltEffect(item, card, 14, 1.03); 
       });
 
       /* ===================================================
@@ -566,7 +574,6 @@
 
           items.forEach(i => {
             i.classList.remove('active');
-            // 重置之前激活项的卡片 3D 状态
             const c = i.querySelector('.project-item-card');
             if(c) c.style.transform = 'scale(1) rotateX(0deg) rotateY(0deg)';
           });
