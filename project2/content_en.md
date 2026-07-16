@@ -10,6 +10,6 @@ caption: ▲ Using a contained spacecraft environment to support mystery, explor
 
 ## Project Overview
 
-This is my DFS2 project. The mission background, level flow, spatial design, core mechanics, and iteration notes can be expanded directly in this Markdown file as development continues.
+This is my DFS2 project. 
 
 ![Ghost Ship level design showcase](images/image_project2_1.jpg)
