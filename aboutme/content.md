@@ -5,7 +5,7 @@ tag: Resume & Design Experience
 type: 个人档案
 role: 关卡设计师 / 游戏设计师
 time: Portfolio
-caption: ▲ 以玩家体验、空间组织与可玩性迭代为核心的游戏设计实践
+caption: ▲ 我喜爱围绕单一有趣玩法构建系统的设计哲学
 hero: images/hero.jpg
 hero_caption: 马子潇——关卡设计师 / 游戏设计师
 hero_width: 68%

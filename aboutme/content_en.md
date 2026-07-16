@@ -5,7 +5,7 @@ tag: Resume & Design Experience
 type: Personal Profile
 role: Level Designer / Game Designer
 time: Portfolio
-caption: ▲ A game-design practice centered on player experience, spatial organization, and iterative playability
+caption: ▲ I love the design philosophy of building systems around one single, interesting gameplay mechanic
 hero: images/hero.jpg
 hero_caption: Zixiao Ma — Level Designer / Game Designer
 hero_width: 68%
