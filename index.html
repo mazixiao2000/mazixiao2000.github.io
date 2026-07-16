@@ -1,18 +1,19 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Zixiao Ma - Portfolio</title>
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+  <title>马子潇 - 个人作品集</title>
   <style>
-    /* --- 1. Global Brutalist Reset & Industrial Grey Palette --- */
+    /* --- 1. 全局极致主义重置 & 中度冷工业灰调体系 --- */
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
     body {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Segoe UI", Roboto, sans-serif;
       height: 100vh;
       display: flex;
       flex-direction: column;
@@ -22,7 +23,7 @@
       -webkit-font-smoothing: antialiased;
     }
 
-    /* --- 2. Header / Profile Bar --- */
+    /* --- 2. 顶部个人信息栏 --- */
     header {
       background-color: #ff5500; 
       padding: 0 40px;
@@ -48,6 +49,7 @@
       font-weight: 600;
       opacity: 0.85;
     }
+    
     .contact-info {
       text-align: right;
       font-size: 11px;
@@ -62,11 +64,53 @@
       border-bottom: 1px solid #000000;
       transition: opacity 0.3s ease;
     }
-    .contact-info a:hover {
-      opacity: 0.6;
-    }
+    .contact-info a:hover { opacity: 0.6; }
 
-    /* Main Container Layout */
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+    .language-switch {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: #000000;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .language-switch input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+    .language-slider {
+      width: 42px;
+      height: 22px;
+      position: relative;
+      border: 1px solid #000000;
+      border-radius: 999px;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    .language-slider::after {
+      content: "";
+      position: absolute;
+      width: 16px;
+      height: 16px;
+      left: 2px;
+      top: 2px;
+      border-radius: 50%;
+      background: #000000;
+      transition: transform 0.25s ease;
+    }
+    .language-switch input:checked + .language-slider::after { transform: translateX(20px); }
+    .language-switch input:focus-visible + .language-slider { outline: 2px solid #000000; outline-offset: 3px; }
+
+    /* 主体布局 */
     .main-container {
       display: flex;
       flex: 1;
@@ -75,283 +119,155 @@
       background-color: #2a2a2a;
     }
 
-    /* --- 3. Left Panel (Tab Items) --- */
+    /* --- 3. 左侧选项卡栏 --- */
     .left-panel {
-      width: 25%;
-      height: 100%;
-      display: flex;
-      flex-direction: column; 
-      overflow: visible; 
-      border-right: 1px solid #1a1a1a;
-      background-color: #1a1a1a; 
-      z-index: 50;
-      perspective: 1200px; 
-      box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3); 
+      width: 25%; height: 100%; display: flex; flex-direction: column; 
+      overflow: visible; border-right: 1px solid #1a1a1a; background-color: #1a1a1a; 
+      z-index: 50; perspective: 800px; box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3); 
     }
     
     .project-item {
-      height: 16.66%; 
-      width: 108%; 
-      cursor: pointer;
-      position: relative;
-      border-bottom: 1px solid #1a1a1a;
-      background-color: #222222;
-      overflow: visible;
-      opacity: 1; 
-      
+      height: 16.66%; width: 108%; cursor: pointer; position: relative;
+      border-bottom: 1px solid #1a1a1a; background-color: #222222; overflow: visible;
       transform: translateX(-7.4%);
-      box-shadow: 0 0 0 rgba(0, 0, 0, 0);
-      
-      /* Reset/Return Animation Curve */
       transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.2), box-shadow 0.3s ease;
     }
-    .project-item:last-child {
-      border-bottom: none;
-    }
     
-    /* Hover Animation state */
-    .project-item:hover {
-      transform: translateX(0);
-      z-index: 60; 
-      box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5); 
-      transition: transform 0.25s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.25s cubic-bezier(0.25, 1, 0.5, 1);
-    }
-    .project-item.active {
-      z-index: 55; 
-    }
+    .project-item:hover { transform: translateX(0); z-index: 60; box-shadow: 10px 10px 30px rgba(0, 0, 0, 0.5); }
+    .project-item.active { z-index: 55; }
     
-    /* 3D Card Container */
     .project-item-card {
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      position: relative;
-      transform-style: preserve-3d;
-      border: 0px solid transparent;
-      transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), border 0.25s ease;
+      width: 100%; height: 100%; overflow: hidden; position: relative; transform-style: preserve-3d;
+      transition: transform 0.2s cubic-bezier(0.25, 1, 0.5, 1), border 0.25s ease;
     }
     
-    /* Active & Hover Border Highlight */
-    .project-item:hover .project-item-card, 
-    .project-item.active .project-item-card {
-      border: 2px solid #ff5500; 
-    }
+    .project-item:hover .project-item-card, .project-item.active .project-item-card { border: 2px solid #ff5500; }
+    .project-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    .project-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover; 
-      display: block;
-      filter: none; 
-    }
-
-    /* Persistent Title Overlays */
     .item-hover-overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: linear-gradient(to top, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.2) 100%); 
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      padding: 0 15px;
-      text-align: center;
-      opacity: 1; 
-      pointer-events: none;
-      transition: background 0.25s ease;
+      position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+      background: linear-gradient(to top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.1) 60%, rgba(0,0,0,0.2) 100%); 
+      display: flex; justify-content: center; align-items: center; padding: 0 15px;
+      text-align: center; pointer-events: none;
     }
-    
-    .project-item:hover .item-hover-overlay,
-    .project-item.active .item-hover-overlay {
-      background: rgba(0, 0, 0, 0.7); 
-    }
-    
-    .item-hover-overlay span {
-      color: #ffffff; 
-      font-size: 13px;
-      font-weight: 600;
-      letter-spacing: 1px;
-      line-height: 1.4;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.8), 0 0 10px rgba(0,0,0,0.5); 
-      transition: color 0.25s ease;
-    }
+    .project-item:hover .item-hover-overlay, .project-item.active .item-hover-overlay { background: rgba(0, 0, 0, 0.65); }
+    .item-hover-overlay span { color: #ffffff; font-size: 13px; font-weight: 600; letter-spacing: 1px; }
+    .project-item:hover .item-hover-overlay span, .project-item.active .item-hover-overlay span { color: #ff5500; }
 
-    .project-item:hover .item-hover-overlay span,
-    .project-item.active .item-hover-overlay span {
-      color: #ff5500;
-      text-shadow: 0 2px 4px rgba(0,0,0,0.5);
-    }
-
-    /* --- 4. Right Showcase Area --- */
+    /* --- 4. 右侧展示区 --- */
     .right-panel {
-      width: 75%;
-      height: 100%;
-      background-color: #333333; 
-      overflow-y: auto; 
-      overflow-x: hidden;
-      scroll-behavior: smooth;
+      width: 75%; height: 100%; background-color: #333333; 
+      overflow-y: auto; overflow-x: hidden; scroll-behavior: smooth;
     }
+    .right-panel::-webkit-scrollbar { width: 0px; }
 
-    .right-panel::-webkit-scrollbar {
-      width: 0px;
-      background: transparent;
-    }
-    .right-panel {
-      -ms-overflow-style: none;  
-      scrollbar-width: none;  
-    }
-
-    /* Content Layout Wrapper */
     .detail-content-wrapper {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 60px 40px 120px 40px;
-      opacity: 1;
-      transition: opacity 0.25s ease;
+      max-width: 880px; margin: 0 auto; padding: 60px 40px 120px 40px;
+      opacity: 1; transition: opacity 0.25s ease;
     }
-    
-    .content-fade {
-      opacity: 0;
-    }
+    .content-fade { opacity: 0; }
 
-    /* Headers and Metrics Breakdown */
-    .project-title-area h2 {
-      font-size: 32px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      margin-bottom: 8px;
-      color: #ffffff; 
-    }
-    .project-title-area .sub-tag {
-      font-size: 12px;
-      color: #aaaaaa;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 35px;
-    }
+    .project-title-area h2 { font-size: 32px; font-weight: 700; margin-bottom: 8px; color: #ffffff; }
+    .project-title-area .sub-tag { font-size: 12px; color: #aaaaaa; text-transform: uppercase; margin-bottom: 35px; }
 
     .spec-table-mini {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 20px;
-      margin-bottom: 50px;
-      background: #222222; 
-      padding: 22px;
-      border: 1px solid #444444;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+      margin-bottom: 50px; background: #222222; padding: 22px; border: 1px solid #444444;
     }
-    .spec-cell h3 {
-      font-size: 11px;
-      color: #ff5500; 
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 6px;
-    }
-    .spec-cell p {
-      font-size: 13.5px;
-      color: #eeeeee;
-      font-weight: 500;
-    }
+    .spec-cell h3 { font-size: 11px; color: #ff5500; text-transform: uppercase; margin-bottom: 6px; }
+    .spec-cell p { font-size: 13.5px; color: #eeeeee; font-weight: 500; }
 
-    /* Modular Content Blocks */
-    .detail-section {
-      margin-bottom: 65px;
-    }
-    .detail-section h4 {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 18px;
-      letter-spacing: 0.5px;
-      border-left: 4px solid #ff5500; 
-      padding-left: 12px;
-      color: #ffffff;
-    }
-    .detail-section p {
-      font-size: 14.5px;
-      line-height: 1.8;
-      color: #cccccc; 
-      margin-bottom: 25px;
-      text-align: justify;
-    }
-    
-    .highlight-text {
-      color: #ff5500;
-      font-weight: 600;
-    }
+    .detail-section { margin-bottom: 65px; }
+    .detail-section h4 { font-size: 18px; font-weight: 700; margin-bottom: 18px; border-left: 4px solid #ff5500; padding-left: 12px; }
+    .detail-section p { font-size: 14.5px; line-height: 1.8; color: #cccccc; margin-bottom: 30px; text-align: justify; }
 
-    /* Media Containers */
+    /* 图片展示列表样式 */
+    .image-gallery { display: flex; flex-direction: column; gap: 20px; min-height: 50px; }
     .showcase-block {
-      width: 100%;
-      border: 1px solid #444444;
-      background: #222222;
-      margin-bottom: 12px;
-      overflow: hidden;
-      box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+      width: 100%; border: 1px solid #444444; background: #222222;
+      overflow: hidden; box-shadow: 0 4px 20px rgba(0,0,0,0.2);
     }
-    .showcase-block img, .showcase-block video {
-      width: 100%;
-      display: block;
-      height: auto;
+    .showcase-block img { width: 100%; display: block; height: auto; }
+    .showcase-caption { font-size: 11.5px; color: #999999; text-align: center; margin-top: 10px; margin-bottom: 40px; }
+
+    /* 简历按钮 */
+    .resume-btn-container { margin-bottom: 40px; }
+    .resume-btn {
+      display: inline-flex; align-items: center; gap: 10px; background-color: #ff5500;
+      color: #000; text-decoration: none; font-size: 14px; font-weight: 700; padding: 14px 28px;
+      transition: all 0.25s ease; box-shadow: 0 4px 15px rgba(255, 85, 0, 0.2);
     }
-    .showcase-caption {
-      font-size: 11.5px;
-      color: #999999;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-  </style>
+    .resume-btn:hover { background-color: transparent; color: #ff5500; border: 1px solid #ff5500; }
+  
+@media (max-width: 768px){
+  header{padding:16px; flex-direction: column; height: auto; align-items: flex-start;}
+  .main-container{flex-direction:column;height:auto;}
+  .left-panel{width:100%;height:auto;flex-direction:row;overflow-x:auto;perspective:none;border-right:none;border-bottom:1px solid #1a1a1a;}
+  .project-item{width:180px;min-width:180px;height:110px;transform:none !important;}
+  .right-panel{width:100% !important;}
+  .detail-content-wrapper{padding:20px 16px !important;}
+  .header-actions{width:100%;justify-content:space-between;gap:14px;}
+  .contact-info{text-align:right;}
+}
+</style>
 </head>
 <body>
 
   <header>
     <div class="profile-info">
-      <h1>Zixiao "Marshall" Ma</h1>
-      <p>Level Designer / Game Designer</p>
+      <h1 id="headerName">马子潇</h1>
+      <p id="headerTitle">关卡策划 / 游戏设计</p>
     </div>
-    <div class="contact-info">
-      <p>📧 <a href="mailto:marsshow2000@outlook.com">marsshow2000@outlook.com</a></p>
-      <p>📱 (+1) 945-949-6840</p>
+    <div class="header-actions">
+      <label class="language-switch" for="languageToggle" aria-label="切换中文和英文 / Switch language">
+        <span>中</span>
+        <input type="checkbox" id="languageToggle" role="switch" aria-label="English">
+        <span class="language-slider" aria-hidden="true"></span>
+        <span>EN</span>
+      </label>
+      <div class="contact-info">
+        <p>📧 <a href="mailto:marsshow2000@outlook.com">marsshow2000@outlook.com</a></p>
+        <p>📱 (+1) 945-949-6840</p>
+      </div>
     </div>
   </header>
 
   <div class="main-container">
-    
     <div class="left-panel" id="leftPanel">
-      <div class="project-item active" data-id="project1">
+      <div class="project-item" data-id="project1">
         <div class="project-item-card">
-          <img src="https://picsum.photos/600/400?random=11" alt="Starfield Level Design">
-          <div class="item-hover-overlay"><span>Starfield Level Design</span></div>
+          <img src="project1/cover.jpg" alt="项目1">
+          <div class="item-hover-overlay"><span>星空支线关卡设计：底卡伦：变人。</span></div>
         </div>
       </div>
       <div class="project-item" data-id="project2">
         <div class="project-item-card">
-          <img src="https://picsum.photos/600/400?random=12" alt="Half-Life 2 Level Design">
-          <div class="item-hover-overlay"><span>Half-Life 2 Level Design</span></div>
+          <img src="project2/cover.jpg" alt="项目2">
+          <div class="item-hover-overlay"><span>星空支线关卡设计：幽灵船</span></div>
         </div>
       </div>
       <div class="project-item" data-id="project3">
         <div class="project-item-card">
-          <img src="https://picsum.photos/600/400?random=13" alt="HamsterBallin'">
-          <div class="item-hover-overlay"><span>UE5 3D Multiplayer Racing<br>HamsterBallin‘</span></div>
+          <img src="project3/cover.jpg" alt="项目3">
+          <div class="item-hover-overlay"><span>UE5 3D多人竞速项目：仓鼠球</span></div>
         </div>
       </div>
       <div class="project-item" data-id="project4">
         <div class="project-item-card">
-          <img src="https://picsum.photos/600/400?random=14" alt="FLING">
-          <div class="item-hover-overlay"><span>Unity 2D Platformer<br>FLING</span></div>
+          <img src="project4/cover.jpg" alt="项目4">
+          <div class="item-hover-overlay"><span>Unity 2d 平台跳跃项目： FLING</span></div>
         </div>
       </div>
-      <div class="project-item" data-id="project5">
+      <div class="project-item" data-id="moreprojects">
         <div class="project-item-card">
-          <img src="https://picsum.photos/600/400?random=15" alt="More Projects">
-          <div class="item-hover-overlay"><span>More Projects</span></div>
+          <img src="moreprojects/cover.jpg" alt="项目5">
+          <div class="item-hover-overlay"><span>更多项目</span></div>
         </div>
       </div>
-      <div class="project-item" data-id="project6">
+      <div class="project-item active" data-id="aboutme">
         <div class="project-item-card">
-          <img src="https://picsum.photos/600/400?random=16" alt="About Me">
-          <div class="item-hover-overlay"><span>About Me</span></div>
+          <img src="aboutme/cover.jpg" alt="项目6">
+          <div class="item-hover-overlay"><span>关于我</span></div>
         </div>
       </div>
     </div>
@@ -359,203 +275,189 @@
     <div class="right-panel" id="rightPanel">
       <div class="detail-content-wrapper" id="detailContentWrapper"></div>
     </div>
-
   </div>
 
+  <script src="content.generated.js"></script>
+  <script src="content-loader.js"></script>
   <script>
-    /* Portfolio Database Architecture */
-    const portfolioDatabase = {
-      project1: {
-        title: "Starfield Level Design - Resource Outpost Exploration",
-        tag: "Level Design Case Study / Starfield Theme",
-        type: "3D Open World RPG Level",
-        role: "Layout Design / Point of Interest Placement / Atmosphere",
-        time: "3 Weeks",
-        sections: [
-          {
-            heading: "1. Core Mission Intent & Spatial Flow",
-            text: "This layout prototype explicitly structures sandbox exploration in low-gravity celestial environments. Players leverage jetpack mechanics to navigate a defunct refinery vertically, where strategically applied <span class='highlight-text'>sightline occlusion</span> and complex ventilation passages carve out multiple high-reward stealth vectors.",
-            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=101' },
-            caption: "▲ Fig 1.1: Multi-tier blockout composition testing vertical movement limits."
-          }
-        ]
-      },
-      project2: {
-        title: "Half-Life 2 Level Design - City 17 Industrial Breach",
-        tag: "Classic Level Design / Source Engine Philosophy",
-        type: "Linear First-Person Shooter",
-        role: "Physics-Based Puzzles / Pacing & Combat Encounters",
-        time: "2 Weeks",
-        sections: [
-          {
-            heading: "1. Gravity Gun Environmental Architecture",
-            text: "Adhering strictly to Valve's signature mechanics-driven pacing, the layout features a closed water valve ecosystem that naturally guides players to employ buoying dynamics to build bridges. This puzzle sequence transitions smoothly into a Combine ambush, where physics props directly convert into <span class='highlight-text'>destructible tactical cover</span>.",
-            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=201' },
-            caption: "▲ Fig 2.1: Logic loop diagram mapping physics leverage and liquid buoyancy mechanics."
-          }
-        ]
-      },
-      project3: {
-        title: "UE5 3D Multiplayer Racing - HamsterBallin‘",
-        tag: "Gameplay & Level Mechanics / Unreal Engine 5",
-        type: "3D Multiplayer Arcade Racing",
-        role: "Curved Tracking / Collision Mesh Optimization / Handling Calibration",
-        time: "4 Weeks",
-        sections: [
-          {
-            heading: "1. Managing High-Velocity Curvatures",
-            text: "The definitive design problem was securing player agency and directional control under extreme velocities. Track borders rely on micro-sloped profiles to buffer centripetal displacement, deploying varying surface physics to afford expert players high-risk <span class='highlight-text'>tangential cutting paths</span> across hairpin loops.",
-            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=302' },
-            caption: "▲ Fig 3.1: High-velocity structural sweep showcasing geometry boundaries and trigger volume layout."
-          }
-        ]
-      },
-      project4: {
-        title: "Unity 2D Platformer - FLING",
-        tag: "2D Precision Platformer / Unity 2D",
-        type: "Hardcore Precision Platformer",
-        role: "Level Layout Configuration / Frame-Perfect Collision Tuning",
-        time: "3 Weeks",
-        sections: [
-          {
-            heading: "1. Projectile Velocity & Frustration Management",
-            text: "The foundational gameplay loop of FLING focuses on momentum and kinetic trajectory arcs. Every corridor coordinates 'launch, micro-correction, and micro-landing' patterns, inserting critical <span class='highlight-text'>buffer platforms</span> within lethal hazard fields to balance the steep difficulty scaling.",
-            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=401' },
-            caption: "▲ Fig 4.1: Vector mapping for launch variables contrasted against player telemetry models."
-          }
-        ]
-      },
-      project5: {
-        title: "More Projects - Prototypes & System Sandboxes",
-        tag: "Prototypes & Game Jam Works",
-        type: "Multi-genre Gameplay Validation",
-        role: "Rapid Prototyping / Core Mechanic Abstraction",
-        time: "Ongoing",
-        sections: [
-          {
-            heading: "1. Game Jam Mechanical Proof-of-Concepts",
-            text: "A repository compiling diverse systemic prototypes developed during 48-hour sprints. Concepts investigate localized gravity inversion matrix setups and non-Euclidean perspective shift mechanics, emphasizing responsive, rapid-turnaround development practices.",
-            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=501' },
-            caption: "▲ Fig 5.1: Blockout structural inventory detailing spatial logic validation testing."
-          }
-        ]
-      },
-      project6: {
-        title: "About Me / Profile & Design Philosophy",
-        tag: "About Me / Resume & Core Credentials",
-        type: "Personal Profile",
-        role: "Level Designer",
-        time: "Full-Time",
-        sections: [
-          {
-            heading: "1. Professional Profile",
-            text: "Level Designer at SMU Guildhall with a passion for exploration, player guidance, and environmental storytelling. Dedicated to crafting engaging and memorable gameplay experiences through level design.",
-            media: { type: 'image', src: 'https://picsum.photos/1920/1080?random=601' },
-            caption: "▲ Committed to refining pristine pacing frameworks and advanced space design."
-          }
-        ]
-      }
-    };
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>"']/g, char => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[char]));
+    }
 
-    document.addEventListener('DOMContentLoaded', () => {
+    function safeHeroWidth(value) {
+      return /^(?:(?:100|[1-9]?\d)%|\d{2,4}px)$/.test(String(value || '')) ? String(value) : '';
+    }
+
+    function paragraphHtml(text) {
+      return `<p>${escapeHtml(text).replace(/\n/g, '<br>')}</p>`;
+    }
+
+    function headingBlock(text) {
+      return `<p><strong>${escapeHtml(text)}</strong></p>`;
+    }
+
+    function imageBlock(image, isHero = false) {
+      const width = isHero ? safeHeroWidth(image.width) : '';
+      const style = width ? ` style="max-width:${width}; margin-left:auto; margin-right:auto;"` : '';
+      const loading = isHero ? 'eager' : 'lazy';
+      return `<div class="showcase-block"${style}><img src="${escapeHtml(image.src)}" alt="${escapeHtml(image.caption)}" loading="${loading}"></div><div class="showcase-caption"${style}>${escapeHtml(image.caption)}</div>`;
+    }
+
+    function videoBlock(video) {
+      const params = new URLSearchParams({ rel: '0', playsinline: '1', modestbranding: '1' });
+      if (location.protocol === 'http:' || location.protocol === 'https:') params.set('origin', location.origin);
+      const source = `https://www.youtube-nocookie.com/embed/${encodeURIComponent(video.id)}?${params.toString()}`;
+      return `<div class="showcase-block"><iframe src="${source}" width="100%" height="450" title="${escapeHtml(video.caption)}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div><div class="showcase-caption">▶ ${escapeHtml(video.caption)}</div>`;
+    }
+
+    function buttonsBlock(block) {
+      const links = (block.links || []).map(link => `<a href="${escapeHtml(link.href)}" target="_blank" rel="noopener noreferrer" class="resume-btn">${escapeHtml(link.label)}</a>`).join(' ');
+      return `<div class="resume-btn-container">${links}</div>`;
+    }
+
+    function renderBlock(block) {
+      if (!block || !block.kind) return '';
+      if (block.kind === 'heading') return headingBlock(block.text || '');
+      if (block.kind === 'paragraph') return paragraphHtml(block.text || '');
+      if (block.kind === 'image') return imageBlock(block);
+      if (block.kind === 'youtube') return videoBlock(block);
+      if (block.kind === 'buttons') return buttonsBlock(block);
+      return '';
+    }
+
+    document.addEventListener('DOMContentLoaded', async () => {
+      const projectIds = ['project1', 'project2', 'project3', 'project4', 'moreprojects', 'aboutme'];
+      const interfaceText = {
+        zh: {
+          name: '马子潇',
+          title: '关卡策划 / 游戏设计',
+          projectType: '项目类型',
+          responsibilities: '负责模块',
+          period: '测试周期',
+          overview: 'Overview / 核心内容解构',
+          pageTitle: '马子潇 - 个人作品集',
+        },
+        en: {
+          name: 'Zixiao Ma',
+          title: 'Level Designer / Game Designer',
+          projectType: 'Project Type',
+          responsibilities: 'Responsibilities',
+          period: 'Development Period',
+          overview: 'Overview / Design Breakdown',
+          pageTitle: 'Zixiao Ma - Game Design Portfolio',
+        },
+      };
+
       const items = document.querySelectorAll('.project-item');
       const rightPanel = document.getElementById('rightPanel');
       const wrapper = document.getElementById('detailContentWrapper');
-
-      /* ===================================================
-         1. 3D Card Interactive Tilt Mechanical Engine
-         =================================================== */
-      function applyTiltEffect(itemElement, cardElement, maxRotate = 35, scale = 1.05) {
-        itemElement.addEventListener('mousemove', (e) => {
-          const rect = itemElement.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const xc = x / rect.width - 0.5;
-          const yc = y / rect.height - 0.5;
-          const rotateX = yc * -maxRotate; 
-          const rotateY = xc * maxRotate;
-          requestAnimationFrame(() => {
-            cardElement.style.transform = `scale(${scale}) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-          });
-        });
-        itemElement.addEventListener('mouseleave', () => {
-          requestAnimationFrame(() => {
-            cardElement.style.transform = 'scale(1) rotateX(0deg) rotateY(0deg)';
-          });
-        });
+      const languageToggle = document.getElementById('languageToggle');
+      const headerName = document.getElementById('headerName');
+      const headerTitle = document.getElementById('headerTitle');
+      function readSavedLanguage() {
+        try { return localStorage.getItem('portfolioLanguage') === 'en' ? 'en' : 'zh'; }
+        catch (error) { return 'zh'; }
       }
-      
-      items.forEach(item => {
-        const card = item.querySelector('.project-item-card');
-        applyTiltEffect(item, card, 35, 1.05); 
-      });
-
-      /* ===================================================
-         2. Dynamic Content Assembler Engine
-         =================================================== */
-      function renderLongProjectPage(projectId) {
-        const data = portfolioDatabase[projectId];
-        if (!data) return;
-
-        let htmlContent = `
-          <div class="project-title-area">
-            <h2>${data.title}</h2>
-            <div class="sub-tag">${data.tag}</div>
-          </div>
-          
-          <div class="spec-table-mini">
-            <div class="spec-cell"><h3>Project Type</h3><p>${data.type}</p></div>
-            <div class="spec-cell"><h3>Responsibilities</h3><p>${data.role}</p></div>
-            <div class="spec-cell"><h3>Timeline</h3><p>${data.time}</p></div>
-          </div>
-        `;
-
-        data.sections.forEach(sec => {
-          htmlContent += `
-            <div class="detail-section">
-              <h4>${sec.heading}</h4>
-              <p>${sec.text}</p>
-              <div class="showcase-block">
-          `;
-
-          if (sec.media.type === 'video') {
-            htmlContent += `<video controls autoplay loop muted src="${sec.media.src}"></video>`;
-          } else {
-            htmlContent += `<img src="${sec.media.src}" alt="Showcase Visual Asset">`;
-          }
-
-          htmlContent += `
-              </div>
-              <div class="showcase-caption">${sec.caption}</div>
-            </div>
-          `;
-        });
-
-        wrapper.classList.add('content-fade');
-        setTimeout(() => {
-          wrapper.innerHTML = htmlContent;
-          wrapper.classList.remove('content-fade');
-          rightPanel.scrollTop = 0; 
-        }, 120);
+      function saveLanguage(language) {
+        try { localStorage.setItem('portfolioLanguage', language); }
+        catch (error) { /* Local file privacy settings may disable storage. */ }
       }
+      let currentLanguage = readSavedLanguage();
+      let currentProjectId = 'aboutme';
+      let projectDatabase = {};
+      let projectContent = {};
 
-      /* ===================================================
-         3. Navigation Linkage / Tab Switching Controller
-         =================================================== */
-      items.forEach(item => {
-        item.addEventListener('click', () => {
-          if (item.classList.contains('active')) return;
+      function applyPhysics(item, card) {
+        item.addEventListener('mousemove', (e) => {
+          const rect = item.getBoundingClientRect();
+          const xc = (e.clientX - rect.left) / rect.width - 0.5;
+          const yc = (e.clientY - rect.top) / rect.height - 0.5;
+          card.style.transform = `scale(1.08) rotateX(${yc * -48}deg) rotateY(${xc * 48}deg)`;
+        });
+        item.addEventListener('mouseleave', () => card.style.transform = 'scale(1) rotateX(0) rotateY(0)');
+      }
+      items.forEach(item => applyPhysics(item, item.querySelector('.project-item-card')));
 
-          items.forEach(i => i.classList.remove('active'));
-          item.classList.add('active');
+      function updateInterface() {
+        const labels = interfaceText[currentLanguage];
+        document.documentElement.lang = currentLanguage === 'en' ? 'en' : 'zh-CN';
+        document.title = labels.pageTitle;
+        headerName.textContent = labels.name;
+        headerTitle.textContent = labels.title;
+        languageToggle.checked = currentLanguage === 'en';
 
+        items.forEach(item => {
           const projectId = item.getAttribute('data-id');
-          renderLongProjectPage(projectId);
+          const data = projectDatabase[projectId];
+          if (!data) return;
+          const label = item.querySelector('.item-hover-overlay span');
+          const image = item.querySelector('img');
+          if (label) label.textContent = data.tabTitle || data.title;
+          if (image) image.alt = data.tabTitle || data.title;
         });
+      }
+
+      function renderPage(projectId) {
+        const data = projectDatabase[projectId];
+        const content = projectContent[projectId] || {};
+        const labels = interfaceText[currentLanguage];
+        if (!data) return;
+        currentProjectId = projectId;
+        wrapper.classList.add('content-fade');
+
+        const heroHtml = content.hero ? imageBlock(content.hero, true) : '';
+        const bodyHtml = (content.blocks || []).map(renderBlock).join('');
+
+        const html = `
+          <div class="project-title-area">
+            <h2>${escapeHtml(data.title)}</h2>
+            <div class="sub-tag">${escapeHtml(data.tag)}</div>
+          </div>
+          ${heroHtml}
+          <div class="spec-table-mini">
+            <div class="spec-cell"><h3>${escapeHtml(labels.projectType)}</h3><p>${escapeHtml(data.type)}</p></div>
+            <div class="spec-cell"><h3>${escapeHtml(labels.responsibilities)}</h3><p>${escapeHtml(data.role)}</p></div>
+            <div class="spec-cell"><h3>${escapeHtml(labels.period)}</h3><p>${escapeHtml(data.time)}</p></div>
+          </div>
+          <div class="detail-section">
+            <h4>${escapeHtml(labels.overview)}</h4>
+            ${bodyHtml}
+            <div class="showcase-caption">${escapeHtml(data.caption)}</div>
+          </div>`;
+
+        setTimeout(() => {
+          wrapper.innerHTML = html;
+          wrapper.classList.remove('content-fade');
+          rightPanel.scrollTop = 0;
+        }, 150);
+      }
+
+      async function activateLanguage(language, preserveScroll = false) {
+        currentLanguage = language === 'en' ? 'en' : 'zh';
+        saveLanguage(currentLanguage);
+        const scrollPosition = rightPanel.scrollTop;
+        const siteContent = await window.loadSiteContent(projectIds, currentLanguage);
+        projectDatabase = siteContent.database || {};
+        projectContent = siteContent.content || {};
+        updateInterface();
+        renderPage(currentProjectId);
+        if (preserveScroll) {
+          setTimeout(() => { rightPanel.scrollTop = scrollPosition; }, 170);
+        }
+      }
+
+      items.forEach(item => item.addEventListener('click', () => {
+        if (item.classList.contains('active')) return;
+        items.forEach(i => i.classList.remove('active'));
+        item.classList.add('active');
+        renderPage(item.getAttribute('data-id'));
+      }));
+
+      languageToggle.addEventListener('change', () => {
+        activateLanguage(languageToggle.checked ? 'en' : 'zh', true);
       });
 
-      // Launch Initial View Configuration
-      renderLongProjectPage('project1');
+      await activateLanguage(currentLanguage);
     });
   </script>
 </body>
