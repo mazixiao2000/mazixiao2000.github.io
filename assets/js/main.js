@@ -1,5 +1,6 @@
 (() => {
   const body = document.body;
+  body.classList.add('js');
   const menuToggle = document.querySelector('.menu-toggle');
   const mobileNav = document.getElementById('mobileNav');
   const progress = document.getElementById('scrollProgress');
@@ -58,7 +59,7 @@
       try {
         await navigator.clipboard.writeText(email);
         const original = copyButton.textContent;
-        copyButton.textContent = '已复制';
+        copyButton.textContent = body.dataset.copyLabel || 'Copied';
         setTimeout(() => { copyButton.textContent = original; }, 1800);
       } catch {
         window.location.href = `mailto:${email}`;

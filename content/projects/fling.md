@@ -13,6 +13,7 @@ team: 4 人团队
 period: 6 周 · Scrum
 status: 完成
 featured: true
+category: team
 order: 4
 tags: [2D 平台, 核心机制, 关卡教学, Playtest]
 card_note: 机制重构 · 多数关卡设计 · 公开测试迭代

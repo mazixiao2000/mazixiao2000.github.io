@@ -4,6 +4,7 @@ title: 马子潇｜关卡设计作品集
 kicker: LEVEL DESIGN · GAMEPLAY · IMPLEMENTATION
 headline: 用空间、机制与节奏，构建玩家能够理解、记住并愿意探索的游戏体验。
 intro: SMU Guildhall 关卡设计硕士在读，本科计算机科学背景，曾在网易雷火担任系统策划实习生。具备从概念、白盒、脚本实现到跨职能迭代的完整开发经验。
+approach_title: 关卡不是场景堆叠，而是玩家决策的结构。
 ---
 
 ## 设计取向
