@@ -485,10 +485,8 @@ def nav(active: str, site: dict[str, Any], lang: str, route: str) -> str:
     opposite = "en" if lang == "zh" else "zh"
     links = [
         (labels["home"], lang_path("/", lang), "home"),
-        (labels["personal"], lang_path("/work/#personal-projects", lang), "personal"),
-        (labels["team"], lang_path("/work/#team-projects", lang), "team"),
-        (labels["other"], lang_path("/work/#other-projects", lang), "archive"),
-        (labels["about"], lang_path("/about/", lang), "about"),
+        (labels["project"], lang_path("/work/", lang), "work"),
+        ("关于我" if lang == "zh" else "About Me", lang_path("/about/", lang), "about"),
     ]
     navlinks = "".join(
         f'<a href="{url}" class="{"active" if active == key else ""}">{esc(label)}</a>'
