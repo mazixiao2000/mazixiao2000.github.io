@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 620" role="img" aria-labelledby="t d">
+<title id="t">The Way of Water gameplay flow</title><desc id="d">Five-beat flow from arrival to rising-water escape</desc>
+<rect width="1600" height="620" rx="24" fill="#151718"/>
+<g font-family="Arial, sans-serif">
+<text x="70" y="78" fill="#ff6a2a" font-size="25" letter-spacing="5">GAMEPLAY FLOW / 10 MINUTE LEVEL</text>
+<path d="M175 300H1425" stroke="#555b5d" stroke-width="5"/>
+<g text-anchor="middle">
+<g transform="translate(190 300)"><circle r="74" fill="#f0eee7"/><text y="-5" fill="#111" font-size="28" font-weight="700">01</text><text y="32" fill="#111" font-size="20">进入基地</text><text y="130" fill="#b9b9b2" font-size="22">建立水下事故情境</text></g>
+<g transform="translate(495 300)"><circle r="74" fill="#f0eee7"/><text y="-5" fill="#111" font-size="28" font-weight="700">02</text><text y="32" fill="#111" font-size="20">识别危险</text><text y="130" fill="#b9b9b2" font-size="22">电流与积水形成阻断</text></g>
+<g transform="translate(800 300)"><circle r="74" fill="#ff6a2a"/><text y="-5" fill="#111" font-size="28" font-weight="700">03</text><text y="32" fill="#111" font-size="20">关闭电源</text><text y="130" fill="#b9b9b2" font-size="22">短时间窗口穿越区域</text></g>
+<g transform="translate(1105 300)"><circle r="74" fill="#f0eee7"/><text y="-5" fill="#111" font-size="28" font-weight="700">04</text><text y="32" fill="#111" font-size="20">水位上涨</text><text y="130" fill="#b9b9b2" font-size="22">规则转化为追逐压力</text></g>
+<g transform="translate(1410 300)"><circle r="74" fill="#f0eee7"/><text y="-5" fill="#111" font-size="28" font-weight="700">05</text><text y="32" fill="#111" font-size="20">垂直逃生</text><text y="130" fill="#b9b9b2" font-size="22">回收机制并完成高潮</text></g>
+</g></g>
+</svg>

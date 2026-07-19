@@ -6,52 +6,35 @@
   <meta name="theme-color" content="#111314">
   <meta name="description" content="马子潇的关卡设计作品集，展示任务关卡、战斗空间、竞速赛道、玩法机制与关卡实现。">
   <meta property="og:type" content="website">
-  <meta property="og:title" content="马子潇｜关卡设计作品集">
+  <meta property="og:title" content="项目｜马子潇关卡设计作品集">
   <meta property="og:description" content="马子潇的关卡设计作品集，展示任务关卡、战斗空间、竞速赛道、玩法机制与关卡实现。">
   <meta property="og:image" content="https://www.mazixiao.com/assets/images/decaran-cover.webp">
   <meta name="twitter:card" content="summary_large_image">
-  <title>马子潇｜关卡设计作品集</title>
+  <title>项目｜马子潇关卡设计作品集</title>
   <link rel="icon" href="/assets/images/avatar-monogram.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/css/styles.css">
   <script defer src="/assets/js/main.js"></script>
 </head>
-<body class="home-page">
+<body class="work-page">
 <div class="scroll-progress" id="scrollProgress"></div>
 
 <header class="site-header" id="siteHeader">
   <a class="brand" href="/" aria-label="返回首页"><strong>MA ZIXIAO</strong><span>LEVEL DESIGNER</span></a>
-  <nav class="desktop-nav" aria-label="主导航"><a href="/" class="active">首页</a><a href="/work/" class="">项目</a><a href="/about/" class="">关于</a><a href="/archive/" class="">归档</a></nav>
+  <nav class="desktop-nav" aria-label="主导航"><a href="/" class="">首页</a><a href="/work/" class="active">项目</a><a href="/about/" class="">关于</a><a href="/archive/" class="">归档</a></nav>
   <div class="header-actions">
     <a class="header-resume" href="/assets/docs/Ma_Zixiao_Level_Designer_Resume_CN.pdf" target="_blank">简历 PDF</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span></button>
   </div>
 </header>
-<nav class="mobile-nav" id="mobileNav" aria-label="移动端导航"><a href="/" class="active">首页</a><a href="/work/" class="">项目</a><a href="/about/" class="">关于</a><a href="/archive/" class="">归档</a><a href="mailto:marsshow2000@outlook.com">联系我</a></nav>
+<nav class="mobile-nav" id="mobileNav" aria-label="移动端导航"><a href="/" class="">首页</a><a href="/work/" class="active">项目</a><a href="/about/" class="">关于</a><a href="/archive/" class="">归档</a><a href="mailto:marsshow2000@outlook.com">联系我</a></nav>
 
 <main>
-  <section class="home-hero">
-    <div class="hero-grid" aria-hidden="true"></div>
-    <div class="hero-main reveal">
-      <div class="eyebrow">LEVEL DESIGN · GAMEPLAY · IMPLEMENTATION</div>
-      <h1>用空间、机制与节奏，构建玩家能够理解、记住并愿意探索的游戏体验。</h1>
-      <p>SMU Guildhall 关卡设计硕士在读，本科计算机科学背景，曾在网易雷火担任系统策划实习生。具备从概念、白盒、脚本实现到跨职能迭代的完整开发经验。</p>
-      <div class="hero-actions">
-        <a class="button button-primary" href="/work/">查看精选项目 <span>↗</span></a>
-        <a class="button button-secondary" href="/assets/docs/Ma_Zixiao_Level_Designer_Resume_CN.pdf" target="_blank">下载中文简历</a>
-      </div>
-    </div>
-    <aside class="hero-profile reveal" style="--delay:120ms">
-      <img src="/assets/images/avatar-monogram.svg" alt="马子潇姓名缩写图形">
-      <div><span>当前身份</span><strong>SMU Guildhall<br>Level Design M.I.T.</strong></div>
-      <div><span>经历</span><strong>网易雷火<br>系统策划实习</strong></div>
-      <div><span>工具</span><strong>UE5 · Unity · CK<br>Hammer · Radiant</strong></div>
-    </aside>
-    <div class="hero-number" aria-hidden="true">LD</div>
-  </section>
-
-  <section class="section-shell featured-section" id="featured-work">
-    <div class="section-heading reveal"><div><span>01 / SELECTED WORK</span><h2>精选项目</h2></div><p>以完整 Case Study 展示我如何定义问题、组织空间、实现机制并通过测试迭代。</p></div>
-    <div class="project-grid">
+  <header class="page-hero section-shell">
+    <div class="eyebrow">WORK / CASE STUDIES</div>
+    <h1>项目与设计案例</h1>
+    <p>首页优先展示能够清楚说明设计目标、个人职责、制作过程和最终结果的完整项目。</p>
+  </header>
+  <section class="section-shell work-list"><div class="project-grid">
     <article class="project-card reveal" style="--delay:0ms">
       <a class="project-card-media" href="/projects/decaran/" aria-label="查看 Decaran: Become Human">
         <img src="/assets/images/decaran-cover.webp" alt="Decaran: Become Human 项目封面">
@@ -103,34 +86,7 @@
         <div class="tag-list"><span>2D 平台</span><span>核心机制</span><span>关卡教学</span><span>Playtest</span></div>
         <div class="project-card-meta"><span>游戏设计 / 关卡设计</span><span>机制重构 · 多数关卡设计 · 公开测试迭代</span></div>
       </div>
-    </article></div>
-    <div class="section-action"><a href="/work/">查看全部项目 <span>↗</span></a></div>
-  </section>
-
-  <section class="design-section">
-    <div class="section-shell design-layout">
-      <div class="design-title reveal"><span>02 / APPROACH</span><h2>关卡不是场景堆叠，<br>而是玩家决策的结构。</h2></div>
-      <div class="article-body home-article reveal" style="--delay:80ms"><h2 id="section-1">设计取向<a class="heading-anchor" href="#section-1" aria-label="链接到本节">#</a></h2>
-<p>我关注玩家在空间中的<strong>目标理解、路径决策与情绪节奏</strong>。我的工作不仅是搭建场景，而是让关卡中的路线、战斗、机制、叙事和视觉信息共同指向清晰的体验目标。</p>
-<div class="capability-grid"><article class="capability-card"><h3>空间与流程</h3><p>通过空间层级、路线结构和复用关系建立清晰的玩家路径。</p></article><article class="capability-card"><h3>战斗与机制</h3><p>将敌人组合、掩体、视线、移动方式和核心机制整合为可读遭遇。</p></article><article class="capability-card"><h3>原型与实现</h3><p>能在 Creation Kit、Hammer、Unreal Engine 与 Unity 中独立完成可玩原型。</p></article><article class="capability-card"><h3>协作与迭代</h3><p>有 42 人 Scrum 团队、4 人小组与单人项目经验，熟悉测试反馈闭环。</p></article></div></div>
-    </div>
-  </section>
-
-  <section class="section-shell experience-section">
-    <div class="section-heading reveal"><div><span>03 / EXPERIENCE</span><h2>设计与制作经验</h2></div><p>从独立任务关卡，到 42 人团队项目，再到大型在线游戏实习。</p></div>
-    <div class="experience-grid">
-      <article class="experience-item reveal"><span>2025—2027</span><h3>SMU Guildhall</h3><p>Digital Game Development · Level Design Track</p></article>
-      <article class="experience-item reveal" style="--delay:70ms"><span>2024</span><h3>网易雷火</h3><p>《天谕》手游海外版本 · 系统策划实习</p></article>
-      <article class="experience-item reveal" style="--delay:140ms"><span>2021—2025</span><h3>浙江理工大学</h3><p>计算机科学与技术 · 全英班</p></article>
-    </div>
-  </section>
-
-  <section class="contact-band">
-    <div class="section-shell contact-inner reveal">
-      <div><span>OPEN TO OPPORTUNITIES</span><h2>寻找关卡设计、游戏设计相关实习与校招机会。</h2></div>
-      <div class="contact-actions"><a href="mailto:marsshow2000@outlook.com" class="button button-light">发送邮件</a><button class="copy-email" type="button" data-email="marsshow2000@outlook.com">复制邮箱</button></div>
-    </div>
-  </section>
+    </article></div></section>
 </main>
 
 <footer class="site-footer">

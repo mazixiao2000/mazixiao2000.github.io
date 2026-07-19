@@ -1,173 +1,142 @@
-# 中英文网站内容更新指南
+# Markdown 内容编辑指南
 
-本网站使用中英文双语 Markdown 内容。网页外观、布局和交互由 `index.html` 控制；日常更新只需要编辑各页面目录中的 Markdown 文件。
+## 1. 项目基础信息
 
-## 1. 中英文内容文件
-
-每个页面包含两份内容：
-
-```text
-project1/content.md       中文
-project1/content_en.md    English
-
-project2/content.md
-project2/content_en.md
-
-project3/content.md
-project3/content_en.md
-
-project4/content.md
-project4/content_en.md
-
-moreprojects/content.md
-moreprojects/content_en.md
-
-aboutme/content.md
-aboutme/content_en.md
-```
-
-顶部栏右侧的语言滑块会在两份内容之间切换。访客选择的语言会保存在浏览器中。
-
-更新中文内容时编辑 `content.md`；更新英文内容时编辑 `content_en.md`。建议两份文件保持相同的章节、图片和链接顺序。
-
-## 2. 页面基本信息
-
-每个 Markdown 文件顶部都有由 `---` 包围的元数据：
+每个项目位于 `content/projects/`，开头的 `---` 区域是项目元数据：
 
 ```md
 ---
-title: 页面大标题
-tab_title: 左侧选项卡标题
-tag: 页面副标题
-type: 项目类型
-role: 负责模块
-time: 项目周期
-caption: 页面底部说明
-hero: images/hero.jpg
-hero_caption: Hero 图片题注
-hero_width: 68%
+layout: project
+slug: project-name
+title: 项目名称
+subtitle: 项目副标题
+kicker: LEVEL DESIGN / ENGINE
+summary: 一句话说明项目的体验目标和你的贡献。
+cover: /assets/images/project-cover.webp
+hero: /assets/images/project-hero.webp
+engine: Unreal Engine 5
+role: 关卡设计师
+team: 4 人团队
+period: 8 周
+status: 完成
+featured: true
+order: 1
+tags: [关卡设计, 战斗设计, 玩家引导]
+card_note: 首页卡片底部的补充信息
 ---
 ```
 
-英文文件中填写对应英文内容：
+- `featured: true`：显示在首页。
+- `order`：数字越小，显示越靠前。
+- `slug`：决定网址，例如 `slug: fling` 对应 `/projects/fling/`。
+- 图片和文档建议使用英文文件名，不使用空格。
+
+## 2. 普通 Markdown
+
+支持：
 
 ```md
----
-title: About Me
-tab_title: About Me
-tag: Resume & Design Experience
-type: Personal Profile
-role: Level Designer / Game Designer
-time: Portfolio
-caption: ▲ English footer caption
-hero: images/hero.jpg
-hero_caption: English hero caption
-hero_width: 68%
----
+## 二级标题
+### 三级标题
+
+普通段落，支持 **粗体**、*斜体*、`代码` 和 [链接](https://example.com)。
+
+- 无序列表
+- 无序列表
+
+1. 有序列表
+2. 有序列表
+
+![图片说明](/assets/images/example.webp)
 ```
 
-- `hero` 可以省略；省略后该页面不显示 Hero 图。
-- Hero 图固定显示在页面大标题下方。
-- `hero_width` 可以省略，默认铺满内容宽度。
-- 中文和英文页面可以引用同一张图片和同一份 PDF。
+二级标题会自动生成左侧目录。
 
-## 3. 添加标题和正文
+## 3. 指标卡片
 
 ```md
-## 项目概述
-
-这里写正文。不同段落之间保留一个空行。
+:::metrics
+- 18 分钟 | 完整体验时长 | 从任务发布到最终选择
+- 300 小时 | 独立开发投入 | 设计、搭建、脚本与测试
+:::
 ```
 
-英文文件示例：
+格式为：`数值 | 标题 | 补充说明`。
+
+## 4. 重点说明
 
 ```md
-## Project Overview
-
-Write the English project description here.
+:::callout title="我的职责"
+关卡流程、白盒、战斗遭遇、脚本实现与测试迭代。
+:::
 ```
 
-## 4. 添加图片和题注
+## 5. 图片画廊
 
 ```md
-![图片题注](images/combat-space.jpg)
+:::gallery cols=2
+![第一张图片说明](/assets/images/image-01.webp)
+![第二张图片说明](/assets/images/image-02.webp)
+:::
 ```
 
-英文版应翻译方括号内的题注，但图片路径保持不变：
+`cols` 可以使用 `1`、`2` 或 `3`。图片可以点击放大。
+
+## 6. 设计步骤
 
 ```md
-![Combat-space layout and cover placement](images/combat-space.jpg)
+:::steps
+- 入口识别 | 让玩家在高速移动中提前发现路线入口。
+- 路线预告 | 镜头展示下一段道路与目标位置。
+:::
 ```
 
-建议图片使用英文小写文件名，例如：
-
-```text
-hero.jpg
-level-overview.jpg
-combat-space.jpg
-boss-fight.jpg
-```
-
-## 5. 添加 YouTube 内嵌播放器
+## 7. 能力卡片
 
 ```md
-@[youtube](lieJnrhMxWs "《底卡伦：变人》完整游戏演示")
+:::capabilities
+- 空间设计 | 使用路线结构和空间层级建立清晰流程。
+- 原型实现 | 在引擎中独立制作可测试版本。
+:::
 ```
 
-英文版：
+## 8. 时间线
 
 ```md
-@[youtube](lieJnrhMxWs "Decaran: Become Human — Full Gameplay Walkthrough")
+:::timeline
+- 2025—2027 | SMU Guildhall | Level Design Track
+- 2024 | 网易雷火 | 系统策划实习
+:::
 ```
 
-也可以填写完整 YouTube 链接。部署到 GitHub Pages 后会直接显示内嵌播放器。直接双击本地 `index.html` 时，YouTube 可能因来源验证而无法播放。
-
-## 6. 添加 PDF 或简历按钮
-
-单个按钮：
+## 9. 文档与外部链接
 
 ```md
-[📄 查看 LDD](pdfs/example.pdf)
+:::links
+- 完整演示 | https://youtu.be/example | YouTube
+- 设计文档 | /assets/docs/example.pdf | PDF
+:::
 ```
 
-英文按钮：
+## 10. 项目归档卡片
+
+用于 `content/archive.md`：
 
 ```md
-[📄 View LDD](pdfs/example.pdf)
+:::archive
+- 项目名称 | 工具或类型 | 一句话介绍。 | /assets/images/cover.webp
+- 没有图片的项目 | Prototype | 会自动使用文字占位图。 |
+:::
 ```
 
-两个按钮并排：
+## 内容写作建议
 
-```md
-[📄 中文简历](../resume.pdf) [📄 English Resume](../resume_en.pdf)
-```
+每个完整项目优先回答五个问题：
 
-链接放在哪段文字下面，按钮就会显示在哪段文字下面。
+1. 你要解决什么玩家体验问题？
+2. 你个人具体负责什么？
+3. 为什么选择这种空间、机制或流程结构？
+4. 测试发现了什么问题，你如何调整？
+5. 最终完成了什么，下一步会改进什么？
 
-## 7. 更新与预览
-
-### 上传 GitHub Pages
-
-修改 Markdown、图片或 PDF 后，通过 GitHub Desktop 提交并推送。线上网站会读取当前语言对应的 Markdown 文件，不需要修改 `index.html`。
-
-### 本地双击预览
-
-直接双击 `index.html` 时，网站使用 `content.generated.js` 作为本地备用内容。每次修改任意 `content.md` 或 `content_en.md` 后，运行：
-
-```text
-build-content.bat
-```
-
-也可以在终端运行：
-
-```bash
-python scripts/build_content.py
-```
-
-## 8. 不应手动修改的文件
-
-```text
-content.generated.js
-```
-
-该文件由构建脚本自动生成，并同时包含中文和英文内容。
+尽量避免只写“负责关卡设计”“参与团队合作”等无法体现判断过程的描述。

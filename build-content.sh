@@ -1,4 +1,4 @@
-#!/usr/bin/env sh
-set -eu
+#!/usr/bin/env bash
+set -e
 cd "$(dirname "$0")"
-python3 scripts/build_content.py
+python3 scripts/build.py
