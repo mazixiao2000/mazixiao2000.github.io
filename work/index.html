@@ -3,11 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#eaf0ff">
+  <meta name="theme-color" content="#111314">
   <meta name="description" content="马子潇的关卡设计作品集，展示任务关卡、战斗空间、竞速赛道、玩法机制与关卡实现。">
-  <link rel="canonical" href="https://www.mazixiao.com/work/">
-  <link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/work/">
-  <link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/work/">
   <meta property="og:type" content="website">
   <meta property="og:title" content="项目｜马子潇关卡设计作品集">
   <meta property="og:description" content="马子潇的关卡设计作品集，展示任务关卡、战斗空间、竞速赛道、玩法机制与关卡实现。">
@@ -18,53 +15,30 @@
   <link rel="stylesheet" href="/assets/css/styles.css">
   <script defer src="/assets/js/main.js"></script>
 </head>
-<body class="work-page" data-lang="zh" data-copy-label="已复制">
-<div class="ambient ambient-one" aria-hidden="true"></div><div class="ambient ambient-two" aria-hidden="true"></div><div class="ambient ambient-three" aria-hidden="true"></div>
-<div class="noise" aria-hidden="true"></div>
+<body class="work-page">
 <div class="scroll-progress" id="scrollProgress"></div>
 
-<header class="site-header glass-panel" id="siteHeader">
-  <a class="brand" href="/" aria-label="首页">
-    <span class="brand-mark">MZ</span><span class="brand-copy"><strong>MA ZIXIAO</strong><small>LEVEL DESIGNER</small></span>
-  </a>
-  <nav class="desktop-nav" aria-label="Main navigation"><a href="/" class="">首页</a><a href="/work/" class="active">项目</a><a href="/about/" class="">关于我</a></nav>
+<header class="site-header" id="siteHeader">
+  <a class="brand" href="/" aria-label="返回首页"><strong>MA ZIXIAO</strong><span>LEVEL DESIGNER</span></a>
+  <nav class="desktop-nav" aria-label="主导航"><a href="/" class="">首页</a><a href="/work/" class="active">项目</a><a href="/about/" class="">关于</a><a href="/archive/" class="">归档</a></nav>
   <div class="header-actions">
-    <a class="contact-chip email-chip" href="mailto:marsshow2000@outlook.com" title="marsshow2000@outlook.com"><span>✉</span><b>marsshow2000@outlook.com</b></a>
-    <a class="contact-chip phone-chip" href="tel:+8613506692801" title="+86 135-0669-2801"><span>☎</span><b>+86 135-0669-2801</b></a>
-    <div class="language-switch" aria-label="Language">
-      <a href="/work/" class="active" lang="zh-CN">中</a>
-      <a href="/en/work/" class="" lang="en">EN</a>
-    </div>
+    <a class="header-resume" href="/assets/docs/Ma_Zixiao_Level_Designer_Resume_CN.pdf" target="_blank">简历 PDF</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span></button>
   </div>
 </header>
-<nav class="mobile-nav glass-panel" id="mobileNav" aria-label="Mobile navigation">
-  <div class="mobile-nav-links"><a href="/" class="">首页</a><a href="/work/" class="active">项目</a><a href="/about/" class="">关于我</a></div>
-  <div class="mobile-contact">
-    <a href="mailto:marsshow2000@outlook.com">marsshow2000@outlook.com</a>
-    <a href="tel:+8613506692801">+86 135-0669-2801</a>
-    <a href="/assets/docs/Ma_Zixiao_Level_Designer_Resume_CN.pdf" target="_blank">简历 PDF</a>
-    <a href="/en/work/">English</a>
-  </div>
-</nav>
+<nav class="mobile-nav" id="mobileNav" aria-label="移动端导航"><a href="/" class="">首页</a><a href="/work/" class="active">项目</a><a href="/about/" class="">关于</a><a href="/archive/" class="">归档</a><a href="mailto:marsshow2000@outlook.com">联系我</a></nav>
 
 <main>
-  <header class="page-hero section-shell glass-panel reveal">
-    <div class="eyebrow">WORK / CASE STUDIES</div><h1>项目与设计案例</h1><p>按个人项目、团队项目与其他项目组织，让招聘者快速确认我的独立制作能力、团队经验与设计广度。</p>
-    <div class="page-tabs"><a href="#personal-projects">个人项目 <b>02</b></a><a href="#team-projects">团队项目 <b>02</b></a><a href="#other-projects">其他项目 <b>06</b></a></div>
+  <header class="page-hero section-shell">
+    <div class="eyebrow">WORK / CASE STUDIES</div>
+    <h1>项目与设计案例</h1>
+    <p>首页优先展示能够清楚说明设计目标、个人职责、制作过程和最终结果的完整项目。</p>
   </header>
-  
-<section class="section-shell project-category" id="personal-projects">
-  <div class="section-heading reveal">
-    <div><span>01 / PERSONAL PROJECTS</span><h2>个人项目</h2></div>
-    <p>独立完成的任务、FPS 与机制关卡，重点展示从概念到可玩实现的完整能力。</p>
-  </div>
-  <div class="project-grid">
-    <article class="project-card glass-panel reveal" style="--delay:0ms">
-      <a class="project-card-media" href="/projects/decaran/" aria-label="查看项目: Decaran: Become Human">
-        <img src="/assets/images/decaran-cover.webp" alt="Decaran: Become Human">
+  <section class="section-shell work-list"><div class="project-grid">
+    <article class="project-card reveal" style="--delay:0ms">
+      <a class="project-card-media" href="/projects/decaran/" aria-label="查看 Decaran: Become Human">
+        <img src="/assets/images/decaran-cover.webp" alt="Decaran: Become Human 项目封面">
         <span class="project-index">01</span>
-        <span class="project-view">查看项目 <b>↗</b></span>
       </a>
       <div class="project-card-copy">
         <div class="project-card-kicker">QUEST LEVEL DESIGN / CREATION KIT</div>
@@ -74,33 +48,10 @@
         <div class="project-card-meta"><span>独立关卡设计师</span><span>18 分钟原创支线 · 4 个外部空间 / 7 个内部空间</span></div>
       </div>
     </article>
-    <article class="project-card glass-panel reveal" style="--delay:70ms">
-      <a class="project-card-media" href="/projects/way-of-water/" aria-label="查看项目: The Way of Water">
-        <img src="/assets/images/way-of-water-cover.svg" alt="The Way of Water">
+    <article class="project-card reveal" style="--delay:70ms">
+      <a class="project-card-media" href="/projects/hamsterballin/" aria-label="查看 Hamsterballin’">
+        <img src="/assets/images/hamsterballin-cover.webp" alt="Hamsterballin’ 项目封面">
         <span class="project-index">02</span>
-        <span class="project-view">查看项目 <b>↗</b></span>
-      </a>
-      <div class="project-card-copy">
-        <div class="project-card-kicker">FPS LEVEL DESIGN / HAMMER EDITOR</div>
-        <h3><a href="/projects/way-of-water/">The Way of Water</a></h3>
-        <p>以“水与电”的可预测规则为核心，把环境危险、限时窗口、战斗和水位上涨逃生组织成约 10 分钟的单人关卡。</p>
-        <div class="tag-list"><span>FPS</span><span>机制关卡</span><span>玩家引导</span><span>节奏设计</span></div>
-        <div class="project-card-meta"><span>独立关卡设计师</span><span>水电危险 · 限时穿越 · 水位上涨逃生</span></div>
-      </div>
-    </article></div>
-</section>
-  
-<section class="section-shell project-category" id="team-projects">
-  <div class="section-heading reveal">
-    <div><span>02 / TEAM PROJECTS</span><h2>团队项目</h2></div>
-    <p>在跨职能团队中负责核心关卡与玩法模块，强调协作、落地和测试迭代。</p>
-  </div>
-  <div class="project-grid">
-    <article class="project-card glass-panel reveal" style="--delay:0ms">
-      <a class="project-card-media" href="/projects/hamsterballin/" aria-label="查看项目: Hamsterballin’">
-        <img src="/assets/images/hamsterballin-cover.webp" alt="Hamsterballin’">
-        <span class="project-index">01</span>
-        <span class="project-view">查看项目 <b>↗</b></span>
       </a>
       <div class="project-card-copy">
         <div class="project-card-kicker">RACING LEVEL DESIGN / CAMERA SYSTEM</div>
@@ -110,11 +61,23 @@
         <div class="project-card-meta"><span>关卡设计 / 镜头设计</span><span>最终关卡负责人 · 索道系统与动态镜头</span></div>
       </div>
     </article>
-    <article class="project-card glass-panel reveal" style="--delay:70ms">
-      <a class="project-card-media" href="/projects/fling/" aria-label="查看项目: FLING">
-        <img src="/assets/images/fling-cover.webp" alt="FLING">
-        <span class="project-index">02</span>
-        <span class="project-view">查看项目 <b>↗</b></span>
+    <article class="project-card reveal" style="--delay:140ms">
+      <a class="project-card-media" href="/projects/way-of-water/" aria-label="查看 The Way of Water">
+        <img src="/assets/images/way-of-water-cover.svg" alt="The Way of Water 项目封面">
+        <span class="project-index">03</span>
+      </a>
+      <div class="project-card-copy">
+        <div class="project-card-kicker">FPS LEVEL DESIGN / HAMMER EDITOR</div>
+        <h3><a href="/projects/way-of-water/">The Way of Water</a></h3>
+        <p>以“水与电”的可预测规则为核心，把环境危险、限时窗口、战斗和水位上涨逃生组织成约 10 分钟的单人关卡。</p>
+        <div class="tag-list"><span>FPS</span><span>机制关卡</span><span>玩家引导</span><span>节奏设计</span></div>
+        <div class="project-card-meta"><span>独立关卡设计师</span><span>水电危险 · 限时穿越 · 水位上涨逃生</span></div>
+      </div>
+    </article>
+    <article class="project-card reveal" style="--delay:210ms">
+      <a class="project-card-media" href="/projects/fling/" aria-label="查看 FLING">
+        <img src="/assets/images/fling-cover.webp" alt="FLING 项目封面">
+        <span class="project-index">04</span>
       </a>
       <div class="project-card-copy">
         <div class="project-card-kicker">GAME DESIGN / LEVEL DESIGN</div>
@@ -123,22 +86,22 @@
         <div class="tag-list"><span>2D 平台</span><span>核心机制</span><span>关卡教学</span><span>Playtest</span></div>
         <div class="project-card-meta"><span>游戏设计 / 关卡设计</span><span>机制重构 · 多数关卡设计 · 公开测试迭代</span></div>
       </div>
-    </article></div>
-</section>
-  <section class="section-shell project-category" id="other-projects"><div class="section-heading reveal"><div><span>03 / OTHER WORK</span><h2>其他项目</h2></div><p>研究、多人地图、桌游与快速原型，补充展示设计广度与持续探索。</p></div><div class="archive-grid"><article class="archive-card glass-panel"><div class="archive-media"><img src="/assets/images/ghost-ship-cover.webp" alt="" loading="lazy"></div><div class="archive-copy"><span>Starfield Creation Kit</span><h3>幽灵船</h3><p>封闭太空场景中的悬疑探索与环境叙事早期项目。</p></div></article><article class="archive-card glass-panel"><div class="archive-media"><div class="archive-placeholder" aria-hidden="true"><span>LD</span></div></div><div class="archive-copy"><span>Quake 3 Radiant</span><h3>The Holy Grail</h3><p>多人竞技场地图，围绕出生点、武器控制与对称结构进行测试。</p></div></article><article class="archive-card glass-panel"><div class="archive-media"><div class="archive-placeholder" aria-hidden="true"><span>LD</span></div></div><div class="archive-copy"><span>FPS Prototype</span><h3>Box Shot</h3><p>正在研发的第一人称关卡项目。</p></div></article><article class="archive-card glass-panel"><div class="archive-media"><div class="archive-placeholder" aria-hidden="true"><span>LD</span></div></div><div class="archive-copy"><span>毕业研究</span><h3>Thematic Affordances</h3><p>研究主题性可供性如何影响玩家对复杂室内环境的认知地图构建。</p></div></article><article class="archive-card glass-panel"><div class="archive-media"><img src="/assets/images/archive-cover.webp" alt="" loading="lazy"></div><div class="archive-copy"><span>原创桌游</span><h3>海错大爆钓</h3><p>独立桌游设计，参与展会展示并推进出版合作。</p></div></article><article class="archive-card glass-panel"><div class="archive-media"><div class="archive-placeholder" aria-hidden="true"><span>LD</span></div></div><div class="archive-copy"><span>Game Jam</span><h3>Escape from the Circus / OGO</h3><p>在有限时间内完成概念收敛、玩法原型与团队协作。</p></div></article></div></section>
+    </article></div></section>
 </main>
 
-<footer class="site-footer section-shell glass-panel">
+<footer class="site-footer">
   <div><strong>马子潇</strong><span>关卡设计 / 游戏设计 / 原型实现</span></div>
   <div class="footer-links">
     <a href="mailto:marsshow2000@outlook.com">marsshow2000@outlook.com</a>
     <a href="https://www.linkedin.com/in/zixiaoma/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     <a href="https://github.com/mazixiao02" target="_blank" rel="noopener noreferrer">GitHub</a>
   </div>
-  <small>© 2026 Ma Zixiao · 由 Markdown 构建并部署于 GitHub Pages</small>
+  <small>© 2026 Ma Zixiao. Built from Markdown for GitHub Pages.</small>
 </footer>
-<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Image preview">
-  <button class="lightbox-close glass-panel" type="button" aria-label="Close">×</button><img src="" alt=""><p></p>
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="图片预览">
+  <button class="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
+  <img src="" alt="">
+  <p></p>
 </div>
 </body>
 </html>

@@ -1,84 +1,60 @@
-# 马子潇｜双语关卡设计作品集
+# 马子潇｜关卡设计作品集
 
-面向米哈游、鹰角等中国游戏公司关卡设计 / 游戏设计岗位制作的静态作品集网站。整体采用 Apple / visionOS 风格毛玻璃界面，并使用 **Markdown 内容 + Python 静态生成** 架构，无前端框架依赖，可直接部署到 GitHub Pages。
+面向中国游戏公司关卡设计 / 游戏设计岗位制作的静态作品集网站。网站使用 **Markdown 内容 + Python 静态生成** 架构，不依赖前端框架，生成后的文件可以直接部署到 GitHub Pages。
 
-## 核心特性
+## 网站结构
 
-- 中文默认站点，英文站点位于 `/en/`
-- 顶栏可切换中英文，并显示邮箱与电话
-- 项目按“个人项目 / 团队项目 / 其他项目”分类
-- 首页和关于页面展示个人照片
-- 原生 CSS `backdrop-filter` 毛玻璃效果，并提供不支持浏览器的回退样式
-- 桌面端、平板与手机端响应式布局
-- 图片灯箱、项目目录、滚动进度和轻量进入动画
-- Markdown 修改后可一键重新生成全部中英文页面
-
-## 文件结构
-
-```text
-content/                 中文 Markdown 内容
-content/en/              英文 Markdown 内容
-content/projects/        中文完整项目
-content/en/projects/     英文完整项目
-assets/images/           项目图片与个人照片
-assets/docs/             中英文简历与项目文档
-assets/css/styles.css    全站毛玻璃视觉样式
-assets/js/main.js        菜单、目录、灯箱等交互
-scripts/build.py         双语静态网站生成器
-en/                      自动生成的英文网站
-```
+- `index.html`：首页
+- `work/`：全部完整项目
+- `projects/`：各项目 Case Study
+- `about/`：个人经历、技能与简历
+- `archive/`：其他项目与研究归档
+- `content/`：所有可编辑 Markdown 内容
+- `assets/images/`：网站图片
+- `assets/docs/`：简历和项目文档
+- `scripts/build.py`：将 Markdown 生成静态 HTML
 
 ## 部署到 GitHub Pages
 
 1. 解压压缩包。
-2. 将 `mazixiao-portfolio` 文件夹**里面的全部内容**复制到 `mazixiao2000.github.io` 仓库根目录。
-3. 不要只上传外层文件夹，否则网址会多一层目录。
-4. 保留 `CNAME` 文件，以继续使用 `mazixiao.com`。
-5. 使用 GitHub Desktop Commit 并 Push。
+2. 将文件夹内的**全部内容**复制到你的 `mazixiao02.github.io` 仓库根目录。不要把外层文件夹作为二级目录上传。
+3. 保留 `CNAME` 文件，以继续使用 `mazixiao.com`。
+4. 使用 GitHub Desktop 提交并 Push。
+5. 等待 GitHub Pages 自动更新。
 
-生成后的 HTML 已包含在压缩包中，首次部署不需要运行构建命令。
+生成好的 HTML 已经包含在压缩包中，因此首次部署不需要运行任何命令。
 
 ## 修改内容
 
-中文内容：
+主要编辑以下文件：
 
-- `content/site.md`
-- `content/home.md`
-- `content/about.md`
-- `content/projects/*.md`
-- `content/archive.md`
+- `content/site.md`：姓名、邮箱、电话、社交链接、简历路径
+- `content/home.md`：首页介绍与设计能力
+- `content/about.md`：个人介绍、经历、工具
+- `content/projects/*.md`：项目页面
+- `content/archive.md`：其他项目归档
 
-英文内容位于对应的 `content/en/` 路径。
-
-修改 Markdown 后重新生成：
+修改 Markdown 后，重新生成网页：
 
 - Windows：双击 `build-content.bat`
 - macOS / Linux：运行 `./build-content.sh`
 
-构建脚本只使用 Python 标准库，建议 Python 3.10 或更高版本。
-
-## 替换个人照片
-
-当前照片文件：
-
-```text
-assets/images/profile-zixiao.webp
-```
-
-使用同名图片直接替换即可，建议竖版、清晰、正面或半身照，宽度至少 800 px。替换图片不需要重新运行构建脚本。
+脚本只使用 Python 标准库，建议使用 Python 3.10 或更高版本。
 
 ## 本地预览
 
-在网站目录打开终端：
+不要直接双击 `index.html`。在网站目录打开终端并运行：
 
 ```bash
 python -m http.server 8000
 ```
 
-浏览器访问：
+浏览器打开：
 
 ```text
 http://localhost:8000
 ```
 
-不要直接双击 `index.html`，否则部分绝对路径资源可能无法正常加载。
+## 设计原则
+
+首页只突出能够完整说明设计问题、职责、过程和结果的项目；信息不完整的作品放入归档，避免削弱招聘方的第一印象。项目页面以设计目标、个人贡献、空间与机制分析、迭代和文档为核心，而不是仅展示最终截图。

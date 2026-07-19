@@ -13,7 +13,6 @@ team: 42 人团队
 period: 12 周 · Scrum
 status: Steam 商店页已公开
 featured: true
-category: team
 order: 2
 tags: [竞速关卡, 路线设计, 镜头系统, 团队协作]
 card_note: 最终关卡负责人 · 索道系统与动态镜头

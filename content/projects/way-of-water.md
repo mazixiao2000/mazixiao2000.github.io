@@ -13,7 +13,6 @@ team: 单人开发
 period: 课程项目
 status: 完成
 featured: true
-category: personal
 order: 3
 tags: [FPS, 机制关卡, 玩家引导, 节奏设计]
 card_note: 水电危险 · 限时穿越 · 水位上涨逃生

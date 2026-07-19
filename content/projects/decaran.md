@@ -13,7 +13,6 @@ team: 单人开发
 period: 12 周 · 约 300 小时
 status: 完成
 featured: true
-category: personal
 order: 1
 tags: [任务关卡, 战斗设计, 环境叙事, 脚本实现]
 card_note: 18 分钟原创支线 · 4 个外部空间 / 7 个内部空间
