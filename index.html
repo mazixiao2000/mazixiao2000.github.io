@@ -6,29 +6,51 @@
   <meta name="theme-color" content="#111314">
   <meta name="description" content="马子潇的关卡设计作品集，展示任务关卡、战斗空间、竞速赛道、玩法机制与关卡实现。">
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
   <meta property="og:title" content="马子潇｜关卡设计作品集">
   <meta property="og:description" content="马子潇的关卡设计作品集，展示任务关卡、战斗空间、竞速赛道、玩法机制与关卡实现。">
+  <meta property="og:url" content="https://www.mazixiao.com/">
   <meta property="og:image" content="https://www.mazixiao.com/assets/images/decaran-cover.webp">
   <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.mazixiao.com/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/">
+  <link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/">
+  <link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/">
   <title>马子潇｜关卡设计作品集</title>
   <link rel="icon" href="/assets/images/avatar-monogram.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/css/styles.css">
   <script defer src="/assets/js/main.js"></script>
 </head>
-<body class="home-page">
+<body class="home-page lang-zh" data-lang="zh">
 <div class="scroll-progress" id="scrollProgress"></div>
 
+<a class="skip-link" href="#main-content">跳到主要内容</a>
 <header class="site-header" id="siteHeader">
   <a class="brand" href="/" aria-label="返回首页"><strong>MA ZIXIAO</strong><span>LEVEL DESIGNER</span></a>
   <nav class="desktop-nav" aria-label="主导航"><a href="/" class="active">首页</a><a href="/work/" class="">项目</a><a href="/about/" class="">关于</a><a href="/archive/" class="">归档</a></nav>
   <div class="header-actions">
-    <a class="header-resume" href="/assets/docs/Ma_Zixiao_Level_Designer_Resume_CN.pdf" target="_blank">简历 PDF</a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span></button>
+    
+    <div class="language-switch" role="group" aria-label="语言切换">
+      <a href="/" data-language-link="zh" lang="zh-CN" class="active" aria-current="true">中</a>
+      <span aria-hidden="true">/</span>
+      <a href="/en/" data-language-link="en" lang="en" class="" aria-current="false">EN</a>
+    </div>
+    <a class="header-resume" href="/assets/docs/Ma_Zixiao_Level_Designer_Resume_CN.pdf" target="_blank" rel="noopener noreferrer">简历 PDF</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="打开导航菜单"><span></span><span></span></button>
   </div>
 </header>
-<nav class="mobile-nav" id="mobileNav" aria-label="移动端导航"><a href="/" class="active">首页</a><a href="/work/" class="">项目</a><a href="/about/" class="">关于</a><a href="/archive/" class="">归档</a><a href="mailto:marsshow2000@outlook.com">联系我</a></nav>
+<nav class="mobile-nav" id="mobileNav" aria-label="移动端导航">
+  <a href="/" class="active">首页</a><a href="/work/" class="">项目</a><a href="/about/" class="">关于</a><a href="/archive/" class="">归档</a>
+  <a href="mailto:mazixiao2000@outlook.com">联系我</a>
+  <div class="mobile-language">
+    <div class="language-switch" role="group" aria-label="语言切换">
+      <a href="/" data-language-link="zh" lang="zh-CN" class="active" aria-current="true">中</a>
+      <span aria-hidden="true">/</span>
+      <a href="/en/" data-language-link="en" lang="en" class="" aria-current="false">EN</a>
+    </div></div>
+</nav>
 
-<main>
+<main id="main-content">
   <section class="home-hero">
     <div class="hero-grid" aria-hidden="true"></div>
     <div class="hero-main reveal">
@@ -37,14 +59,12 @@
       <p>SMU Guildhall 关卡设计硕士在读，本科计算机科学背景，曾在网易雷火担任系统策划实习生。具备从概念、白盒、脚本实现到跨职能迭代的完整开发经验。</p>
       <div class="hero-actions">
         <a class="button button-primary" href="/work/">查看精选项目 <span>↗</span></a>
-        <a class="button button-secondary" href="/assets/docs/Ma_Zixiao_Level_Designer_Resume_CN.pdf" target="_blank">下载中文简历</a>
+        <a class="button button-secondary" href="/assets/docs/Ma_Zixiao_Level_Designer_Resume_CN.pdf" target="_blank" rel="noopener noreferrer">下载中文简历</a>
       </div>
     </div>
     <aside class="hero-profile reveal" style="--delay:120ms">
-      <img src="/assets/images/avatar-monogram.svg" alt="马子潇姓名缩写图形">
-      <div><span>当前身份</span><strong>SMU Guildhall<br>Level Design M.I.T.</strong></div>
-      <div><span>经历</span><strong>网易雷火<br>系统策划实习</strong></div>
-      <div><span>工具</span><strong>UE5 · Unity · CK<br>Hammer · Radiant</strong></div>
+      <img src="/assets/images/avatar-monogram.svg" alt="MA monogram">
+      <div><span>当前身份</span><strong>SMU Guildhall<br>Level Design M.I.T.</strong></div><div><span>经历</span><strong>网易雷火<br>系统策划实习</strong></div><div><span>工具</span><strong>UE5 · Unity · CK<br>Hammer · Radiant</strong></div>
     </aside>
     <div class="hero-number" aria-hidden="true">LD</div>
   </section>
@@ -54,7 +74,7 @@
     <div class="project-grid">
     <article class="project-card reveal" style="--delay:0ms">
       <a class="project-card-media" href="/projects/decaran/" aria-label="查看 Decaran: Become Human">
-        <img src="/assets/images/decaran-cover.webp" alt="Decaran: Become Human 项目封面">
+        <img src="/assets/images/decaran-cover.webp" alt="Decaran: Become Human 项目封面" loading="lazy" decoding="async">
         <span class="project-index">01</span>
       </a>
       <div class="project-card-copy">
@@ -67,7 +87,7 @@
     </article>
     <article class="project-card reveal" style="--delay:70ms">
       <a class="project-card-media" href="/projects/hamsterballin/" aria-label="查看 Hamsterballin’">
-        <img src="/assets/images/hamsterballin-cover.webp" alt="Hamsterballin’ 项目封面">
+        <img src="/assets/images/hamsterballin-cover.webp" alt="Hamsterballin’ 项目封面" loading="lazy" decoding="async">
         <span class="project-index">02</span>
       </a>
       <div class="project-card-copy">
@@ -80,7 +100,7 @@
     </article>
     <article class="project-card reveal" style="--delay:140ms">
       <a class="project-card-media" href="/projects/way-of-water/" aria-label="查看 The Way of Water">
-        <img src="/assets/images/way-of-water-cover.svg" alt="The Way of Water 项目封面">
+        <img src="/assets/images/way-of-water-cover.svg" alt="The Way of Water 项目封面" loading="lazy" decoding="async">
         <span class="project-index">03</span>
       </a>
       <div class="project-card-copy">
@@ -93,7 +113,7 @@
     </article>
     <article class="project-card reveal" style="--delay:210ms">
       <a class="project-card-media" href="/projects/fling/" aria-label="查看 FLING">
-        <img src="/assets/images/fling-cover.webp" alt="FLING 项目封面">
+        <img src="/assets/images/fling-cover.webp" alt="FLING 项目封面" loading="lazy" decoding="async">
         <span class="project-index">04</span>
       </a>
       <div class="project-card-copy">
@@ -118,17 +138,13 @@
 
   <section class="section-shell experience-section">
     <div class="section-heading reveal"><div><span>03 / EXPERIENCE</span><h2>设计与制作经验</h2></div><p>从独立任务关卡，到 42 人团队项目，再到大型在线游戏实习。</p></div>
-    <div class="experience-grid">
-      <article class="experience-item reveal"><span>2025—2027</span><h3>SMU Guildhall</h3><p>Digital Game Development · Level Design Track</p></article>
-      <article class="experience-item reveal" style="--delay:70ms"><span>2024</span><h3>网易雷火</h3><p>《天谕》手游海外版本 · 系统策划实习</p></article>
-      <article class="experience-item reveal" style="--delay:140ms"><span>2021—2025</span><h3>浙江理工大学</h3><p>计算机科学与技术 · 全英班</p></article>
-    </div>
+    <div class="experience-grid"><article class="experience-item reveal" style="--delay:0ms"><span>2025—2027</span><h3>SMU Guildhall</h3><p>Digital Game Development · Level Design Track</p></article><article class="experience-item reveal" style="--delay:70ms"><span>2024</span><h3>网易雷火</h3><p>《天谕》手游海外版本 · 系统策划实习</p></article><article class="experience-item reveal" style="--delay:140ms"><span>2021—2025</span><h3>浙江理工大学</h3><p>计算机科学与技术 · 全英班</p></article></div>
   </section>
 
   <section class="contact-band">
     <div class="section-shell contact-inner reveal">
       <div><span>OPEN TO OPPORTUNITIES</span><h2>寻找关卡设计、游戏设计相关实习与校招机会。</h2></div>
-      <div class="contact-actions"><a href="mailto:marsshow2000@outlook.com" class="button button-light">发送邮件</a><button class="copy-email" type="button" data-email="marsshow2000@outlook.com">复制邮箱</button></div>
+      <div class="contact-actions"><a href="mailto:mazixiao2000@outlook.com" class="button button-light">发送邮件</a><button class="copy-email" type="button" data-email="mazixiao2000@outlook.com" data-copied-label="已复制">复制邮箱</button></div>
     </div>
   </section>
 </main>
@@ -136,13 +152,13 @@
 <footer class="site-footer">
   <div><strong>马子潇</strong><span>关卡设计 / 游戏设计 / 原型实现</span></div>
   <div class="footer-links">
-    <a href="mailto:marsshow2000@outlook.com">marsshow2000@outlook.com</a>
+    <a href="mailto:mazixiao2000@outlook.com">mazixiao2000@outlook.com</a>
     <a href="https://www.linkedin.com/in/zixiaoma/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     <a href="https://github.com/mazixiao02" target="_blank" rel="noopener noreferrer">GitHub</a>
   </div>
-  <small>© 2026 Ma Zixiao. Built from Markdown for GitHub Pages.</small>
+  <small>© 2026 Ma Zixiao. 基于 Markdown 构建并部署于 GitHub Pages。</small>
 </footer>
-<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="图片预览">
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="图片预览">
   <button class="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
   <img src="" alt="">
   <p></p>

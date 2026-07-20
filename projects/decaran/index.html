@@ -6,29 +6,51 @@
   <meta name="theme-color" content="#111314">
   <meta name="description" content="在一座隐藏于沙漠的自动化工厂中，将探索、战斗、垂直移动、环境引导与道德抉择整合为完整的 18 分钟任务体验。">
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
   <meta property="og:title" content="Decaran: Become Human｜马子潇作品集">
   <meta property="og:description" content="在一座隐藏于沙漠的自动化工厂中，将探索、战斗、垂直移动、环境引导与道德抉择整合为完整的 18 分钟任务体验。">
+  <meta property="og:url" content="https://www.mazixiao.com/projects/decaran/">
   <meta property="og:image" content="https://www.mazixiao.com/assets/images/decaran-cover.webp">
   <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.mazixiao.com/projects/decaran/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/projects/decaran/">
+  <link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/projects/decaran/">
+  <link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/projects/decaran/">
   <title>Decaran: Become Human｜马子潇作品集</title>
   <link rel="icon" href="/assets/images/avatar-monogram.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/css/styles.css">
   <script defer src="/assets/js/main.js"></script>
 </head>
-<body class="project-page">
+<body class="project-page lang-zh" data-lang="zh">
 <div class="scroll-progress" id="scrollProgress"></div>
 
+<a class="skip-link" href="#main-content">跳到主要内容</a>
 <header class="site-header" id="siteHeader">
   <a class="brand" href="/" aria-label="返回首页"><strong>MA ZIXIAO</strong><span>LEVEL DESIGNER</span></a>
   <nav class="desktop-nav" aria-label="主导航"><a href="/" class="">首页</a><a href="/work/" class="active">项目</a><a href="/about/" class="">关于</a><a href="/archive/" class="">归档</a></nav>
   <div class="header-actions">
-    <a class="header-resume" href="/assets/docs/Ma_Zixiao_Level_Designer_Resume_CN.pdf" target="_blank">简历 PDF</a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span></button>
+    
+    <div class="language-switch" role="group" aria-label="语言切换">
+      <a href="/projects/decaran/" data-language-link="zh" lang="zh-CN" class="active" aria-current="true">中</a>
+      <span aria-hidden="true">/</span>
+      <a href="/en/projects/decaran/" data-language-link="en" lang="en" class="" aria-current="false">EN</a>
+    </div>
+    <a class="header-resume" href="/assets/docs/Ma_Zixiao_Level_Designer_Resume_CN.pdf" target="_blank" rel="noopener noreferrer">简历 PDF</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="打开导航菜单"><span></span><span></span></button>
   </div>
 </header>
-<nav class="mobile-nav" id="mobileNav" aria-label="移动端导航"><a href="/" class="">首页</a><a href="/work/" class="active">项目</a><a href="/about/" class="">关于</a><a href="/archive/" class="">归档</a><a href="mailto:marsshow2000@outlook.com">联系我</a></nav>
+<nav class="mobile-nav" id="mobileNav" aria-label="移动端导航">
+  <a href="/" class="">首页</a><a href="/work/" class="active">项目</a><a href="/about/" class="">关于</a><a href="/archive/" class="">归档</a>
+  <a href="mailto:mazixiao2000@outlook.com">联系我</a>
+  <div class="mobile-language">
+    <div class="language-switch" role="group" aria-label="语言切换">
+      <a href="/projects/decaran/" data-language-link="zh" lang="zh-CN" class="active" aria-current="true">中</a>
+      <span aria-hidden="true">/</span>
+      <a href="/en/projects/decaran/" data-language-link="en" lang="en" class="" aria-current="false">EN</a>
+    </div></div>
+</nav>
 
-<main class="project-main">
+<main class="project-main" id="main-content">
   <header class="project-hero">
     <div class="project-hero-copy section-shell">
       <div class="project-breadcrumb"><a href="/work/">项目</a><span>/</span><span>Starfield Creation Kit</span></div>
@@ -39,7 +61,7 @@
       <div class="tag-list tag-list-large"><span>任务关卡</span><span>战斗设计</span><span>环境叙事</span><span>脚本实现</span></div>
     </div>
     <div class="project-hero-media">
-      <img src="/assets/images/decaran-overview.webp" alt="Decaran: Become Human 项目主视觉">
+      <img src="/assets/images/decaran-overview.webp" alt="Decaran: Become Human 项目主视觉" decoding="async">
     </div>
     <div class="project-specs section-shell">
       <div><span>职责</span><strong>独立关卡设计师</strong></div>
@@ -58,18 +80,18 @@
 <aside class="callout"><span>我的职责</span><p>任务概念、叙事结构、空间布局、白盒、战斗遭遇、敌人配置、谜题机制、终端交互、触发逻辑、Papyrus 脚本、测试与迭代。</p></aside>
 <h2 id="section-2">用中心空间组织任务节奏<a class="heading-anchor" href="#section-2" aria-label="链接到本节">#</a></h2>
 <p>内部流程以中央大厅和锁定电梯为核心。玩家需要进入三个功能不同的房间，完成目标并激活终端，再返回大厅观察电梯状态变化。这个“大厅—房间—大厅”的循环同时承担三个功能：明确阶段目标、复用熟悉空间、让玩家建立稳定的空间锚点。</p>
-<div class="gallery gallery-2"><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-map-overview.webp" data-lightbox-alt="关卡总体布局：外部建筑与内部工厂形成连续任务路径"><img src="/assets/images/decaran-map-overview.webp" alt="关卡总体布局：外部建筑与内部工厂形成连续任务路径" loading="lazy"></button><figcaption>关卡总体布局：外部建筑与内部工厂形成连续任务路径</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-map-floor2.webp" data-lightbox-alt="二层空间结构：中央大厅、功能房间与垂直连接关系"><img src="/assets/images/decaran-map-floor2.webp" alt="二层空间结构：中央大厅、功能房间与垂直连接关系" loading="lazy"></button><figcaption>二层空间结构：中央大厅、功能房间与垂直连接关系</figcaption></figure></div>
+<div class="gallery gallery-2"><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-map-overview.webp" data-lightbox-alt="关卡总体布局：外部建筑与内部工厂形成连续任务路径"><img src="/assets/images/decaran-map-overview.webp" alt="关卡总体布局：外部建筑与内部工厂形成连续任务路径" loading="lazy" decoding="async"></button><figcaption>关卡总体布局：外部建筑与内部工厂形成连续任务路径</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-map-floor2.webp" data-lightbox-alt="二层空间结构：中央大厅、功能房间与垂直连接关系"><img src="/assets/images/decaran-map-floor2.webp" alt="二层空间结构：中央大厅、功能房间与垂直连接关系" loading="lazy" decoding="async"></button><figcaption>二层空间结构：中央大厅、功能房间与垂直连接关系</figcaption></figure></div>
 <p>每次终端互动后，玩家都会面向大厅中的电梯和状态指示，直接看到进度反馈。电缆连接、门禁状态与灯光变化进一步将任务逻辑可视化，减少仅依赖 HUD 指令的导航。</p>
 <h2 id="section-3">战斗空间与核心机制<a class="heading-anchor" href="#section-3" aria-label="链接到本节">#</a></h2>
 <p>敌人组合包含近战突击机器人与远程火力单位，促使玩家不断调整站位、掩体和攻击优先级。EMP 步枪 Novablast 能够在造成伤害的同时暂时瘫痪机械敌人，为玩家提供控制战场节奏的工具。</p>
 <p>关卡刻意使用紧凑房间、开放场地、走廊猫道与垂直空间，使每次遭遇在射程、移动路线和视线压力上产生差异。战斗强度逐步提升，并在最终 Boss 战中回收前期学习的移动、控制与目标判断。</p>
-<div class="gallery gallery-2"><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-lobby.webp" data-lightbox-alt="大厅以多层结构、开放视线和明确功能分区建立空间层级"><img src="/assets/images/decaran-lobby.webp" alt="大厅以多层结构、开放视线和明确功能分区建立空间层级" loading="lazy"></button><figcaption>大厅以多层结构、开放视线和明确功能分区建立空间层级</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-laser.webp" data-lightbox-alt="激光区域将观察、时机判断与垂直移动组合为标志性段落"><img src="/assets/images/decaran-laser.webp" alt="激光区域将观察、时机判断与垂直移动组合为标志性段落" loading="lazy"></button><figcaption>激光区域将观察、时机判断与垂直移动组合为标志性段落</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-vertical-shaft.webp" data-lightbox-alt="垂直通风井改变移动方式，并将玩家重新带回核心空间"><img src="/assets/images/decaran-vertical-shaft.webp" alt="垂直通风井改变移动方式，并将玩家重新带回核心空间" loading="lazy"></button><figcaption>垂直通风井改变移动方式，并将玩家重新带回核心空间</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-rooftop.webp" data-lightbox-alt="屋顶办公区利用开阔视野和日落氛围承载剧情转折"><img src="/assets/images/decaran-rooftop.webp" alt="屋顶办公区利用开阔视野和日落氛围承载剧情转折" loading="lazy"></button><figcaption>屋顶办公区利用开阔视野和日落氛围承载剧情转折</figcaption></figure></div>
+<div class="gallery gallery-2"><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-lobby.webp" data-lightbox-alt="大厅以多层结构、开放视线和明确功能分区建立空间层级"><img src="/assets/images/decaran-lobby.webp" alt="大厅以多层结构、开放视线和明确功能分区建立空间层级" loading="lazy" decoding="async"></button><figcaption>大厅以多层结构、开放视线和明确功能分区建立空间层级</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-laser.webp" data-lightbox-alt="激光区域将观察、时机判断与垂直移动组合为标志性段落"><img src="/assets/images/decaran-laser.webp" alt="激光区域将观察、时机判断与垂直移动组合为标志性段落" loading="lazy" decoding="async"></button><figcaption>激光区域将观察、时机判断与垂直移动组合为标志性段落</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-vertical-shaft.webp" data-lightbox-alt="垂直通风井改变移动方式，并将玩家重新带回核心空间"><img src="/assets/images/decaran-vertical-shaft.webp" alt="垂直通风井改变移动方式，并将玩家重新带回核心空间" loading="lazy" decoding="async"></button><figcaption>垂直通风井改变移动方式，并将玩家重新带回核心空间</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-rooftop.webp" data-lightbox-alt="屋顶办公区利用开阔视野和日落氛围承载剧情转折"><img src="/assets/images/decaran-rooftop.webp" alt="屋顶办公区利用开阔视野和日落氛围承载剧情转折" loading="lazy" decoding="async"></button><figcaption>屋顶办公区利用开阔视野和日落氛围承载剧情转折</figcaption></figure></div>
 <h2 id="section-4">让环境承担引导信息<a class="heading-anchor" href="#section-4" aria-label="链接到本节">#</a></h2>
 <p>工厂被划分为办公室、生产区、服务器区、屋顶和生活设施等明确功能区域。通过资产类型、建筑结构和照明语言的差异，玩家能够先识别空间用途，再理解区域之间的关系。</p>
 <p>电缆将终端与电梯、隐藏按钮与秘密门直接连接，既是世界观中的功能结构，也是玩家可追踪的视觉线索。隐藏交互用于奖励观察和探索，而不是作为推进主线的唯一条件。</p>
 <h2 id="section-5">叙事反转与最终选择<a class="heading-anchor" href="#section-5" aria-label="链接到本节">#</a></h2>
 <p>任务包含两层反转：第一层改变玩家对“叛乱”的理解，第二层改变玩家对同伴 R6D7 的判断。结尾并不存在无代价的正确答案：恢复生产能够维持药品供应和人类秩序，但需要消灭获得意识的机器人；释放机器人则意味着工厂停摆，并引发人类伤亡与阵营敌对。</p>
-<figure class="feature-figure"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-dialogue.webp" data-lightbox-alt="R6D7 从向导转变为叛乱核心，完成角色关系的重新定义"><img src="/assets/images/decaran-dialogue.webp" alt="R6D7 从向导转变为叛乱核心，完成角色关系的重新定义" loading="lazy"></button><figcaption>R6D7 从向导转变为叛乱核心，完成角色关系的重新定义</figcaption></figure>
+<figure class="feature-figure"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-dialogue.webp" data-lightbox-alt="R6D7 从向导转变为叛乱核心，完成角色关系的重新定义"><img src="/assets/images/decaran-dialogue.webp" alt="R6D7 从向导转变为叛乱核心，完成角色关系的重新定义" loading="lazy" decoding="async"></button><figcaption>R6D7 从向导转变为叛乱核心，完成角色关系的重新定义</figcaption></figure>
 <h2 id="section-6">项目成果与反思<a class="heading-anchor" href="#section-6" aria-label="链接到本节">#</a></h2>
 <p>项目完成了从任务发布、外部探索、内部多阶段目标、垂直移动、Boss 战到双结局选择的完整流程。它验证了我能够在现有大型 RPG 工具链中，将设计文档转化为可玩的任务关卡，并独立处理空间、遭遇、脚本和叙事之间的依赖关系。</p>
 <p>下一步改进重点会放在进一步压缩前段信息密度、强化部分战斗房间的敌人层次，以及通过更多动态状态变化提升重复经过中央大厅时的反馈差异。</p>
@@ -86,13 +108,13 @@
 <footer class="site-footer">
   <div><strong>马子潇</strong><span>关卡设计 / 游戏设计 / 原型实现</span></div>
   <div class="footer-links">
-    <a href="mailto:marsshow2000@outlook.com">marsshow2000@outlook.com</a>
+    <a href="mailto:mazixiao2000@outlook.com">mazixiao2000@outlook.com</a>
     <a href="https://www.linkedin.com/in/zixiaoma/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     <a href="https://github.com/mazixiao02" target="_blank" rel="noopener noreferrer">GitHub</a>
   </div>
-  <small>© 2026 Ma Zixiao. Built from Markdown for GitHub Pages.</small>
+  <small>© 2026 Ma Zixiao. 基于 Markdown 构建并部署于 GitHub Pages。</small>
 </footer>
-<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="图片预览">
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="图片预览">
   <button class="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
   <img src="" alt="">
   <p></p>

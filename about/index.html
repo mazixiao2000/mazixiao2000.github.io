@@ -6,29 +6,51 @@
   <meta name="theme-color" content="#111314">
   <meta name="description" content="关卡设计、系统设计与技术实现交叉背景。">
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
   <meta property="og:title" content="关于我｜马子潇作品集">
   <meta property="og:description" content="关卡设计、系统设计与技术实现交叉背景。">
+  <meta property="og:url" content="https://www.mazixiao.com/about/">
   <meta property="og:image" content="https://www.mazixiao.com/assets/images/decaran-cover.webp">
   <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.mazixiao.com/about/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/about/">
+  <link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/about/">
+  <link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/about/">
   <title>关于我｜马子潇作品集</title>
   <link rel="icon" href="/assets/images/avatar-monogram.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/css/styles.css">
   <script defer src="/assets/js/main.js"></script>
 </head>
-<body class="about-page">
+<body class="about-page lang-zh" data-lang="zh">
 <div class="scroll-progress" id="scrollProgress"></div>
 
+<a class="skip-link" href="#main-content">跳到主要内容</a>
 <header class="site-header" id="siteHeader">
   <a class="brand" href="/" aria-label="返回首页"><strong>MA ZIXIAO</strong><span>LEVEL DESIGNER</span></a>
   <nav class="desktop-nav" aria-label="主导航"><a href="/" class="">首页</a><a href="/work/" class="">项目</a><a href="/about/" class="active">关于</a><a href="/archive/" class="">归档</a></nav>
   <div class="header-actions">
-    <a class="header-resume" href="/assets/docs/Ma_Zixiao_Level_Designer_Resume_CN.pdf" target="_blank">简历 PDF</a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span></button>
+    
+    <div class="language-switch" role="group" aria-label="语言切换">
+      <a href="/about/" data-language-link="zh" lang="zh-CN" class="active" aria-current="true">中</a>
+      <span aria-hidden="true">/</span>
+      <a href="/en/about/" data-language-link="en" lang="en" class="" aria-current="false">EN</a>
+    </div>
+    <a class="header-resume" href="/assets/docs/Ma_Zixiao_Level_Designer_Resume_CN.pdf" target="_blank" rel="noopener noreferrer">简历 PDF</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="打开导航菜单"><span></span><span></span></button>
   </div>
 </header>
-<nav class="mobile-nav" id="mobileNav" aria-label="移动端导航"><a href="/" class="">首页</a><a href="/work/" class="">项目</a><a href="/about/" class="active">关于</a><a href="/archive/" class="">归档</a><a href="mailto:marsshow2000@outlook.com">联系我</a></nav>
+<nav class="mobile-nav" id="mobileNav" aria-label="移动端导航">
+  <a href="/" class="">首页</a><a href="/work/" class="">项目</a><a href="/about/" class="active">关于</a><a href="/archive/" class="">归档</a>
+  <a href="mailto:mazixiao2000@outlook.com">联系我</a>
+  <div class="mobile-language">
+    <div class="language-switch" role="group" aria-label="语言切换">
+      <a href="/about/" data-language-link="zh" lang="zh-CN" class="active" aria-current="true">中</a>
+      <span aria-hidden="true">/</span>
+      <a href="/en/about/" data-language-link="en" lang="en" class="" aria-current="false">EN</a>
+    </div></div>
+</nav>
 
-<main>
+<main id="main-content">
   <header class="page-hero section-shell">
     <div class="eyebrow">PROFILE / EXPERIENCE</div>
     <h1>关于我</h1>
@@ -55,13 +77,13 @@
 <footer class="site-footer">
   <div><strong>马子潇</strong><span>关卡设计 / 游戏设计 / 原型实现</span></div>
   <div class="footer-links">
-    <a href="mailto:marsshow2000@outlook.com">marsshow2000@outlook.com</a>
+    <a href="mailto:mazixiao2000@outlook.com">mazixiao2000@outlook.com</a>
     <a href="https://www.linkedin.com/in/zixiaoma/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     <a href="https://github.com/mazixiao02" target="_blank" rel="noopener noreferrer">GitHub</a>
   </div>
-  <small>© 2026 Ma Zixiao. Built from Markdown for GitHub Pages.</small>
+  <small>© 2026 Ma Zixiao. 基于 Markdown 构建并部署于 GitHub Pages。</small>
 </footer>
-<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="图片预览">
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="图片预览">
   <button class="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
   <img src="" alt="">
   <p></p>

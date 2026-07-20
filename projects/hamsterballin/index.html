@@ -6,29 +6,51 @@
   <meta name="theme-color" content="#111314">
   <meta name="description" content="在 42 人团队中负责最终赛道“扭蛋机星系”、索道捷径系统与镜头演出，让路线、导航和景观展示在高速竞速中协同工作。">
   <meta property="og:type" content="website">
+  <meta property="og:locale" content="zh_CN">
   <meta property="og:title" content="Hamsterballin’｜马子潇作品集">
   <meta property="og:description" content="在 42 人团队中负责最终赛道“扭蛋机星系”、索道捷径系统与镜头演出，让路线、导航和景观展示在高速竞速中协同工作。">
+  <meta property="og:url" content="https://www.mazixiao.com/projects/hamsterballin/">
   <meta property="og:image" content="https://www.mazixiao.com/assets/images/hamsterballin-cover.webp">
   <meta name="twitter:card" content="summary_large_image">
+  <link rel="canonical" href="https://www.mazixiao.com/projects/hamsterballin/">
+  <link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/projects/hamsterballin/">
+  <link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/projects/hamsterballin/">
+  <link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/projects/hamsterballin/">
   <title>Hamsterballin’｜马子潇作品集</title>
   <link rel="icon" href="/assets/images/avatar-monogram.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/css/styles.css">
   <script defer src="/assets/js/main.js"></script>
 </head>
-<body class="project-page">
+<body class="project-page lang-zh" data-lang="zh">
 <div class="scroll-progress" id="scrollProgress"></div>
 
+<a class="skip-link" href="#main-content">跳到主要内容</a>
 <header class="site-header" id="siteHeader">
   <a class="brand" href="/" aria-label="返回首页"><strong>MA ZIXIAO</strong><span>LEVEL DESIGNER</span></a>
   <nav class="desktop-nav" aria-label="主导航"><a href="/" class="">首页</a><a href="/work/" class="active">项目</a><a href="/about/" class="">关于</a><a href="/archive/" class="">归档</a></nav>
   <div class="header-actions">
-    <a class="header-resume" href="/assets/docs/Ma_Zixiao_Level_Designer_Resume_CN.pdf" target="_blank">简历 PDF</a>
-    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileNav"><span></span><span></span></button>
+    
+    <div class="language-switch" role="group" aria-label="语言切换">
+      <a href="/projects/hamsterballin/" data-language-link="zh" lang="zh-CN" class="active" aria-current="true">中</a>
+      <span aria-hidden="true">/</span>
+      <a href="/en/projects/hamsterballin/" data-language-link="en" lang="en" class="" aria-current="false">EN</a>
+    </div>
+    <a class="header-resume" href="/assets/docs/Ma_Zixiao_Level_Designer_Resume_CN.pdf" target="_blank" rel="noopener noreferrer">简历 PDF</a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="打开导航菜单"><span></span><span></span></button>
   </div>
 </header>
-<nav class="mobile-nav" id="mobileNav" aria-label="移动端导航"><a href="/" class="">首页</a><a href="/work/" class="active">项目</a><a href="/about/" class="">关于</a><a href="/archive/" class="">归档</a><a href="mailto:marsshow2000@outlook.com">联系我</a></nav>
+<nav class="mobile-nav" id="mobileNav" aria-label="移动端导航">
+  <a href="/" class="">首页</a><a href="/work/" class="active">项目</a><a href="/about/" class="">关于</a><a href="/archive/" class="">归档</a>
+  <a href="mailto:mazixiao2000@outlook.com">联系我</a>
+  <div class="mobile-language">
+    <div class="language-switch" role="group" aria-label="语言切换">
+      <a href="/projects/hamsterballin/" data-language-link="zh" lang="zh-CN" class="active" aria-current="true">中</a>
+      <span aria-hidden="true">/</span>
+      <a href="/en/projects/hamsterballin/" data-language-link="en" lang="en" class="" aria-current="false">EN</a>
+    </div></div>
+</nav>
 
-<main class="project-main">
+<main class="project-main" id="main-content">
   <header class="project-hero">
     <div class="project-hero-copy section-shell">
       <div class="project-breadcrumb"><a href="/work/">项目</a><span>/</span><span>Unreal Engine 5</span></div>
@@ -39,7 +61,7 @@
       <div class="tag-list tag-list-large"><span>竞速关卡</span><span>路线设计</span><span>镜头系统</span><span>团队协作</span></div>
     </div>
     <div class="project-hero-media">
-      <img src="/assets/images/hamsterballin-hero.webp" alt="Hamsterballin’ 项目主视觉">
+      <img src="/assets/images/hamsterballin-hero.webp" alt="Hamsterballin’ 项目主视觉" decoding="async">
     </div>
     <div class="project-specs section-shell">
       <div><span>职责</span><strong>关卡设计 / 镜头设计</strong></div>
@@ -62,7 +84,7 @@
 <h2 id="section-3">索道系统：把捷径变成导航工具<a class="heading-anchor" href="#section-3" aria-label="链接到本节">#</a></h2>
 <p>索道最初作为可选择的捷径提出，但在迭代中被赋予了更多功能：玩家离开地面赛道后，镜头能够展示地标、预告下一段路线、强化整体方向感，并为高速驾驶提供短暂的节奏变化。</p>
 <div class="steps"><div class="step"><span>01</span><div><h3>入口识别</h3><p>通过轨道方向、颜色和空间抬升，让玩家在高速移动中提前看见索道入口。</p></div></div><div class="step"><span>02</span><div><h3>移动演出</h3><p>镜头从跟随驾驶切换为更稳定的景观构图，展示赛道结构与目标位置。</p></div></div><div class="step"><span>03</span><div><h3>路线预告</h3><p>运镜主动扫过下一段道路、转向点或大型地标，为离开索道后的操作做准备。</p></div></div><div class="step"><span>04</span><div><h3>平滑回归</h3><p>在终点恢复玩家控制与驾驶视角，避免镜头突变影响竞速判断。</p></div></div></div>
-<div class="gallery gallery-2"><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/hamster-cableway-01.webp" data-lightbox-alt="关卡一：索道入口与主赛道形成清晰的路线分叉"><img src="/assets/images/hamster-cableway-01.webp" alt="关卡一：索道入口与主赛道形成清晰的路线分叉" loading="lazy"></button><figcaption>关卡一：索道入口与主赛道形成清晰的路线分叉</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/hamster-cableway-02.webp" data-lightbox-alt="关卡一：连续运镜展示机械空间与后续方向"><img src="/assets/images/hamster-cableway-02.webp" alt="关卡一：连续运镜展示机械空间与后续方向" loading="lazy"></button><figcaption>关卡一：连续运镜展示机械空间与后续方向</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/hamster-cableway-03.webp" data-lightbox-alt="关卡二：高处捷径从主路上方穿过，形成位置优势"><img src="/assets/images/hamster-cableway-03.webp" alt="关卡二：高处捷径从主路上方穿过，形成位置优势" loading="lazy"></button><figcaption>关卡二：高处捷径从主路上方穿过，形成位置优势</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/hamster-cableway-04.webp" data-lightbox-alt="关卡二：运输过程中的构图用于预告重新汇合点"><img src="/assets/images/hamster-cableway-04.webp" alt="关卡二：运输过程中的构图用于预告重新汇合点" loading="lazy"></button><figcaption>关卡二：运输过程中的构图用于预告重新汇合点</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/hamster-cableway-05.webp" data-lightbox-alt="关卡三：高处轨道强化大型地标与区域方向"><img src="/assets/images/hamster-cableway-05.webp" alt="关卡三：高处轨道强化大型地标与区域方向" loading="lazy"></button><figcaption>关卡三：高处轨道强化大型地标与区域方向</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/hamster-cableway-06.webp" data-lightbox-alt="关卡三：镜头展示扭蛋机核心并建立终段目标"><img src="/assets/images/hamster-cableway-06.webp" alt="关卡三：镜头展示扭蛋机核心并建立终段目标" loading="lazy"></button><figcaption>关卡三：镜头展示扭蛋机核心并建立终段目标</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/hamster-cableway-07.webp" data-lightbox-alt="关卡三：连续路线保持视觉节奏与空间连贯性"><img src="/assets/images/hamster-cableway-07.webp" alt="关卡三：连续路线保持视觉节奏与空间连贯性" loading="lazy"></button><figcaption>关卡三：连续路线保持视觉节奏与空间连贯性</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/hamster-cableway-08.webp" data-lightbox-alt="索道终点：视角与控制权平滑回到主赛道"><img src="/assets/images/hamster-cableway-08.webp" alt="索道终点：视角与控制权平滑回到主赛道" loading="lazy"></button><figcaption>索道终点：视角与控制权平滑回到主赛道</figcaption></figure></div>
+<div class="gallery gallery-2"><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/hamster-cableway-01.webp" data-lightbox-alt="关卡一：索道入口与主赛道形成清晰的路线分叉"><img src="/assets/images/hamster-cableway-01.webp" alt="关卡一：索道入口与主赛道形成清晰的路线分叉" loading="lazy" decoding="async"></button><figcaption>关卡一：索道入口与主赛道形成清晰的路线分叉</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/hamster-cableway-02.webp" data-lightbox-alt="关卡一：连续运镜展示机械空间与后续方向"><img src="/assets/images/hamster-cableway-02.webp" alt="关卡一：连续运镜展示机械空间与后续方向" loading="lazy" decoding="async"></button><figcaption>关卡一：连续运镜展示机械空间与后续方向</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/hamster-cableway-03.webp" data-lightbox-alt="关卡二：高处捷径从主路上方穿过，形成位置优势"><img src="/assets/images/hamster-cableway-03.webp" alt="关卡二：高处捷径从主路上方穿过，形成位置优势" loading="lazy" decoding="async"></button><figcaption>关卡二：高处捷径从主路上方穿过，形成位置优势</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/hamster-cableway-04.webp" data-lightbox-alt="关卡二：运输过程中的构图用于预告重新汇合点"><img src="/assets/images/hamster-cableway-04.webp" alt="关卡二：运输过程中的构图用于预告重新汇合点" loading="lazy" decoding="async"></button><figcaption>关卡二：运输过程中的构图用于预告重新汇合点</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/hamster-cableway-05.webp" data-lightbox-alt="关卡三：高处轨道强化大型地标与区域方向"><img src="/assets/images/hamster-cableway-05.webp" alt="关卡三：高处轨道强化大型地标与区域方向" loading="lazy" decoding="async"></button><figcaption>关卡三：高处轨道强化大型地标与区域方向</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/hamster-cableway-06.webp" data-lightbox-alt="关卡三：镜头展示扭蛋机核心并建立终段目标"><img src="/assets/images/hamster-cableway-06.webp" alt="关卡三：镜头展示扭蛋机核心并建立终段目标" loading="lazy" decoding="async"></button><figcaption>关卡三：镜头展示扭蛋机核心并建立终段目标</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/hamster-cableway-07.webp" data-lightbox-alt="关卡三：连续路线保持视觉节奏与空间连贯性"><img src="/assets/images/hamster-cableway-07.webp" alt="关卡三：连续路线保持视觉节奏与空间连贯性" loading="lazy" decoding="async"></button><figcaption>关卡三：连续路线保持视觉节奏与空间连贯性</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/hamster-cableway-08.webp" data-lightbox-alt="索道终点：视角与控制权平滑回到主赛道"><img src="/assets/images/hamster-cableway-08.webp" alt="索道终点：视角与控制权平滑回到主赛道" loading="lazy" decoding="async"></button><figcaption>索道终点：视角与控制权平滑回到主赛道</figcaption></figure></div>
 <h2 id="section-4">团队协作与迭代<a class="heading-anchor" href="#section-4" aria-label="链接到本节">#</a></h2>
 <p>在 42 人团队中，关卡设计无法脱离制作约束独立推进。我需要把设计意图拆解成可执行需求，与程序确认交互和镜头逻辑，与美术确认地标、材质和空间可读性，并通过多人 Playtest 观察玩家是否看见入口、理解路线与顺利返回赛道。</p>
 <p>这个项目让我建立了在大型 Scrum 团队中维护设计目标的经验：不是固守最初方案，而是在性能、制作量、视觉效果和玩法清晰度之间持续做出取舍。</p>
@@ -79,13 +101,13 @@
 <footer class="site-footer">
   <div><strong>马子潇</strong><span>关卡设计 / 游戏设计 / 原型实现</span></div>
   <div class="footer-links">
-    <a href="mailto:marsshow2000@outlook.com">marsshow2000@outlook.com</a>
+    <a href="mailto:mazixiao2000@outlook.com">mazixiao2000@outlook.com</a>
     <a href="https://www.linkedin.com/in/zixiaoma/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
     <a href="https://github.com/mazixiao02" target="_blank" rel="noopener noreferrer">GitHub</a>
   </div>
-  <small>© 2026 Ma Zixiao. Built from Markdown for GitHub Pages.</small>
+  <small>© 2026 Ma Zixiao. 基于 Markdown 构建并部署于 GitHub Pages。</small>
 </footer>
-<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="图片预览">
+<div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="图片预览">
   <button class="lightbox-close" type="button" aria-label="关闭图片预览">×</button>
   <img src="" alt="">
   <p></p>

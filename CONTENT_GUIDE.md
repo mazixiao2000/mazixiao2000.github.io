@@ -1,8 +1,26 @@
-# Markdown 内容编辑指南
+# 双语 Markdown 内容编辑指南
 
-## 1. 项目基础信息
+## 1. 中英文文件必须成对维护
 
-每个项目位于 `content/projects/`，开头的 `---` 区域是项目元数据：
+中文内容放在 `content/`，英文内容放在 `content_en/`。两边目录结构保持一致：
+
+```text
+content/projects/decaran.md
+content_en/projects/decaran.md
+```
+
+两个版本必须使用相同的：
+
+- 文件名
+- `slug`
+- `order`
+- 图片与文档路径
+
+文字、标签、职责、摘要等内容分别使用对应语言。
+
+## 2. 项目基础信息
+
+每个项目文件开头的 `---` 区域是项目元数据：
 
 ```md
 ---
@@ -28,10 +46,10 @@ card_note: 首页卡片底部的补充信息
 
 - `featured: true`：显示在首页。
 - `order`：数字越小，显示越靠前。
-- `slug`：决定网址，例如 `slug: fling` 对应 `/projects/fling/`。
+- `slug`：决定网址，例如 `slug: fling` 对应 `/projects/fling/` 和 `/en/projects/fling/`。
 - 图片和文档建议使用英文文件名，不使用空格。
 
-## 2. 普通 Markdown
+## 3. 普通 Markdown
 
 支持：
 
@@ -52,7 +70,7 @@ card_note: 首页卡片底部的补充信息
 
 二级标题会自动生成左侧目录。
 
-## 3. 指标卡片
+## 4. 指标卡片
 
 ```md
 :::metrics
@@ -63,7 +81,7 @@ card_note: 首页卡片底部的补充信息
 
 格式为：`数值 | 标题 | 补充说明`。
 
-## 4. 重点说明
+## 5. 重点说明
 
 ```md
 :::callout title="我的职责"
@@ -71,7 +89,15 @@ card_note: 首页卡片底部的补充信息
 :::
 ```
 
-## 5. 图片画廊
+英文页面直接使用英文标题：
+
+```md
+:::callout title="My Responsibilities"
+Quest flow, blockout, encounters, scripting, playtesting, and iteration.
+:::
+```
+
+## 6. 图片画廊
 
 ```md
 :::gallery cols=2
@@ -82,7 +108,7 @@ card_note: 首页卡片底部的补充信息
 
 `cols` 可以使用 `1`、`2` 或 `3`。图片可以点击放大。
 
-## 6. 设计步骤
+## 7. 设计步骤
 
 ```md
 :::steps
@@ -91,7 +117,7 @@ card_note: 首页卡片底部的补充信息
 :::
 ```
 
-## 7. 能力卡片
+## 8. 能力卡片
 
 ```md
 :::capabilities
@@ -100,7 +126,7 @@ card_note: 首页卡片底部的补充信息
 :::
 ```
 
-## 8. 时间线
+## 9. 时间线
 
 ```md
 :::timeline
@@ -109,7 +135,7 @@ card_note: 首页卡片底部的补充信息
 :::
 ```
 
-## 9. 文档与外部链接
+## 10. 文档与外部链接
 
 ```md
 :::links
@@ -118,9 +144,9 @@ card_note: 首页卡片底部的补充信息
 :::
 ```
 
-## 10. 项目归档卡片
+## 11. 项目归档卡片
 
-用于 `content/archive.md`：
+用于 `content/archive.md` 与 `content_en/archive.md`：
 
 ```md
 :::archive
@@ -128,6 +154,16 @@ card_note: 首页卡片底部的补充信息
 - 没有图片的项目 | Prototype | 会自动使用文字占位图。 |
 :::
 ```
+
+## 12. 构建与检查
+
+修改完成后运行：
+
+```bash
+python scripts/build.py
+```
+
+脚本会同时生成中文根目录页面与 `/en/` 英文页面，并更新 `sitemap.xml`。
 
 ## 内容写作建议
 
@@ -139,4 +175,4 @@ card_note: 首页卡片底部的补充信息
 4. 测试发现了什么问题，你如何调整？
 5. 最终完成了什么，下一步会改进什么？
 
-尽量避免只写“负责关卡设计”“参与团队合作”等无法体现判断过程的描述。
+英文版本不要逐字直译中文，而应优先使用海外游戏行业常见表达，并保持职责边界清晰。
