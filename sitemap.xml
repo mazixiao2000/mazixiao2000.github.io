@@ -1,19 +1,99 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://www.mazixiao.com/</loc></url>
-  <url><loc>https://www.mazixiao.com/work/</loc></url>
-  <url><loc>https://www.mazixiao.com/about/</loc></url>
-  <url><loc>https://www.mazixiao.com/archive/</loc></url>
-  <url><loc>https://www.mazixiao.com/projects/decaran/</loc></url>
-  <url><loc>https://www.mazixiao.com/projects/hamsterballin/</loc></url>
-  <url><loc>https://www.mazixiao.com/projects/way-of-water/</loc></url>
-  <url><loc>https://www.mazixiao.com/projects/fling/</loc></url>
-  <url><loc>https://www.mazixiao.com/en/</loc></url>
-  <url><loc>https://www.mazixiao.com/en/work/</loc></url>
-  <url><loc>https://www.mazixiao.com/en/about/</loc></url>
-  <url><loc>https://www.mazixiao.com/en/archive/</loc></url>
-  <url><loc>https://www.mazixiao.com/en/projects/decaran/</loc></url>
-  <url><loc>https://www.mazixiao.com/en/projects/hamsterballin/</loc></url>
-  <url><loc>https://www.mazixiao.com/en/projects/way-of-water/</loc></url>
-  <url><loc>https://www.mazixiao.com/en/projects/fling/</loc></url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://www.mazixiao.com/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/" />
+  </url>
+  <url>
+    <loc>https://www.mazixiao.com/en/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/" />
+  </url>
+  <url>
+    <loc>https://www.mazixiao.com/work/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/work/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/work/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/work/" />
+  </url>
+  <url>
+    <loc>https://www.mazixiao.com/en/work/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/work/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/work/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/work/" />
+  </url>
+  <url>
+    <loc>https://www.mazixiao.com/about/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/about/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/about/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/about/" />
+  </url>
+  <url>
+    <loc>https://www.mazixiao.com/en/about/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/about/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/about/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/about/" />
+  </url>
+  <url>
+    <loc>https://www.mazixiao.com/archive/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/archive/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/archive/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/archive/" />
+  </url>
+  <url>
+    <loc>https://www.mazixiao.com/en/archive/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/archive/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/archive/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/archive/" />
+  </url>
+  <url>
+    <loc>https://www.mazixiao.com/projects/decaran/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/projects/decaran/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/projects/decaran/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/projects/decaran/" />
+  </url>
+  <url>
+    <loc>https://www.mazixiao.com/en/projects/decaran/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/projects/decaran/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/projects/decaran/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/projects/decaran/" />
+  </url>
+  <url>
+    <loc>https://www.mazixiao.com/projects/hamsterballin/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/projects/hamsterballin/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/projects/hamsterballin/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/projects/hamsterballin/" />
+  </url>
+  <url>
+    <loc>https://www.mazixiao.com/en/projects/hamsterballin/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/projects/hamsterballin/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/projects/hamsterballin/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/projects/hamsterballin/" />
+  </url>
+  <url>
+    <loc>https://www.mazixiao.com/projects/way-of-water/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/projects/way-of-water/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/projects/way-of-water/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/projects/way-of-water/" />
+  </url>
+  <url>
+    <loc>https://www.mazixiao.com/en/projects/way-of-water/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/projects/way-of-water/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/projects/way-of-water/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/projects/way-of-water/" />
+  </url>
+  <url>
+    <loc>https://www.mazixiao.com/projects/fling/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/projects/fling/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/projects/fling/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/projects/fling/" />
+  </url>
+  <url>
+    <loc>https://www.mazixiao.com/en/projects/fling/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/projects/fling/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/projects/fling/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/projects/fling/" />
+  </url>
 </urlset>

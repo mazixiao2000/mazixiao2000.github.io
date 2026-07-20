@@ -4,24 +4,37 @@
   const mobileNav = document.getElementById('mobileNav');
   const progress = document.getElementById('scrollProgress');
 
+  const closeMenu = () => {
+    body.classList.remove('menu-open');
+    if (menuToggle) menuToggle.setAttribute('aria-expanded', 'false');
+  };
+
   if (menuToggle && mobileNav) {
     menuToggle.addEventListener('click', () => {
       const open = body.classList.toggle('menu-open');
       menuToggle.setAttribute('aria-expanded', String(open));
     });
-    mobileNav.querySelectorAll('a').forEach((link) => link.addEventListener('click', () => {
-      body.classList.remove('menu-open');
-      menuToggle.setAttribute('aria-expanded', 'false');
-    }));
+    mobileNav.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMenu));
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 820) closeMenu();
+    }, { passive: true });
   }
 
   document.querySelectorAll('[data-language-link]').forEach((link) => {
     link.addEventListener('click', (event) => {
+      try { window.localStorage.setItem('portfolio-language', link.dataset.languageLink || ''); } catch { /* storage may be disabled */ }
       if (window.location.hash) {
         event.preventDefault();
         window.location.href = `${link.href}${window.location.hash}`;
       }
     });
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && body.classList.contains('menu-open')) {
+      closeMenu();
+      menuToggle?.focus();
+    }
   });
 
   const updateProgress = () => {

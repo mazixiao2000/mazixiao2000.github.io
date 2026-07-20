@@ -1,19 +1,14 @@
 ---
 layout: project
-slug: hamsterballin
 title: Hamsterballin’
 subtitle: UE5 本地多人竞速游戏
 kicker: RACING LEVEL DESIGN / CAMERA SYSTEM
 summary: 在 42 人团队中负责最终赛道“扭蛋机星系”、索道捷径系统与镜头演出，让路线、导航和景观展示在高速竞速中协同工作。
-cover: /assets/images/hamsterballin-cover.webp
-hero: /assets/images/hamsterballin-hero.webp
 engine: Unreal Engine 5
 role: 关卡设计 / 镜头设计
 team: 42 人团队
 period: 12 周 · Scrum
 status: Steam 商店页已公开
-featured: true
-order: 2
 tags: [竞速关卡, 路线设计, 镜头系统, 团队协作]
 card_note: 最终关卡负责人 · 索道系统与动态镜头
 ---

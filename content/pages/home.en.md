@@ -1,6 +1,6 @@
 ---
 layout: home
-title: Zixiao Ma | Level Design Portfolio
+title: {{site.name}} | Level Design Portfolio
 kicker: LEVEL DESIGN · GAMEPLAY · IMPLEMENTATION
 headline: I build spaces, systems, and pacing that players can understand, remember, and want to explore.
 intro: Level Design M.I.T. candidate at SMU Guildhall with a Computer Science background and prior systems design experience at NetEase Games. I work across concept development, blockout, scripting, playtesting, and cross-disciplinary iteration.

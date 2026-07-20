@@ -1,19 +1,14 @@
 ---
 layout: project
-slug: decaran
 title: Decaran: Become Human
 subtitle: Original Starfield Side-Quest Level
 kicker: QUEST LEVEL DESIGN / CREATION KIT
 summary: An 18-minute quest set in a hidden automated factory, integrating exploration, combat, vertical traversal, environmental guidance, and a morally consequential choice.
-cover: /assets/images/decaran-cover.webp
-hero: /assets/images/decaran-overview.webp
 engine: Starfield Creation Kit
 role: Solo Level Designer
 team: Solo Project
 period: 12 Weeks · Approx. 300 Hours
 status: Complete
-featured: true
-order: 1
 tags: [Quest Design, Combat Design, Environmental Storytelling, Scripting]
 card_note: 18-minute original side quest · 4 exterior / 7 interior spaces
 ---

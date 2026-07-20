@@ -1,0 +1,138 @@
+{
+  "site_url": "https://www.mazixiao.com",
+  "default_language": "zh",
+  "copyright_start": 2026,
+  "identity": {
+    "zh": {
+      "name": "马子潇",
+      "brand": "马子潇",
+      "alternate_name": "Zixiao “Marshall” Ma",
+      "role": "关卡设计师 / 游戏设计师",
+      "short_role": "关卡设计师",
+      "location": "上海 / 杭州 / 成都 · 可实习与校招",
+      "description": "马子潇的关卡设计作品集，展示任务关卡、战斗空间、竞速赛道、玩法机制与关卡实现。",
+      "footer_role": "关卡设计 / 游戏设计 / 原型实现"
+    },
+    "en": {
+      "name": "Zixiao Ma",
+      "brand": "ZIXIAO MA",
+      "alternate_name": "马子潇 / Marshall Ma",
+      "role": "Level Designer / Game Designer",
+      "short_role": "LEVEL DESIGNER",
+      "location": "Shanghai / Hangzhou / Chengdu · Open to internships and graduate roles",
+      "description": "Level design portfolio of Zixiao Ma, featuring quest design, combat spaces, racing tracks, gameplay systems, and implementation work.",
+      "footer_role": "Level Design / Game Design / Prototyping"
+    }
+  },
+  "contact": {
+    "email": "mazixiao2000@outlook.com",
+    "phone": "+86 135-0669-2801"
+  },
+  "resumes": {
+    "zh": "/assets/docs/Ma_Zixiao_Level_Designer_Resume_CN.pdf",
+    "en": "/assets/docs/Zixiao_Ma_Level_Designer_Resume.pdf"
+  },
+  "social": [
+    {
+      "key": "linkedin",
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/in/zixiaoma/"
+    },
+    {
+      "key": "github",
+      "label": "GitHub",
+      "url": "https://github.com/mazixiao02"
+    }
+  ],
+  "assets": {
+    "favicon": "/assets/images/avatar-monogram.svg",
+    "avatar": "/assets/images/avatar-monogram.svg",
+    "default_og": "/assets/images/decaran-cover.webp"
+  },
+  "homepage": {
+    "zh": {
+      "profile": [
+        {
+          "label": "当前身份",
+          "lines": [
+            "SMU Guildhall",
+            "Level Design M.I.T."
+          ]
+        },
+        {
+          "label": "经历",
+          "lines": [
+            "网易雷火",
+            "系统策划实习"
+          ]
+        },
+        {
+          "label": "工具",
+          "lines": [
+            "UE5 · Unity · CK",
+            "Hammer · Radiant"
+          ]
+        }
+      ],
+      "experience": [
+        {
+          "date": "2025—2027",
+          "organization": "SMU Guildhall",
+          "description": "Digital Game Development · Level Design Track"
+        },
+        {
+          "date": "2024",
+          "organization": "网易雷火",
+          "description": "《天谕》手游海外版本 · 系统策划实习"
+        },
+        {
+          "date": "2021—2025",
+          "organization": "浙江理工大学",
+          "description": "计算机科学与技术 · 全英班"
+        }
+      ]
+    },
+    "en": {
+      "profile": [
+        {
+          "label": "Current",
+          "lines": [
+            "SMU Guildhall",
+            "Level Design M.I.T."
+          ]
+        },
+        {
+          "label": "Experience",
+          "lines": [
+            "NetEase Games",
+            "Systems Design Intern"
+          ]
+        },
+        {
+          "label": "Tools",
+          "lines": [
+            "UE5 · Unity · CK",
+            "Hammer · Radiant"
+          ]
+        }
+      ],
+      "experience": [
+        {
+          "date": "2025—2027",
+          "organization": "SMU Guildhall",
+          "description": "Digital Game Development · Level Design Track"
+        },
+        {
+          "date": "2024",
+          "organization": "NetEase Games",
+          "description": "Revelation Mobile Overseas · Systems Design Internship"
+        },
+        {
+          "date": "2021—2025",
+          "organization": "Zhejiang Sci-Tech University",
+          "description": "Computer Science and Technology · English-Taught Program"
+        }
+      ]
+    }
+  }
+}

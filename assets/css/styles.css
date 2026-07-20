@@ -704,3 +704,20 @@ button:focus-visible {
   .lang-en .design-title h2,
   .lang-en .contact-inner h2 { font-size: 35px; }
 }
+
+/* Localized brand typography: Chinese characters need less tracking than Latin capitals. */
+.lang-zh .brand strong { letter-spacing: .08em; font-weight: 800; }
+@media (max-width: 560px) {
+  .lang-zh .brand strong { letter-spacing: .06em; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal { opacity: 1 !important; transform: none !important; }
+}

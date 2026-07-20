@@ -1,19 +1,14 @@
 ---
 layout: project
-slug: fling
 title: FLING
 subtitle: Unity 2D Precision Platformer
 kicker: GAME DESIGN / LEVEL DESIGN
 summary: In a four-person team, I owned the core gameplay direction and most level design, helping pivot a struggling prototype into a focused precision platformer built around a fishing rod and time manipulation.
-cover: /assets/images/fling-cover.webp
-hero: /assets/images/fling-gameplay.webp
 engine: Unity
 role: Game Design / Level Design
 team: 4-Person Team
 period: 6 Weeks · Scrum
 status: Complete
-featured: true
-order: 4
 tags: [2D Platformer, Core Mechanics, Onboarding, Playtesting]
 card_note: Mechanic pivot · Majority of levels · Public playtest iteration
 ---

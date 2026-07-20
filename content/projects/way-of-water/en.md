@@ -1,19 +1,14 @@
 ---
 layout: project
-slug: way-of-water
 title: The Way of Water
 subtitle: Half-Life 2 Single-Player FPS Level
 kicker: FPS LEVEL DESIGN / HAMMER EDITOR
 summary: A ten-minute single-player level built around a predictable water-and-electricity rule set, combining environmental hazards, timed traversal, combat, and a rising-water escape.
-cover: /assets/images/way-of-water-cover.svg
-hero: /assets/images/way-of-water-flow.svg
 engine: Hammer Editor / Hammer++
 role: Solo Level Designer
 team: Solo Project
 period: Course Project
 status: Complete
-featured: true
-order: 3
 tags: [FPS, Mechanic-Driven Level, Player Guidance, Pacing]
 card_note: Electrified water · Timed traversal · Rising-water escape
 ---

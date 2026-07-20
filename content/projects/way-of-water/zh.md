@@ -1,19 +1,14 @@
 ---
 layout: project
-slug: way-of-water
 title: The Way of Water
 subtitle: Half-Life 2 单人 FPS 关卡
 kicker: FPS LEVEL DESIGN / HAMMER EDITOR
 summary: 以“水与电”的可预测规则为核心，把环境危险、限时窗口、战斗和水位上涨逃生组织成约 10 分钟的单人关卡。
-cover: /assets/images/way-of-water-cover.svg
-hero: /assets/images/way-of-water-flow.svg
 engine: Hammer Editor / Hammer++
 role: 独立关卡设计师
 team: 单人开发
 period: 课程项目
 status: 完成
-featured: true
-order: 3
 tags: [FPS, 机制关卡, 玩家引导, 节奏设计]
 card_note: 水电危险 · 限时穿越 · 水位上涨逃生
 ---

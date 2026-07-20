@@ -46,7 +46,7 @@ A level should let players understand their current goal, read the spatial struc
 I independently designed the original tabletop game *Big Fishing Boom*, which has been showcased at the Shanghai SHM Board Game Expo and the “Good Chinese Board Games” event. The project is currently moving toward publication and commercial collaboration. Designing tabletop systems has strengthened my attention to rule communication, information hierarchy, and decision feedback between players.
 
 :::links
-- Download English Resume | /assets/docs/Zixiao_Ma_Level_Designer_Resume.pdf | PDF · English
-- 下载中文简历 | /assets/docs/Ma_Zixiao_Level_Designer_Resume_CN.pdf | PDF · Chinese
-- LinkedIn | https://www.linkedin.com/in/zixiaoma/ | Experience and contact information
+- Download English Resume | {{site.resume_en}} | PDF · English
+- 下载中文简历 | {{site.resume_zh}} | PDF · Chinese
+- LinkedIn | {{site.linkedin}} | Experience and contact information
 :::

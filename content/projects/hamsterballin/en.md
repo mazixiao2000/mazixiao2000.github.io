@@ -1,19 +1,14 @@
 ---
 layout: project
-slug: hamsterballin
 title: Hamsterballin’
 subtitle: UE5 Local Multiplayer Racing Game
 kicker: RACING LEVEL DESIGN / CAMERA SYSTEM
 summary: On a 42-person team, I designed the final track “Gacha Galaxy,” developed the cableway shortcut system, and created camera sequences that align route readability, navigation, and spectacle at racing speed.
-cover: /assets/images/hamsterballin-cover.webp
-hero: /assets/images/hamsterballin-hero.webp
 engine: Unreal Engine 5
 role: Level Design / Camera Design
 team: 42-Person Team
 period: 12 Weeks · Scrum
 status: Steam Page Public
-featured: true
-order: 2
 tags: [Racing Levels, Route Design, Camera Systems, Team Collaboration]
 card_note: Final-track owner · Cableway system and dynamic cameras
 ---

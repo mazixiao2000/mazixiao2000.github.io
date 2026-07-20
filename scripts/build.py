@@ -8,135 +8,33 @@ from __future__ import annotations
 
 import ast
 import html
+import json
 import re
+import shutil
+from datetime import datetime
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
 
-LANGUAGES: dict[str, dict[str, Any]] = {
-    "zh": {
-        "content": ROOT / "content",
-        "prefix": "",
-        "html_lang": "zh-CN",
-        "og_locale": "zh_CN",
-        "labels": {
-            "skip": "跳到主要内容",
-            "home": "首页",
-            "work": "项目",
-            "about": "关于",
-            "archive": "归档",
-            "main_nav": "主导航",
-            "mobile_nav": "移动端导航",
-            "back_home": "返回首页",
-            "resume": "简历 PDF",
-            "contact": "联系我",
-            "language": "语言切换",
-            "menu": "打开导航菜单",
-            "view_project": "查看",
-            "project_cover": "项目封面",
-            "view_selected": "查看精选项目",
-            "download_resume": "下载中文简历",
-            "current_identity": "当前身份",
-            "experience": "经历",
-            "tools": "工具",
-            "selected_work": "精选项目",
-            "selected_desc": "以完整 Case Study 展示我如何定义问题、组织空间、实现机制并通过测试迭代。",
-            "view_all": "查看全部项目",
-            "approach_title": "关卡不是场景堆叠，<br>而是玩家决策的结构。",
-            "experience_title": "设计与制作经验",
-            "experience_desc": "从独立任务关卡，到 42 人团队项目，再到大型在线游戏实习。",
-            "open_opportunities": "寻找关卡设计、游戏设计相关实习与校招机会。",
-            "send_email": "发送邮件",
-            "copy_email": "复制邮箱",
-            "copied": "已复制",
-            "work_title": "项目与设计案例",
-            "work_desc": "首页优先展示能够清楚说明设计目标、个人职责、制作过程和最终结果的完整项目。",
-            "project": "项目",
-            "role": "职责",
-            "engine": "工具",
-            "team": "团队",
-            "period": "周期",
-            "status": "状态",
-            "toc": "目录",
-            "back_top": "回到顶部 ↑",
-            "previous": "上一个项目",
-            "next": "下一个项目",
-            "section_link": "链接到本节",
-            "design_note": "设计说明",
-            "image_preview": "图片预览",
-            "close_preview": "关闭图片预览",
-            "not_found_title": "这个空间还没有被搭建。",
-            "not_found_desc": "返回首页继续查看项目。",
-            "return_home": "返回首页",
-            "footer_role": "关卡设计 / 游戏设计 / 原型实现",
-            "built": "基于 Markdown 构建并部署于 GitHub Pages。",
-            "project_switch": "项目切换",
-            "hero_alt": "项目主视觉",
-        },
-    },
-    "en": {
-        "content": ROOT / "content_en",
-        "prefix": "/en",
-        "html_lang": "en",
-        "og_locale": "en_US",
-        "labels": {
-            "skip": "Skip to main content",
-            "home": "Home",
-            "work": "Work",
-            "about": "About",
-            "archive": "Archive",
-            "main_nav": "Primary navigation",
-            "mobile_nav": "Mobile navigation",
-            "back_home": "Back to homepage",
-            "resume": "Resume PDF",
-            "contact": "Contact",
-            "language": "Language selector",
-            "menu": "Open navigation menu",
-            "view_project": "View",
-            "project_cover": "project cover",
-            "view_selected": "View Selected Work",
-            "download_resume": "Download Resume",
-            "current_identity": "Current",
-            "experience": "Experience",
-            "tools": "Tools",
-            "selected_work": "Selected Work",
-            "selected_desc": "Complete case studies showing how I define problems, structure spaces, implement mechanics, and iterate through playtesting.",
-            "view_all": "View All Projects",
-            "approach_title": "A level is not a collection of spaces.<br>It is a structure for player decisions.",
-            "experience_title": "Design & Production Experience",
-            "experience_desc": "From solo quest levels and small-team prototypes to a 42-person production and a live-service game internship.",
-            "open_opportunities": "Open to level design and game design internships and graduate opportunities.",
-            "send_email": "Send Email",
-            "copy_email": "Copy Email",
-            "copied": "Copied",
-            "work_title": "Projects & Case Studies",
-            "work_desc": "The primary portfolio focuses on projects that clearly communicate the design goal, personal ownership, development process, and final result.",
-            "project": "Work",
-            "role": "Role",
-            "engine": "Tools",
-            "team": "Team",
-            "period": "Duration",
-            "status": "Status",
-            "toc": "Contents",
-            "back_top": "Back to Top ↑",
-            "previous": "Previous Project",
-            "next": "Next Project",
-            "section_link": "Link to this section",
-            "design_note": "Design Note",
-            "image_preview": "Image preview",
-            "close_preview": "Close image preview",
-            "not_found_title": "This space has not been built yet.",
-            "not_found_desc": "Return home to continue exploring the portfolio.",
-            "return_home": "Return Home",
-            "footer_role": "Level Design / Game Design / Prototyping",
-            "built": "Built from Markdown for GitHub Pages.",
-            "project_switch": "Project navigation",
-            "hero_alt": "project hero image",
-        },
-    },
-}
+DATA_DIR = ROOT / "data"
+CONTENT_DIR = ROOT / "content"
+
+
+def load_json(path: Path) -> dict[str, Any]:
+    try:
+        return json.loads(path.read_text(encoding="utf-8"))
+    except FileNotFoundError as exc:
+        raise SystemExit(f"Missing required configuration file: {path.relative_to(ROOT)}") from exc
+    except json.JSONDecodeError as exc:
+        raise SystemExit(f"Invalid JSON in {path.relative_to(ROOT)}: {exc}") from exc
+
+
+SITE_CONFIG: dict[str, Any] = load_json(DATA_DIR / "site.json")
+LANGUAGES: dict[str, dict[str, Any]] = load_json(DATA_DIR / "i18n.json")
+SUPPORTED_LANGUAGES = tuple(LANGUAGES.keys())
+
 
 
 def parse_scalar(value: str) -> Any:
@@ -158,8 +56,60 @@ def parse_scalar(value: str) -> Any:
     return value
 
 
-def read_md(path: Path) -> tuple[dict[str, Any], str]:
+def site_for_language(lang: str) -> dict[str, Any]:
+    identity = dict(SITE_CONFIG["identity"][lang])
+    contact = SITE_CONFIG.get("contact", {})
+    resumes = SITE_CONFIG.get("resumes", {})
+    social_links = SITE_CONFIG.get("social", [])
+    social_by_key = {item.get("key", ""): item.get("url", "") for item in social_links}
+    assets = SITE_CONFIG.get("assets", {})
+    identity.update(
+        {
+            "site_url": SITE_CONFIG.get("site_url", "").rstrip("/"),
+            "email": contact.get("email", ""),
+            "phone": contact.get("phone", ""),
+            "resume": resumes.get(lang, ""),
+            "resume_zh": resumes.get("zh", ""),
+            "resume_en": resumes.get("en", ""),
+            "social_links": social_links,
+            "linkedin": social_by_key.get("linkedin", ""),
+            "github": social_by_key.get("github", ""),
+            "favicon": assets.get("favicon", "/assets/images/avatar-monogram.svg"),
+            "avatar": assets.get("avatar", "/assets/images/avatar-monogram.svg"),
+            "default_og": assets.get("default_og", "/assets/images/decaran-cover.webp"),
+            "copyright_start": SITE_CONFIG.get("copyright_start", datetime.now().year),
+            "homepage": SITE_CONFIG.get("homepage", {}).get(lang, {}),
+        }
+    )
+    return identity
+
+
+def nested_value(data: dict[str, Any], dotted_key: str) -> Any:
+    current: Any = data
+    for part in dotted_key.split("."):
+        if not isinstance(current, dict) or part not in current:
+            raise KeyError(dotted_key)
+        current = current[part]
+    return current
+
+
+def expand_variables(text: str, context: dict[str, Any], source: Path) -> str:
+    pattern = re.compile(r"\{\{\s*([a-zA-Z0-9_.-]+)\s*\}\}")
+
+    def replace(match: re.Match[str]) -> str:
+        key = match.group(1)
+        try:
+            return str(nested_value(context, key))
+        except KeyError as exc:
+            raise ValueError(f"Unknown variable '{{{{{key}}}}}' in {source.relative_to(ROOT)}") from exc
+
+    return pattern.sub(replace, text)
+
+
+def read_md(path: Path, context: dict[str, Any] | None = None) -> tuple[dict[str, Any], str]:
     text = path.read_text(encoding="utf-8")
+    if context:
+        text = expand_variables(text, context, path)
     meta: dict[str, Any] = {}
     body = text
     if text.startswith("---\n"):
@@ -463,6 +413,17 @@ def esc(value: Any) -> str:
     return html.escape(str(value or ""), quote=True)
 
 
+def portfolio_name(site: dict[str, Any], lang: str, level_design: bool = False) -> str:
+    cfg = LANGUAGES[lang]
+    label = cfg["level_design_portfolio_label"] if level_design else cfg["portfolio_label"]
+    joiner = "" if lang == "zh" else " "
+    return f"{site.get('name', '')}{joiner}{label}"
+
+
+def page_title(title: str, site: dict[str, Any], lang: str, level_design: bool = False) -> str:
+    return f"{title}{LANGUAGES[lang]['title_separator']}{portfolio_name(site, lang, level_design)}"
+
+
 def route(lang: str, path: str) -> str:
     if path.startswith(("http://", "https://", "mailto:", "tel:", "#")):
         return path
@@ -476,7 +437,8 @@ def route(lang: str, path: str) -> str:
 
 
 def output_path(lang: str, route_path: str) -> Path:
-    base_dir = ROOT / "en" if lang == "en" else ROOT
+    prefix = str(LANGUAGES[lang].get("prefix", "")).strip("/")
+    base_dir = ROOT / prefix if prefix else ROOT
     if route_path == "/":
         return base_dir / "index.html"
     return base_dir / route_path.strip("/") / "index.html"
@@ -521,26 +483,33 @@ def nav(active: str, site: dict[str, Any], lang: str, route_path: str) -> str:
         (labels["archive"], route(lang, "/archive/"), "archive"),
     ]
     navlinks = "".join(
-        f'<a href="{url}" class="{"active" if active == key else ""}">{label}</a>'
+        f'<a href="{url}" class="{"active" if active == key else ""}"'
+        f'{" aria-current=\"page\"" if active == key else ""}>{esc(label)}</a>'
         for label, url, key in links
     )
     zh_url = route("zh", route_path)
     en_url = route("en", route_path)
-    resume = site.get("resume_en") if lang == "en" else site.get("resume_cn")
+    language_links = []
+    for code, url in (("zh", zh_url), ("en", en_url)):
+        current = ' class="active" aria-current="page"' if lang == code else ""
+        language_links.append(
+            f'<a href="{url}" data-language-link="{code}" lang="{esc(LANGUAGES[code]["html_lang"])}"{current}>'
+            f'{esc(LANGUAGES[code]["switch_label"])}</a>'
+        )
     language_switch = f'''
     <div class="language-switch" role="group" aria-label="{esc(labels['language'])}">
-      <a href="{zh_url}" data-language-link="zh" lang="zh-CN" class="{'active' if lang == 'zh' else ''}" aria-current="{'true' if lang == 'zh' else 'false'}">中</a>
+      {language_links[0]}
       <span aria-hidden="true">/</span>
-      <a href="{en_url}" data-language-link="en" lang="en" class="{'active' if lang == 'en' else ''}" aria-current="{'true' if lang == 'en' else 'false'}">EN</a>
+      {language_links[1]}
     </div>'''
     return f'''
 <a class="skip-link" href="#main-content">{esc(labels['skip'])}</a>
 <header class="site-header" id="siteHeader">
-  <a class="brand" href="{route(lang, '/')}" aria-label="{esc(labels['back_home'])}"><strong>MA ZIXIAO</strong><span>{esc(site.get('short_role'))}</span></a>
+  <a class="brand" href="{route(lang, '/')}" aria-label="{esc(labels['back_home'])}"><strong>{esc(site.get('brand'))}</strong><span>{esc(site.get('short_role'))}</span></a>
   <nav class="desktop-nav" aria-label="{esc(labels['main_nav'])}">{navlinks}</nav>
   <div class="header-actions">
     {language_switch}
-    <a class="header-resume" href="{esc(resume)}" target="_blank" rel="noopener noreferrer">{esc(labels['resume'])}</a>
+    <a class="header-resume" href="{esc(site.get('resume'))}" target="_blank" rel="noopener noreferrer">{esc(labels['resume'])}</a>
     <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="mobileNav" aria-label="{esc(labels['menu'])}"><span></span><span></span></button>
   </div>
 </header>
@@ -550,18 +519,24 @@ def nav(active: str, site: dict[str, Any], lang: str, route_path: str) -> str:
   <div class="mobile-language">{language_switch}</div>
 </nav>'''
 
-
 def footer(site: dict[str, Any], lang: str) -> str:
     labels = LANGUAGES[lang]["labels"]
+    social_links = "".join(
+        f'<a href="{esc(item.get("url"))}" target="_blank" rel="me noopener noreferrer">{esc(item.get("label"))}</a>'
+        for item in site.get("social_links", [])
+        if item.get("url")
+    )
+    start = int(site.get("copyright_start", datetime.now().year))
+    year = datetime.now().year
+    years = str(year) if start == year else f"{start}–{year}"
     return f'''
 <footer class="site-footer">
-  <div><strong>{esc(site.get('name'))}</strong><span>{esc(labels['footer_role'])}</span></div>
+  <div><strong>{esc(site.get('name'))}</strong><span>{esc(site.get('footer_role'))}</span></div>
   <div class="footer-links">
     <a href="mailto:{esc(site.get('email'))}">{esc(site.get('email'))}</a>
-    <a href="{esc(site.get('linkedin'))}" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-    <a href="{esc(site.get('github'))}" target="_blank" rel="noopener noreferrer">GitHub</a>
+    {social_links}
   </div>
-  <small>© 2026 Ma Zixiao. {esc(labels['built'])}</small>
+  <small>© {years} {esc(site.get('name'))}. {esc(labels['built'])}</small>
 </footer>
 <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="{esc(labels['image_preview'])}">
   <button class="lightbox-close" type="button" aria-label="{esc(labels['close_preview'])}">×</button>
@@ -569,16 +544,15 @@ def footer(site: dict[str, Any], lang: str) -> str:
   <p></p>
 </div>'''
 
-
 def base(
-    page_title: str,
+    page_title_text: str,
     description: str,
     active: str,
     content: str,
     site: dict[str, Any],
     lang: str,
     route_path: str,
-    image: str = "/assets/images/decaran-cover.webp",
+    image: str = "",
     body_class: str = "",
 ) -> str:
     cfg = LANGUAGES[lang]
@@ -586,31 +560,54 @@ def base(
     current_url = canonical_base + route(lang, route_path)
     zh_url = canonical_base + route("zh", route_path)
     en_url = canonical_base + route("en", route_path)
+    image = image or site.get("default_og", "")
+    image_url = image if str(image).startswith(("http://", "https://")) else canonical_base + str(image)
     body_classes = " ".join(x for x in [body_class, f"lang-{lang}"] if x)
+    alternate_locale = LANGUAGES["en" if lang == "zh" else "zh"]["og_locale"]
+    structured_data = {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": site.get("name"),
+        "alternateName": site.get("alternate_name"),
+        "url": canonical_base + route(lang, "/"),
+        "image": canonical_base + site.get("avatar", ""),
+        "jobTitle": site.get("role"),
+        "email": f"mailto:{site.get('email')}" if site.get("email") else "",
+        "sameAs": [item.get("url") for item in site.get("social_links", []) if item.get("url")],
+    }
+    json_ld = json.dumps(structured_data, ensure_ascii=False, separators=(",", ":"))
     return f'''<!doctype html>
 <html lang="{esc(cfg['html_lang'])}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#111314">
+  <meta name="color-scheme" content="light">
+  <meta name="author" content="{esc(site.get('name'))}">
   <meta name="description" content="{esc(description)}">
   <meta property="og:type" content="website">
+  <meta property="og:site_name" content="{esc(portfolio_name(site, lang))}">
   <meta property="og:locale" content="{esc(cfg['og_locale'])}">
-  <meta property="og:title" content="{esc(page_title)}">
+  <meta property="og:locale:alternate" content="{esc(alternate_locale)}">
+  <meta property="og:title" content="{esc(page_title_text)}">
   <meta property="og:description" content="{esc(description)}">
   <meta property="og:url" content="{esc(current_url)}">
-  <meta property="og:image" content="{esc(canonical_base + image)}">
+  <meta property="og:image" content="{esc(image_url)}">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{esc(page_title_text)}">
+  <meta name="twitter:description" content="{esc(description)}">
+  <meta name="twitter:image" content="{esc(image_url)}">
   <link rel="canonical" href="{esc(current_url)}">
   <link rel="alternate" hreflang="zh-CN" href="{esc(zh_url)}">
   <link rel="alternate" hreflang="en" href="{esc(en_url)}">
   <link rel="alternate" hreflang="x-default" href="{esc(zh_url)}">
-  <title>{esc(page_title)}</title>
-  <link rel="icon" href="/assets/images/avatar-monogram.svg" type="image/svg+xml">
+  <title>{esc(page_title_text)}</title>
+  <link rel="icon" href="{esc(site.get('favicon'))}" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/css/styles.css">
+  <script type="application/ld+json">{json_ld}</script>
   <script defer src="/assets/js/main.js"></script>
 </head>
-<body class="{esc(body_classes)}" data-lang="{esc(lang)}">
+<body class="{esc(body_classes)}" data-lang="{esc(lang)}" data-page-route="{esc(route_path)}">
 <div class="scroll-progress" id="scrollProgress"></div>
 {nav(active, site, lang, route_path)}
 {content}
@@ -618,40 +615,20 @@ def base(
 </body>
 </html>'''
 
-
 def home_page(meta: dict[str, Any], rendered: Rendered, projects: list[dict[str, Any]], site: dict[str, Any], lang: str) -> str:
     labels = LANGUAGES[lang]["labels"]
     featured = [p for p in projects if p.get("featured")]
     cards = "".join(project_card(p, lang, i) for i, p in enumerate(featured))
-    if lang == "zh":
-        profile = [
-            (labels["current_identity"], "SMU Guildhall<br>Level Design M.I.T."),
-            (labels["experience"], "网易雷火<br>系统策划实习"),
-            (labels["tools"], "UE5 · Unity · CK<br>Hammer · Radiant"),
-        ]
-        experience = [
-            ("2025—2027", "SMU Guildhall", "Digital Game Development · Level Design Track"),
-            ("2024", "网易雷火", "《天谕》手游海外版本 · 系统策划实习"),
-            ("2021—2025", "浙江理工大学", "计算机科学与技术 · 全英班"),
-        ]
-    else:
-        profile = [
-            (labels["current_identity"], "SMU Guildhall<br>Level Design M.I.T."),
-            (labels["experience"], "NetEase Games<br>Systems Design Intern"),
-            (labels["tools"], "UE5 · Unity · CK<br>Hammer · Radiant"),
-        ]
-        experience = [
-            ("2025—2027", "SMU Guildhall", "Digital Game Development · Level Design Track"),
-            ("2024", "NetEase Games", "Revelation Mobile Overseas · Systems Design Internship"),
-            ("2021—2025", "Zhejiang Sci-Tech University", "Computer Science and Technology · English-Taught Program"),
-        ]
-    profile_html = "".join(f"<div><span>{esc(a)}</span><strong>{b}</strong></div>" for a, b in profile)
-    experience_html = "".join(
-        f'<article class="experience-item reveal" style="--delay:{i * 70}ms"><span>{esc(date)}</span>'
-        f'<h3>{esc(org)}</h3><p>{esc(desc)}</p></article>'
-        for i, (date, org, desc) in enumerate(experience)
+    home_data = site.get("homepage", {})
+    profile_html = "".join(
+        f'<div><span>{esc(item.get("label"))}</span><strong>{"<br>".join(esc(line) for line in item.get("lines", []))}</strong></div>'
+        for item in home_data.get("profile", [])
     )
-    resume = site.get("resume_en") if lang == "en" else site.get("resume_cn")
+    experience_html = "".join(
+        f'<article class="experience-item reveal" style="--delay:{i * 70}ms"><span>{esc(item.get("date"))}</span>'
+        f'<h3>{esc(item.get("organization"))}</h3><p>{esc(item.get("description"))}</p></article>'
+        for i, item in enumerate(home_data.get("experience", []))
+    )
     content = f'''
 <main id="main-content">
   <section class="home-hero">
@@ -662,52 +639,51 @@ def home_page(meta: dict[str, Any], rendered: Rendered, projects: list[dict[str,
       <p>{esc(meta.get('intro'))}</p>
       <div class="hero-actions">
         <a class="button button-primary" href="{route(lang, '/work/')}">{esc(labels['view_selected'])} <span>↗</span></a>
-        <a class="button button-secondary" href="{esc(resume)}" target="_blank" rel="noopener noreferrer">{esc(labels['download_resume'])}</a>
+        <a class="button button-secondary" href="{esc(site.get('resume'))}" target="_blank" rel="noopener noreferrer">{esc(labels['download_resume'])}</a>
       </div>
     </div>
     <aside class="hero-profile reveal" style="--delay:120ms">
-      <img src="/assets/images/avatar-monogram.svg" alt="MA monogram">
+      <img src="{esc(site.get('avatar'))}" alt="{esc(site.get('name'))} monogram">
       {profile_html}
     </aside>
     <div class="hero-number" aria-hidden="true">LD</div>
   </section>
 
   <section class="section-shell featured-section" id="featured-work">
-    <div class="section-heading reveal"><div><span>01 / SELECTED WORK</span><h2>{esc(labels['selected_work'])}</h2></div><p>{esc(labels['selected_desc'])}</p></div>
+    <div class="section-heading reveal"><div><span>{esc(labels['selected_eyebrow'])}</span><h2>{esc(labels['selected_work'])}</h2></div><p>{esc(labels['selected_desc'])}</p></div>
     <div class="project-grid">{cards}</div>
     <div class="section-action"><a href="{route(lang, '/work/')}">{esc(labels['view_all'])} <span>↗</span></a></div>
   </section>
 
   <section class="design-section">
     <div class="section-shell design-layout">
-      <div class="design-title reveal"><span>02 / APPROACH</span><h2>{labels['approach_title']}</h2></div>
+      <div class="design-title reveal"><span>{esc(labels['approach_eyebrow'])}</span><h2>{labels['approach_title']}</h2></div>
       <div class="article-body home-article reveal" style="--delay:80ms">{rendered.html}</div>
     </div>
   </section>
 
   <section class="section-shell experience-section">
-    <div class="section-heading reveal"><div><span>03 / EXPERIENCE</span><h2>{esc(labels['experience_title'])}</h2></div><p>{esc(labels['experience_desc'])}</p></div>
+    <div class="section-heading reveal"><div><span>{esc(labels['experience_eyebrow'])}</span><h2>{esc(labels['experience_title'])}</h2></div><p>{esc(labels['experience_desc'])}</p></div>
     <div class="experience-grid">{experience_html}</div>
   </section>
 
   <section class="contact-band">
     <div class="section-shell contact-inner reveal">
-      <div><span>OPEN TO OPPORTUNITIES</span><h2>{esc(labels['open_opportunities'])}</h2></div>
+      <div><span>{esc(labels['open_to'])}</span><h2>{esc(labels['open_opportunities'])}</h2></div>
       <div class="contact-actions"><a href="mailto:{esc(site.get('email'))}" class="button button-light">{esc(labels['send_email'])}</a><button class="copy-email" type="button" data-email="{esc(site.get('email'))}" data-copied-label="{esc(labels['copied'])}">{esc(labels['copy_email'])}</button></div>
     </div>
   </section>
 </main>'''
-    return base(meta.get("title", "Portfolio"), site.get("description", ""), "home", content, site, lang, "/", body_class="home-page")
-
+    return base(meta.get("title", portfolio_name(site, lang, True)), site.get("description", ""), "home", content, site, lang, "/", body_class="home-page")
 
 def work_page(projects: list[dict[str, Any]], site: dict[str, Any], lang: str) -> str:
     labels = LANGUAGES[lang]["labels"]
     cards = "".join(project_card(p, lang, i) for i, p in enumerate(projects))
-    title = "项目｜马子潇关卡设计作品集" if lang == "zh" else "Work | Zixiao Ma Level Design Portfolio"
+    title = page_title(labels["work"], site, lang, level_design=True)
     content = f'''
 <main id="main-content">
   <header class="page-hero section-shell">
-    <div class="eyebrow">WORK / CASE STUDIES</div>
+    <div class="eyebrow">{esc(labels['work_eyebrow'])}</div>
     <h1>{esc(labels['work_title'])}</h1>
     <p>{esc(labels['work_desc'])}</p>
   </header>
@@ -724,7 +700,7 @@ def project_page(project: dict[str, Any], rendered: Rendered, projects: list[dic
     prev_project = projects[idx - 1] if idx > 0 else projects[-1]
     next_project = projects[(idx + 1) % len(projects)]
     route_path = f"/projects/{project['slug']}/"
-    page_title = f"{project['title']}｜马子潇作品集" if lang == "zh" else f"{project['title']} | Zixiao Ma Portfolio"
+    project_page_title = page_title(str(project["title"]), site, lang)
     content = f'''
 <main class="project-main" id="main-content">
   <header class="project-hero">
@@ -758,14 +734,13 @@ def project_page(project: dict[str, Any], rendered: Rendered, projects: list[dic
     <a href="{project_url(next_project, lang)}"><span>{esc(labels['next'])}</span><strong>{esc(next_project['title'])} →</strong></a>
   </nav>
 </main>'''
-    return base(page_title, project.get("summary", ""), "work", content, site, lang, route_path, project.get("cover", ""), "project-page")
+    return base(project_page_title, project.get("summary", ""), "work", content, site, lang, route_path, project.get("cover", ""), "project-page")
 
 
 def standard_page(meta: dict[str, Any], rendered: Rendered, site: dict[str, Any], active: str, lang: str) -> str:
     labels = LANGUAGES[lang]["labels"]
     toc = "".join(f'<a href="#{esc(sid)}">{esc(title)}</a>' for sid, title in rendered.toc)
     route_path = f"/{active}/"
-    suffix = "马子潇作品集" if lang == "zh" else "Zixiao Ma Portfolio"
     content = f'''
 <main id="main-content">
   <header class="page-hero section-shell">
@@ -778,7 +753,7 @@ def standard_page(meta: dict[str, Any], rendered: Rendered, site: dict[str, Any]
     <article class="article-body standard-article">{rendered.html}</article>
   </div>
 </main>'''
-    return base(f"{meta.get('title')}｜{suffix}" if lang == "zh" else f"{meta.get('title')} | {suffix}", meta.get("summary", site.get("description", "")), active, content, site, lang, route_path, body_class=f"{active}-page")
+    return base(page_title(str(meta.get("title", "")), site, lang), meta.get("summary", site.get("description", "")), active, content, site, lang, route_path, body_class=f"{active}-page")
 
 
 def write(path: Path, data: str) -> None:
@@ -786,27 +761,96 @@ def write(path: Path, data: str) -> None:
     path.write_text(data, encoding="utf-8")
 
 
+def validate_sources() -> None:
+    errors: list[str] = []
+    required_identity = {"name", "brand", "role", "short_role", "description", "footer_role"}
+    for lang in SUPPORTED_LANGUAGES:
+        missing = required_identity - set(SITE_CONFIG.get("identity", {}).get(lang, {}))
+        if missing:
+            errors.append(f"data/site.json identity.{lang} is missing: {', '.join(sorted(missing))}")
+        for page in ("home", "about", "archive"):
+            path = CONTENT_DIR / "pages" / f"{page}.{lang}.md"
+            if not path.exists():
+                errors.append(f"Missing localized page: {path.relative_to(ROOT)}")
+
+    project_root = CONTENT_DIR / "projects"
+    project_dirs = [p for p in project_root.iterdir() if p.is_dir() and not p.name.startswith("_")]
+    seen_slugs: set[str] = set()
+    seen_orders: set[int] = set()
+    if not project_dirs:
+        errors.append("No project source folders found in content/projects/.")
+    for project_dir in project_dirs:
+        shared_path = project_dir / "project.json"
+        if not shared_path.exists():
+            errors.append(f"Missing {shared_path.relative_to(ROOT)}")
+            continue
+        shared = load_json(shared_path)
+        slug = str(shared.get("slug", ""))
+        order = shared.get("order")
+        if not slug:
+            errors.append(f"Missing slug in {shared_path.relative_to(ROOT)}")
+        elif slug != project_dir.name:
+            errors.append(f"Project folder '{project_dir.name}' must match slug '{slug}'.")
+        elif slug in seen_slugs:
+            errors.append(f"Duplicate project slug: {slug}")
+        seen_slugs.add(slug)
+        if not isinstance(order, int):
+            errors.append(f"Project order must be an integer in {shared_path.relative_to(ROOT)}")
+        elif order in seen_orders:
+            errors.append(f"Duplicate project order: {order}")
+        else:
+            seen_orders.add(order)
+        for lang in SUPPORTED_LANGUAGES:
+            localized = project_dir / f"{lang}.md"
+            if not localized.exists():
+                errors.append(f"Missing localized project file: {localized.relative_to(ROOT)}")
+        for key in ("cover", "hero"):
+            asset = str(shared.get(key, ""))
+            if asset.startswith("/assets/") and not (ROOT / asset.lstrip("/")).exists():
+                errors.append(f"Missing project {key} asset for {slug}: {asset}")
+
+    if errors:
+        raise SystemExit("Source validation failed:\n- " + "\n- ".join(errors))
+
+
 def load_language(lang: str) -> tuple[dict[str, Any], dict[str, Any], str, dict[str, Any], str, dict[str, Any], str, list[tuple[dict[str, Any], str]]]:
-    content_dir: Path = LANGUAGES[lang]["content"]
-    site, _ = read_md(content_dir / "site.md")
-    home_meta, home_body = read_md(content_dir / "home.md")
-    about_meta, about_body = read_md(content_dir / "about.md")
-    archive_meta, archive_body = read_md(content_dir / "archive.md")
+    site = site_for_language(lang)
+    context = {"site": site}
+    pages_dir = CONTENT_DIR / "pages"
+    home_meta, home_body = read_md(pages_dir / f"home.{lang}.md", context)
+    about_meta, about_body = read_md(pages_dir / f"about.{lang}.md", context)
+    archive_meta, archive_body = read_md(pages_dir / f"archive.{lang}.md", context)
     project_records: list[tuple[dict[str, Any], str]] = []
-    for path in sorted((content_dir / "projects").glob("*.md")):
-        project_records.append(read_md(path))
+    project_dirs = sorted(p for p in (CONTENT_DIR / "projects").iterdir() if p.is_dir() and not p.name.startswith("_"))
+    for project_dir in project_dirs:
+        shared = load_json(project_dir / "project.json")
+        localized, body = read_md(project_dir / f"{lang}.md", context)
+        project_records.append(({**shared, **localized}, body))
     project_records.sort(key=lambda record: int(record[0].get("order", 999)))
     return site, home_meta, home_body, about_meta, about_body, archive_meta, archive_body, project_records
 
 
-def main() -> None:
-    all_urls: list[str] = []
-    site_url = ""
+def clean_generated() -> None:
+    for directory in ("en", "about", "archive", "work", "projects", "404"):
+        target = ROOT / directory
+        if target.exists():
+            shutil.rmtree(target)
+    for filename in ("index.html", "404.html", "sitemap.xml", "robots.txt"):
+        target = ROOT / filename
+        if target.exists():
+            target.unlink()
 
-    for lang in ("zh", "en"):
+
+def main() -> None:
+    validate_sources()
+    clean_generated()
+    localized_sites: dict[str, dict[str, Any]] = {}
+    route_paths: list[str] = []
+
+    for lang in SUPPORTED_LANGUAGES:
         site, home_meta, home_body, about_meta, about_body, archive_meta, archive_body, project_records = load_language(lang)
-        site_url = site.get("site_url", "").rstrip("/") or site_url
         projects = [record[0] for record in project_records]
+        localized_sites[lang] = site
 
         write(output_path(lang, "/"), home_page(home_meta, render_markdown(home_body, lang), projects, site, lang))
         write(output_path(lang, "/work/"), work_page(projects, site, lang))
@@ -817,27 +861,39 @@ def main() -> None:
             path = f"/projects/{meta['slug']}/"
             write(output_path(lang, path), project_page(meta, render_markdown(body, lang), projects, site, lang))
 
-        routes = ["/", "/work/", "/about/", "/archive/"] + [f"/projects/{p['slug']}/" for p in projects]
-        all_urls.extend(route(lang, item) for item in routes)
+        if not route_paths:
+            route_paths = ["/", "/work/", "/about/", "/archive/"] + [f"/projects/{p['slug']}/" for p in projects]
 
-    zh_site, *_ = load_language("zh")
-    en_site, *_ = load_language("en")
-    zh_labels = LANGUAGES["zh"]["labels"]
-    en_labels = LANGUAGES["en"]["labels"]
-    zh_not_found = f'''<main class="not-found" id="main-content"><div><span>404</span><h1>{esc(zh_labels['not_found_title'])}</h1><p>{esc(zh_labels['not_found_desc'])}</p><a class="button button-primary" href="/">{esc(zh_labels['return_home'])}</a></div></main>'''
-    en_not_found = f'''<main class="not-found" id="main-content"><div><span>404</span><h1>{esc(en_labels['not_found_title'])}</h1><p>{esc(en_labels['not_found_desc'])}</p><a class="button button-primary" href="/en/">{esc(en_labels['return_home'])}</a></div></main>'''
-    zh_404 = base("页面未找到｜马子潇作品集", "页面未找到", "", zh_not_found, zh_site, "zh", "/404/")
-    en_404 = base("Page Not Found | Zixiao Ma Portfolio", "Page not found", "", en_not_found, en_site, "en", "/404/")
-    write(ROOT / "404.html", zh_404)
-    write(output_path("zh", "/404/"), zh_404)
-    write(output_path("en", "/404/"), en_404)
+    for lang in SUPPORTED_LANGUAGES:
+        site = localized_sites[lang]
+        labels = LANGUAGES[lang]["labels"]
+        home_url = route(lang, "/")
+        not_found = f'''<main class="not-found" id="main-content"><div><span>404</span><h1>{esc(labels['not_found_title'])}</h1><p>{esc(labels['not_found_desc'])}</p><a class="button button-primary" href="{home_url}">{esc(labels['return_home'])}</a></div></main>'''
+        page = base(page_title(labels["page_not_found"], site, lang), labels["page_not_found"], "", not_found, site, lang, "/404/")
+        write(output_path(lang, "/404/"), page)
+        if lang == SITE_CONFIG.get("default_language", "zh"):
+            write(ROOT / "404.html", page)
 
-    sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-    sitemap += "\n".join(f"  <url><loc>{site_url}{url}</loc></url>" for url in all_urls)
-    sitemap += "\n</urlset>\n"
-    write(ROOT / "sitemap.xml", sitemap)
+    site_url = str(SITE_CONFIG.get("site_url", "")).rstrip("/")
+    sitemap_lines = [
+        '<?xml version="1.0" encoding="UTF-8"?>',
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">',
+    ]
+    for path in route_paths:
+        alternates = {lang: site_url + route(lang, path) for lang in SUPPORTED_LANGUAGES}
+        for lang in SUPPORTED_LANGUAGES:
+            sitemap_lines.append("  <url>")
+            sitemap_lines.append(f"    <loc>{esc(alternates[lang])}</loc>")
+            for alt_lang in SUPPORTED_LANGUAGES:
+                hreflang = "zh-CN" if alt_lang == "zh" else "en"
+                sitemap_lines.append(f'    <xhtml:link rel="alternate" hreflang="{hreflang}" href="{esc(alternates[alt_lang])}" />')
+            sitemap_lines.append(f'    <xhtml:link rel="alternate" hreflang="x-default" href="{esc(alternates["zh"])}" />')
+            sitemap_lines.append("  </url>")
+    sitemap_lines.append("</urlset>")
+    write(ROOT / "sitemap.xml", "\n".join(sitemap_lines) + "\n")
     write(ROOT / "robots.txt", f"User-agent: *\nAllow: /\nSitemap: {site_url}/sitemap.xml\n")
-    print(f"Built {len(all_urls)} localized pages across Chinese and English.")
+    total = len(route_paths) * len(SUPPORTED_LANGUAGES)
+    print(f"Built {total} localized pages from paired bilingual sources.")
 
 
 if __name__ == "__main__":

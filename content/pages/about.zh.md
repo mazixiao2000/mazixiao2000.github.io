@@ -46,7 +46,7 @@ summary: 关卡设计、系统设计与技术实现交叉背景。
 独立设计原创桌游《海错大爆钓》，曾参与上海 SHM 桌游展及“中国好桌游”相关展示，并持续推进出版与商业合作。桌游设计经历让我更加重视规则表达、信息层级和玩家之间的决策反馈。
 
 :::links
-- 下载中文简历 | /assets/docs/Ma_Zixiao_Level_Designer_Resume_CN.pdf | PDF · 中文
-- Download English Resume | /assets/docs/Zixiao_Ma_Level_Designer_Resume.pdf | PDF · English
-- LinkedIn | https://www.linkedin.com/in/zixiaoma/ | 职业经历与联系
+- 下载中文简历 | {{site.resume_zh}} | PDF · 中文
+- Download English Resume | {{site.resume_en}} | PDF · English
+- LinkedIn | {{site.linkedin}} | 职业经历与联系
 :::

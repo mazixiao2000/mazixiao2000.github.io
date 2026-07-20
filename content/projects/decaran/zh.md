@@ -1,19 +1,14 @@
 ---
 layout: project
-slug: decaran
 title: Decaran: Become Human
 subtitle: 《Starfield》原创支线任务关卡
 kicker: QUEST LEVEL DESIGN / CREATION KIT
 summary: 在一座隐藏于沙漠的自动化工厂中，将探索、战斗、垂直移动、环境引导与道德抉择整合为完整的 18 分钟任务体验。
-cover: /assets/images/decaran-cover.webp
-hero: /assets/images/decaran-overview.webp
 engine: Starfield Creation Kit
 role: 独立关卡设计师
 team: 单人开发
 period: 12 周 · 约 300 小时
 status: 完成
-featured: true
-order: 1
 tags: [任务关卡, 战斗设计, 环境叙事, 脚本实现]
 card_note: 18 分钟原创支线 · 4 个外部空间 / 7 个内部空间
 ---

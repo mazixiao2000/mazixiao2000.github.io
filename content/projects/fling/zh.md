@@ -1,19 +1,14 @@
 ---
 layout: project
-slug: fling
 title: FLING
 subtitle: Unity 2D 精准平台跳跃游戏
 kicker: GAME DESIGN / LEVEL DESIGN
 summary: 在 4 人团队中负责核心玩法与多数关卡设计，并通过一次关键机制转向，将濒临被砍的原型收敛为围绕钓竿与时间停止展开的精准平台体验。
-cover: /assets/images/fling-cover.webp
-hero: /assets/images/fling-gameplay.webp
 engine: Unity
 role: 游戏设计 / 关卡设计
 team: 4 人团队
 period: 6 周 · Scrum
 status: 完成
-featured: true
-order: 4
 tags: [2D 平台, 核心机制, 关卡教学, Playtest]
 card_note: 机制重构 · 多数关卡设计 · 公开测试迭代
 ---
