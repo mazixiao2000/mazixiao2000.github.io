@@ -15,6 +15,107 @@
   --shadow: 0 24px 70px rgba(25, 27, 28, 0.13);
 }
 
+/* Rich project content: timelines, playtest records, and reserved video slots. */
+.data-table-wrap {
+  width: 100%;
+  margin: 1.5rem 0 2rem;
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+}
+
+.data-table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+  font-size: 0.94rem;
+  line-height: 1.65;
+}
+
+.data-table th,
+.data-table td {
+  padding: 0.9rem 1rem;
+  text-align: left;
+  vertical-align: top;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.data-table th:last-child,
+.data-table td:last-child {
+  border-right: 0;
+}
+
+.data-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.data-table th {
+  color: var(--ink);
+  background: var(--paper-2);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.video-embed,
+.video-placeholder {
+  margin: 1.5rem 0 2rem;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--ink);
+}
+
+.video-embed iframe {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border: 0;
+}
+
+.video-embed > p {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0;
+  padding: 0.9rem 1rem;
+  color: #fff;
+}
+
+.video-embed > p span {
+  color: rgba(255, 255, 255, 0.62);
+}
+
+.video-placeholder {
+  display: grid;
+  place-items: center;
+  min-height: 260px;
+  padding: 2rem;
+  color: #fff;
+  text-align: center;
+}
+
+.video-placeholder span {
+  color: var(--accent);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.video-placeholder strong {
+  display: block;
+  margin-top: 0.65rem;
+  font-size: clamp(1.25rem, 3vw, 2rem);
+}
+
+.video-placeholder p {
+  margin: 0.4rem 0 0;
+  color: rgba(255, 255, 255, 0.62);
+}
+
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body {

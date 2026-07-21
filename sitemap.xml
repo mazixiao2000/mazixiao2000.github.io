@@ -49,18 +49,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/archive/" />
   </url>
   <url>
-    <loc>https://www.mazixiao.com/projects/decaran/</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/projects/decaran/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/projects/decaran/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/projects/decaran/" />
-  </url>
-  <url>
-    <loc>https://www.mazixiao.com/en/projects/decaran/</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/projects/decaran/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/projects/decaran/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/projects/decaran/" />
-  </url>
-  <url>
     <loc>https://www.mazixiao.com/projects/hamsterballin/</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/projects/hamsterballin/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/projects/hamsterballin/" />
@@ -73,18 +61,6 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/projects/hamsterballin/" />
   </url>
   <url>
-    <loc>https://www.mazixiao.com/projects/way-of-water/</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/projects/way-of-water/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/projects/way-of-water/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/projects/way-of-water/" />
-  </url>
-  <url>
-    <loc>https://www.mazixiao.com/en/projects/way-of-water/</loc>
-    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/projects/way-of-water/" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/projects/way-of-water/" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/projects/way-of-water/" />
-  </url>
-  <url>
     <loc>https://www.mazixiao.com/projects/fling/</loc>
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/projects/fling/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/projects/fling/" />
@@ -95,5 +71,29 @@
     <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/projects/fling/" />
     <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/projects/fling/" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/projects/fling/" />
+  </url>
+  <url>
+    <loc>https://www.mazixiao.com/projects/decaran/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/projects/decaran/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/projects/decaran/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/projects/decaran/" />
+  </url>
+  <url>
+    <loc>https://www.mazixiao.com/en/projects/decaran/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/projects/decaran/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/projects/decaran/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/projects/decaran/" />
+  </url>
+  <url>
+    <loc>https://www.mazixiao.com/projects/ghostship/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/projects/ghostship/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/projects/ghostship/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/projects/ghostship/" />
+  </url>
+  <url>
+    <loc>https://www.mazixiao.com/en/projects/ghostship/</loc>
+    <xhtml:link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/projects/ghostship/" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.mazixiao.com/en/projects/ghostship/" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.mazixiao.com/projects/ghostship/" />
   </url>
 </urlset>

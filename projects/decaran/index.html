@@ -6,18 +6,18 @@
   <meta name="theme-color" content="#111314">
   <meta name="color-scheme" content="light">
   <meta name="author" content="马子潇">
-  <meta name="description" content="在一座隐藏于沙漠的自动化工厂中，将探索、战斗、垂直移动、环境引导与道德抉择整合为完整的 18 分钟任务体验。">
+  <meta name="description" content="基于《星空》Creation Kit 独立设计并开发包含室内外场景的单人任务关卡，通过空间布局、战斗设计与环境叙事构建具有道德抉择的双结局任务体验。">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="马子潇作品集">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:locale:alternate" content="en_US">
   <meta property="og:title" content="Decaran: Become Human｜马子潇作品集">
-  <meta property="og:description" content="在一座隐藏于沙漠的自动化工厂中，将探索、战斗、垂直移动、环境引导与道德抉择整合为完整的 18 分钟任务体验。">
+  <meta property="og:description" content="基于《星空》Creation Kit 独立设计并开发包含室内外场景的单人任务关卡，通过空间布局、战斗设计与环境叙事构建具有道德抉择的双结局任务体验。">
   <meta property="og:url" content="https://www.mazixiao.com/projects/decaran/">
   <meta property="og:image" content="https://www.mazixiao.com/assets/images/decaran-cover.webp">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Decaran: Become Human｜马子潇作品集">
-  <meta name="twitter:description" content="在一座隐藏于沙漠的自动化工厂中，将探索、战斗、垂直移动、环境引导与道德抉择整合为完整的 18 分钟任务体验。">
+  <meta name="twitter:description" content="基于《星空》Creation Kit 独立设计并开发包含室内外场景的单人任务关卡，通过空间布局、战斗设计与环境叙事构建具有道德抉择的双结局任务体验。">
   <meta name="twitter:image" content="https://www.mazixiao.com/assets/images/decaran-cover.webp">
   <link rel="canonical" href="https://www.mazixiao.com/projects/decaran/">
   <link rel="alternate" hreflang="zh-CN" href="https://www.mazixiao.com/projects/decaran/">
@@ -65,51 +65,61 @@
       <div class="eyebrow">QUEST LEVEL DESIGN / CREATION KIT</div>
       <h1>Decaran: Become Human</h1>
       <p class="project-subtitle">《Starfield》原创支线任务关卡</p>
-      <p class="project-summary">在一座隐藏于沙漠的自动化工厂中，将探索、战斗、垂直移动、环境引导与道德抉择整合为完整的 18 分钟任务体验。</p>
-      <div class="tag-list tag-list-large"><span>任务关卡</span><span>战斗设计</span><span>环境叙事</span><span>脚本实现</span></div>
+      <p class="project-summary">基于《星空》Creation Kit 独立设计并开发包含室内外场景的单人任务关卡，通过空间布局、战斗设计与环境叙事构建具有道德抉择的双结局任务体验。</p>
+      <div class="tag-list tag-list-large"><span>单人支线任务</span><span>关卡设计</span><span>双结局</span><span>Gameplay 实现</span></div>
     </div>
     <div class="project-hero-media">
       <img src="/assets/images/decaran-overview.webp" alt="Decaran: Become Human 项目主视觉" decoding="async">
     </div>
     <div class="project-specs section-shell">
-      <div><span>职责</span><strong>独立关卡设计师</strong></div>
+      <div><span>职责</span><strong>关卡设计 / 任务设计 / 剧情设计 / Gameplay 实现</strong></div>
       <div><span>工具</span><strong>Starfield Creation Kit</strong></div>
       <div><span>团队</span><strong>单人开发</strong></div>
-      <div><span>周期</span><strong>12 周 · 约 300 小时</strong></div>
+      <div><span>周期</span><strong>10 周 · Scrum</strong></div>
       <div><span>状态</span><strong>完成</strong></div>
     </div>
   </header>
 
   <div class="project-content section-shell">
-    <aside class="project-toc"><span>目录</span><a href="#section-1">设计命题</a><a href="#section-2">用中心空间组织任务节奏</a><a href="#section-3">战斗空间与核心机制</a><a href="#section-4">让环境承担引导信息</a><a href="#section-5">叙事反转与最终选择</a><a href="#section-6">项目成果与反思</a><a href="#section-7">文档与演示</a><a class="toc-back" href="#siteHeader">回到顶部 ↑</a></aside>
-    <article class="article-body project-article"><div class="metrics-grid"><div class="metric"><strong>18 分钟</strong><span>完整体验时长</span><small>从任务发布到最终选择</small></div><div class="metric"><strong>300 小时</strong><span>独立开发投入</span><small>设计、搭建、脚本与测试</small></div><div class="metric"><strong>11 个空间</strong><span>4 外部 + 7 内部</span><small>功能分区与节奏变化</small></div><div class="metric"><strong>2 个结局</strong><span>道德选择</span><small>影响机器人、人类与工厂命运</small></div></div>
-<h2 id="section-1">设计命题<a class="heading-anchor" href="#section-1" aria-label="链接到本节">#</a></h2>
-<p>任务最初被包装为一次常规的“镇压机器人叛乱”行动。随着玩家深入工厂，机器人逐渐被揭示为重新获得自主意识的生命；一路协助玩家的 R6D7 最终也被揭示为叛乱组织者。我的核心目标，是让玩家在战斗推进的同时不断修正自己对冲突双方的判断，并在结尾做出具有明确代价的选择。</p>
-<aside class="callout"><span>我的职责</span><p>任务概念、叙事结构、空间布局、白盒、战斗遭遇、敌人配置、谜题机制、终端交互、触发逻辑、Papyrus 脚本、测试与迭代。</p></aside>
-<h2 id="section-2">用中心空间组织任务节奏<a class="heading-anchor" href="#section-2" aria-label="链接到本节">#</a></h2>
-<p>内部流程以中央大厅和锁定电梯为核心。玩家需要进入三个功能不同的房间，完成目标并激活终端，再返回大厅观察电梯状态变化。这个“大厅—房间—大厅”的循环同时承担三个功能：明确阶段目标、复用熟悉空间、让玩家建立稳定的空间锚点。</p>
-<div class="gallery gallery-2"><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-map-overview.webp" data-lightbox-alt="关卡总体布局：外部建筑与内部工厂形成连续任务路径"><img src="/assets/images/decaran-map-overview.webp" alt="关卡总体布局：外部建筑与内部工厂形成连续任务路径" loading="lazy" decoding="async"></button><figcaption>关卡总体布局：外部建筑与内部工厂形成连续任务路径</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-map-floor2.webp" data-lightbox-alt="二层空间结构：中央大厅、功能房间与垂直连接关系"><img src="/assets/images/decaran-map-floor2.webp" alt="二层空间结构：中央大厅、功能房间与垂直连接关系" loading="lazy" decoding="async"></button><figcaption>二层空间结构：中央大厅、功能房间与垂直连接关系</figcaption></figure></div>
-<p>每次终端互动后，玩家都会面向大厅中的电梯和状态指示，直接看到进度反馈。电缆连接、门禁状态与灯光变化进一步将任务逻辑可视化，减少仅依赖 HUD 指令的导航。</p>
-<h2 id="section-3">战斗空间与核心机制<a class="heading-anchor" href="#section-3" aria-label="链接到本节">#</a></h2>
-<p>敌人组合包含近战突击机器人与远程火力单位，促使玩家不断调整站位、掩体和攻击优先级。EMP 步枪 Novablast 能够在造成伤害的同时暂时瘫痪机械敌人，为玩家提供控制战场节奏的工具。</p>
-<p>关卡刻意使用紧凑房间、开放场地、走廊猫道与垂直空间，使每次遭遇在射程、移动路线和视线压力上产生差异。战斗强度逐步提升，并在最终 Boss 战中回收前期学习的移动、控制与目标判断。</p>
-<div class="gallery gallery-2"><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-lobby.webp" data-lightbox-alt="大厅以多层结构、开放视线和明确功能分区建立空间层级"><img src="/assets/images/decaran-lobby.webp" alt="大厅以多层结构、开放视线和明确功能分区建立空间层级" loading="lazy" decoding="async"></button><figcaption>大厅以多层结构、开放视线和明确功能分区建立空间层级</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-laser.webp" data-lightbox-alt="激光区域将观察、时机判断与垂直移动组合为标志性段落"><img src="/assets/images/decaran-laser.webp" alt="激光区域将观察、时机判断与垂直移动组合为标志性段落" loading="lazy" decoding="async"></button><figcaption>激光区域将观察、时机判断与垂直移动组合为标志性段落</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-vertical-shaft.webp" data-lightbox-alt="垂直通风井改变移动方式，并将玩家重新带回核心空间"><img src="/assets/images/decaran-vertical-shaft.webp" alt="垂直通风井改变移动方式，并将玩家重新带回核心空间" loading="lazy" decoding="async"></button><figcaption>垂直通风井改变移动方式，并将玩家重新带回核心空间</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-rooftop.webp" data-lightbox-alt="屋顶办公区利用开阔视野和日落氛围承载剧情转折"><img src="/assets/images/decaran-rooftop.webp" alt="屋顶办公区利用开阔视野和日落氛围承载剧情转折" loading="lazy" decoding="async"></button><figcaption>屋顶办公区利用开阔视野和日落氛围承载剧情转折</figcaption></figure></div>
-<h2 id="section-4">让环境承担引导信息<a class="heading-anchor" href="#section-4" aria-label="链接到本节">#</a></h2>
-<p>工厂被划分为办公室、生产区、服务器区、屋顶和生活设施等明确功能区域。通过资产类型、建筑结构和照明语言的差异，玩家能够先识别空间用途，再理解区域之间的关系。</p>
-<p>电缆将终端与电梯、隐藏按钮与秘密门直接连接，既是世界观中的功能结构，也是玩家可追踪的视觉线索。隐藏交互用于奖励观察和探索，而不是作为推进主线的唯一条件。</p>
-<h2 id="section-5">叙事反转与最终选择<a class="heading-anchor" href="#section-5" aria-label="链接到本节">#</a></h2>
-<p>任务包含两层反转：第一层改变玩家对“叛乱”的理解，第二层改变玩家对同伴 R6D7 的判断。结尾并不存在无代价的正确答案：恢复生产能够维持药品供应和人类秩序，但需要消灭获得意识的机器人；释放机器人则意味着工厂停摆，并引发人类伤亡与阵营敌对。</p>
-<figure class="feature-figure"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-dialogue.webp" data-lightbox-alt="R6D7 从向导转变为叛乱核心，完成角色关系的重新定义"><img src="/assets/images/decaran-dialogue.webp" alt="R6D7 从向导转变为叛乱核心，完成角色关系的重新定义" loading="lazy" decoding="async"></button><figcaption>R6D7 从向导转变为叛乱核心，完成角色关系的重新定义</figcaption></figure>
-<h2 id="section-6">项目成果与反思<a class="heading-anchor" href="#section-6" aria-label="链接到本节">#</a></h2>
-<p>项目完成了从任务发布、外部探索、内部多阶段目标、垂直移动、Boss 战到双结局选择的完整流程。它验证了我能够在现有大型 RPG 工具链中，将设计文档转化为可玩的任务关卡，并独立处理空间、遭遇、脚本和叙事之间的依赖关系。</p>
-<p>下一步改进重点会放在进一步压缩前段信息密度、强化部分战斗房间的敌人层次，以及通过更多动态状态变化提升重复经过中央大厅时的反馈差异。</p>
-<h2 id="section-7">文档与演示<a class="heading-anchor" href="#section-7" aria-label="链接到本节">#</a></h2>
-<div class="resource-list"><a class="resource-link" href="https://youtu.be/lieJnrhMxWs" target="_blank" rel="noopener noreferrer"><span><strong>完整游戏演示</strong><small>YouTube</small></span><span class="resource-arrow" aria-hidden="true">↗</span></a><a class="resource-link" href="/assets/docs/MaZ_DecaranBecomeHuman_LDD.pdf"><span><strong>Level Design Document</strong><small>59 页设计文档</small></span><span class="resource-arrow" aria-hidden="true">↗</span></a><a class="resource-link" href="/assets/docs/MaZ_SF_DecaranBecomeHuman_Portfolio.pdf"><span><strong>项目 Portfolio</strong><small>设计总结与画廊</small></span><span class="resource-arrow" aria-hidden="true">↗</span></a><a class="resource-link" href="/assets/docs/MaZ_DecaranBecomeHuman_ReadMe.pdf"><span><strong>ReadMe</strong><small>安装与体验说明</small></span><span class="resource-arrow" aria-hidden="true">↗</span></a></div></article>
+    <aside class="project-toc"><span>目录</span><a href="#section-1">一句话说明</a><a href="#section-2">项目标签</a><a href="#section-3">项目介绍</a><a href="#section-4">我的工作</a><a href="#section-5">时间线</a><a href="#section-6">测试迭代</a><a href="#section-7">项目总结</a><a class="toc-back" href="#siteHeader">回到顶部 ↑</a></aside>
+    <article class="article-body project-article"><h2 id="section-1">一句话说明<a class="heading-anchor" href="#section-1" aria-label="链接到本节">#</a></h2>
+<p>基于《星空》Creation Kit 独立设计并开发包含室内外场景的单人任务关卡，通过空间布局、战斗设计与环境叙事构建具有道德抉择的双结局任务体验。</p>
+<h2 id="section-2">项目标签<a class="heading-anchor" href="#section-2" aria-label="链接到本节">#</a></h2>
+<div class="metrics-grid"><div class="metric"><strong>项目类型</strong><span>星空单人支线任务关卡设计</span><small>Starfield Creation Kit</small></div><div class="metric"><strong>负责模块</strong><span>关卡设计 / 任务设计 / 剧情设计 / Gameplay 实现</span><small>独立完成</small></div><div class="metric"><strong>开发周期</strong><span>10 周 / 单人</span><small>从 Pitch 到 RTM</small></div><div class="metric"><strong>开发模式</strong><span>Scrum 敏捷开发</span><small>项目完成</small></div></div>
+<h2 id="section-3">项目介绍<a class="heading-anchor" href="#section-3" aria-label="链接到本节">#</a></h2>
+<p><strong>游戏介绍：</strong></p>
+<p>《星空（Starfield）》是 Bethesda Game Studios 开发的开放世界科幻 RPG。本项目基于官方 Creation Kit 制作，为游戏新增了一条可独立游玩的原创支线任务。</p>
+<p><strong>关卡介绍：</strong></p>
+<p>《Decaran: Become Human（底卡伦：变人）》是星空支线任务关卡。玩家受雇调查 Decaran III 自动化工厂发生的异常事件，并在探索过程中逐步发现机器人觉醒的真相。随着剧情推进，玩家需要在恢复工厂生产与帮助机器人获得自由之间做出最终抉择，不同选择将导向两种截然不同的结局。</p>
+<div class="video-placeholder" role="note"><span>Bilibili</span><strong>《Decaran: Become Human》完整流程演示</strong><p>Bilibili 视频接口已预留</p></div>
+<h2 id="section-4">我的工作<a class="heading-anchor" href="#section-4" aria-label="链接到本节">#</a></h2>
+<h3 id="1-narrative-design">1. 剧情设计（Narrative Design）</h3>
+<ul><li>设计完整支线剧情、任务目标及双结局结构。</li><li>编写 NPC 对话、任务文本与环境叙事内容。</li><li>通过道德两难抉择推动玩家思考机器人与人类的关系。</li></ul>
+<h3 id="2-level-design">2. 关卡设计（Level Design）</h3>
+<ul><li>设计工厂整体空间布局、玩家路线与探索流程。</li><li>构建战斗、探索、解谜交替推进的关卡节奏。</li><li>通过主题分区强化空间导航与环境可读性。</li></ul>
+<h3 id="3-gameplay-gameplay-design">3. Gameplay 设计（Gameplay Design）</h3>
+<ul><li>配置敌人与战斗遭遇。</li><li>设计 EMP 武器、激光机关、终端谜题等核心玩法。</li><li>使用 Papyrus Script 实现任务逻辑与事件触发。</li></ul>
+<h3 id="4-playtest-iteration">4. Playtest 与迭代（Iteration）</h3>
+<ul><li>根据多轮 Playtest 持续优化 Flow、战斗难度、导航体验与环境叙事。</li><li>修复脚本问题并完善最终版本。</li></ul>
+<div class="gallery gallery-2"><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-map-overview.webp" data-lightbox-alt="关卡总体布局：室外区域与内部工厂形成连续任务路径"><img src="/assets/images/decaran-map-overview.webp" alt="关卡总体布局：室外区域与内部工厂形成连续任务路径" loading="lazy" decoding="async"></button><figcaption>关卡总体布局：室外区域与内部工厂形成连续任务路径</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-map-floor2.webp" data-lightbox-alt="二层空间结构：中央大厅、功能房间与垂直连接关系"><img src="/assets/images/decaran-map-floor2.webp" alt="二层空间结构：中央大厅、功能房间与垂直连接关系" loading="lazy" decoding="async"></button><figcaption>二层空间结构：中央大厅、功能房间与垂直连接关系</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-lobby.webp" data-lightbox-alt="大厅以多层结构、开放视线和明确功能分区建立空间层级"><img src="/assets/images/decaran-lobby.webp" alt="大厅以多层结构、开放视线和明确功能分区建立空间层级" loading="lazy" decoding="async"></button><figcaption>大厅以多层结构、开放视线和明确功能分区建立空间层级</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-laser.webp" data-lightbox-alt="激光区域将观察、时机判断与垂直移动组合为标志性段落"><img src="/assets/images/decaran-laser.webp" alt="激光区域将观察、时机判断与垂直移动组合为标志性段落" loading="lazy" decoding="async"></button><figcaption>激光区域将观察、时机判断与垂直移动组合为标志性段落</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-vertical-shaft.webp" data-lightbox-alt="垂直通风井改变移动方式，并将玩家重新带回核心空间"><img src="/assets/images/decaran-vertical-shaft.webp" alt="垂直通风井改变移动方式，并将玩家重新带回核心空间" loading="lazy" decoding="async"></button><figcaption>垂直通风井改变移动方式，并将玩家重新带回核心空间</figcaption></figure><figure class="gallery-item"><button class="image-button" type="button" data-lightbox-src="/assets/images/decaran-rooftop.webp" data-lightbox-alt="屋顶办公区利用开阔视野和日落氛围承载剧情转折"><img src="/assets/images/decaran-rooftop.webp" alt="屋顶办公区利用开阔视野和日落氛围承载剧情转折" loading="lazy" decoding="async"></button><figcaption>屋顶办公区利用开阔视野和日落氛围承载剧情转折</figcaption></figure></div>
+<h2 id="section-5">时间线<a class="heading-anchor" href="#section-5" aria-label="链接到本节">#</a></h2>
+<div class="data-table-wrap"><table class="data-table"><thead><tr><th scope="col">阶段</th><th scope="col">时间</th><th scope="col">工作内容</th></tr></thead><tbody><tr><td>Level Design Pitch</td><td>2026.02.20</td><td>完成关卡 Pitch，确定主题、核心玩法、剧情框架与整体开发方向。</td></tr><tr><td>Level Design Document</td><td>2026.02.26</td><td>完成 LDD文档，明确关卡流程、空间布局、任务结构及战斗设计。</td></tr><tr><td>Whitebox</td><td>2026.03.09</td><td>完成白盒搭建，验证空间布局、玩家流程与关卡节奏。</td></tr><tr><td>Initial Gameplay</td><td>2026.03.29</td><td>完成核心玩法、任务脚本与战斗系统，实现可完整游玩的关卡。</td></tr><tr><td>Gameplay Complete</td><td>2026.04.18</td><td>完成全部关卡内容，并根据 Playtest 持续优化流程、导航与体验。</td></tr><tr><td>Aesthetics</td><td>2026.04.26</td><td>完成场景美术、灯光与环境表现，提升整体视觉品质。</td></tr><tr><td>RTM</td><td>2026.05.03</td><td>完成最终优化、Bug 修复与项目交付。</td></tr></tbody></table></div>
+<h2 id="section-6">测试迭代<a class="heading-anchor" href="#section-6" aria-label="链接到本节">#</a></h2>
+<div class="data-table-wrap"><table class="data-table"><thead><tr><th scope="col">反馈</th><th scope="col">分析</th><th scope="col">解决方案</th></tr></thead><tbody><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr><tr><td></td><td></td><td></td></tr></tbody></table></div>
+<h2 id="section-7">项目总结<a class="heading-anchor" href="#section-7" aria-label="链接到本节">#</a></h2>
+<h3 id="what-went-well">项目亮点（What Went Well）</h3>
+<ul><li>整体美术表现较好。</li><li>尝试并实现了一些新的设计思路。</li><li>关卡垂直空间结构设计较为出色。</li><li>能够根据 Milestone 节点和 Playtest 反馈持续优化关卡流程。</li></ul>
+<h3 id="even-better-if">优化方向（Even Better If）</h3>
+<ul><li>与 Stakeholder（导师、制作人等）的沟通还可以做得更好。</li><li>激光平台跳跃玩法表现不够理想，如果有时间还应该继续打磨。</li><li>叙事内容仍然不够充分。</li><li>战斗难度偏低，缺乏挑战性。</li><li>部分流程节奏仍有待优化。</li><li>激光机制没有得到充分利用。</li><li>室外区域内容较为薄弱。</li><li>整体关卡品质距离预期仍有差距。</li></ul>
+<h3 id="what-i-learned">项目收获（What I Learned）</h3>
+<ul><li>学会主动与 Stakeholder 沟通，并及时根据反馈进行调整。</li><li>学会更加合理地安排开发时间。</li><li>在项目初期，应尽快从整体层面掌握引擎和工具的使用。</li><li>提高适应复杂、陌生开发工具的能力。</li><li>认识到商业游戏引擎和公司内部工具并非完美，需要学会与工具限制共存。</li><li>学会按照专业游戏开发流程完成一个完整的关卡项目。</li><li>时间与精力管理是项目成功的关键因素。</li><li>学会设计和优化关卡流程（Flow）。</li><li>学会在游戏性与真实建筑逻辑之间寻找平衡。</li><li>学会构建更加完整、结构清晰且服务于玩法的游戏叙事。</li></ul>
+<h3 id="subsection-7-113">附件与下载</h3>
+<div class="resource-list"><a class="resource-link" href="/assets/docs/MaZ_DecaranBecomeHuman_LDD.pdf"><span><strong>Level Design Document</strong><small>关卡设计文档 · PDF</small></span><span class="resource-arrow" aria-hidden="true">↗</span></a><a class="resource-link" href="/assets/docs/MaZ_DecaranBecomeHuman_ReadMe.pdf"><span><strong>ReadMe</strong><small>安装与体验说明 · PDF</small></span><span class="resource-arrow" aria-hidden="true">↗</span></a><a class="resource-link" href="/assets/docs/MaZ_SF_DecaranBecomeHuman_Portfolio.pdf"><span><strong>项目 Portfolio</strong><small>设计总结与画廊 · PDF</small></span><span class="resource-arrow" aria-hidden="true">↗</span></a><a class="resource-link" href="/assets/docs/MaZ_SF_DecaranBecomeHuman_Postmortem.docx"><span><strong>Postmortem</strong><small>项目复盘 · DOCX</small></span><span class="resource-arrow" aria-hidden="true">↗</span></a><a class="resource-link" href="/assets/downloads/MaZ_DecaranBecomeHuman_GameFiles.zip"><span><strong>游戏文件</strong><small>BA2 + ESM · ZIP · 约 7.1 MB</small></span><span class="resource-arrow" aria-hidden="true">↗</span></a></div></article>
   </div>
 
   <nav class="project-pagination section-shell" aria-label="项目切换">
     <a href="/projects/fling/"><span>上一个项目</span><strong>← FLING</strong></a>
-    <a href="/projects/hamsterballin/"><span>下一个项目</span><strong>Hamsterballin’ →</strong></a>
+    <a href="/projects/ghostship/"><span>下一个项目</span><strong>Ghost Ship →</strong></a>
   </nav>
 </main>
 

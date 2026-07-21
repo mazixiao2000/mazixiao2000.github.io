@@ -291,6 +291,35 @@ def render_directive(name: str, attrs: str, lines: list[str], lang: str) -> str:
         title = title_match.group(1) if title_match else labels["design_note"]
         return f'<aside class="callout"><span>{inline(title)}</span><p>{inline(" ".join(clean))}</p></aside>'
 
+    if name == "video":
+        def attr(key: str, fallback: str = "") -> str:
+            match = re.search(rf'{re.escape(key)}="([^"]*)"', attrs)
+            return match.group(1).strip() if match else fallback
+
+        platform = attr("platform", "YouTube")
+        video_id = attr("id")
+        title = attr("title", "Video")
+        normalized = platform.lower()
+        if video_id and normalized == "youtube":
+            src = f"https://www.youtube-nocookie.com/embed/{html.escape(video_id, quote=True)}"
+        elif video_id and normalized == "bilibili":
+            src = f"https://player.bilibili.com/player.html?bvid={html.escape(video_id, quote=True)}&page=1&high_quality=1"
+        else:
+            src = ""
+        if src:
+            return (
+                '<div class="video-embed">'
+                f'<iframe src="{src}" title="{html.escape(title, quote=True)}" '
+                'loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; '
+                'gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>'
+                f'<p><strong>{inline(title)}</strong><span>{inline(platform)}</span></p></div>'
+            )
+        placeholder = "Bilibili 视频接口已预留" if lang == "zh" and normalized == "bilibili" else "YouTube video slot reserved"
+        return (
+            '<div class="video-placeholder" role="note">'
+            f'<span>{inline(platform)}</span><strong>{inline(title)}</strong><p>{inline(placeholder)}</p></div>'
+        )
+
     return ""
 
 
@@ -353,6 +382,37 @@ def render_markdown(body: str, lang: str) -> Rendered:
             out.append(f'<h3 id="{sid}">{inline(title)}</h3>')
             i += 1
             continue
+
+        if stripped.startswith("|") and i + 1 < len(lines):
+            separator = lines[i + 1].strip()
+            separator_cells = [cell.strip() for cell in separator.strip("|").split("|")]
+            if separator.startswith("|") and separator_cells and all(
+                re.fullmatch(r":?-{3,}:?", cell) for cell in separator_cells
+            ):
+                flush_paragraph()
+
+                def table_cells(line: str) -> list[str]:
+                    return [cell.strip() for cell in line.strip().strip("|").split("|")]
+
+                header_cells = table_cells(stripped)
+                rows: list[list[str]] = []
+                i += 2
+                while i < len(lines) and lines[i].strip().startswith("|"):
+                    rows.append(table_cells(lines[i]))
+                    i += 1
+                thead = "".join(f"<th scope=\"col\">{inline(cell)}</th>" for cell in header_cells)
+                tbody = "".join(
+                    "<tr>" + "".join(f"<td>{inline(cell)}</td>" for cell in row) + "</tr>"
+                    for row in rows
+                )
+                out.append(
+                    '<div class="data-table-wrap"><table class="data-table"><thead><tr>'
+                    + thead
+                    + "</tr></thead><tbody>"
+                    + tbody
+                    + "</tbody></table></div>"
+                )
+                continue
 
         if stripped == "---":
             flush_paragraph()

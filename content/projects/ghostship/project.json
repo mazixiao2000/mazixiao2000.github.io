@@ -1,0 +1,7 @@
+{
+  "slug": "ghostship",
+  "cover": "/assets/images/ghost-ship-cover.webp",
+  "hero": "/assets/images/ghostship-overview.webp",
+  "featured": true,
+  "order": 4
+}

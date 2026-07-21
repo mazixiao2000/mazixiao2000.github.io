@@ -26,7 +26,10 @@ content/
     about.zh.md / about.en.md
     archive.zh.md / archive.en.md
   projects/
+    hamsterballin/
+    fling/
     decaran/
+    ghostship/
       project.json          # 两种语言共用：slug、排序、封面、主视觉
       zh.md                 # 中文项目内容与本地化信息
       en.md                 # 英文项目内容与本地化信息
@@ -34,6 +37,7 @@ content/
 assets/
   images/                   # 图片
   docs/                     # 简历与项目文档
+  downloads/                # 可直接下载的游戏文件压缩包
   css/styles.css
   js/main.js
 

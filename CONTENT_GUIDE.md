@@ -184,7 +184,37 @@ Markdown 中可以引用以下变量：
 :::
 ```
 
-## 13. 项目归档卡片
+## 13. 项目表格
+
+时间线与测试迭代支持标准 Markdown 表格：
+
+```md
+| 阶段 | 时间 | 工作内容 |
+|---|---|---|
+| Whitebox | 2026.06.08 | 完成白盒搭建。 |
+```
+
+在手机上表格会自动允许横向滚动，不会挤压正文。
+
+## 14. 视频接口
+
+中文项目页使用 Bilibili 的 BV 号：
+
+```md
+:::video platform="Bilibili" id="BVxxxxxxxxxx" title="项目宣传片"
+:::
+```
+
+英文项目页使用 YouTube 视频网址中 `v=` 或 `youtu.be/` 后面的 ID：
+
+```md
+:::video platform="YouTube" id="dQw4w9WgXcQ" title="Project Trailer"
+:::
+```
+
+暂时没有视频时将 `id` 留空，页面会显示已预留的视频位；以后只需补上 ID 并重新构建。
+
+## 15. 项目归档卡片
 
 用于 `archive.zh.md` 与 `archive.en.md`：
 
@@ -195,7 +225,7 @@ Markdown 中可以引用以下变量：
 :::
 ```
 
-## 14. 新建项目
+## 16. 新建项目
 
 推荐使用脚本：
 
@@ -205,7 +235,7 @@ python scripts/new_project.py project-slug --order 5
 
 `slug` 只能使用小写字母、数字和连字符。
 
-## 15. 构建与质量检查
+## 17. 构建与质量检查
 
 ```bash
 python scripts/build.py
